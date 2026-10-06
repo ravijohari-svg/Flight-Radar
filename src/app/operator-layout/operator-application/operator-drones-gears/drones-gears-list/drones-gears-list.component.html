@@ -1,0 +1,637 @@
+<div *ngIf="loader" class="loader">
+  <div class="logo">
+    <img
+      src="../../../../../assets/common-layout/SquareLoader.gif"
+      width="30px"
+    />
+    <img
+      src="../../../../../assets/common-layout/SkyeUTM logoWhite.svg"
+      width="200px"
+    />
+  </div>
+</div>
+<div *ngIf="!loader">
+  <mat-sidenav-container>
+    <mat-sidenav
+      #drawer
+      mode="over"
+      position="end"
+      [fixedInViewport]="true"
+      [fixedTopGap]="0"
+      [fixedBottomGap]="0"
+      style="background: #1f2937"
+    >
+      <div>
+        <div class="mt-3 mb-3 mx-sm-4 mx-2x">
+          <div class="pt-2 row">
+            <div class="col-9 main-header white-text">
+              {{ droneDetail?.Model }}
+            </div>
+            <div class="col text-right">
+              <button
+                class="btn p-0 white-text-opacity"
+                (click)="drawer.toggle()"
+              >
+                <i class="fa fa-times" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+          <div class="f-10 main-sub-header white-text-opacity">
+            UIN Number : {{ droneDetail?.UIN }}
+          </div>
+
+          <!-- new -->
+          <div class="my-3">
+            <div class="card dark-light" style="border-radius: 10px">
+              <div class="card-body py-1 row">
+                <div class="col-md sub-header py-1">Uploads</div>
+              </div>
+              <div class="card-body py-2 row">
+                <div class="col-md-4 my-2">
+                  <div class="list-description">Front View</div>
+                  <div class="list-values">
+                    <div class="File-Uploaded">
+                      <img
+                        src="../.../../../../../../assets/common-layout/file-logo.svg"
+                        class="file-logo"
+                      />
+                      <span class="filenamepdf f-14">
+                        {{ droneFrontImageFileName }}
+                      </span>
+                      <!-- <span class="KB"> </span>
+                      <img
+                        src="../.../../../../../../assets/common-layout/file-close.svg"
+                        class="file-close"
+                      /> -->
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 my-2">
+                  <div class="list-description">Side View</div>
+                  <div class="list-values">
+                    <div class="File-Uploaded">
+                      <img
+                        src="../.../../../../../../assets/common-layout/file-logo.svg"
+                        class="file-logo"
+                      />
+                      <span class="filenamepdf f-14">
+                        {{ droneSideImageFileName }}
+                      </span>
+                      <!-- <span class="KB"> </span>
+                      <img
+                        src="../.../../../../../../assets/common-layout/file-close.svg"
+                        class="file-close"
+                      /> -->
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 my-2">
+                  <div class="list-description">Isometric View</div>
+                  <div class="list-values">
+                    <div class="File-Uploaded">
+                      <img
+                        src="../.../../../../../../assets/common-layout/file-logo.svg"
+                        class="file-logo"
+                      />
+                      <span class="filenamepdf f-14">
+                        {{ droneIsometricImageFileName }}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- new -->
+
+          <!-- <hr> -->
+          <div class="my-3">
+            <div class="card dark-light" style="border-radius: 10px">
+              <div class="card-body py-1 row">
+                <div class="col-md sub-header py-1">UAV/UAS Info</div>
+              </div>
+              <div class="card-body py-2 row">
+                <div class="col-md-4 my-2">
+                  <div class="list-description">
+                    {{ droneDetail?.UAVInfoType?.Value }}
+                  </div>
+                  <div class="list-values">Type</div>
+                </div>
+                <div class="col-md-4 my-2">
+                  <div class="list-description">
+                    {{ droneDetail?.UAVInfoClass?.Value }}
+                  </div>
+                  <div class="list-values">Class</div>
+                </div>
+                <div class="col-md-4 my-2">
+                  <div class="list-description">
+                    {{ droneDetail?.Endurance }}
+                    {{ DroneUnits.UAVInfoEndurance }}
+                  </div>
+                  <div class="list-values">Endurance</div>
+                </div>
+                <div class="col-md-4 my-2">
+                  <div class="list-description">
+                    {{ droneDetail?.MaximumSpeed }}
+                    {{ DroneUnits.UAVInfoMaxSpeed }}
+                  </div>
+                  <div class="list-values">Maximum speed</div>
+                </div>
+                <div class="col-md-4 my-2" *ngIf="droneDetail?.GPSManufacturer">
+                  <div class="list-description">
+                    {{ droneDetail?.GPSManufacturer }}
+                  </div>
+                  <!-- <div class="list-values"> GPS manufacturer </div> -->
+                  <div class="list-values" *ngIf="droneDetail?.GPSManufacturer">
+                    GPS manufacturer
+                  </div>
+                </div>
+                <div class="col-md-4 my-2" *ngIf="droneDetail?.GPSmodel">
+                  <div class="list-description">
+                    {{ droneDetail?.GPSmodel }}
+                  </div>
+                  <!-- <div class="list-values">GPS Model</div> -->
+                  <div class="list-values" *ngIf="droneDetail?.GPSmodel">
+                    GPS Model
+                  </div>
+                </div>
+                <div class="col-md-4 my-2">
+                  <div class="list-description">
+                    {{ droneDetail?.UAVInfoGPSType?.Value }}
+                  </div>
+                  <div class="list-values">GPS Type</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <hr> -->
+          <div class="my-3">
+            <!-- <div class=" -->
+            <div class="card dark-light" style="border-radius: 10px">
+              <div class="card-body py-1 row">
+                <div class="col-md sub-header py-1">UAV/UAS Make Info</div>
+              </div>
+              <div class="card-body py-2 row">
+                <div class="col-md-4 my-2">
+                  <div class="list-description">
+                    {{ droneDetail?.UAVMakeInfoManufacturer?.Value }}
+                  </div>
+                  <div class="list-values">Manufacturer</div>
+                </div>
+                <div class="col-md-4 my-2">
+                  <div class="list-description">
+                    {{ droneDetail?.Maxdimension }}
+                    {{ DroneUnits.UAVMakeMaxDimension }}
+                  </div>
+                  <div class="list-values">Maximum Dimension</div>
+                </div>
+                <div
+                  class="col-md-4 my-2"
+                  *ngIf="droneDetail?.UAVMakeInfoCertificate"
+                >
+                  <div class="list-description">
+                    {{ droneDetail?.UAVMakeInfoCertificate }}
+                  </div>
+                  <div class="list-values">Certificate</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <hr> -->
+          <div class="my-3">
+            <!-- <div class="sub-header py-2">Avionics</div> -->
+            <div class="card dark-light" style="border-radius: 10px">
+              <div class="card-body py-1 row">
+                <div class="col-md sub-header py-1">Avionics</div>
+              </div>
+              <!-- <div class=" row"> -->
+              <div class="card-body py-2 row">
+                <div class="col-md-4 my-2">
+                  <div class="list-description">
+                    {{ droneDetail?.AvionicsFlightController?.Value }}
+                  </div>
+                  <div class="list-values">Flight Controller</div>
+                </div>
+                <div class="col-md-4 my-2">
+                  <div class="list-description">
+                    {{ droneDetail?.AvionicsGCS?.Value }}
+                  </div>
+                  <div class="list-values">GCS</div>
+                </div>
+                <div class="col-md-4 my-2">
+                  <div class="list-description">
+                    {{ droneDetail?.AvionicsProtocol?.Value }}
+                  </div>
+                  <div class="list-values">Protocol</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <hr> -->
+          <div class="my-3">
+            <!-- <div class="sub-header py-2">Comms</div> -->
+            <div class="card dark-light" style="border-radius: 10px">
+              <div class="card-body py-1 row">
+                <div class="col-md sub-header py-1">Comms</div>
+              </div>
+              <!-- <div class=" row"> -->
+              <div class="card-body py-2 row">
+                <!-- <div class="row"> -->
+                <div class="col-md-4 my-2">
+                  <div class="list-description">
+                    {{ droneDetail?.CommsType?.Value }}
+                  </div>
+                  <div class="list-values">Type</div>
+                </div>
+                <div class="col-md-4 my-2">
+                  <div class="list-description">
+                    {{ droneDetail?.CommsRange }} {{ DroneUnits.CommsRange }}
+                  </div>
+                  <div class="list-values">Range</div>
+                </div>
+                <div class="col-md-4 my-2" *ngIf="droneDetail?.CommsMake">
+                  <div class="list-description">
+                    {{ droneDetail?.CommsMake }}
+                  </div>
+                  <div class="list-values">Make</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Remote ID Details -->
+          <div class="my-3">
+            <div class="card dark-light" style="border-radius: 10px">
+              <!-- <div class=" row"> -->
+              <div class="card-body py-2 row">
+                <div class="col">
+                  <div class="sub-header">Remote ID Details</div>
+                </div>
+                <div class="col">
+                  <div class="col pr-0 f-10 white-text-opacity float-text">
+                    <div
+                      class="Regular-Button2 float-right"
+                      (click)="
+                        copyMessage(droneDetail?.RemoteIdURL, 'do_not_toggle')
+                      "
+                    >
+                      <img
+                        src="../../../../../assets/common-layout/Content-Copy.svg"
+                        class="Content-Copy"
+                      /><span class="Button-label"> Copy ID </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card-body py-2 row">
+                <div class="col-md-6 my-2">
+                  <div class="list-description">
+                    {{
+                      droneDetail?.RemoteIdURL.length > 26
+                        ? (droneDetail?.RemoteIdURL | slice : 0 : 26) + "..."
+                        : droneDetail?.RemoteIdURL
+                    }}
+                  </div>
+                  <div class="list-values">Remote ID URL</div>
+                </div>
+                <div class="col-md-6 my-2">
+                  <!-- <div class="server-connection">
+                    <img src="../../../../../assets/common-layout/arrows-up.svg"
+                    class="arrows-up">
+                    <span class="server-connection-lable"> Establish Server Connection</span>
+                  </div> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <div class="main-panel py-3 px-md-3 px-2">
+        <div
+          *ngIf="dronesList && dronesList.length == 0"
+          class="empty-state-container mx-auto"
+        >
+          <div class="text-center">
+            <img
+              src="../../../../../assets/common-layout/Empty-State_Horizontal.svg"
+              width="100%"
+            />
+            <div class="empty-state-header">No Drone/Gear found!</div>
+            <div class="my-2 empty-state-text">
+              Create your own Drones/Gears List for a better experience
+            </div>
+
+            <a
+              class="btn empty-state-btn my-3"
+              routerLink="/operator/operator-app/drones-gears/registration"
+            >
+              Let's get started
+            </a>
+          </div>
+        </div>
+        <div *ngIf="dronesList && dronesList.length != 0">
+          <div class="text-right" *ngIf="!profileDetails?.RPTO">
+            <a
+              class="btn primary-outline-btn"
+              routerLink="/operator/operator-app/drones-gears/registration"
+            >
+              + Add Drones and Gears</a
+            >
+          </div>
+
+          <!-- drag and drop -->
+          <div class="white-text f-14 font-bold m-lg-2">
+            WhatsApp UTM
+            <!-- <img src="../../../../../assets/common-layout/whatsapp_bg.svg" width="300px" height="400px" /> -->
+          </div>
+          <div class="white-text-opacity f-12 font-bold m-lg-2">
+            Please drag the drones you’d like to use on our WhatsApp UTM into
+            this section. Maximum of 3 drones.
+          </div>
+          <div
+            class="row whatsapp-background"
+            cdkDropList
+            id="whatsApp_DronesListId"
+            (cdkDropListDropped)="onDrop($event)"
+            [cdkDropListConnectedTo]="['dronesListId']"
+            [cdkDropListData]="whatsApp_DronesList"
+          >
+            <div
+              cdkDrag
+              *ngFor="let drone of whatsApp_DronesList"
+              class="col-lg-4 my-3"
+              (click)="onOpenDrawer(drone, drawer)"
+            >
+              <div class="card card-no-border clickable-card h-100 dark-medium">
+                <div class="card-body px-3">
+                  <!-- <div class="whatsapp_card">
+                  <img src="../../../../../assets/common-layout/whatsapp_icon.png">
+                </div> -->
+                  <!-- image slider/carousal -->
+                  <app-carousel
+                    (click)="drawer.toggle()"
+                    [images]="drone?.DroneImages"
+                    [autoSlide]="true"
+                    [indecators]="false"
+                  ></app-carousel>
+                  <div class="display-flex drone_and_gears mt-2">
+                    <div class="white-text f-14 font-bold">
+                      {{ drone.Model }}
+                    </div>
+                    <div class="edit-box"></div>
+                    <mat-select
+                      *ngIf="!profileDetails?.RPTO"
+                      (click)="drawer.toggle()"
+                      [(value)]="categories.value"
+                    >
+                      <mat-option
+                        *ngFor="let category of categories"
+                        [value]="category.value"
+                        (click)="onSelect(category.value, drone)"
+                      >
+                        <img with="20" height="20" [src]="category.image" />
+                        {{ category.viewValue }}
+                      </mat-option>
+                    </mat-select>
+                  </div>
+
+                  <div class="white-text-opacity f-12 my-1">
+                    UIN Number :
+                    <span *ngIf="drone.UIN"> {{ drone.UIN }} </span>
+                    <span *ngIf="!drone.UIN"> ___ </span>
+                  </div>
+                  <div class="card dark-light mt-2">
+                    <div class="card-body px-3 py-2">
+                      <div class="row my-2">
+                        <div class="col pr-0 f-10 white-text-opacity">
+                          Class
+                        </div>
+                        <div
+                          class="col pl-0 f-10 font-bold white-text text-right"
+                        >
+                          {{ drone.UAVInfoClass?.Value }}
+                        </div>
+                      </div>
+                      <div class="row my-2">
+                        <div class="col pr-0 f-10 white-text-opacity">Type</div>
+                        <div
+                          class="col pl-0 f-10 font-bold white-text text-right"
+                        >
+                          {{ drone.UAVInfoType?.Value }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card dark mt-2">
+                    <div class="card-body px-3 py-2">
+                      <div class="row my-2">
+                        <div class="col pr-0 f-10 white-text-opacity">
+                          Remote ID URL
+                        </div>
+                        <div
+                          *ngIf="drone.RemoteIdURL"
+                          class="col pl-0 f-10 font-bold white-text text-right remoteID-url-color"
+                        >
+                          {{
+                            drone.RemoteIdURL.length > 26
+                              ? (drone.RemoteIdURL | slice : 0 : 26) + "..."
+                              : drone.RemoteIdURL
+                          }}
+                        </div>
+                        <div
+                          *ngIf="!drone.RemoteIdURL"
+                          class="col pl-0 f-10 font-bold white-text text-right remoteID-url-color"
+                        >
+                          -------------
+                        </div>
+                      </div>
+
+                      <div class="row my-2">
+                        <div class="col pr-0 f-10 white-text-opacity">
+                          <div
+                            class="Regular-Button"
+                            (click)="copyMessage(drone.RemoteIdURL, drawer)"
+                          >
+                            <img
+                              src="../../../../../assets/common-layout/Content-Copy.svg"
+                              class="Content-Copy"
+                            /><span class="Button-label"> Copy ID </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- <div class="card-footer pb-4">
+          <div class="card card-grey">
+            <div class="card-body px-3 py-2">
+              <div class="row my-2">
+                <div class="col pr-0 list-description">UAV Info Class</div>
+                <div class="col pl-0 list-values text-right">{{drone.UAVInfoClass?.Value}}</div>
+              </div>
+              <div class="row my-2">
+                <div class="col pr-0 list-description">UAV Info Type</div>
+                <div class="col pl-0 list-values text-right">{{drone.UAVInfoType?.Value}}</div>
+              </div>
+            </div>
+          </div>
+       </div> -->
+              </div>
+            </div>
+          </div>
+          <hr class="hrLine" />
+          <!-- drag and drop -->
+
+          <div
+            class="row"
+            cdkDropList
+            id="dronesListId"
+            (cdkDropListDropped)="onDrop($event)"
+            [cdkDropListConnectedTo]="['whatsApp_DronesListId']"
+            [cdkDropListData]="dronesList"
+          >
+            <div
+              cdkDrag
+              *ngFor="let drone of dronesList; trackBy: trackByDroneId"
+              class="col-lg-4 my-3"
+              (click)="onOpenDrawer(drone, drawer)"
+            >
+              <div class="card card-no-border clickable-card h-100 dark-medium">
+                <div class="card-body px-3">
+                  <div class="whatsapp_card" *ngIf="drone?.WhatsappDrone">
+                    <img
+                      src="../../../../../assets/common-layout/whatsapp_icon.png"
+                    />
+                  </div>
+                  <!-- image slider/carousal -->
+                  <app-carousel
+                    (click)="drawer.toggle()"
+                    [images]="drone?.DroneImages"
+                    [autoSlide]="true"
+                    [indecators]="false"
+                  ></app-carousel>
+                  <div class="display-flex drone_and_gears mt-2">
+                    <div class="white-text f-14 font-bold">
+                      {{ drone.Model }}
+                    </div>
+                    <!-- <i class="fa fa-circle" aria-hidden="true"></i> Manufactured by {{drone.GPSManufacturer}}  -->
+                    <div class="edit-box"></div>
+                    <!-- [ngClass]="{ 'is-invalid': submitted && uavInfo.class.errors }" -->
+                    <!-- <img src="../../../../../assets/common-layout/dotsHorizontal.svg"
+                    class="dots-horizontal" alt="hi"> -->
+                    <!-- <img src="../../../../../assets/common-layout/Delete.svg" alt="" class="Delete"> -->
+                    <!-- <select   (click)="drawer.toggle()" (change)="onSelect($event.target.value,drone)">
+                  <option selected  value="" disabled>...</option>
+                  <option value="edit" > &nbsp;&nbsp; Edit &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </option>
+                      <option value="delete"> <img src="../../../../../assets/common-layout/Delete.svg" class="Delete"> Delete </option>
+                </select> -->
+
+                    <!-- <mat-select (click)="drawer.toggle()" (selectionChange)="onSelect($event.value, drone)"
+                      (change)="onSelect($event.target.value, drone)" [(value)]="categories[0]">
+                      <mat-option *ngFor="let category of categories" [value]="category.value"> -->
+                    <mat-select
+                      (click)="drawer.toggle()"
+                      [(value)]="categories.value"
+                    >
+                      <mat-option
+                        *ngFor="let category of categories"
+                        [value]="category.value"
+                        (click)="onSelect(category.value, drone)"
+                      >
+                        <img with="20" height="20" [src]="category.image" />
+                        {{ category.viewValue }}
+                      </mat-option>
+                    </mat-select>
+                  </div>
+
+                  <div class="white-text-opacity f-12 my-1">
+                    UIN Number :
+                    <span *ngIf="drone.UIN"> {{ drone.UIN }} </span>
+                    <span *ngIf="!drone.UIN"> ___ </span>
+                  </div>
+                  <div class="card dark-light mt-2">
+                    <div class="card-body px-3 py-2">
+                      <div class="row my-2">
+                        <div class="col pr-0 f-10 white-text-opacity">
+                          Class
+                        </div>
+                        <div
+                          class="col pl-0 f-10 font-bold white-text text-right"
+                        >
+                          {{ drone.UAVInfoClass?.Value }}
+                        </div>
+                      </div>
+                      <div class="row my-2">
+                        <div class="col pr-0 f-10 white-text-opacity">Type</div>
+                        <div
+                          class="col pl-0 f-10 font-bold white-text text-right"
+                        >
+                          {{ drone.UAVInfoType?.Value }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card dark mt-2">
+                    <div class="card-body px-3 py-2">
+                      <div class="row my-2">
+                        <div class="col pr-0 f-10 white-text-opacity">
+                          Remote ID URL
+                        </div>
+                        <div
+                          *ngIf="drone.RemoteIdURL"
+                          class="col pl-0 f-10 font-bold white-text text-right remoteID-url-color"
+                        >
+                          {{
+                            drone.RemoteIdURL.length > 26
+                              ? (drone.RemoteIdURL | slice : 0 : 26) + "..."
+                              : drone.RemoteIdURL
+                          }}
+                        </div>
+                        <div
+                          *ngIf="!drone.RemoteIdURL"
+                          class="col pl-0 f-10 font-bold white-text text-right remoteID-url-color"
+                        >
+                          -------------
+                        </div>
+                      </div>
+
+                      <div class="row my-2">
+                        <div class="col pr-0 f-10 white-text-opacity">
+                          <div
+                            class="Regular-Button"
+                            (click)="copyMessage(drone.RemoteIdURL, drawer)"
+                          >
+                            <img
+                              src="../../../../../assets/common-layout/Content-Copy.svg"
+                              class="Content-Copy"
+                            /><span class="Button-label"> Copy ID </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- <div class="card-footer pb-4">
+          <div class="card card-grey">
+            <div class="card-body px-3 py-2">
+              <div class="row my-2">
+                <div class="col pr-0 list-description">UAV Info Class</div>
+                <div class="col pl-0 list-values text-right">{{drone.UAVInfoClass?.Value}}</div>
+              </div>
+              <div class="row my-2">
+                <div class="col pr-0 list-description">UAV Info Type</div>
+                <div class="col pl-0 list-values text-right">{{drone.UAVInfoType?.Value}}</div>
+              </div>
+            </div>
+          </div>
+       </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

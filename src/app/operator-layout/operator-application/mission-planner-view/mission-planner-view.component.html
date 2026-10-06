@@ -1,0 +1,220 @@
+<div class="mission-planner-wrapper">
+  <div class="map-container">
+    <ng-template appResuableOutlet></ng-template>
+  </div>
+
+  <header class="flight-console-header">
+    <div class="flight-id">
+      <span class="meta-label">ID</span>
+      <strong>{{ droneUIN || missionList?.DroneName || "DEL-04321" }}</strong>
+      <span class="connection-pill" [class.disconnected]="!liveLatitude">
+        <span></span>
+        {{ liveLatitude ? "CONNECTED" : "STANDBY" }}
+      </span>
+    </div>
+
+    <div class="header-metrics">
+      <div>
+        <span class="meta-label">Mission</span>
+        <strong>{{ missionList?.OperationName || "DEL-5723" }}</strong>
+      </div>
+      <div>
+        <span class="meta-label">Operator</span>
+        <strong>{{ missionList?.CreatedByName || profileDetails?.Name || "NaN" }}</strong>
+      </div>
+      <div>
+        <span class="meta-label">Flight Mode</span>
+        <strong>{{ webSocketValue?.status?.mode || webSocketValue?.mode || "STABILIZE" }}</strong>
+      </div>
+      <div class="signal-group">
+        <span class="signal-item">
+          <img src="../../../../../assets/icons/battery.svg" alt="Battery" />
+          {{ webSocketValue?.battery_remaining || webSocketValue?.system?.battery_remaining }}%
+        </span>
+        <span class="signal-item">
+          <img src="../../../../../assets/icons/satellite.png" alt="Satellite" />
+          {{ satelliteVisibleCount || "--" }}
+        </span>
+        <!-- <span class="signal-item">
+          <img src="../../../../../assets/icons/connection_type.svg" alt="RSSI" />
+          {{ webSocketValue?.linkqualitygcs || webSocketValue?.system?.linkqualitygcs || 98 }}%
+        </span> -->
+      </div>
+    </div>
+  </header>
+
+  <section class="position-card">
+    <div class="panel-title">Position Data</div>
+    <div>
+      <span>Lat</span>
+      <strong>{{ liveLatitude ? (liveLatitude | number : "1.1-4") : "--" }}</strong>
+    </div>
+    <div>
+      <span>Lon</span>
+      <strong>{{ liveLongitude ? (liveLongitude | number : "1.1-4") : "--" }}</strong>
+    </div>
+    <div>
+      <span>Alt (REL)</span>
+      <strong>{{ liveAltitude ? (liveAltitude | number:'1.0-3') : "--" }}</strong>
+    </div>
+    <div class="map-tools">
+      <button type="button" aria-label="Zoom in">+</button>
+      <button type="button" aria-label="Zoom out">-</button>
+      <button type="button" aria-label="Recenter">o</button>
+    </div>
+  </section>
+
+  <button
+    class="track-mission"
+    type="button"
+    [class.tracking-on]="liveLatitude && droneFollow"
+    (click)="TrackDrone()"
+  >
+    Track Mission
+  </button>
+
+  <aside class="flight-console-rail">
+    <section class="console-panel preflight-panel">
+      <div class="panel-title">Pre-Flight Checks</div>
+      <div
+        class="check-row"
+        *ngFor="let check of preFlightChecks"
+        [class.warning]="check.status === 'warn'"
+      >
+        <span>{{ check.label }}</span>
+        <small>{{ check.value }}</small>
+        <span class="check-status">{{ check.status === "warn" ? "WARN" : "OK" }}</span>
+      </div>
+    </section>
+
+    <section class="console-panel events-panel">
+      <div class="events-title">
+        <span></span>
+        Events Messages
+      </div>
+      <div class="event-log" *ngFor="let event of eventMessages">
+        <span>{{ event.time }}</span>
+        <p [class]="event.type">{{ event.message }}</p>
+      </div>
+      <div class="event-log" *ngIf="liveMessage">
+
+        <span>LIVE</span>
+        <p class="command">{{ liveMessage }}</p>
+      </div>
+    </section>
+
+    <section class="console-panel command-panel">
+      <div class="panel-title">Command Center</div>
+      <div class="mode-execute">
+        <select [(ngModel)]="selectedModeVal" name="mode">
+          <option value="" disabled>Select mode</option>
+          <option *ngFor="let mode of modes" [value]="mode">{{ mode }}</option>
+        </select>
+        <button
+          type="button"
+          [disabled]="isDroneCommandDisabled(selectedModeVal)"
+          (click)="executeSelectedMode()"
+        >
+          Execute
+        </button>
+      </div>
+
+      <div class="command-grid">
+        <button
+          type="button"
+          *ngFor="let command of commandButtons"
+          [class.primary]="command.variant === 'primary'"
+          [class.danger]="command.variant === 'danger'"
+          [disabled]="!webSocketValue?.isPickUp || isDroneCommandDisabled(command.action)"
+          (click)="handleCommandClick(command)"
+        >
+          <img [src]="command.icon" [alt]="command.label" *ngIf="command.icon" />
+          <span>{{ command.label }}</span>
+        </button>
+      </div>
+
+      <button
+        type="button"
+        class="end-mission-button"
+        [disabled]="!missionList?.MissionId"
+        (click)="showSwal('endMissionConfirm', missionList.MissionId)"
+      >
+        End Mission
+      </button>
+    </section>
+  </aside>
+
+  <footer class="telemetry-strip">
+    <div class="telemetry-tile" *ngFor="let item of telemetryStrip">
+      <span>{{ item.label }}</span>
+      <strong>{{ item.value }}</strong>
+    </div>
+  </footer>
+
+  <div class="takeoff-modal-backdrop" *ngIf="showTakeoffModal">
+    <section class="takeoff-modal" role="dialog" aria-modal="true" aria-labelledby="takeoff-modal-title">
+      <button type="button" class="takeoff-modal-close" aria-label="Close" (click)="closeTakeoffModal()">
+        x
+      </button>
+
+      <div class="takeoff-modal-header">
+        <h2 id="takeoff-modal-title">Takeoff Confirmation</h2>
+        <p>
+          Drone ID: {{ droneUIN || missionList?.DroneName || "PROD4321" }} |
+          Mission ID: {{ missionList?.OperationName || "DEL-5723" }}
+        </p>
+      </div>
+
+      <div class="takeoff-modal-body">
+        <div class="takeoff-check-title">
+          <span>[]</span>
+          Pre-Flight Safety Checks
+        </div>
+
+        <label class="takeoff-altitude-field">
+          <span>Target Altitude</span>
+          <div>
+            <input
+              type="number"
+              min="1"
+              max="120"
+              [(ngModel)]="takeoffAltitude"
+              name="takeoffAltitude"
+            />
+            <strong>METERS</strong>
+          </div>
+          <small>Restricted airspace limit: 120m AGL</small>
+        </label>
+
+        <div class="takeoff-summary">
+          <div>
+            <span>Distance</span>
+            <strong>{{ liveDist ? (liveDist / 1000 | number : "1.1-1") : "2.3" }} km</strong>
+          </div>
+          <div>
+            <span>Est. Time</span>
+            <strong>{{ flightTime || "12 min" }}</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="takeoff-modal-actions">
+        <button type="button" class="takeoff-cancel" (click)="closeTakeoffModal()">Cancel</button>
+        <button type="button" class="takeoff-submit" (click)="confirmTakeoff()">Start Takeoff</button>
+      </div>
+    </section>
+  </div>
+
+  <div class="command-snackbar" *ngIf="commandSnackbar.visible">
+    {{ commandSnackbar.message }}
+  </div>
+</div>
+
+<app-heatmap
+  class="mission-planner-heatmap"
+  (toggSwitch)="toggle2D3D($event)"
+  (toggSwitchData)="toggleData($event)"
+  (toggSwitchTel)="toggleData($event)"
+  (toggSwitchPop)="toggleData($event)"
+  [heatmapData]="guestUser"
+></app-heatmap>

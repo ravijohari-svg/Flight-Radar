@@ -1,0 +1,287 @@
+{
+  "type": "FeatureCollection",
+  "name": "Network_tower",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+    }
+  },
+  "features": [{
+      "type": "Feature",
+      "properties": {
+        "radio": "GSM",
+        "mcc": 404,
+        "net": 5,
+        "area": 221,
+        "cell": 2171,
+        "unit": 0,
+        "lon": 70.380477905272997,
+        "lat": 20.913162231445,
+        "range": 1000,
+        "samples": 1,
+        "changeable": 1,
+        "created": 1459669222,
+        "updated": 1459669222,
+        "averageSignal": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [70.380477905272997, 20.913162231445]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "radio": "GSM",
+        "mcc": 404,
+        "net": 5,
+        "area": 2312,
+        "cell": 12805,
+        "unit": 0,
+        "lon": 70.123672485352003,
+        "lat": 21.126022338866999,
+        "range": 1000,
+        "samples": 1,
+        "changeable": 1,
+        "created": 1459669222,
+        "updated": 1459669222,
+        "averageSignal": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [70.123672485352003, 21.126022338866999]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "radio": "GSM",
+        "mcc": 404,
+        "net": 69,
+        "area": 441,
+        "cell": 40912,
+        "unit": 0,
+        "lon": 73.019943237305,
+        "lat": 19.039993286133001,
+        "range": 1000,
+        "samples": 1,
+        "changeable": 1,
+        "created": 1459760674,
+        "updated": 1459760674,
+        "averageSignal": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [73.019943237305, 19.039993286133001]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "radio": "GSM",
+        "mcc": 404,
+        "net": 45,
+        "area": 25033,
+        "cell": 53132,
+        "unit": 0,
+        "lon": 77.543466,
+        "lat": 12.903442,
+        "range": 1369,
+        "samples": 14,
+        "changeable": 1,
+        "created": 1459703141,
+        "updated": 1491232540,
+        "averageSignal": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [77.543466, 12.903442]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "radio": "GSM",
+        "mcc": 404,
+        "net": 10,
+        "area": 310,
+        "cell": 27942,
+        "unit": 0,
+        "lon": 77.236404,
+        "lat": 28.601303,
+        "range": 1000,
+        "samples": 3,
+        "changeable": 1,
+        "created": 1459746500,
+        "updated": 1460953046,
+        "averageSignal": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [77.236404, 28.601303]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "radio": "GSM",
+        "mcc": 404,
+        "net": 42,
+        "area": 52400,
+        "cell": 38596,
+        "unit": 0,
+        "lon": 79.679031,
+        "lat": 12.259859,
+        "range": 1286,
+        "samples": 7,
+        "changeable": 1,
+        "created": 1459746501,
+        "updated": 1485740249,
+        "averageSignal": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [79.679031, 12.259859]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "radio": "GSM",
+        "mcc": 404,
+        "net": 58,
+        "area": 6043,
+        "cell": 60092,
+        "unit": 0,
+        "lon": 83.377304,
+        "lat": 21.871719,
+        "range": 1000,
+        "samples": 2,
+        "changeable": 1,
+        "created": 1459746503,
+        "updated": 1474892887,
+        "averageSignal": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [83.377304, 21.871719]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "radio": "GSM",
+        "mcc": 404,
+        "net": 86,
+        "area": 32602,
+        "cell": 2221,
+        "unit": 0,
+        "lon": 75.004349,
+        "lat": 15.444031,
+        "range": 1000,
+        "samples": 2,
+        "changeable": 1,
+        "created": 1459746503,
+        "updated": 1459933131,
+        "averageSignal": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [75.004349, 15.444031]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "radio": "GSM",
+        "mcc": 404,
+        "net": 93,
+        "area": 1103,
+        "cell": 61337,
+        "unit": 0,
+        "lon": 83.371810913085994,
+        "lat": 21.874465942383001,
+        "range": 1000,
+        "samples": 1,
+        "changeable": 1,
+        "created": 1459723047,
+        "updated": 1459723047,
+        "averageSignal": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [83.371810913085994, 21.874465942383001]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "radio": "GSM",
+        "mcc": 404,
+        "net": 43,
+        "area": 1142,
+        "cell": 57292,
+        "unit": 0,
+        "lon": 78.124809,
+        "lat": 9.927177,
+        "range": 1000,
+        "samples": 4,
+        "changeable": 1,
+        "created": 1459761526,
+        "updated": 1481802373,
+        "averageSignal": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [78.124809, 9.927177]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "radio": "GSM",
+        "mcc": 404,
+        "net": 57,
+        "area": 1141,
+        "cell": 62141,
+        "unit": 0,
+        "lon": 72.599716186522997,
+        "lat": 23.02116394043,
+        "range": 1000,
+        "samples": 1,
+        "changeable": 1,
+        "created": 1459744018,
+        "updated": 1459744018,
+        "averageSignal": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [72.599716186522997, 23.02116394043]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "radio": "GSM",
+        "mcc": 404,
+        "net": 75,
+        "area": 112,
+        "cell": 12302,
+        "unit": 0,
+        "lon": 86.529006958007997,
+        "lat": 22.541885375976999,
+        "range": 1000,
+        "samples": 1,
+        "changeable": 1,
+        "created": 1459748759,
+        "updated": 1459748759,
+        "averageSignal": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [86.529006958007997, 22.541885375976999]
+      }
+    }
+  ]
+}

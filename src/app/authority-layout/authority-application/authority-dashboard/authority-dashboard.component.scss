@@ -1,0 +1,125 @@
+@import "../../../../scss/colorCodes.scss";
+
+@mixin font($font-size, $font-weight) {
+  font-size: $font-size;
+  font-weight: $font-weight;
+}
+
+.main-panel {
+  height: 100vh;
+  overflow: hidden;
+  // background-color: $screen-color;
+}
+
+.header {
+  @include font(20px, 600);
+  color: $text-dark;
+}
+
+.active {
+  border-radius: 0;
+  border-bottom: 3px solid $blue-dark;
+  color: $text-white !important;
+}
+// .tabs {
+//   z-index: 10;
+//   width: max-content;
+//   position: relative;
+//   div {
+//     border-radius: 6px;
+//   }
+// }
+.tabs {
+  z-index: 10;
+  width: max-content;
+  position: absolute;
+  top:57px;
+  div {
+    border-radius: 6px;
+  }
+}
+.bottom-field{
+  position:absolute;
+  top:50px;
+}
+.map-ui-card{
+  position: absolute;
+  top:55px;
+  left:750px;
+  z-index:25;
+}
+.createMissionBtn {
+  position: absolute;
+  top: 60px;
+  right: 50px;
+  width: max-content;
+}
+.btn-tabs {
+  @include font(12px, 500);
+  color: $text-white-opacity;
+  border: 1px solid $text-light;
+  border-radius: 4px;
+  background-color: transparent;
+}
+.btn-tabs.active,
+.btn-tabs:hover {
+  background-color: gray;
+}
+.btn-tabs:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+//Metrices
+.section-header {
+  @include font(85%, 600);
+  color: $text-dark;
+}
+.icon-circle {
+  padding: 1px 5px;
+}
+.metric-value {
+  @include font(20px, 600);
+  color: $text-dark;
+}
+.metric-description {
+  @include font(64%, 600);
+  color: $text-dark;
+}
+.metric-card {
+  cursor: pointer;
+}
+.metric-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);
+}
+
+.form-control:focus {
+  outline: none;
+  box-shadow: none;
+  background-color: $black-medium;
+}
+.hoverable:hover {
+  cursor: pointer;
+}
+.topHeader {
+  border: none;
+  border-bottom: 1px solid $dark-border;
+}
+.sideNav {
+  border: none;
+  border-right: 1px solid $dark-border;
+}
+.main-map {
+  height: calc(100vh - 56px);
+}
+
+.primary-btn:disabled {
+  background-color: rgba(0, 0, 0, 0.225);
+  color: #ffffff;
+}
+
+.primary-btn-alignment {
+  margin-top: 2.5px;
+  font-size:12px;
+}

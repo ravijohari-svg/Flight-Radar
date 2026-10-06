@@ -1,0 +1,1119 @@
+@import 'ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
+@import 'ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
+
+html,
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.map-container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+ac-toolbar-button .button-container {
+  width: 150px !important;
+  font-size: 12px !important;
+  background-color: rgb(40 40 40 / 92%) !important;
+  color: #fff;
+  border-radius: 5px !important;
+}
+
+ac-toolbar-button .button-container label input {
+  vertical-align: middle;
+}
+
+ac-toolbar-button .button-container label {
+  margin: 0.25rem;
+}
+
+/* You can add global styles to this file, and also import other style files */
+@import "/node_modules/bootstrap/scss/bootstrap.scss";
+@import "scss/colorCodes.scss";
+@import "../node_modules/ngx-bootstrap/datepicker/bs-datepicker.css";
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+@mixin colors($color, $background-color) {
+  color: $color;
+  background-color: $background-color;
+}
+
+@mixin font($font-size, $font-weight) {
+  font-size: $font-size;
+  font-weight: $font-weight;
+}
+
+a,
+button {
+  cursor: pointer;
+}
+
+//Common Buttons
+.primary-btn {
+  @include colors($text-white, $blue-dark);
+  // @include font(14px,400);
+  border-radius: 5px;
+}
+
+.primary-btn:hover {
+  @include colors($blue-dark, $text-white);
+}
+
+.primary-btn:disabled {
+  @include colors($text-white, $black-medium);
+  border: 1px solid $text-white;
+}
+
+.primary-outline-btn {
+  color: $blue-dark;
+}
+
+.primary-outline-border-btn {
+  // color: $blue;
+  @include colors($blue-dark, $text-white);
+  // border: 1px solid $blue;
+  border-radius: 5px;
+  @include font(13px, 400);
+}
+
+.primary-outline-border-btn:hover {
+  @include colors(#ffffff, $blue);
+}
+
+.white-btn {
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  color: $text-dark;
+}
+
+//Stepper
+.mat-stepper-horizontal {
+  font-family: "Poppins", sans-serif;
+}
+
+.mat-stepper-horizontal-line {
+  display: none !important;
+  // min-width: 0px !important;
+  // border-left: 2px solid #e6e6e6 !important;
+  // height: 20px !important;
+}
+
+.mat-step-header .mat-step-label {
+  color: $text-dark !important;
+  @include font(14px, normal);
+  color: rgba(255, 255, 255, 0.75) !important;
+}
+
+.mat-step-label-selected .mat-step-text-label {
+  // color: $text-dark !important;
+  color: rgba(255, 255, 255, 0.75) !important;
+}
+
+.mat-step-header .mat-step-icon {
+  background-color: $text-white-opacity;
+  color: $black-medium;
+  width: 17px;
+  height: 17px;
+  font-size: 12px;
+}
+
+.mat-step-header .mat-step-icon-selected,
+.mat-step-header .mat-step-icon-state-done,
+.mat-step-header .mat-step-icon-state-edit {
+  // background-color: $text-dark !important;
+  background-color: $text-white;
+  color: $text-dark;
+  font-size: 12px;
+}
+
+.mat-step-icon-state-done {
+  // real one
+  border: 3px solid #e7e7e7 !important;
+}
+
+.mat-horizontal-stepper-header {
+  pointer-events: none !important;
+  padding: 0 25px 0 0 !important;
+}
+
+.mat-horizontal-content-container {
+  padding: 0px;
+}
+
+// OTP UI
+.otp-input {
+  background-color: $black-medium;
+  color: $text-white;
+}
+
+//Error Messages
+.error-message {
+  font-size: 80%;
+  color: $red;
+  // @extend .br-red;
+}
+
+.warning-message {
+  font-size: 80%;
+  color: $pending;
+}
+
+//Popups
+.alert-login-button {
+  background-color: $blue !important;
+  color: #ffffff !important;
+  border-radius: 5px;
+}
+
+.alert-cancel-button {
+  color: $blue;
+}
+
+.alert-small-text {
+  font-size: 12px;
+  color: $text-dark;
+  opacity: 0.45;
+}
+
+.swal2-icon-show {
+  border: none !important;
+}
+
+.swal2-confirm,
+.swal2-cancel {
+  outline: none !important;
+  box-shadow: none !important;
+  font-size: 12px;
+}
+
+.alert-title {
+  color: $text-dark !important;
+  font-size: 16px !important;
+}
+
+.alert-text,
+.swal2-html-container {
+  font-size: 11px !important;
+  color: #fff !important;
+}
+
+//Inline Block
+.inline-block {
+  display: inline-block;
+}
+
+//Loader
+
+.loader {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  background-color: $black-dark;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // Navifly_loader.gif  Navifly_loader_transparent.gif
+  // background: url('assets/common-layout/Navifly_loader_transparent.gif') 60% 40% no-repeat rgba(255, 255, 255, 0.6);
+  // background: url('assets/common-layout/Rolling-White2.gif') 50% 50% no-repeat rgba(0, 0, 0, 0.6);
+  // Rolling-yellow.gif
+  // background: url('assets/common-layout/SquareLoader.gif') 50% 50% no-repeat rgb(0, 0, 0);
+  // background-size: 30px;
+  // opacity: 0.8;
+}
+
+.logo {
+  display: inline-block;
+  // margin: 40vh auto auto auto;
+  // width: 250px;
+
+  // position: fixed;
+  // left: 0px;
+  // top: 0px;
+  // width: 100%;
+  // height: 100%;
+  // z-index: 9999;
+  // background: url('assets/common-layout/SkyeUTM logoWhite.svg') 60% 49% no-repeat;
+  // background-size: 200px 200px;
+  // opacity: 0.8;
+}
+
+.loaderImage {
+  margin-left: 636px;
+  margin-top: 200px;
+  height: 200px;
+  width: 200px;
+  opacity: 1;
+}
+
+//Font Sizes
+.font-12 {
+  font-size: 12px !important;
+}
+
+.font-10 {
+  font-size: 10px !important;
+}
+
+//card
+.card.card-outer {
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  border: none;
+  border-radius: 20px;
+}
+
+.card-no-border {
+  border: none;
+  border-radius: 10px;
+}
+
+//Dropdown
+.dropdown-item {
+  color: $text-light;
+  @include font(72%, 600);
+}
+
+//ngx typeahead
+// typeahead-container {
+//   height: 150px !important;
+// }
+
+//ngx accordion
+.card-header.panel-enabled {
+  padding: 0.25rem !important;
+  border-bottom: none;
+  background-color: $black-light;
+}
+
+.panel-body.card-block.card-body {
+  padding: 0rem;
+}
+
+.panel.card.panel-default {
+  // border: 0.2px solid $text-white-opacity;
+  border: none;
+}
+
+accordion-group.customer-accordion .panel .card-header.panel-enabled {
+  min-height: 110px !important;
+  padding: 0rem 0.25rem !important;
+  background-color: $screen-color !important;
+}
+
+.mat-expansion-indicator::after {
+  color: $text-white;
+}
+
+.panel-collapse.collapse.in.show {
+  background-color: $black-medium;
+}
+
+//Empty State
+.empty-state-header {
+  @include font(16px, 600);
+  color: $text-white;
+}
+
+.empty-state-text {
+  @include font(12px, 400);
+  color: $text-white-opacity;
+}
+
+.empty-state-btn {
+  @include font(14px, 400);
+  background-color: $blue;
+  color: white;
+}
+
+.empty-state-btn:hover {
+  background-color: white;
+  color: $blue;
+}
+
+.empty-state-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+  min-height: 40vh !important;
+}
+
+.empty-state-card {
+  background-color: #fcfcfc;
+}
+
+//Side navbar
+.img-text {
+  color: #ffffff;
+  font-size: 12px;
+}
+
+.white-line-sidenav {
+  background-color: #ffffff;
+  // height: 1px;
+  width: 75%;
+  border: 0.00001px solid #ffffff;
+  opacity: 0.6;
+  margin: 15px 0px;
+}
+
+.dark-red {
+  background-color: $dark-red;
+}
+
+.dark-green {
+  background-color: $dark-green;
+}
+
+.dark-orange {
+  background-color: $dark-orange;
+}
+
+// Dark theme styles guide
+.dark-light {
+  background-color: $black-light;
+}
+
+.dark-medium {
+  background-color: $black-medium;
+}
+.dark-new {
+  background-color: $dark-new;
+}
+.text-dark-medium {
+  color: $black-medium;
+}
+
+.dark {
+  background-color: $black-dark;
+}
+
+.blue {
+  background-color: $blue-dark;
+}
+
+.white-text {
+  color: $text-white;
+}
+
+.white-text-opacity {
+  color: $text-white-opacity;
+}
+
+.dark-v1 {
+  background-color: $dark-v1;
+}
+.body-color {
+  background-color: $dark-new !important;
+}
+.dark-body {
+  background-color: $dark-body;
+}
+.reject,
+.approve,
+.pending,
+.deleted {
+  color: $black-dark;
+}
+
+.reject {
+  background-color: $reject;
+}
+
+.reject-btn {
+  background-color: $reject;
+}
+
+.approve {
+  background-color: $approval;
+}
+
+.pending {
+  background-color: $pending;
+}
+
+.deleted {
+  background-color: $neutral;
+}
+
+.reject-btn:hover {
+  color: white;
+  background-color: $dark-red;
+}
+.btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.btn-dark-outline {
+  color: $text-white-opacity;
+  font-size: 12px;
+}
+
+.btn-dark-border {
+  color: $text-white;
+  // background-color: $black-dark;
+  border: 0.5px solid $text-white-opacity;
+}
+
+.border-light {
+  border: 0.5px solid $text-white-opacity;
+}
+
+.f-30 {
+  font-size: 32px;
+}
+
+.f-28 {
+  font-size: 28px;
+}
+
+.f-24 {
+  font-size: 24px;
+}
+.f-20 {
+  font-size: 20px;
+}
+
+.f-18 {
+  font-size: 18px;
+}
+
+.f-16 {
+  font-size: 16px;
+}
+
+.f-14 {
+  font-size: 14px;
+}
+
+.f-12 {
+  font-size: 12px;
+}
+.f-11 {
+  font-size: 11px;
+}
+.f-10 {
+  font-size: 10px;
+}
+
+.f-8 {
+  font-size: 8px;
+}
+
+.list-values-dark {
+  font-size: 11px;
+  color: $text-white;
+}
+
+.list-description-dark {
+  font-size: 10px;
+  color: $text-white-opacity;
+}
+
+.br-15 {
+  border-radius: 15px;
+}
+
+.br-red {
+  border: 0.2px solid $red !important;
+}
+
+.br-orange {
+  border: 0.2px solid  $pending !important;
+}
+
+.br-white {
+  border: 0.2px solid $text-white-opacity !important;
+}
+
+.b-red {
+  background-color: $red;
+}
+
+mat-sidenav-content {
+  background-color: $black-dark;
+}
+
+.mat-drawer-inner-container::-webkit-scrollbar {
+  width: 0.3em;
+}
+
+.mat-drawer-inner-container::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 2px $scrollbar;
+}
+
+.mat-drawer-inner-container::-webkit-scrollbar-thumb {
+  background-color: $black-light;
+}
+
+// Complaince
+.complaince {
+  width: 45px;
+  height: 20px;
+  border-radius: 5px;
+}
+.text-white-light {
+  color: $loginText2;
+}
+// Font weight
+.light-semi-bold {
+  font-weight: 500 !important;
+  color: $black-light !important;
+}
+
+.fw-500 {
+  font-weight: 500 !important;
+}
+
+//Modal
+.modal-content {
+  border: none;
+}
+
+//Bootstrap modal closing/opening
+body:not(.modal-open) {
+  padding-right: 0px !important;
+}
+
+//Payment
+.payment-modal {
+  left: 10px;
+  border-radius: 20px;
+  width: 90vw !important;
+  max-width: 90vw !important;
+  min-height: 90vh !important;
+  background-color: $black-dark-opacity !important;
+}
+
+.swal2-html-container,
+.swal2-title,
+.swal2-text {
+  color: rgba(255, 255, 255, 0.75) !important;
+}
+
+// Maps
+.modal-content {
+  border-radius: 20px;
+}
+
+.cesium-viewer .cesium-widget-credits {
+  display: none !important;
+}
+
+.map-container .cesium-infoBox {
+  top: 162px;
+  right: 6px;
+}
+
+.map-container .cesium-viewer-toolbar {
+  // top: 77px;
+  z-index: 100;
+}
+
+.map-container .cesium-viewer-toolbar .cesium-navigation-help {
+  top: 83px;
+}
+
+.map-container
+  .cesium-viewer-toolbar
+  .cesium-sceneModePicker-wrapper
+  .cesium-sceneModePicker-dropDown-icon {
+  top: 43px;
+}
+
+.map-container .cesium-viewer-toolbar .cesium-baseLayerPicker-dropDown-visible {
+  top: 79px;
+  right: 6rem;
+}
+
+.map-create-mission .map-container .cesium-infoBox {
+  top: 162px;
+}
+
+.map-create-mission .map-container .cesium-viewer-toolbar {
+  top: 77px;
+}
+
+.map-create-mission
+  .map-container
+  .cesium-viewer-toolbar
+  .cesium-navigation-help-visible {
+  top: 83px;
+}
+
+.map-create-mission
+  .map-container
+  .cesium-viewer-toolbar
+  .cesium-sceneModePicker-wrapper
+  .cesium-sceneModePicker-dropDown-icon {
+  top: 43px;
+}
+
+.map-create-mission
+  .map-container
+  .cesium-viewer-toolbar
+  .cesium-baseLayerPicker-dropDown-visible {
+  top: 79px;
+}
+
+.authority-missionDetail .map-container .cesium-infoBox {
+  top: 82px;
+  right: 6px;
+}
+
+.authority-missionDetail
+  .map-container
+  .cesium-viewer-toolbar
+  .cesium-navigation-help-visible {
+  top: 76px;
+}
+
+.authority-missionDetail
+  .map-container
+  .cesium-viewer-toolbar
+  .cesium-sceneModePicker-wrapper
+  .cesium-sceneModePicker-dropDown-icon {
+  top: 37px;
+}
+
+.authority-missionDetail
+  .map-container
+  .cesium-viewer-toolbar
+  .cesium-baseLayerPicker-dropDown-visible {
+  top: 71px;
+}
+
+.main-operator-dashboard .cesium-viewer-toolbar {
+  top: 10px;
+  right: 145px;
+}
+.create-mission-module .cesium-viewer-toolbar {
+  top: 56px;
+  right: 9.5rem;
+}
+// @media screen and (max-width: 992px) {
+//   .map-dashboard .map-container .cesium-viewer-toolbar {
+//     top: 153px;
+//   }
+
+//   .map-create-mission .map-container .cesium-viewer-toolbar {
+//     top: 120px;
+//   }
+// }
+
+// @media screen and (max-width: 1164px) and (min-width: 993px) {
+//   .map-dashboard .map-container .cesium-viewer-toolbar {
+//     top: 97px;
+//   }
+// }
+@media screen and (max-width: 1285px) {
+  .createMissionBtn {
+    top: 77px;
+  }
+  .main-operator-dashboard .cesium-viewer-toolbar {
+    top: 114px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .createMissionBtn {
+    top: 77px;
+    left: 16%;
+  }
+  .main-operator-dashboard .cesium-viewer-toolbar {
+    top: 114px;
+  }
+}
+//   .map-create-mission .map-container .cesium-viewer-toolbar {
+//     top: 120px;
+// }
+
+.cesium-viewer-toolbar .cesium-toolbar-button {
+  border-color: black;
+  border-width: medium;
+}
+
+@media screen and (max-width: 767px) {
+  .cesium-viewer-toolbar .cesium-toolbar-button {
+     right: 40px;
+  }
+}
+.map-ongoing-authority .map-container .cesium-infoBox {
+  top: 74px;
+}
+
+.map-ongoing-authority
+  .map-container
+  .cesium-viewer-toolbar
+  .cesium-baseLayerPicker-dropDown-visible {
+  top: 69px;
+}
+
+.map-ongoing-authority
+  .map-container
+  .cesium-viewer-toolbar
+  .cesium-sceneModePicker-wrapper
+  .cesium-sceneModePicker-dropDown-icon {
+  top: 34px;
+}
+
+.map-ongoing-authority
+  .map-container
+  .cesium-viewer-toolbar
+  .cesium-navigation-help {
+  top: 74px;
+}
+
+//admin-dropdown
+.ng-select.ng-select-single .ng-select-container {
+  // height: 42px;
+  background-color: $black-medium;
+}
+
+.ng-select,
+.ng-select div,
+.ng-select input,
+.ng-select span {
+  // color: #8c8c8c;
+  // font-size: 12px;
+  color: #ffffff;
+  font-family: SFProText;
+  font-size: 16px;
+}
+
+.MaplayerDropdown,
+.MaplayerDropdown.ng-select div,
+.MaplayerDropdown.ng-select input,
+.MaplayerDropdown.ng-select span {
+  color: #efe8e8;
+  font-family: SFProText;
+  font-size: 16px;
+}
+.MaplayerDropdown.ng-select.ng-select-multiple
+  .ng-select-container
+  .ng-value-container
+  .ng-value {
+  background-color: $black-light !important;
+}
+.MaplayerDropdown.ng-select.ng-select-single .ng-select-container {
+  background-color: #1b1f27;
+}
+.ng-select.ng-select-opened > .ng-select-container {
+  background: #1b1f27;
+  // border-color: #b3b3b3 #ccc #d9d9d9;
+}
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+  font-size: 12px;
+}
+
+.ng-select .ng-select-container {
+  min-height: 41px;
+}
+
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+  background-color: $black-medium;
+}
+
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-optgroup,
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+  color: #8c8c8c;
+}
+
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked {
+  background-color: $black-medium;
+}
+
+//ng-select-border
+.ng-select .ng-select-container {
+  border-radius: 8px;
+  border: solid 1px $black-light;
+  background-color: $rectangle-color;
+}
+
+.admin-list-modal .card {
+  border: none;
+  border-radius: 1rem;
+}
+
+.mat-mdc-slide-toggle.mat-accent {
+  --mdc-switch-selected-focus-state-layer-color: #246af7;
+  --mdc-switch-selected-handle-color: #3d7bf7;
+  --mdc-switch-selected-hover-state-layer-color: #3d7bf7;
+  --mdc-switch-selected-pressed-state-layer-color: #3d7bf7;
+  --mdc-switch-selected-focus-handle-color: #3d7bf7;
+  --mdc-switch-selected-hover-handle-color: rgb(190, 234, 248);
+  --mdc-switch-selected-pressed-handle-color: #2167f1;
+  --mdc-switch-selected-focus-track-color: #5382e0;
+  --mdc-switch-selected-hover-track-color: #5382e0;
+  --mdc-switch-selected-pressed-track-color: #3d7bf7;
+  --mdc-switch-selected-track-color: #3d7bf7;
+  --mdc-switch-selected-track-color: #3d7bf7;
+}
+
+//dropdown with image using material design
+.mat-select-panel {
+  background-color: $black-medium !important;
+}
+
+.mat-option-text {
+  font-family: "DM Sans", sans-serif;
+  color: $text-white;
+}
+
+.mat-select-panel {
+  flex-basis: 100%;
+  margin-top: 49px;
+  margin-left: -20px;
+}
+
+.mat-select-trigger {
+  height: 2.125em;
+}
+
+.mat-select-arrow {
+  color: $black-medium;
+}
+
+//calender color
+.theme-green .bs-datepicker-head {
+  background-color: $black-light;
+}
+
+.theme-green .bs-datepicker-body table td span.selected {
+  background-color: $black-light;
+}
+
+// .display-flex .mat-option  {
+//   background-color: #1b1f27;
+// }
+// text hover color
+.btn_text:hover {
+  color: beige;
+}
+
+// .mat-expansion-panel-header {
+// background-color: $black-light !important;
+// }
+.mat-expansion-panel {
+  background-color: $black-light !important;
+}
+
+.mat-expansion-panel-body {
+  background-color: $rectangle-color;
+  padding: 0px !important;
+}
+.hiddenMap {
+  display: none;
+  pointer-events: none;
+}
+
+// tour and guide css
+.driver-popover {
+  border-radius: 8px;
+  background-color: $dark-body;
+  color: $text-white-opacity;
+  font-family: Poppins;
+  padding: 25px 20px;
+  max-width: 400px;
+  min-width: 350px;
+}
+
+.driver-popover .driver-popover-title,
+.driver-popover .driver-popover-description,
+.driver-popover .driver-popover-progress-text {
+  color: $text-white-opacity;
+}
+
+.driver-popover .driver-popover-arrow {
+  content: "";
+  position: absolute;
+  border: 5px solid $dark-body;
+}
+.driver-popover .driver-popover-arrow-side-right {
+  right: 100%;
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+  border-top-color: transparent;
+}
+.driver-popover .driver-popover-arrow-side-left {
+  left: 100%;
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+  border-top-color: transparent;
+}
+// bottom and top css we have to class individually
+
+// custom close button css
+.driver-popover .custom-stepper {
+  color: $text-white-opacity;
+  display: flex;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 10px;
+}
+
+.driver-popover .custom-stepper .custom-close-button {
+  color: $text-white-opacity;
+  background-color: transparent;
+  background-image: none;
+  pointer-events: auto;
+  text-transform: none;
+  text-align: center;
+  color: $button-color;
+  border: none;
+  font-weight: 500;
+}
+
+.driver-popover .custom-stepper .custom-close-button:focus {
+  outline: none;
+}
+
+.driver-popover .driver-popover-title {
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 16px;
+  letter-spacing: 0.4px;
+  margin-bottom: 16px;
+}
+
+.driver-popover .driver-popover-description {
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.4px;
+  margin-bottom: 24px;
+}
+// navigations btns
+.driver-popover .driver-popover-navigation-btns {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px; /* 114.286% */
+  letter-spacing: 0.28px;
+  text-shadow: none;
+}
+
+.driver-popover .driver-popover-next-btn {
+  padding: 9.761px 24px;
+  color: $button-color;
+  border-radius: 39.046px;
+  border: 1.22px solid $button-color;
+  background: transparent;
+  background-image: none;
+  text-shadow: none;
+  margin-left: auto;
+}
+.driver-popover .driver-popover-prev-btn {
+  border: none;
+  color: $text-white-opacity;
+  padding: 0;
+  background: transparent;
+  background-image: none;
+  text-shadow: none;
+}
+
+.driver-popover .driver-popover-next-btn:hover {
+  outline: none;
+  background-color: transparent;
+  background-image: none;
+  color: $button-color;
+}
+
+.driver-popover .driver-popover-prev-btn:hover {
+  outline: none;
+  background-color: transparent;
+  background-image: none;
+}
+
+.driver-popover .custom-stepper .custom-close-button:focus {
+  outline: none;
+}
+.driver-popover .custom-stepper .custom-close-button:hover {
+  outline: none;
+  background: transparent;
+  background-image: none;
+  color: $button-color;
+}
+//drone and gear section after delete option select show delete value
+.mat-select-value {
+  color: $dark-v1;
+}
+.owl-next, .owl-prev {
+  // background-color: $frame-color !important;
+  width : 40px !important;
+  height: 40px !important;
+  border: 1px solid $text-white;
+  border-radius: 25px !important;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  position: absolute;
+  top: 90%;
+  background-color: #ffffff !important;
+  border: 1px solid #949494 !important;
+  color: #a4a4a4 !important;
+ }
+ .owl-next i {
+  font-size: 30px;
+ }
+ .owl-prev i {
+  font-size: 30px;
+ }
+ .owl-next {
+  right : 0% !important;
+ }
+ .owl-prev {
+  right: 8% !important;
+ }
+ @media (max-width: 768px) {
+  .owl-next i {
+    font-size: 30px;
+   }
+   .owl-prev i {
+    font-size: 25px;
+   }
+   .owl-next {
+    right : -12% !important;
+   }
+   .owl-prev {
+    left: -11% !important;
+ }
+ }
+
+ 
+.rpto-tag {
+  color: $dark-red;
+  font-size: 500;
+}
+
+// .owl-theme .owl-dots .owl-dot span{
+//   border-radius: 0px !important;
+//   width: 55px !important;
+//     height: 6px !important;
+//     margin: 4px 0px !important;
+// } 

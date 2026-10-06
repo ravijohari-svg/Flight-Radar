@@ -1,0 +1,162 @@
+@import "../../../../../../scss/colorCodes.scss";
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans&display=swap");
+
+@mixin font($font-size, $font-weight) {
+  font-size: $font-size;
+  font-weight: $font-weight;
+}
+
+@mixin colors($color, $background-color) {
+  color: $color;
+  background-color: $background-color;
+}
+
+.main-panel {
+  min-height: 100vh;
+}
+
+//Blackbox list table
+.table-bordered {
+  // border-collapse: separate;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 2px;
+  background-color: $dark-v1;
+  border-collapse: collapse;
+}
+.table-bordered thead {
+  @include colors($text-white, $black-light);
+}
+.table-bordered tbody tr {
+  padding: 20px !important;
+}
+
+.table-bordered thead tr th {
+  border: none !important;
+  // color: $text-dark;
+  // @include colors($text-white,$black-light);
+  opacity: 0.8;
+  @include font(11px, 600);
+  padding: 0.7rem;
+}
+
+.table-header {
+  font-size: 22px;
+  font-weight: 600;
+  color: #111111;
+  // padding: 0.5rem;
+  padding-left: 0rem !important;
+}
+
+.table-bordered tbody tr td {
+  border-right: none;
+  border-left: none;
+  border-top: 1px solid;
+  border-bottom: none;
+  border-color: rgba(0, 0, 0, 0.125) !important;
+  width: 150px;
+  @include font(12px, 400);
+  @include colors($text-white-opacity, $black-medium);
+  padding: 0.7rem;
+}
+
+.table-bordered tbody tr td button {
+  @include font(12px, 600);
+}
+
+.table-bordered th,
+.table-bordered td {
+  vertical-align: middle;
+}
+
+.btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.input-group-text {
+  background: #ffffff;
+  border-right: 0px;
+  color: $text-light;
+  padding-right: 0.1rem;
+}
+
+.form-control {
+  height: 40px;
+}
+.form-control:focus {
+  outline: none;
+  box-shadow: none;
+  background-color: $black-medium;
+}
+.input-group .form-control {
+  border-left: 0px;
+}
+
+.input-group .form-control::placeholder {
+  color: $text-light;
+  @include font(12px, 500);
+}
+
+select {
+  color: $text-light;
+  @include font(12px, 500);
+}
+.dropdown-item {
+  color: $text-light;
+  @include font(72%, 600);
+}
+.form-control {
+  font-size: 75%;
+}
+.primary-outline-btn {
+  font-size: 75%;
+}
+
+.fa-long-arrow-right,
+.fa-search {
+  color: $text-light;
+  position: absolute;
+  left: 85%;
+  top: 20%;
+  z-index: 10;
+  font-size: 13px;
+}
+
+.previous,
+.next {
+  color: rgba(255, 255, 255, 0.75) !important;
+  background-color: #1b1f27;
+}
+.previous:hover {
+  background: #6c757d !important;
+  border-radius: 5px !important;
+}
+
+.next:hover {
+  color: rgba(255, 255, 255, 0.75) !important;
+  background: #6c757d !important;
+  border-radius: 5px !important;
+}
+.timeDistance-box {
+  // position: absolute;
+  margin-left: 14px;
+  width: 212px;
+  height: 106px;
+  left: 0px;
+  top: 0px;
+  background: $dark-v1;
+  border-radius: 6px;
+}
+.timeDistance-box-img {
+  // position: absolute;
+  width: 16px;
+  height: 16px;
+  // left: 16px;
+  // top: 18px;
+}
+.box-stats {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  margin-left: 4px;
+}

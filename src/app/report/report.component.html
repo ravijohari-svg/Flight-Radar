@@ -1,0 +1,419 @@
+<div *ngIf="completed">
+  <div class="completed">Report generated</div>
+</div>
+
+<div class="report" id="page">
+  <div class="page">
+    <div class="header">
+      <div class="headerText">
+        <div class="head">
+          <span *ngIf="reportType == 'Postflight'">Post-flight Report</span>
+          <span *ngIf="reportType != 'Postflight'">Pre-flight Report</span>
+        </div>
+        <div>
+          {{ missionDetails?.ActivityType }}
+        </div>
+      </div>
+      <img
+        class="logoImg"
+        src="../../../../assets/icons/IMAGE.svg"
+        alt="logo"
+      />
+    </div>
+    <div class="headerInfo">
+      Utilise the document to notify the stakeholders of your flight such as
+      team members, property owners, citizens you fly over, regulators, ATC and
+      local law enforcement. Please conduct a safe and informed flight.
+    </div>
+
+    <div class="reportCards py-0">
+      <div class="reportCard">
+        <span class="cardHead">
+          <img src="../../../../assets/icons/mission.svg" alt="mission" />
+        </span>
+
+        <div class="key-value-table">
+          <div class="trow">
+            <div class="key">Operation Name</div>
+            <div class="value">{{ missionDetails?.OperationName }}</div>
+          </div>
+          <div class="trow">
+            <div class="key">Operation Id</div>
+            <div class="value">{{ missionDetails?.MissionId }}</div>
+          </div>
+          <div class="trow">
+            <div class="key">Max. Altitude</div>
+            <div class="value">{{ missionDetails?.MaximumAltitude }}</div>
+          </div>
+          <div class="trow">
+            <div class="key">Start Time</div>
+            <div class="value">
+              {{ missionDetails?.StartTime | date : "dd MMM yyyy, h:mm a" }}
+            </div>
+          </div>
+          <div class="trow">
+            <div class="key">End Time</div>
+            <div class="value">
+              {{ missionDetails?.EndTime | date : "dd MMM yyyy, h:mm a" }}
+            </div>
+          </div>
+          <div class="trow">
+            <div class="key">Drone Name</div>
+            <div class="value">{{ missionDetails?.DroneName }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="reportCard">
+        <span class="cardHead">
+          <img src="../../../../assets/icons/pilot.svg" alt="mission" />
+        </span>
+
+        <div class="key-value-table">
+          <div class="trow">
+            <div class="key">Pilot Name</div>
+            <div class="value">{{ missionDetails?.CreatedByName }}</div>
+          </div>
+          <div class="trow">
+            <div class="key">Contact</div>
+            <div class="value">+{{ missionDetails?.PilotContact }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="multireportCards">
+        <div class="reportCard">
+          <span class="cardHead">
+            <img src="../../../../assets/icons/Compliance.svg" alt="mission" />
+          </span>
+
+          <div class="key-value-table compliance">
+            <div
+              class="trow"
+              *ngFor="
+                let category of missionDetails?.missionPermissionsList;
+                let i = index;
+                trackBy: missionPermissionTrackBy
+              "
+            >
+              <div class="key">{{ category?.Name }}</div>
+              <div class="value">
+                <div [class]="category?.permission"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="reportCard">
+          <span class="cardHead">
+            <img src="../../../../assets/icons/Airspace.svg" alt="mission" />
+          </span>
+
+          <div class="key-value-table">
+            <div class="trow" *ngIf="missionDetails?.FIRID">
+              <div class="key">FIR Code</div>
+              <div class="value">{{ missionDetails?.FIRID.join(", ") }}</div>
+            </div>
+            <div class="trow">
+              <div class="key">Type</div>
+              <div class="value">{{ missionDetails?.IntersectionType }}</div>
+            </div>
+            <div class="trow">
+              <div class="key">FIC</div>
+              <div class="value">--</div>
+            </div>
+            <div class="trow">
+              <div class="key">Location</div>
+              <div class="value">{{ weatherDetails?.name }}</div>
+            </div>
+            <div class="trow">
+              <div class="key">State</div>
+              <div class="value">
+                {{ missionDetails?.principalSubdivision }}
+              </div>
+            </div>
+            <div class="trow">
+              <div class="key">Country</div>
+              <div class="value">
+                {{ missionDetails?.Country || weatherDetails?.sys.country }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="reportCards page">
+    <div class="reportCard">
+      <div class="cardHead">
+        <img src="../../../../assets/icons/mapdetails.svg" alt="mission" />
+        <div class="intersection" [class]="type">
+          <img
+            *ngIf="type === 'greenzone'"
+            src="../../../assets/icons/check-circle.svg"
+            alt=""
+          />
+          <img
+            *ngIf="type === 'yellowzone'"
+            src="../../../assets/icons/warning.svg"
+            alt=""
+          />
+          <img
+            *ngIf="
+              type === 'redzone' ||
+              type === 'geozone' ||
+              type === 'reservedairspace'
+            "
+            src="../../../assets/icons/error.svg"
+            alt=""
+          />
+          <div>
+            <div class="head">Intersection Details</div>
+            <div *ngIf="type === 'greenzone'" class="detail">
+              your mission is flying in green zone
+            </div>
+            <div *ngIf="type === 'redzone'" class="detail">
+              your mission is flying in red zone
+            </div>
+            <div *ngIf="type === 'geozone'" class="detail">
+              your mission is flying in geo zone
+            </div>
+            <div *ngIf="type === 'yellowzone'" class="detail">
+              your mission is flying in yellow zone
+            </div>
+            <div *ngIf="type === 'reservedairspace'" class="detail">
+              your mission is flying in reserved airspace
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="key-value-table">
+        <div *ngIf="mapScreenshotURL" class="mapImg">
+          <img [src]="mapScreenshotURL" alt="" />
+        </div>
+      </div>
+    </div>
+    <div class="reportCard">
+      <span class="cardHead">
+        <img src="../../../../assets/icons/graph.svg" alt="mission" />
+      </span>
+      <div class="key-value-table">
+        <div class="chartContainer">
+          <div
+            #chartContainer
+            echarts
+            [options]="chartOption"
+            *ngIf="!chartImg"
+          ></div>
+          <img *ngIf="chartImg" [src]="chartImg" alt="chart" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="reportCards page">
+    <div class="reportCard" *ngIf="weatherDetails">
+      <span class="cardHead">
+        <img src="../../../../assets/icons/weather.svg" alt="mission" />
+      </span>
+
+      <div class="key-value-table">
+        <div class="multitable">
+          <div class="multitrow">
+            <div class="trow">
+              <div class="key">Temperature</div>
+              <div class="value">
+                {{ weatherDetails?.main?.temp | frantCelcius : "C" }} °C
+              </div>
+            </div>
+            <div class="trow">
+              <div class="key">Wind Speed</div>
+              <div class="value">{{ weatherDetails?.wind?.speed }} m/s</div>
+            </div>
+            <div class="trow">
+              <div class="key">Climate</div>
+              <div class="value">{{ weatherDetails?.weather[0].main }}</div>
+            </div>
+          </div>
+          <div class="multitrow">
+            <div class="trow">
+              <div class="key">Wind Direction</div>
+              <div class="value">{{ weatherDetails?.wind?.deg }} °</div>
+            </div>
+            <div class="trow">
+              <div class="key">Visibility</div>
+              <div class="value">
+                {{ weatherDetails?.visibility / 1000 }} km
+              </div>
+            </div>
+            <div class="trow">
+              <div class="key">Wind Gust</div>
+              <div class="value" *ngIf="weatherDetails?.wind?.gust">
+                {{ weatherDetails?.wind?.gust }} m/s
+              </div>
+              <div *ngIf="!weatherDetails?.wind?.gust" class="value">--</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="reportType != 'Postflight'" class="pb-3">
+      <div class="disclaimer">
+        Disclaimer - This document is an instrument to increase flight awareness
+        and airspace safety. This is not a legal document. Skye UTM and/or Its
+        affiliates cannot be held accountable for any mishaps, privacy invasions
+        and loss of property or life.
+      </div>
+    </div>
+    <div class="reportCard" *ngIf="distanceDetails">
+      <span class="cardHead">
+        <img src="../../../../assets/icons/distance.svg" alt="mission" />
+      </span>
+
+      <div class="key-value-table">
+        <div class="multitable">
+          <div class="multitrow distance">
+            <div class="trow">
+              <div class="key">Total Distance Covered</div>
+              <div class="value">{{ distanceDetails.distance / 1000 }} km</div>
+            </div>
+          </div>
+          <div class="multitrow">
+            <div class="trow">
+              <div class="key">Total Hours</div>
+              <div class="value">{{ distanceDetails.time }} hrs</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="reportCard" *ngIf="preFlightDetails">
+      <span class="cardHead">
+        <img src="../../../../assets/icons/preflight.svg" alt="mission" />
+      </span>
+      <div class="key-value-table">
+        <table>
+          <thead>
+            <tr>
+              <th>State</th>
+              <th>Time</th>
+              <th>Battery</th>
+              <th>Connection</th>
+              <th>Mode</th>
+              <th>Latitude (°)</th>
+              <th>Longitude (°)</th>
+              <th>Altitude (m)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let blackBoxList of preFlightDetails">
+              <td>{{ blackBoxList.CurrentState }}</td>
+              <td>{{ blackBoxList.Time | date : "h:mm a" }}</td>
+              <td>{{ blackBoxList.Battery }} %</td>
+              <td>{{ blackBoxList.DroneConnection }}</td>
+              <td>{{ blackBoxList.Mode }}</td>
+              <td>{{ blackBoxList.lat }}</td>
+              <td>{{ blackBoxList.lng }}</td>
+              <td>{{ blackBoxList?.alt }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="reportType == 'Postflight'" class="reportCards page">
+    <div class="reportCard" *ngIf="inFlightDetails">
+      <span class="cardHead">
+        <img src="../../../../assets/icons/inflight.svg" alt="mission" />
+      </span>
+      <div class="key-value-table">
+        <table>
+          <thead>
+            <tr>
+              <th>State</th>
+              <th>Time</th>
+              <th>Battery</th>
+              <th>Connection</th>
+              <th>Mode</th>
+              <th>Latitude (°)</th>
+              <th>Longitude (°)</th>
+              <th>Altitude (m)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let blackBoxList of inFlightDetails">
+              <td class="state">{{ blackBoxList.CurrentState }}</td>
+              <td>{{ blackBoxList.Time | date : "h:mm a" }}</td>
+              <td>{{ blackBoxList.Battery }} %</td>
+              <td>{{ blackBoxList.DroneConnection }}</td>
+              <td>{{ blackBoxList.Mode }}</td>
+              <td>{{ blackBoxList.lat }}</td>
+              <td>{{ blackBoxList.lng }}</td>
+              <td>{{ blackBoxList?.alt }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="reportCard" *ngIf="postFlightDetails">
+      <span class="cardHead">
+        <img src="../../../../assets/icons/postflight.svg" alt="mission" />
+      </span>
+      <div class="key-value-table">
+        <table>
+          <thead>
+            <tr>
+              <th>State</th>
+              <th>Time</th>
+              <th>Battery</th>
+              <th>Connection</th>
+              <th>Mode</th>
+              <th>Latitude (°)</th>
+              <th>Longitude (°)</th>
+              <th>Altitude (m)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let blackBoxList of postFlightDetails">
+              <td>{{ blackBoxList.CurrentState }}</td>
+              <td>{{ blackBoxList.Time | date : "h:mm a" }}</td>
+              <td>{{ blackBoxList.Battery }} %</td>
+              <td>{{ blackBoxList.DroneConnection }}</td>
+              <td>{{ blackBoxList.Mode }}</td>
+              <td>{{ blackBoxList.lat }}</td>
+              <td>{{ blackBoxList.lng }}</td>
+              <td>{{ blackBoxList?.alt }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="pb-3">
+      <div class="disclaimer">
+        Disclaimer - This document is an instrument to increase flight awareness
+        and airspace safety. This is not a legal document. Skye UTM and/or Its
+        affiliates cannot be held accountable for any mishaps, privacy invasions
+        and loss of property or life.
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="cesium-container"></div>
+
+<!-- <div class="map">
+  <ng-template appResuableOutlet></ng-template>
+</div> -->
+
+<!-- <div class="report">
+  <div *ngIf="mapScreenshotURL">
+    <img class= "mapImg" [src]="mapScreenshotURL" alt="" height="700px"/>
+  </div>
+  <div class="chartContainer">
+    <div
+      #chartContainer
+      echarts
+      [options]="chartOption"
+      *ngIf="!chartImg"
+    ></div>
+    <img class = "chartImg"  *ngIf="chartImg" [src]="chartImg" alt="chart" height="500px"/>
+  </div>
+
+  <div id="cesium-container"></div>
+</div> -->

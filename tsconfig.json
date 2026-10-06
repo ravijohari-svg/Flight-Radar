@@ -1,0 +1,50 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "allowJs": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "es2020",
+    "lib": ["es2018", "dom"],
+    "paths": {
+      "crypto": ["node_modules/crypto-browserify"],
+      "stream": ["node_modules/stream-browserify"],
+      "vm": ["node_modules/vm-browserify"]
+    },
+    "useDefineForClassFields": false,
+     "ignoreDeprecations": "6.0",
+    "strict": false,
+    "noImplicitAny": false,
+  },
+  "exclude": [
+    ".git",
+    ".app-cache",
+    ".npm",
+    ".npm-tmp",
+    "dist",
+    "dist*",
+    "node_modules",
+    "subfolder/dist",
+    "subfolder/node_modules",
+    "**/dist/*",
+    "**/node_modules/*"
+  ],
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "extendedDiagnostics": {
+      "checks": {
+        "invalidBananaInBox": "error",
+        "nullishCoalescingNotNullable": "warning"
+      },
+      "defaultCategory": "suppress"
+    }
+  }
+}

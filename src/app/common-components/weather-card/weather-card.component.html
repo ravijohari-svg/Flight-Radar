@@ -1,0 +1,163 @@
+<div class="infoCardBox">
+  <div class="trapz trapz1 p-1" style="z-index: 2">
+    <div class="weatherInfo">
+      <div class="go go1" [ngClass]="conditonToFly">
+        <div class="f-11">
+          {{ conditonToFly.replaceAll("_", " ") }}
+        </div>
+      </div>
+      <div class="weatherDetails">
+        <div class="weatherIcon pl-4 pr-1">
+          <img
+            src="../.../../../../../assets/icons/location.svg"
+            alt="Location"
+          />
+          <div>
+            <div class="list-description-dark f-10">Location</div>
+            <div class="text-white f-14 texttruncate">
+              {{ responseCityName }}
+            </div>
+          </div>
+        </div>
+        <div class="seperator"></div>
+        <div class="weatherIcon">
+          <img
+            src="../.../../../../../assets/icons/temperature.svg"
+            alt="Temperature"
+          />
+          <div>
+            <div class="list-description-dark f-10">Temperature</div>
+            <div class="text-white f-14">
+              {{ currentWeatherDetails?.main?.temp | frantCelcius : "C" }}°C
+              <!-- {{ currentWeatherDetails?.main.temp }}°C -->
+            </div>
+          </div>
+        </div>
+        <div class="seperator"></div>
+
+        <div class="weatherIcon">
+          <img
+            src="../.../../../../../assets/icons/wind_speed.svg"
+            alt="Wind"
+          />
+          <div>
+            <div class="list-description-dark f-10">Wind Speed</div>
+            <div class="text-white f-14">
+              {{ currentWeatherDetails?.wind.speed }} m/s
+            </div>
+          </div>
+        </div>
+        <div class="seperator"></div>
+
+        <div class="weatherIcon">
+          <img
+            src="../.../../../../../assets/icons/climate.svg"
+            alt="Climate"
+          />
+          <div>
+            <div class="list-description-dark f-10">Climate</div>
+            <div class="text-white f-14 texttruncate">
+              {{ currentWeatherDetails?.weather[0].description | titlecase }}
+            </div>
+          </div>
+        </div>
+        <div class="seperator"></div>
+        <div class="weatherIcon">
+          <img
+            src="../.../../../../../assets/icons/wind_direction.svg"
+            alt="wind_direction"
+          />
+          <div class="pl-1">
+            <div class="list-description-dark f-10">Wind Dir.</div>
+            <div class="text-white f-14">
+              {{ currentWeatherDetails?.wind.deg }} deg
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="go go2" [ngClass]="conditonToFly">
+        <div class="f-11">
+          {{ conditonToFly.replaceAll("_", " ") }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="trapz trapz2 p-1"
+    style="z-index: 1"
+    [class.toggleWeatherCard]="dropdownState"
+  >
+    <div class="weatherDetails2 weatherInfo">
+      <div class="dropdown" (click)="toggleDropdown()">
+        <img
+          src="../../../../assets/icons/chevron-left.svg"
+          [alt]="dropdownState ? 'up' : 'down'"
+          [class.rotate]="dropdownState"
+        />
+      </div>
+
+      <div class="weatherDetails">
+        <div class="weatherIcon" *ngIf="currentWeatherDetails?.visibility">
+          <img
+            src="../.../../../../../assets/icons/visibility.svg"
+            alt="visibility"
+          />
+          <div>
+            <div class="list-description-dark f-10">Visibility</div>
+            <div class="text-white f-14">
+              {{ currentWeatherDetails?.visibility | meterToKm }} Km
+            </div>
+          </div>
+        </div>
+        <div class="seperator"></div>
+        <div class="weatherIcon" *ngIf="currentWeatherDetails?.wind?.gust">
+          <img
+            src="../.../../../../../assets/icons/windgust.svg"
+            alt="windgust"
+          />
+          <div>
+            <div class="list-description-dark f-10">Gust</div>
+            <div class="text-white f-14">
+              {{ currentWeatherDetails?.wind?.gust }} m/s
+            </div>
+          </div>
+        </div>
+        <div class="seperator" *ngIf="currentWeatherDetails?.wind?.gust"></div>
+        <div class="weatherIcon" *ngIf="currentWeatherDetails?.rain">
+          <img src="../.../../../../../assets/icons/p_rain.svg" alt="p_rain" />
+          <div>
+            <div class="list-description-dark f-10">Precipitation Rain</div>
+            <div class="text-white f-14">
+              {{ currentWeatherDetails?.rain["1h"] }} 1h
+            </div>
+          </div>
+        </div>
+        <div class="seperator" *ngIf="currentWeatherDetails?.rain"></div>
+        <div class="weatherIcon" *ngIf="currentWeatherDetails?.snow">
+          <img src="../.../../../../../assets/icons/p_snow.svg" alt="p_snow" />
+          <div>
+            <div class="list-description-dark f-10">Precipitation Snow</div>
+            <div class="text-white f-14">
+              {{ currentWeatherDetails?.snow["1h"] }} 1h
+            </div>
+          </div>
+        </div>
+        <div class="seperator" *ngIf="currentWeatherDetails?.snow"></div>
+        <div class="weatherIcon">
+          <img
+            src="../.../../../../../assets/icons/sunrise_sunset.svg"
+            alt="sunrise_sunset"
+          />
+          <div>
+            <div class="list-description-dark f-10">Sunrise - Sunset</div>
+            <div class="text-white f-14">
+              {{ currentWeatherDetails?.sys?.sunrise | unixToLocalTime }} -
+              {{ currentWeatherDetails?.sys.sunset | unixToLocalTime }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="createMissionBtn"></div> -->
+    </div>
+  </div>
+</div>

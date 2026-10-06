@@ -1,0 +1,242 @@
+@import "../../scss/colorCodes.scss";
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap");
+
+$preflightBorder: 0.15vw solid $preflightBorder;
+$preflightText: $preflightText;
+$preflightBoxShadow: 0px 0px 8px 0px $preflightBoxShadow;
+
+.report {
+  background: white;
+  width: 100%;
+  position: relative;
+  font-size: 1vw;
+}
+
+.header {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 1.68vw;
+  box-sizing: border-box;
+
+  .headerText {
+    font-size: 2.36vw;
+    color: $preflightText;
+    white-space: nowrap;
+    .head {
+      margin-bottom: 0.33vw;
+      font-size: 3.37vw;
+    }
+  }
+  .logoImg {
+    width: 65vw;
+  }
+}
+
+.headerInfo {
+  margin: 1vw 0 1vw 0;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.68vw;
+  padding: 0 1.68vw;
+  font-weight: 300;
+}
+
+.reportCards {
+  padding: 1.68vw 2.02vw;
+  .reportCard {
+    width: 100%;
+    position: relative;
+    border: $preflightBorder;
+    border-radius: 1.34vw;
+    padding-bottom: 0.84vw;
+    box-shadow: 0px 0px 1.34vw 0px $preflightBoxShadow;
+    margin-bottom: 2.02vw;
+  }
+  .cardHead {
+    position: absolute;
+    top: 2vw;
+    left: -1.55%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    img {
+      width: 34.45%;
+    }
+  }
+  .key-value-table {
+    margin-top: 6.71vw;
+    padding: 1.68vw;
+    background-color: white;
+    font-family: "Inter", sans-serif;
+    // font-size: 1.68vw;
+    font-size: 1.5vw;
+
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    border: $preflightBorder;
+  }
+
+  th,
+  td:first-child {
+    font-size: 1.6vw;
+    font-weight: 700;
+  }
+
+  th,
+  td {
+    border: $preflightBorder;
+    padding: 1.68vw 0.8vw 1.68vw 1.68vw;
+  }
+  .state {
+    padding: 0.4vw !important;
+  }
+  .trow {
+    width: 100%;
+    display: flex;
+    border: $preflightBorder;
+    border-bottom: none;
+  }
+  .trow:last-child {
+    border-bottom: $preflightBorder;
+  }
+  .key,
+  .value {
+    padding: 1.68vw;
+  }
+  .key {
+    width: 40%;
+    font-weight: 700;
+    border-right: $preflightBorder;
+  }
+  .value {
+    width: 60%;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.75);
+  }
+}
+.multireportCards {
+  width: 100%;
+  display: flex;
+  gap: 3.36vw;
+  .cardHead {
+    left: -3.1%;
+    img {
+      width: 69%;
+    }
+  }
+}
+.multitable {
+  display: flex;
+  gap: 1.68vw;
+  .multitrow {
+    width: 100%;
+    .key,
+    .value {
+      width: 50%;
+    }
+  }
+}
+
+.compliance {
+  .key {
+    width: calc(100% - 8.4vw);
+  }
+  .value {
+    width: 8.4vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.34vw;
+    div {
+      width: 1.34vw;
+      height: 1.34vw;
+      border-radius: 50%;
+    }
+  }
+  .Auto-Approve {
+    background: $approval;
+  }
+  .Auto-Reject {
+    background: $reject;
+  }
+  .Manual {
+    background: $pending;
+  }
+}
+
+.intersection {
+  border-radius: 0.89vw;
+  padding: 0.84vw 1.68vw;
+  display: flex;
+  gap: 1.68vw;
+  align-items: center;
+  img {
+    width: 3.26vw !important;
+  }
+  .head {
+    font-size: 1.68vw;
+    color: $preflightText;
+  }
+  .detail {
+    font-size: 1.34vw;
+    color: rgba($color: $preflightText, $alpha: 0.75);
+  }
+}
+
+.greenzone {
+  border: 1px solid $approval;
+}
+
+.redzone,
+.geozone,
+.reservedairspace {
+  border: 1px solid $reject;
+}
+
+.yellowzone {
+  border: 1px solid $pending;
+}
+
+.disclaimer {
+  border: $preflightBorder;
+  border-radius: 1.34vw;
+  box-shadow: $preflightBoxShadow;
+  padding: 1.68vw;
+  font-family: "Inter", sans-serif;
+  font-weight: 300;
+  font-size: 1.68vw;
+}
+
+.map {
+  width: 90.42vw;
+  height: 55.8vw;
+  border-radius: 1.34vw;
+}
+
+.mapImg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1.68vw;
+  img {
+    width: 100%;
+  }
+}
+
+.chartContainer {
+  width: 100%;
+  height: 100%;
+  border-radius: 1.01vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  div,
+  img {
+    width: 90.42vw;
+    height: 55.8vw;
+  }
+}

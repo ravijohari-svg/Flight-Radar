@@ -1,0 +1,215 @@
+@import "../../../scss/colorCodes.scss";
+
+@mixin font($font-size, $font-weight) {
+  font-size: $font-size;
+  font-weight: $font-weight;
+}
+
+@mixin colors($color, $background-color) {
+  color: $color;
+  background-color: $background-color;
+}
+
+//main layout
+@media (min-width: 992px) {
+  .col-lg-8 {
+    max-width: 60% !important;
+    flex: 0 0 60% !important;
+  }
+
+  .col-lg-4 {
+    max-width: 40% !important;
+    flex: 0 0 40% !important;
+  }
+}
+
+@media only screen and (max-width: 991px) {
+  .col-lg-4 {
+    display: none;
+  }
+}
+
+.main-panel {
+  min-height: 96vh;
+}
+
+//Image
+.image-section {
+  background-color: $regular-button;
+  border-radius: 25px 25px 0px 0px;
+}
+
+.image-header {
+  @include font(40px, 500);
+}
+
+.image-text {
+  @include font(20px, 300);
+}
+
+.page-title {
+  @include font(24px, 800);
+  color: $text-dark;
+}
+
+//Forms
+.form-titles {
+  @include font(20px, 500);
+  color: $text-white;
+}
+
+.form-control {
+  height: 45px;
+  background-color: $black-medium;
+  color: $text-white-opacity;
+  font-size: 12px;
+}
+
+.form-control.icon-prefix {
+  padding-left: 35px;
+}
+
+.prefix-form {
+  position: absolute;
+  top: 45px;
+  left: 25px;
+  width: 12px;
+  font-size: 12px;
+  color: $text-white-opacity;
+}
+
+.form-group label {
+  @include font(14px, normal);
+  color: $text-light;
+}
+
+.button-link:hover {
+  color: $link-hover;
+}
+
+.stepper-indication {
+  color: $text-light;
+  @include font(12px, normal);
+}
+
+.title-description {
+  @include font(14px, 500);
+  color: $text-light;
+}
+
+//Show and Hide password
+.input-group-text {
+  background-color: $black-medium;
+  border: 1px solid $input-border;
+  border-radius: 0.25rem;
+  border-left: none;
+}
+
+//Buttons
+.change-btn {
+  @include font(14px, 500);
+}
+
+.primary-outline-btn {
+  @include font(14px, 600);
+}
+
+.primary-outline-btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+//Documents
+input[type="file"] {
+  display: none;
+}
+
+.file-name {
+  color: $text-light;
+  @include font(11px, normal);
+  word-wrap: break-word;
+}
+
+.form-group.file-label {
+  @include colors($text-light,$form-group-file-label);
+  height: calc(1.5em + 0.75rem + 2px);
+}
+
+.form-group.file-label label {
+  // @include colors($text-light, $black-medium);
+  border: 1px solid $input-border;
+  background-color: $black-medium;
+
+  @include colors($text-light, $black-medium);
+  @include font(12px, normal);
+  margin-bottom: 0px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.file-icons {
+  font-size: 20px;
+  vertical-align: middle;
+  color: $file-icon;
+}
+
+//Custom Error Indications
+.invalid-data {
+  border: 1px solid $red !important;
+}
+
+.invalid-text {
+  color: $red;
+}
+
+element.style {
+  width: 40px;
+  height: 30px;
+  border-radius: 5px;
+  border: 1px solid $element-border;
+  font-size: 17px;
+}
+
+.hint {
+  margin-left: 10px;
+  position: relative;
+}
+
+.hint .tooltiptext {
+  visibility: hidden;
+  width: 250px;
+  background-color:$text-white;
+  color: $black-medium;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 0;
+  font-size: 11px;
+  /* Position the tooltip */
+  position: absolute;
+  left: -125px;
+  top: -40px;
+  z-index: 1;
+}
+
+.hint .tooltiptext::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: rotate(-45deg);
+  bottom: -5px;
+  width: 10px;
+  height: 10px;
+  background-color:$text-white;
+  border-radius: 2px;
+  z-index: -1;
+}
+
+.hint:hover .tooltiptext {
+  visibility: visible;
+}
+
+.submit_createaccount_form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}

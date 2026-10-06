@@ -1,0 +1,558 @@
+<div *ngIf="loader" class="loader">
+  <app-loader [PhaseKey]="loaderKey"></app-loader>
+</div>
+<div *ngIf="!loader" [ngClass]="{ 'main-panel': errFlag == true }">
+  <div class="heading">
+    <button class="back_btn" (click)="onBack()">
+      <img src="..//../../../../../assets/icons/chevron-left.svg" alt="back" />
+      Back
+    </button>
+    <h1>Mission</h1>
+  </div>
+  <div *ngIf="errFlag" class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10 px-lg-5">
+      <div class="my-4 mx-md-5">
+        <div class="mx-lg-4">
+          <div class="text-center">
+            <img
+              src="../../../../../../assets/common-layout/ErrorImage.svg"
+              width="250px"
+            />
+            <div class="white-text my-3">
+              <h4>Something went wrong.</h4>
+              <div class="f-12">Please try again later</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-1"></div>
+  </div>
+  <div *ngIf="missionDetails" class="blackbox_mission_details">
+    <div class="blackbox_mission_left">
+      <div class="mission">
+        <div class="mission_name">
+          <p>#{{ missionDetails.MissionId }}</p>
+          <div>
+            <div *ngIf="missionDetails.Status == 'Success'">
+              <span class="py-0 px-1 f-12 my-2 br-15 approve">
+                Successful
+                <span *ngIf="missionDetails.ApprovalMode"
+                  >( {{ missionDetails.ApprovalMode }} )</span
+                >
+              </span>
+            </div>
+            <div *ngIf="missionDetails.Status == 'UnSuccess'">
+              <span class="py-0 px-1 f-12 my-2 br-15 reject">
+                Unsuccessful
+                <span *ngIf="missionDetails.ApprovalMode"
+                  >( {{ missionDetails.ApprovalMode }} )</span
+                >
+              </span>
+            </div>
+            <div *ngIf="missionDetails.Status == 'Rejected'">
+              <span class="py-0 px-1 f-12 my-2 br-15 reject">
+                Rejected
+                <span *ngIf="missionDetails.ApprovalMode"
+                  >( {{ missionDetails.ApprovalMode }} )</span
+                >
+              </span>
+            </div>
+            <div *ngIf="missionDetails.Status == 'Approved'">
+              <span class="py-0 px-1 f-12 my-2 br-15 approve">
+                Approved
+                <span *ngIf="missionDetails.ApprovalMode"
+                  >( {{ missionDetails.ApprovalMode }} )</span
+                >
+              </span>
+            </div>
+            <div *ngIf="missionDetails.Status == 'Pending'">
+              <span class="py-0 px-1 f-12 my-2 br-15 pending">
+                Pending
+                <span *ngIf="missionDetails.ApprovalMode"
+                  >( {{ missionDetails.ApprovalMode }} )</span
+                >
+              </span>
+            </div>
+            <div *ngIf="missionDetails.Status == 'Deleted'">
+              <span class="py-0 px-1 f-12 my-2 br-15 deleted">
+                Deleted
+                <span *ngIf="missionDetails.ApprovalMode"
+                  >( {{ missionDetails.ApprovalMode }} )</span
+                >
+              </span>
+            </div>
+
+            <div *ngIf="missionDetails.Status == 'UnExecuted'">
+              <span class="py-0 px-1 f-12 my-2 br-15 reject">
+                UnExecuted
+                <span *ngIf="missionDetails.ApprovalMode"
+                  >( {{ missionDetails.ApprovalMode }} )</span
+                >
+              </span>
+            </div>
+
+            <div *ngIf="missionDetails.Status == 'Upcoming'">
+              <span class="py-0 px-1 f-12 my-2 br-15 approve">
+                Upcoming
+                <span *ngIf="missionDetails.ApprovalMode"
+                  >( {{ missionDetails.ApprovalMode }} )</span
+                >
+              </span>
+            </div>
+            <!-- <div *ngIf="missionDetails.LiveStatus == 'Completed'">
+              <span class="py-0 px-1 f-12 my-2 br-15 approve">
+                Successful
+                <span *ngIf="missionDetails.ApprovalMode"
+                  >( {{ missionDetails.ApprovalMode }} )</span
+                >
+              </span>
+            </div>
+            <div *ngIf="missionDetails.MissionStatus == 'Rejected'">
+              <span class="py-0 px-1 f-12 my-2 br-15 reject">
+                Rejected
+                <span *ngIf="missionDetails.ApprovalMode"
+                  >( {{ missionDetails.ApprovalMode }} )</span
+                >
+              </span>
+            </div>
+            <div
+              *ngIf="
+                missionDetails.MissionStatus == 'Approved' &&
+                missionDetails.LiveStatus == 'InActive'
+              "
+            >
+              <span class="py-0 px-1 f-12 my-2 br-15 reject">
+                UnExecuted
+                <span *ngIf="missionDetails.ApprovalMode"
+                  >( {{ missionDetails.ApprovalMode }} )</span
+                >
+              </span>
+            </div>
+            <div *ngIf="missionDetails.LiveStatus == 'Deleted'">
+              <span class="py-0 px-1 f-12 my-2 br-15 deleted">
+                Deleted
+                <span *ngIf="missionDetails.ApprovalMode"
+                  >( {{ missionDetails.ApprovalMode }} )</span
+                >
+              </span>
+            </div> -->
+          </div>
+        </div>
+        <div class="misson_details">
+          <div>
+            <p>{{ missionDetails.DroneName }}</p>
+            <p>Drone</p>
+          </div>
+          <div>
+            <p>
+              {{ missionDetails.TS_Created | date : "dd MMM yyyy, h:mm a" }}
+            </p>
+            <p>Submission Time</p>
+          </div>
+          <div>
+            <p>{{ missionDetails.CreatedByName }}</p>
+            <p>Pilot</p>
+          </div>
+          <div>
+            <p>{{ missionDetails.ActivityType }}</p>
+            <p>Activity Type</p>
+          </div>
+          <div>
+            <p>{{ missionDetails?.Waypoints?.length }}</p>
+            <p>Waypoints</p>
+          </div>
+          <div>
+            <p style="text-transform: lowercase">
+              {{ missionDetails.MaximumAltitude }} m
+            </p>
+            <p>Maximum Altitude</p>
+          </div>
+        </div>
+      </div>
+      <div
+        *ngIf="missionDetails.LiveStatus == 'Deleted'"
+        class="mission_deleted"
+      >
+        <div class="mission_deleted_inner f-14">
+          Mission is been rejected by User on
+          <span class="font-weight-bold">{{
+            missionDetails?.TS_Updated | date : "medium"
+          }}</span>
+        </div>
+      </div>
+      <div class="mission_compliance">
+        <div class="complainceBox dark-v1 p-3">
+          <h3 class="pb-1">Complaince</h3>
+          <div *ngFor="let category of missionPermissionsList; let i = index">
+            <div
+              class="complaince"
+              [ngClass]="{
+                approve: category?.permission == 'Auto-Approve',
+                reject: category?.permission == 'Auto-Reject',
+                pending: category?.permission == 'Manual'
+              }"
+            ></div>
+            <div class="f-14 text-white">
+              {{ category?.Name }}
+            </div>
+          </div>
+        </div>
+        <div class="reports p-3">
+          <h3>Reports</h3>
+          <div>
+            <div
+              *ngIf="missionDetails?.PreflightURL"
+              (click)="downloadReport('Preflight')"
+            >
+              <img
+                src="../../../../../../assets/icons/description.svg"
+                alt="description"
+              />
+              <div><span>Preflight</span> <span>150 KB</span></div>
+              <img
+                *ngIf="!preFlightLoader"
+                src="../../../../../../assets/icons/Download.svg"
+                alt="download"
+                width="30px"
+              />
+              <img
+                *ngIf="preFlightLoader"
+                src="../../../../../assets/common-layout/SquareLoader.gif"
+                width="30px"
+              />
+            </div>
+            <div
+              *ngIf="missionDetails?.PostflightURL"
+              (click)="downloadReport('Postflight')"
+            >
+              <img
+                src="../../../../../../assets/icons/description.svg"
+                alt="description"
+              />
+              <div><span>Postflight</span> <span>150 KB</span></div>
+              <img
+                *ngIf="!postFlightLoader"
+                src="../../../../../../assets/icons/Download.svg"
+                alt="download"
+                width="30px"
+              />
+              <img
+                *ngIf="postFlightLoader"
+                src="../../../../../assets/common-layout/SquareLoader.gif"
+                width="30px"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mission_IntersectionDetails">
+        <h3>Intersection Details</h3>
+        <div class="mission_IntersectionDetails_cards">
+          <div *ngIf="coRelationFlag?.yellowzone">
+            <img
+              src="../../../../../../assets/icons/warning.svg"
+              alt="warning"
+            />
+            <div>
+              <p>Yellow Zone</p>
+              <p>You’ve intersected a yellow zone</p>
+            </div>
+          </div>
+          <div *ngIf="coRelationFlag?.redzone">
+            <img src="../../../../../../assets/icons/error.svg" alt="danger" />
+            <div>
+              <p>Red Zone</p>
+              <p>You’ve intersected a red zone</p>
+            </div>
+          </div>
+          <div *ngIf="coRelationFlag?.orangezone">
+            <img
+              src="../../../../../../assets/icons/lock-keyhole-square.svg"
+              alt="lock"
+            />
+            <div *ngIf="interesectionArr.reservedAirspace.length != 0">
+              <p>Reserved Airspace</p>
+              <p>You’re going into reserved airspace</p>
+            </div>
+          </div>
+          <div *ngIf="coRelationFlag?.greenzone">
+            <img
+              src="../../../../../../assets/icons/check-circle.svg"
+              alt="check"
+            />
+            <div>
+              <p>You’re good to go!</p>
+              <p>No Intersections, your flight path is approved.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="blackBoxDetails" class="inFlight_status">
+        <div>
+          <h4>Flight Status</h4>
+          <p>
+            <img
+              src="../../../../../../assets/icons/connection_type.svg"
+              alt="connection_type"
+            />
+            Connection Type
+          </p>
+        </div>
+        <div>
+          <ul class="StepProgress">
+            <div
+              *ngFor="
+                let blackBox of blackBoxDetails;
+                trackBy: trackByBlackBoxDetails;
+                let i = index
+              "
+            >
+              <li class="StepProgress-item">
+                <div class="heading">
+                  <h2>
+                    {{ blackBox.CurrentState }}
+                  </h2>
+                  <p>
+                    {{ blackBox.Time | date : "h:mm a" }}
+                  </p>
+                </div>
+                <div class="inflight_blackBox">
+                  <div class="misson_details">
+                    <div>
+                      <p>{{ blackBox.Battery }} %</p>
+                      <p>Drone Battery</p>
+                    </div>
+                    <div>
+                      <p>
+                        {{
+                          blackBox.DroneConnection === true ? "strong" : "weak"
+                        }}
+                      </p>
+                      <p>Drone Connection</p>
+                    </div>
+                    <div *ngIf="blackBox.Mode">
+                      <p>{{ blackBox.Mode }}</p>
+                      <p>Mode</p>
+                    </div>
+                    <div>
+                      <p>{{ blackBox.lat }}</p>
+                      <p>Latitude</p>
+                    </div>
+                    <div>
+                      <p>{{ blackBox.lng }}</p>
+                      <p>Longitude</p>
+                    </div>
+                    <div *ngIf="blackBox.alt">
+                      <p style="text-transform: lowercase">
+                        {{ blackBox.alt }} m
+                      </p>
+                      <p>Altitude</p>
+                    </div>
+
+                    <div>
+                      <p>{{ blackBox?.BatteryVoltage | number : '1.2-2'   }} v</p>
+                      <p>Battery Voltage</p>
+                    </div>
+
+                  </div>
+                  <div
+                    *ngIf="blackBox?.Comments !== ''"
+                    class="card dark-medium m-1"
+                  >
+                    <div class="card-body p-1">
+                      <div class="my-1">
+                        <i class="fa fa-circle red align-middle f-10"></i>
+                        <span class="white-text f-14 font-weight-bold px-2">{{
+                          blackBox?.Comments
+                        }}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="blackBox_error">
+                    <div class="heading">
+                      <i class="fa fa-circle manual align-middle f-10"></i>
+                      <span class="white-text f-14 font-weight-bold px-2"
+                        >ERRORS</span
+                      >
+                    </div>
+                    <div class="error_details">
+                      <div *ngFor="let item of blackBox.Alerts | keyvalue">
+                        <p>
+                          {{ item.value.Count }}
+                        </p>
+                        <p>
+                          {{ item.key | titlecase }}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </div>
+            <li class="StepProgress-item mission_end">
+              <h4>END OF MISSION</h4>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="blackbox_mission_right">
+      <div class="mission_info">
+        <div>
+          <img
+            src="../../../../../assets/icons/trailing.svg"
+            alt="10"
+            width="20px"
+          />
+          <p>Trailing</p>
+        </div>
+        <div>
+          <img
+            src="../../../../../assets/icons/waypoint.svg"
+            alt="10"
+            width="20px"
+          />
+          <p>Waypoint</p>
+        </div>
+        <div>
+          <img
+            src="../../../../../assets/icons/multirotor.svg"
+            alt="10"
+            width="26px"
+          />
+          <p>UAV/UAS</p>
+        </div>
+        <div>
+          <img
+            src="../../../../../assets/icons/connected.svg"
+            alt="10"
+            width="20px"
+          />
+          <p>Connected</p>
+        </div>
+        <div>
+          <img
+            src="../../../../../assets/icons/disconnected.svg"
+            alt="10"
+            width="20px"
+          />
+          <p>Disconnected</p>
+        </div>
+      </div>
+      <div class="main-map px-0 my-3">
+        <ng-template appResuableOutlet></ng-template>
+        <div class="map_button_container authority-blackbox">
+          <div class="align-map-buttons">
+            <div
+              class="osm-button"
+              *ngIf="toggleflagText == '3D'"
+              (click)="osmBuildings()"
+              style="word-wrap: break-word; margin-right: 5px"
+            >
+              <mat-slide-toggle>Obstacles</mat-slide-toggle>
+            </div>
+            <div class="slideToggle-button" style="word-wrap: break-word">
+              <span style="margin-right: 5px">2D</span>
+              <mat-slide-toggle (click)="toggle2D3D()">3D</mat-slide-toggle>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        *ngIf="droneTrailing && droneTrailing.length != 0"
+        class="mission_trailing"
+      >
+        <h3>Trailing</h3>
+        <div class="drone-trail-section table-responsive">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">No.</th>
+                <th scope="col">Time</th>
+                <th scope="col">Latitude (°)</th>
+                <th scope="col">Longitude (°)</th>
+                <th scope="col">Altitude (m)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="
+                  let trail of droneTrailing;
+                  trackBy: trackByDroneTrailing;
+                  let i = index
+                "
+                [class.active]="trail === selectedRowIndex"
+                (click)="onTrailingLog(trail, i)"
+              >
+                <td>{{ i + 1 }}</td>
+                <td>{{ trail.datetime | date : "hh:mm:ss a" }}</td>
+                <td>{{ trail.lat }}</td>
+                <td>{{ trail.lng }}</td>
+                <td>{{ trail?.alt }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div *ngIf="this.elevationData[0] !== undefined">
+        <div class="elevation_graph mt-3 p-16 pr-2 text-white">
+          <div echarts [options]="chartOption1"></div>
+        </div>
+      </div>
+      <div *ngIf="this.time.length > 0">
+        <div class="elevation_graph mt-3 p-16 pr-2 text-white">
+          <div echarts [options]="chartOption2"></div>
+        </div>
+      </div>
+      <div *ngIf="this.chin.length > 0">
+        <div class="elevation_graph mt-3 p-16 pr-2 text-white">
+          <div class="dropdown p-2">
+            <button class="btn btn-secondary dropdown-toggle channel-button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding: 0.5rem 1rem;margin: 0.25rem 0.25rem">Channel
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" (click)="changeOption('ch1')">ch1</a>
+              <a class="dropdown-item" (click)="changeOption('ch2')">ch2</a>
+              <a class="dropdown-item" (click)="changeOption('ch3')">ch3</a>
+              <a class="dropdown-item" (click)="changeOption('ch4')">ch4</a>
+              <a class="dropdown-item" (click)="changeOption('ch5')">ch5</a>
+              <a class="dropdown-item" (click)="changeOption('ch6')">ch6</a>
+              <a class="dropdown-item" (click)="changeOption('ch7')">ch7</a>
+              <a class="dropdown-item" (click)="changeOption('ch8')">ch8</a>
+              <a class="dropdown-item" (click)="changeOption('ch9')">ch9</a>
+            </div>
+          </div>
+          <div echarts [options]="chartOption3"></div>
+        </div>
+      </div>
+      <div
+        *ngIf="droneMessages && droneMessages.length != 0"
+        class="mission_trailing my-3"
+      >
+        <h3>Messages</h3>
+        <div class="drone-trail-section table-responsive">
+          <table class="table table-bordered mt-2">
+            <thead>
+              <tr>
+                <!-- <th scope="col">Messages</th> -->
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="
+                  let message of droneMessages;
+                  trackBy: trackByDroneMessages;
+                  let i = index
+                "
+              >
+                <td>{{message}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

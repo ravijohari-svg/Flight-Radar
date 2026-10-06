@@ -1,0 +1,74 @@
+@import "../../../../../scss/colorCodes.scss";
+
+@mixin font($font-size, $font-weight) {
+  font-size: $font-size;
+  font-weight: $font-weight;
+}
+
+@mixin colors($color, $background-color) {
+  color: $color;
+  background-color: $background-color;
+}
+.card-grey {
+  background-color: $screen-color;
+  border: none;
+}
+.card-no-border {
+  border: none;
+}
+.main-header {
+  // color: $text-dark;
+  @include font(85%, 600);
+}
+.header {
+  color: $text-dark;
+  @include font(80%, 600);
+}
+
+.primary-outline-btn,
+.primary-btn {
+  @include font(75%, 600);
+}
+.primary-outline-btn .fa-plus {
+  @include font(85%, 600);
+}
+
+.btn-edit {
+  color: $text-light;
+  @include font(77%, 400);
+}
+.btn-delete {
+  color: $red;
+  @include font(77%, 400);
+}
+.list-values {
+  //color: $text-dark;
+  font-size: 75%;
+  font-weight: 600;
+}
+
+.list-description {
+  color: $text-light;
+  font-size: 70%;
+}
+
+//Icons
+.fa-times {
+  font-size: 70%;
+  color: $fa-times;
+}
+.modal-heading {
+  color: $text-dark;
+  @include font(100%, 600);
+}
+.form-control {
+  height: 40px;
+  @include font(80%, 400);
+  background-color: $form-color;
+}
+// .form-check-input {
+//   margin-top: 0.5rem;
+// }
+.form-check-label {
+  font-size: 75%;
+}

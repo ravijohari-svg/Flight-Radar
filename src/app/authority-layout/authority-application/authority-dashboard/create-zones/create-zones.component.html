@@ -1,0 +1,403 @@
+<div *ngIf="loader" class="loader">
+  <div class="logo">
+    <img
+      src="../../../../../assets/common-layout/SquareLoader.gif"
+      width="30px"
+    />
+    <img
+      src="../../../../../assets/common-layout/SkyeUTM logoWhite.svg"
+      width="200px"
+    />
+  </div>
+</div>
+<div class="main-panel">
+    <!-- HeatMaps  -->
+    <div class="heatmap" >
+      <app-heatmap (toggSwitch)="toggle2D3D($event)"></app-heatmap>
+    </div>
+     <!-- UI Card  -->
+    <div class="map-ui">
+      <app-map-ui
+      *ngIf="isView"
+      [isView]="isView"
+      [title]="entityDescription?.title"
+      [fircode]="entityDescription?.airspaceInfo?.FIRCodes"
+      [airspacetype]="entityDescription?.airspaceInfo?.Type"
+      [fic]="entityDescription?.airspaceInfo.FIC"
+      [country]="entityDescription?.groundInfo.Country"
+      [state]="entityDescription?.groundInfo.States"
+      [elevation]="entityDescription?.groundInfo.elevation"
+      (changeIsView)="close(val)"
+    >
+   </app-map-ui>
+     </div>
+
+  <div class="card dark-medium">
+    <div class="mission-cards">
+      <div class="fill"></div>
+      <!-- Top header title  -->
+      <div class="top-section">
+        <div class="text-white mission-header">
+          <div class="text-title">Create Zones</div>
+          <div class="img-close" (click)="updateZoneVal()">
+            <img src="../../../../assets/icons/ellipse.svg" />
+          </div>
+        </div>
+      </div>
+      <div class="my-3 second-screen" *ngIf="tabIndex == 0">
+        <div class="form-group text-light">
+            <label
+              for="inputName"
+              class="pr-3 f-12 mt-2"
+              >Zone Name</label
+            >
+            <div class="input-group">
+              <input
+                type="text"
+                class="alt-change text-white rounded-left"
+                aria-describedby="emailHelp"
+                placeholder="Zone Name"
+                [(ngModel)]="zoneName"
+              />
+              <!-- <div
+                *ngIf="submitted && f?.zoneName.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f?.zoneName.errors.required">
+                  Maximum Altitude is required
+                </div>
+              </div> -->
+            </div>
+        </div>
+
+        <!-- <div class="form-flow-1">
+          <div class="input-button mt-3">
+            <input     class="form-check-input ml-3"
+            type="radio"
+            name="inlineRadioOptions"
+            id="inlineRadio1"
+            value="0"
+            (change)="isDrawPoint('green')"/>
+            <div>
+              <img src="../../../../assets/icons/file-upload.svg" />
+            </div>
+          </div>
+          <div class="input-button-content">
+            <div style="color: rgb(55, 208, 55);" class="input-button-content1 mr-1 ">Green Zone</div>
+            <div class="input-button-content2 mr-1">
+              you can draw the waypoints on map and it will be visible.
+            </div>
+          </div>
+        </div> -->
+
+        <div class="form-flow-1">
+          <div class="input-button mt-3">
+            <input class="form-check-input ml-3" type="radio" name="inlineRadioOptions"
+            id="inlineRadio1"
+            value="0"
+            (change)="isDrawPoint('red')" />
+            <div>
+              <img src="../../../../assets/icons/file-upload.svg" />
+            </div>
+          </div>
+          <div class="input-button-content">
+            <div style="color: rgb(226, 72, 72);" class="input-button-content1 mr-1">Restricted Area</div>
+            <div class="input-button-content2 mr-1">
+              you can draw the waypoints on map and it will be visible.
+            </div>
+          </div>
+        </div>
+
+        <!-- <div class="form-flow-1">
+          <div class="input-button mt-3">
+            <input class="form-check-input ml-3" type="radio" name="inlineRadioOptions"
+            id="inlineRadio1"
+            value="0"
+            (change)="isDrawPoint('yellow')" />
+            <div>
+              <img src="../../../../assets/icons/file-upload.svg" />
+            </div>
+          </div>
+          <div class="input-button-content">
+            <div style="color: yellow;" class="input-button-content1 mr-1">Yellow Zone</div>
+            <div class="input-button-content2 mr-1">
+              you can draw the waypoints on map and it will be visible.
+            </div>
+          </div>
+        </div> -->
+        <form [formGroup]="missionDetails">
+          <div class="my-3">
+        <div class="form-group form-property focus-input">
+          <label class="form-group-headings" for="exampleInputEmail1"
+            >Start Time<span class="f-14 ml-1 required-asterisk"
+              >*</span
+            ></label
+          >
+          <input
+            type="datetime-local"
+            class="form-control form-select focus-input"
+            formControlName="StartTime"
+            [ngClass]="{
+              'is-invalid':
+                submitted && (f?.StartTime.errors || errors?.startEndTime)
+            }"
+          />
+          <div
+            *ngIf="submitted && f?.StartTime.errors"
+            class="invalid-feedback inv-feedback"
+          >
+            <div *ngIf="f?.StartTime.errors.required">
+              Start Time is required
+            </div>
+            <div *ngIf="f?.StartTime.errors.startTime">
+              Start Time has to be greater than or equal to Current time
+            </div>
+          </div>
+          <div
+            *ngIf="submitted && errors?.startEndTime"
+            class="error-message"
+          >
+            Start Time has to be less than End Time
+          </div>
+        </div>
+        <div class="form-group form-property">
+          <label class="form-group-headings" for="exampleInputEmail1"
+            >End Time <span class="f-14 required-asterisk">*</span></label
+          >
+          <input
+            type="datetime-local"
+            class="form-control form-select focus-input"
+            formControlName="EndTime"
+            [ngClass]="{
+              'is-invalid':
+                submitted && (f?.EndTime.errors || errors?.startEndTime)
+            }"
+          />
+          <div
+            *ngIf="submitted && f?.EndTime.errors"
+            class="invalid-feedback inv-feedback"
+          >
+            End Time is required
+          </div>
+          <div
+            *ngIf="submitted && this.missionDetails?.errors?.startEndTime"
+            class="error-message"
+          >
+            End Time has to be greater than Start Time
+          </div>
+        </div>
+        </div>
+        </form>
+        <div class="back-next-button mt-3">
+          <button class="back-button" (click)="updateZoneVal()">
+            <img src="../../../../assets/icons/left-btn.svg" width="25" />
+          </button>
+          <button
+          class="next-button text-white"
+          (click)="nextOperation()"
+          [ngClass]="{
+            'back-color': (isNext === 2 || isNext === 3) && zoneName !== '' && missionDetails.value.StartTime && missionDetails.value.EndTime,
+            'disabled-btn': !(missionDetails.value.StartTime && missionDetails.value.EndTime)
+          }"
+          [disabled]="!(missionDetails.value.StartTime && missionDetails.value.EndTime)"
+        >
+          Next
+        </button>
+        
+        
+        
+        </div>
+      </div>
+      <div *ngIf="tabIndex == 2">
+        <form [formGroup]="missionDetails">
+        <div class="form-group max-alt">
+          <label
+            for="inputPassword"
+            class="pr-3 f-12 mt-2"
+            *ngIf="wayPointsForm.value.wayPoints.length > 1"
+            >Maximum Altitude(m)</label
+          >
+          <div
+            class="input-group"
+            *ngIf="wayPointsForm.value.wayPoints.length > 1"
+          >
+            <input
+              type="number"
+              class="alt-change text-white rounded-left"
+              aria-describedby="emailHelp"
+              formControlName="MaximumAltitude"
+              (change)="onMaximumAltitudeChange()"
+              [readonly]="true"
+              [ngClass]="{
+                'is-invalid': submitted && f?.MaximumAltitude.errors
+              }"
+            />
+            <div
+              *ngIf="submitted && f?.MaximumAltitude.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f?.MaximumAltitude.errors.required">
+                Maximum Altitude is required
+              </div>
+              <div *ngIf="f?.MaximumAltitude.errors.max">
+                Value should be less than or equal to 120
+              </div>
+              <div *ngIf="f?.MaximumAltitude.errors.pattern">
+                Invalid Data
+              </div>
+            </div>
+          </div>
+          <div class="way-down-btn">
+            <span
+              class="waypoint-show-1 summary-width f-16 fw-100 mt-3"
+              *ngIf="latitudeArr.length > 1"
+            >
+              Waypoint Summary
+              <div>{{ correlationData?.zoneCount[0] }}</div>
+              <div>{{ correlationData?.zoneCount[1] }}</div>
+              <div>{{ correlationData?.zoneCount[2] }}</div>
+            </span>
+            <button
+              class="text-white download-btn-1 f-12 p-1 mt-3 mr-1"
+              (click)="downloadWaypoints()"
+              *ngIf="latitudeArr.length > 1"
+            >
+              Download
+            </button>
+          </div>
+    
+          <!-- <button
+            class="btn"
+            style="display: none"
+            (click)="onMaximumAltitudeChange()"
+          ></button> -->
+        </div>
+        </form>
+      </div>
+      <div *ngIf="tabIndex == 2 || tabIndex == 3">
+        <div *ngIf="wayPointsForm.value.wayPoints.length > 1" class="mt-3">
+          <form [formGroup]="wayPointsForm" *ngIf="isVisible">
+            <div
+              class="card w-100 waypoint-card"
+              *ngFor="
+                let point of this.wayPointsForm.get('wayPoints')['controls'];
+                let i = index
+              "
+            >
+              <app-waypoint-form-card
+                *ngIf="isVisible"
+                [waypointNo]="i"
+                [waypoint]="point"
+                [correlationData]="correlationData"
+                [submitted]="waypointformSubmitted"
+                [isDisable]="isDisable"
+                [showCorr]="showCorrelation"
+                (formValueChanged)="onValueChange($event)"
+                (waypointError)="onErrorFind($event)"
+              ></app-waypoint-form-card>
+            </div>
+          </form>
+        </div>
+
+        <div class="my-4 mx-3 display-flex" *ngIf="tabIndex == 2">
+          <button
+            class="back-button-1"
+            (click)="
+              this.tabIndex = 0;
+              startDrawPolyline('reset');
+              
+              setWaypointFlag = false;
+              resetFlag = false;
+              completePathFlag = false
+            "
+          >
+            <img
+              src="../../../../../assets/icons/left-btn.svg"
+              width="25px"
+            />
+          </button>
+
+          <button
+            [disabled]="resetFlag"
+            class="back-button text-white"
+            (click)="onReset()"
+          >
+            <span
+              ><img
+                class="mr-1"
+                src="../../../../../assets/icons/Refresh.svg" /></span
+            >Reset
+          </button>
+
+          <button
+            *ngIf="!completeWaypoint"
+            class="text-white f-16 inc-widths"
+            (click)="onCompletePath()"
+            [disabled]="completePathFlag"
+          >
+            <span
+              ><img src="../../../../../assets/icons/Check_Outline.svg"
+            /></span>
+            Complete Zone
+          </button>
+
+          <button
+            *ngIf="completeWaypoint"
+            [disabled]="setWaypointFlag || errorFind"
+            class="text-white f-16 inc-widths"
+            (click)="onZoneSubmit()"
+            [ngClass]="{
+              'setwaypoint-button-1': errorFind,
+              'setwaypoint-button-1':  !completePathFlag,
+              'set-waypoint-button-1': (!errorFind && latitudeArr.length >= 2) || completePathFlag
+            }"
+          >
+            <span *ngIf="!submitFlag"> Set Zone </span>
+            <span *ngIf="submitFlag"
+              ><img
+                src="../../../../../assets/common-layout/SquareLoader.gif"
+                width="20px"
+            /></span>
+          </button>
+        </div>
+
+        <div class="my-4 mx-3 display-flex" *ngIf="tabIndex == 3">
+          <button
+            class="back-button"
+            (click)="
+              updateZoneVal();
+              startDrawPolyline('reset');
+              setWaypointFlag = false;
+              resetFlag = false;
+              completePathFlag = false
+            "
+          >
+            <img
+              src="../../../../../assets/icons/left-btn.svg"
+              width="25px"
+            />
+          </button>
+          <button
+            [disabled]="setWaypointFlag || errorFind"
+            class="text-white inc-width"
+            (click)="onZoneSubmit()"
+            [ngClass]="{
+              'setwaypoint-button': errorFind,
+              'setwaypoint-button': !errorFind && latitudeArr.length < 2,
+              'set-waypoint-button': !errorFind && latitudeArr.length >= 2
+            }"
+          >
+            <span *ngIf="!submitFlag"> Set Waypoints </span>
+            <span *ngIf="submitFlag"
+              ><img
+                src="../../../../../assets/common-layout/SquareLoader.gif"
+                width="20px"
+            /></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>

@@ -1,0 +1,157 @@
+<div class="wayPointComps f-14">
+  <div
+    class="wayPointComp"
+    (click)="toggleAccordion(index * 10 + 0)"
+    *ngIf="
+      innerYellow ||
+      outerYellow
+    "
+  >
+    <div class="accordionHeader p-2">
+      <div>
+        <img
+          src="../../../../assets/icons/warning.svg"
+          alt="warning"
+        />
+        <div>
+          <div class="text-white">Yellow Zone</div>
+          <div class="f-10 text-white-50">
+            Intersections, your flight requires
+            approval.
+          </div>
+        </div>
+      </div>
+      <img
+        *ngIf="expandedAccordionIndex !== index * 10 + 0"
+        src="../../../../assets/icons/arrowDown.svg"
+        alt="arrowDown"
+      />
+      <img
+        *ngIf="expandedAccordionIndex === index * 10 + 0"
+        src="../../../../assets/icons/arrowUp.svg"
+        alt="arrowDown"
+      />
+    </div>
+    <div
+      class="accordianBorder"
+      *ngIf="expandedAccordionIndex === index * 10 + 0"
+    ></div>
+    <div
+      class="p-2"
+      *ngIf="expandedAccordionIndex === index * 10 + 0"
+    >
+      <div class="accordionContent f-11 p-2">
+        <div class="text-white">What this is:</div>
+        <div class="text-white-50">
+          Yellow Zone - Drone flights are prohibited
+          without permission from the concerned air
+          traffic control authority and DGCA. Request
+          permission and coordinate with
+          DGCA(drone.dgca@gov.in) to obtain necessary
+          permissions to operate in this area.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="wayPointComp"
+    (click)="toggleAccordion(index * 10 + 1)"
+    *ngIf="
+      redZone || geoZone
+    "
+  >
+    <div class="accordionHeader p-2">
+      <div>
+        <img
+          src="../../../../assets/icons/error.svg"
+          alt="danger"
+        />
+        <div>
+          <div class="text-white">Red Zone</div>
+          <div class="f-10 text-white-50">
+            You’ve intersected a red zone
+          </div>
+        </div>
+      </div>
+      <img
+        *ngIf="expandedAccordionIndex !== index * 10 + 1"
+        src="../../../../assets/icons/arrowDown.svg"
+        alt="arrowDown"
+      />
+      <img
+        *ngIf="expandedAccordionIndex === index * 10 + 1"
+        src="../../../../assets/icons/arrowUp.svg"
+        alt="arrowDown"
+      />
+    </div>
+    <div
+      class="accordianBorder"
+      *ngIf="expandedAccordionIndex === index * 10 + 1"
+    ></div>
+    <div
+      class="p-2"
+      *ngIf="expandedAccordionIndex === index * 10 + 1"
+    >
+      <div class="accordionContent f-11 p-2">
+        <div class="text-white">What this is:</div>
+        <div class="text-white-50">
+          Red Zone - Drone flight is prohibited within
+          5km of airport perimeter in India.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="wayPointComp green-border"
+    (click)="toggleAccordion(index * 10 + 2)"
+    *ngIf="
+      !(
+        innerYellow ||  outerYellow || redZone || geoZone
+      )
+    "
+  >
+    <div class="accordionHeader  green-border p-2">
+      <div>
+        <img
+          src="../../../../assets/icons/check-circle.svg"
+          alt="check"
+        />
+        <div>
+          <div class="text-white">Green Zone</div>
+          <div class="f-10 text-white-50">
+            No Intersections, your flight path is
+            approved.
+          </div>
+        </div>
+      </div>
+      <img
+        *ngIf="expandedAccordionIndex !== index * 10 + 2"
+        src="../../../../assets/icons/arrowDown.svg"
+        alt="arrowDown"
+      />
+      <img
+        *ngIf="expandedAccordionIndex === index * 10 + 2"
+        src="../../../../assets/icons/arrowUp.svg"
+        alt="arrowDown"
+      />
+    </div>
+    <div
+      class="accordianBorder green-border"
+      *ngIf="expandedAccordionIndex === index * 10 + 2"
+    ></div>
+    <div
+      class="p-2 green-border"
+      *ngIf="expandedAccordionIndex === index * 10 + 2"
+    >
+      <div class="accordionContent f-11 p-2">
+        <div class="text-white">What this is:</div>
+        <div class="text-white-50">
+          Green Zone - Drone flight is approved in
+          this area.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

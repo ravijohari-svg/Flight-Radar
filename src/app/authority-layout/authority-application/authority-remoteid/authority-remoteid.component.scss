@@ -1,0 +1,28 @@
+
+.main-panel {
+    min-height: 100vh;
+}
+.main-map {
+    height:100vh;
+}
+.mission-container {
+    position: absolute;
+    top: 3rem;
+    left: 1vw;
+    width: 300px;
+    max-height: 77vh;
+    overflow-y: auto;
+}
+//Scrollbar
+.mission-container::-webkit-scrollbar {
+    width: 0.3em;
+  }
+
+  .mission-container::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.1);
+  }
+
+  .mission-container::-webkit-scrollbar-thumb {
+    background-color: #b9b9b9;
+    // outline: 1px solid slategrey;
+  }

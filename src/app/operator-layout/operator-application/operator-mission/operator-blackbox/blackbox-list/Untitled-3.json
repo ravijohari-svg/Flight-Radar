@@ -1,0 +1,125 @@
+[
+    {
+        "Price": 0,
+        "Module": "Free",
+        "Services": [
+            {
+                "Text": "0 submissions/month"
+            },
+            {
+                "Text": "Interactive Airspace Maps",
+                "Id": "GlobalAirspaceView"
+            }
+        ],
+        "Preference": 1
+    },
+    {
+        "Price": 4500,
+        "Module": "Basic",
+        "Services": [
+            {
+                "Text": "10 submissions/month"
+            },
+            {
+                "Text": "Interactive Airspace Maps",
+                "Id": "GlobalAirspaceView"
+            },
+            {
+                "Number": 10,
+                "Text": "Submit and recieve approvals for flight(BVLOS/LOS)",
+                "Id": "FlightSubmission"
+            },
+            {
+                "Text": "BlackBox analytics",
+                "Id": "BlackBoxAnalytics"
+            },
+            {
+                "Text": "Pre-flight & Post-flight reports",
+                "Id": "Reports"
+            },
+            {
+                "Text": "One-click Mission planner connection, GCS API's and integration support",
+                "Id": "MissionPlannerConnection"
+            },
+            {
+                "Text": "Standard Deconfliction",
+                "Id": "StandardDeconfliction"
+            }
+        ],
+        "Preference": 2
+    },
+    {
+        "Price": 12000,
+        "Module": "Advanced",
+        "Services": [
+            {
+                "Text": "20 submissions/month"
+            },
+            {
+                "Text": "Interactive Airspace Maps API's to utilize into your solution",
+                "Id": "AirspaceAPIS"
+            },
+            {
+                "Number": 20,
+                "Text": "Submit and recieve approvals for flight(BVLOS/LOS)",
+                "Id": "FlightSubmission"
+            },
+            {
+                "Text": "Live tracking and information display for all your clients",
+                "Id": "LiveTracking"
+            },
+            {
+                "Text": "Pre-flight & Post-flight reports",
+                "Id": "FlightReports"
+            },
+            {
+                "Text": "GCS + LTE, multi band support",
+                "Id": "GCSSupport"
+            },
+            {
+                "Text": "Priority Deconfliction",
+                "Id": "PriorityDeconfliction"
+            },
+            {
+                "Number": 20,
+                "Text": "Access to Skye Tunnel infrastructure of verified paths and safe-flight resources",
+                "Id": "SkyeTunnelAccess"
+            },
+            {
+                "Text": "SORA reports",
+                "Id": "SORAReports"
+            },
+            {
+                "Text": "3D terrain and buildings",
+                "Id": "TerrainView"
+            }
+        ],
+        "Preference": 3
+    },
+    {
+        "Price": 25000,
+        "Module": "Premium",
+        "Services": [
+            {
+                "Text": "40 submissions/month"
+            },
+            {
+                "Text": "All basic + Advanced feautures",
+                "Id": "Basic+Advanced"
+            },
+            {
+                "Text": "Flight documentation and mail submission templates for ready-forward submission to Regulators",
+                "Id": "FlightDocumentation"
+            },
+            {
+                "Text": "Access to skyeHub(Landing and charging stations)",
+                "Id": "SkyeHub"
+            },
+            {
+                "Text": "Fleet Analytics blackbox",
+                "Id": "FleetAnalytics"
+            }
+        ],
+        "Preference": 4
+    }
+]

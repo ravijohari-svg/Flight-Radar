@@ -1,0 +1,443 @@
+@import "../../../../../scss/colorCodes.scss";
+
+.main-panel {
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+.map-ui-card {
+  position: absolute;
+  top: 55px;
+  left: 360px; /* adjusted to accommodate sidebar */
+  z-index: 25;
+}
+
+.main-map {
+  height: calc(100vh - 96px); /* 100vh - 56px top header - 40px bottom footer */
+  margin-top: 56px; /* Push down by header height */
+}
+
+.live-traffic-sidebar {
+  position: absolute;
+  top: 56px; /* Below top header */
+  left: 0;
+  width: 320px;
+  height: calc(100vh - 96px); /* Account for header and footer */
+  background-color: #1a1c22;
+  z-index: 25;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  border-right: 1px solid #282a32;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.sidebar-header {
+  padding: 16px;
+  border-bottom: 1px solid #282a32;
+}
+
+.sidebar-title {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #8c92a4;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+.search-box {
+  position: relative;
+  
+  .search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #8c92a4;
+    font-size: 12px;
+  }
+  
+  input {
+    width: 100%;
+    background-color: #24262d;
+    border: 1px solid #2d3039;
+    border-radius: 4px;
+    padding: 8px 12px 8px 32px;
+    color: #fff;
+    font-size: 13px;
+    outline: none;
+    box-sizing: border-box;
+    
+    &::placeholder {
+      color: #5c6274;
+    }
+    
+    &:focus {
+      border-color: #404554;
+    }
+  }
+}
+
+.vehicle-list {
+  flex: 1;
+  overflow-y: auto;
+  
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #3b4255;
+    border-radius: 3px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+}
+
+.vehicle-item {
+  padding: 16px;
+  border-bottom: 1px solid #282a32;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.04);
+  }
+
+  &.selected {
+    background-color: rgba(0, 188, 212, 0.12);
+    border-left: 3px solid #00bcd4;
+    padding-left: 13px;
+  }
+  
+  .top-row, .middle-row, .bottom-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .top-row {
+    margin-bottom: 8px;
+    
+    .flight-id {
+      font-size: 13px;
+      font-weight: 600;
+      color: #e2e4e9;
+    }
+    
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: #00e676;
+      box-shadow: 0 0 6px rgba(0, 230, 118, 0.4);
+    }
+  }
+  
+  .middle-row {
+    margin-bottom: 4px;
+    font-size: 12px;
+    
+    .operator {
+      color: #e2e4e9;
+    }
+    
+    .altitude {
+      color: #e2e4e9;
+      font-weight: 500;
+    }
+  }
+  
+  .bottom-row {
+    font-size: 12px;
+    color: #8c92a4;
+  }
+}
+
+.sidebar-footer {
+  padding: 12px 16px;
+  font-size: 11px;
+  color: #8c92a4;
+  border-top: 1px solid #282a32;
+  background-color: #1a1c22;
+}
+
+/* Radar Top Header */
+.radar-top-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  background-color: #1a1c22;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  border-bottom: 1px solid #282a32;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  box-sizing: border-box;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  
+  .logo {
+    font-size: 20px;
+    margin-right: 32px;
+    font-style: italic;
+    
+    .logo-skye { font-weight: 700; }
+    .logo-utm { font-weight: 300; }
+  }
+}
+
+.header-center {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  
+  .stats-group {
+    display: flex;
+    gap: 24px;
+    font-size: 12px;
+    
+    .stat-item {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      
+      .stat-val { font-size: 14px; font-weight: 600; }
+      .stat-lbl { color: #8c92a4; }
+      
+      .text-white { color: #fff; }
+      .text-orange { color: #ff9800; }
+      .text-cyan { color: #00bcd4; }
+      .text-purple { color: #9c27b0; }
+    }
+  }
+  
+  .last-updated {
+    font-size: 11px;
+    color: #8c92a4;
+  }
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  
+  .live-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #00e676;
+    font-size: 11px;
+    font-weight: 600;
+    
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: #00e676;
+      box-shadow: 0 0 6px rgba(0, 230, 118, 0.4);
+    }
+  }
+  
+  .header-btn {
+    background: transparent;
+    border: 1px solid #282a32;
+    color: #8c92a4;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    
+    &.active {
+      border-color: #2962ff;
+      color: #2962ff;
+      background-color: rgba(41, 98, 255, 0.1);
+    }
+    
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+  }
+  
+  .view-toggle {
+    display: flex;
+    background: #24262d;
+    border-radius: 4px;
+    padding: 2px;
+    
+    .toggle-btn {
+      background: transparent;
+      border: none;
+      color: #8c92a4;
+      padding: 4px 12px;
+      font-size: 11px;
+      font-weight: 600;
+      border-radius: 3px;
+      cursor: pointer;
+      
+      &.active {
+        background-color: #2962ff;
+        color: #fff;
+      }
+    }
+  }
+  
+  .icon-btn {
+    background: transparent;
+    border: none;
+    color: #8c92a4;
+    font-size: 16px;
+    cursor: pointer;
+    
+    &:hover { color: #fff; }
+  }
+}
+
+/* Radar Bottom Footer */
+.radar-bottom-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background-color: #1a1c22;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  border-top: 1px solid #282a32;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  box-sizing: border-box;
+}
+
+.footer-left {
+  display: flex;
+  gap: 24px;
+  
+  .footer-stat {
+    font-size: 11px;
+    
+    .f-lbl { color: #8c92a4; margin-right: 4px; }
+    .f-val { font-weight: 600; }
+    
+    .text-green { color: #00e676; }
+  }
+}
+
+.footer-right {
+  display: flex;
+  align-items: center;
+  font-size: 11px;
+  color: #8c92a4;
+  
+  .dot-sep {
+    margin: 0 8px;
+    color: #3b4255;
+  }
+}
+
+/* Hover Card Styling */
+.hover-card {
+  position: absolute;
+  z-index: 8;
+  width: 184px;
+  border-color: rgba(19, 110, 127, 0.95);
+  background: rgba(12, 17, 25, 0.98);
+  pointer-events: none;
+  border: 1px solid rgba(56, 68, 86, 0.82);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.24);
+}
+
+.hover-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  min-height: 34px;
+  padding: 8px 9px 0;
+  background: rgba(5, 53, 64, 0.72);
+}
+
+.hover-head strong {
+  color: #22d3ee;
+  font-family: monospace;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.hover-head span {
+  color: rgba(226, 232, 240, 0.58);
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.hover-state {
+  padding: 0 9px 8px;
+  background: rgba(5, 53, 64, 0.72);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  color: #22c55e;
+  font-family: monospace;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.hover-state span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22c55e;
+}
+
+.hover-card dl {
+  padding: 7px 9px 8px;
+  margin: 0;
+}
+
+.hover-card dl div {
+  display: grid;
+  grid-template-columns: minmax(0, 77px) minmax(0, 1fr);
+  min-height: 19px;
+  border-bottom: 1px solid rgba(30, 41, 59, 0.72);
+  align-items: center;
+  gap: 7px;
+}
+
+.hover-card dt,
+.hover-card dd {
+  font-family: monospace;
+  font-size: 9px;
+  overflow: hidden;
+  margin: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hover-card dt {
+  color: rgba(94, 137, 195, 0.86);
+  font-weight: 800;
+}
+
+.hover-card dd {
+  color: #dbeafe;
+  font-weight: 900;
+  text-align: right;
+}

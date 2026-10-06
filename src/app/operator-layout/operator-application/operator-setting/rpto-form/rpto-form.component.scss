@@ -1,0 +1,592 @@
+@import "../../../../../scss/colorCodes.scss";
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans&display=swap");
+@font-face {
+  font-family: SFProText;
+  src: url(../../../../../assets/fonts/SFProText-Regular.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: SFProText;
+  src: url(../../../../../assets/fonts/SFProText-Regular.ttf) format("truetype");
+}
+
+@mixin font($font-size, $font-weight) {
+  font-size: $font-size;
+  font-weight: $font-weight;
+}
+
+@mixin colors($color, $background-color) {
+  color: $color;
+  background-color: $background-color;
+}
+
+.form-control,
+.input-group-text {
+  // height: 40px;
+  font-size: 12px;
+  background-color: $black-medium;
+  color: $text-white-opacity;
+  border: 1px solid $black-light;
+  border-radius: 8px;
+}
+
+// .form-control::placeholder {
+//   color: $text-white-opacity;
+//   opacity:0.9;
+// }
+.form-control,
+.input-group-text {
+  padding: 1.25rem 2rem;
+}
+
+select {
+  padding: 0.67rem 1.5rem;
+  background-color: $black-medium;
+  color: $text-white-opacity;
+  border-radius: 8px;
+  width: 100%;
+  font-size: 12px;
+  border: 1px solid $black-light;
+}
+
+select:invalid {
+  opacity: 0.5;
+}
+
+.input-group-text {
+  padding: 0.5rem;
+}
+
+.form-control:focus,
+.input-group-text:focus {
+  outline: none;
+  box-shadow: none;
+  background-color: $black-medium;
+}
+
+.input-group-text {
+  background-color: transparent;
+}
+.input-template {
+  height: 80px;
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+  font-size: 14px !important;
+  color: $text-white !important;
+}
+.input-general {
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+  font-size: 14px !important;
+}
+
+.list-values {
+  // font-size: 93%;
+  // font-weight: 600;
+  font-family: "DM Sans", sans-serif;
+  font-size: 22px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.17;
+  letter-spacing: -1px;
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.list-values-inner {
+  color: $text-white;
+  font-family: "DM Sans", sans-serif;
+  width: 178px;
+  height: 24px;
+  flex-grow: 0;
+  margin-top: 7px;
+  margin-bottom: 35px;
+  font-size: 20px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.2;
+  letter-spacing: -1px;
+  text-align: left;
+}
+
+.list-description {
+  color: $text-white-opacity;
+  font-size: 75%;
+}
+
+
+.form-control.is-invalid {
+  background-image: none !important;
+}
+
+.card-color {
+  background-color: $dark-new;
+  border: 1.5px solid $dark-border;
+  width: 56.75rem;
+  margin-left: 0px;
+  border-radius: 8px;
+}
+.verify-whatsapp {
+  color: $link-text;
+}
+.verify-whatsapp:hover {
+  cursor: pointer;
+}
+.form-input {
+  background: $dark-body;
+}
+.cardbody-margin {
+  margin-top: -5px;
+  margin-bottom: -26px;
+}
+
+.list-values {
+  color: $text-white;
+  // font-size: 93%;
+  // font-weight: 600;
+  font-family: "DM Sans", sans-serif;
+  font-size: 22px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.17;
+  letter-spacing: -1px;
+  text-align: left;
+}
+
+.input-label {
+  flex-grow: 0;
+  font-family: SFProText;
+  font-size: 14px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.14;
+  letter-spacing: 0.28px;
+  text-align: left;
+  color: $text-white;
+  margin-bottom: 7px;
+}
+
+.Title {
+  height: 28px;
+  flex-grow: 1;
+  font-family: "DM Sans", sans-serif;
+  // font-size: 24px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.17;
+  letter-spacing: -1px;
+  text-align: left;
+  color: $text-white;
+}
+
+
+.form-control,
+.input-group-text {
+  // height: 40px;
+  font-size: 12px;
+  background-color: $black-medium;
+  color: $text-white-opacity;
+  border: 1px solid $black-light;
+  border-radius: 8px;
+}
+
+// .form-control::placeholder {
+//   color: $text-white-opacity;
+//   opacity:0.9;
+// }
+.form-control,
+.input-group-text {
+  padding: 1.25rem 2rem;
+}
+.full-card {
+  display: flex;
+  flex-direction: row;
+  // background-color: red;
+}
+.details-card {
+  display: flex;
+  flex-direction: column;
+  // background-color: blue;
+}
+
+.width-align {
+  position: absolute;
+  top: 666px;
+  max-width: 80vw;
+  margin-left: 930px;
+}
+.side-rec {
+  width: 560px;
+  height: 273px;
+  border-radius: 8px;
+  border: 1.5px solid $dark-border;
+  background: $dark-new;
+  .circle-text {
+    position: relative;
+    top: 45px;
+    left: 75%;
+    transform: translate(-50%, -50%);
+  }
+  .button-logout {
+    position: relative;
+    top: 80px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 112px;
+    height: 40px;
+    border-radius: 8px;
+    background: $reject;
+    border: none !important;
+  }
+  .circle {
+    position: relative;
+    top: 33%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 130px;
+    height: 130px;
+    background-color: $preflightBorder;
+    display: grid;
+    place-items: center;
+    // border: 5px solid $preflightBorder;
+    //  background: linear-gradient(to right,$preflightBorder 50%,white);
+    border-radius: 50%;
+    .initials {
+      position: absolute;
+      top: 8px;
+      left: 14px;
+      font-size: 75px;
+      color: $preflightBorder;
+    }
+    .inner-circle {
+      position: absolute;
+      bottom: -25px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50px;
+      height: 50px;
+      background-color: $loginText2;
+      border-radius: 50%;
+    }
+    .inner-circle:hover {
+      cursor: pointer;
+    }
+    .inner-circle img {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+    }
+  }
+  .circle::before {
+    content: "";
+    position: absolute;
+    height: 90%;
+    width: 90%;
+    background-color: $img-stroke;
+    border-radius: 50%;
+  }
+}
+.button-text {
+  width: 153px;
+  height: 40px;
+  flex-grow: 0;
+  font-family: "DM Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: 0.32px;
+  text-align: center;
+}
+.create-field {
+  width: 153px;
+  height: 35px;
+  flex-grow: 0;
+  font-family: "DM Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: 0.32px;
+  text-align: center;
+}
+.button-text2 {
+  color: $text-white;
+  margin-right: 7px;
+  border: solid 1px $black-light;
+}
+.form-group label {
+  @include font(14px, normal);
+  color: $text-light;
+}
+.form-group.file-label {
+  // @include colors($text-light, #fafafa);
+  height: calc(1.5em + 0.75rem + 2px);
+}
+
+.form-group.file-label label {
+  // @include colors($text-light, $black-medium);
+  // border: 1px solid #ced4da;
+  // background-color: $black-medium;
+
+  // @include colors($text-light, $black-medium);
+  // @include font(12px, normal);
+  // margin-bottom: 0px;
+  cursor: pointer;
+  width: 100%;
+
+  font-size: 12px;
+  background-color: $black-medium;
+  color: $text-white-opacity;
+  border: 1px solid $black-light;
+  border-radius: 8px;
+}
+
+//Documents
+input[type="file"] {
+  display: none;
+}
+
+img.file-logo {
+  width: 20px;
+  height: 20px;
+  flex-grow: 0;
+  object-fit: contain;
+}
+
+.flex-align {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-evenly;
+}
+
+.file-name {
+  color: $text-light;
+  @include font(11px, normal);
+  word-wrap: break-word;
+}
+
+.myClass {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.border-style {
+  font-size: 12px;
+  background-color: $black-medium;
+  color: $text-white;
+  border: 1px solid $black-light;
+  border-radius: 8px;
+}
+.disabled-cursor {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.initial-pos {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  height: 40px !important;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.kml-name {
+  align-items: center;
+  font-size: 12px !important;
+}
+.label-sec {
+  width: 50% !important;
+  margin-top: 12px !important;
+}
+.uploadFILE {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 0;
+
+  .labelClass {
+    margin: 0;
+  }
+}
+.upload-img2 {
+  width: 30.5px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.inside-sec {
+  position: relative;
+  width: 100%;
+}
+.text-primary-drag {
+  color: $text-primary;
+}
+
+.upload-section {
+  height: 80px;
+  width: 100%;
+  align-self: stretch;
+  flex-grow: 0;
+  border-radius: 4px;
+  border: dashed 1.5px $kb-color;
+  background-color: $black-dark;
+}
+.text-drag {
+  width: 100%;
+  height: 32px;
+  font-family: SFProText;
+  font-size: 10px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  text-align: center;
+  color: $text-white;
+}
+.text-drag:hover {
+  cursor: pointer;
+}
+.close-hover:hover {
+  cursor: pointer;
+}
+.card-grey {
+  background-color: $screen-color;
+  border: none;
+}
+
+.card-no-border {
+  border: none;
+}
+
+.bg-color {
+  background-color: $dark-v1;
+}
+
+.modal-radius {
+  border-radius: 1.25rem;
+}
+
+.disabled-div {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.disabled-img {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.img-cross {
+  height: 20px;
+  width: 50px;
+}
+.Upload {
+  height: 128px;
+  width: 284px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.verify-otp {
+  position: absolute;
+  top: 25%;
+  left: 33%;
+  width: 394px;
+  height: 285px;
+  border-radius: 8px;
+  background: $dark-body;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: $table-border;
+  z-index: 999;
+  backdrop-filter: blur(5px);
+}
+
+.exit-button {
+  position: absolute;
+  top: 25%;
+  left: 33%;
+  width: 350px;
+  height: 260px;
+  border-radius: 8px;
+  background: $dark-body;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.exit-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+.verify-button {
+  width: 300px;
+  height: 40px;
+  border-radius: 8px;
+  border: none;
+  background: $button-color;
+}
+.exit-button-text {
+  margin-top: 82px;
+}
+.exit-button-1 {
+  width: 70px;
+  height: 40px;
+  border-radius: 8px;
+  gap: 10px;
+  border: none;
+  background: $button-color;
+}
+.verify-code:hover {
+  cursor: pointer;
+}
+.otp-input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.otp-input input {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 2px solid $black-light;
+  background: $dark-body;
+  border-radius: 4px;
+  outline: none;
+}
+.otp-input input:focus {
+  border-color: $dark-v1;
+}
+/* Remove up and down arrows from number input fields */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+.astrik {
+  color: $adv-color;
+}

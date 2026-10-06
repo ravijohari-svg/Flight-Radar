@@ -1,0 +1,151 @@
+@import "../../../scss/colorCodes.scss";
+
+.texttruncate {
+  width: 95px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.weatherIcon {
+  width: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  img {
+    width: 15px;
+  }
+}
+.trapz {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 0;
+  border: 80px solid transparent;
+  -o-text-overflow: clip;
+  text-overflow: clip;
+  -webkit-transform: rotateX(180deg);
+  transform: rotateX(180deg);
+  position: relative;
+  transition: all 0.5s ease;
+}
+.weatherIcon2 {
+  width: 125px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: $black-light;
+  border-radius: 4px;
+}
+
+.weatherDetails {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  .seperator {
+    border: 1.5px solid $black-light;
+    height: 40px;
+  }
+}
+.trapz2 {
+  top: -52px;
+  margin-top: -50px;
+  width: 750px;
+  border-top: 0 solid;
+  border-bottom: 100px solid $dark-new;
+  .weatherDetails2 {
+    background-color: $dark-new;
+    transition: transform 0.3s ease-in-out;
+    .dropdown {
+      left: 50%;
+      bottom: -20px;
+      transform: translateX(-55%) rotate(180deg);
+    }
+    .weatherIcon {
+      width: max-content !important;
+      img {
+        width: 20px;
+      }
+    }
+  }
+}
+.toggleWeatherCard {
+  top: -10px;
+}
+
+.infoCardBox {
+  .trapz1 {
+    margin-top: -50px;
+    width: 750px;
+    border-top: 0 solid;
+    border-bottom: 100px solid $dark-new;
+  }
+  .weatherInfo {
+    position: relative;
+    top: 8px;
+    width: 100%;
+    -webkit-transform: rotateX(180deg);
+    transform: rotateX(180deg);
+    display: flex;
+    justify-content: space-around;
+    .Good_to_fly {
+      border-top: 40px solid $approval;
+    }
+    .Caution_flying {
+      border-top: 40px solid $pending;
+    }
+    .Avoid_flying {
+      border-top: 40px solid $reject;
+    }
+    .go {
+      position: absolute;
+      width: 70px;
+      text-align: center;
+      div {
+        text-align: center;
+        position: relative;
+        top: -33px;
+        line-height: 12px;
+        font-weight: 600;
+      }
+    }
+    .go1 {
+      left: -35px;
+      border-left: 32px solid transparent;
+
+      div {
+        right: 8px;
+      }
+    }
+    .go2 {
+      right: -35px;
+      border-right: 32px solid transparent;
+      div {
+        left: 5px;
+      }
+    }
+  }
+}
+.dropdown {
+  position: absolute;
+  width: 100px;
+  height: 0;
+  border-bottom: 20px solid $dark-new;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  display: inline-flex;
+  justify-content: center;
+  cursor: pointer;
+  img {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease;
+    rotate: 90deg;
+
+    &.rotate {
+      transform: rotate(180deg);
+    }
+  }
+}

@@ -1,0 +1,8 @@
+<div class="px-3 py-3 mx-1 main-panel">
+    <div class="Admin-Portal">Admin Portal</div>
+    <div class="tabs my-2">
+     <span class="pilotLink"><a class="btn btn-tabs white-text" [routerLink]="['pilots']" routerLinkActive="active">Pilots <span class="Number Notification">{{pilotsDataLength}}</span></a> </span> 
+    <span class="regulatorLink">  <a class="btn btn-tabs white-text" [routerLink]="['regulators']" routerLinkActive="active">Regulators <span class="Number Notification">{{regulatorsDataLength}}</span> </a></span> 
+    </div>
+    <router-outlet ></router-outlet>
+</div>

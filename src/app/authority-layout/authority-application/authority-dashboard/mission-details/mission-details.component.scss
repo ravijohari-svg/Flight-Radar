@@ -1,0 +1,335 @@
+@import "../../../../../scss/colorCodes.scss";
+
+@mixin font($font-size, $font-weight) {
+  font-size: $font-size;
+  font-weight: $font-weight;
+}
+
+.title {
+  display: inline;
+  @include font(15px, 600);
+}
+
+.btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+.main-panel {
+  position: relative;
+}
+.map-col {
+  margin-top: -4.3rem !important;
+}
+
+.main-map {
+  height: calc(100vh - 55px);
+}
+.mission-container {
+  position: absolute;
+  top: 4.2rem;
+  left: 0.1vw;
+  width: 375px;
+  max-height: 90vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.mission-detail-box{
+  background-color: $dark-body;
+  width:370px;
+}
+.btn-img{
+  display: flex;
+  flex-direction: row;
+  gap:5px;
+}
+// .osm-button{
+//   top: 2.7rem;
+//   right: 1vw;
+//   position:absolute;
+//   z-index: 1000;
+
+//   width: 150px !important;
+//   font-size: 12px !important;
+//   background-color: rgb(40 40 40 / 92%) !important;
+//   color: #fff;
+//   border-radius: 5px !important;
+//   height: 30px;
+//   padding: 5px;
+//     transition: all 0.2s;
+//     cursor: pointer;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     flex-direction: column;
+// }
+
+@media screen and (max-width: 768px) {
+  .map-col {
+    margin-top: -3.3rem !important;
+  }
+  .osm-button {
+    right: 1.5vw;
+  }
+}
+
+//Scrollbar
+.mission-container::-webkit-scrollbar {
+  width: 0.3em;
+}
+
+.mission-container::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 2px $scrollbar;
+}
+
+.mission-container::-webkit-scrollbar-thumb {
+  background-color: $black-light;
+}
+
+.list-values {
+  color: $text-dark;
+  font-size: 93%;
+  font-weight: 600;
+}
+
+.list-description {
+  color: $text-light;
+  font-size: 80%;
+}
+.info-btn {
+  color: #c9c9c9;
+}
+
+.info-btn:hover + .hover-card {
+  display: block;
+  // color: red;
+}
+.hover-card {
+  display: none;
+  position: absolute;
+  width: 320px;
+  background-color: #ffffff;
+  top: 3%;
+  left: 42%;
+  z-index: 10;
+}
+.hover-card-top5 {
+  top: 25%;
+}
+.hover-card-top10 {
+  top: 0%;
+}
+.hover-card-top15 {
+  top: -35%;
+}
+.hover-card-top-large {
+  top: -60%;
+}
+.card-list-values {
+  color: $text-dark;
+  font-size: 80%;
+  font-weight: 600;
+}
+
+.fa-check-circle {
+  color: #4fc55f;
+}
+
+.fa-times-circle,
+.fa-times {
+  color: #dc3545;
+}
+
+.fa-circle.red {
+  color: #dc3545;
+  // color: rgba(0, 0, 0, 0.125);
+  // border-radius: 50%;
+}
+.fa-dot-circle-o,
+.fa-circle.manual {
+  color: #ffcb3d;
+}
+.osm-button {
+  font-family: "DM Sans", sans-serif;
+  z-index: 1000;
+  width: 117px !important;
+  font-size: 12px !important;
+  background-color: #ffff;
+  color: rgb(40 40 40 / 92%) !important;
+  border-radius: 15px !important;
+  height: 30px;
+  padding: 5px;
+  transition: all 0.2s;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  opacity: 0.7;
+}
+
+.view-button {
+  font-family: "DM Sans", sans-serif;
+  // top: 120.5px;
+  top: 4.7rem;
+  right: 1vw;
+  position: absolute;
+  z-index: 1000;
+
+  width: 150px !important;
+  font-size: 12px !important;
+  background-color: rgb(40 40 40 / 92%) !important;
+  color: #fff;
+  border-radius: 5px !important;
+  height: 30px;
+  padding: 5px;
+  transition: all 0.2s;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.slideToggle-button {
+  font-family: "DM Sans", sans-serif;
+  z-index: 1000;
+  width: 103px !important;
+  font-size: 12px !important;
+  background-color: #ffff;
+  color: rgba(40, 40, 40, 0.92) !important;
+  border-radius: 15px !important;
+  height: 30px;
+  padding: 5px;
+  transition: all 0.2s;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  opacity: 0.7;
+}
+.align-map-buttons {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 600;
+  top: 0.5rem;
+  right: 3rem;
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+}
+.heatmap {
+  position: fixed;
+  z-index: 25;
+  top: 6vh;
+  right: 0;
+}
+.map-ui{
+  position: fixed;
+  z-index: 25;
+  top: 12vh;
+  right: 0;
+}
+@media screen and (max-width: 1300px) {
+  .mission-container {
+    width: 30vw !important;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .map-col {
+    margin-top: -3.3rem !important;
+  }
+  .osm-button {
+    right: 1.5vw;
+  }
+  .mission-container {
+    width: 300px !important;
+  }
+}
+.back-button{
+  display: flex;
+  flex-direction: row;
+  gap:4px;
+  border-radius: 8px;
+  border: 1px solid $black-light;
+}
+.approval-card{
+  background-color: $dark-new;
+  border-radius: 8px;
+  border: 1px solid $dark-border;
+}
+.complaince-card{
+  background-color: $dark-new;
+  border-radius: 8px;
+  border: 1px solid $dark-border;
+  height:200px;
+}
+.custom-height{
+  height:35px;
+}
+.pilot-card{
+  background-color: $dark-new;
+  border-radius: 8px;
+  border: 1px solid $dark-border;
+}
+.drone-card{
+  background-color: $dark-new;
+  border-radius: 8px;
+  border: 1px solid $dark-border;
+}
+.flight-card{
+  background-color: $dark-new;
+  border-radius: 8px;
+  border: 1px solid $dark-border;
+}
+.complaince-color{
+  width:20px;
+  height:20px;
+}
+.col-shift{
+  margin-left: -6px;
+}
+.documents{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 330px;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid $black-light;
+  background: $dark-border;
+}
+.operation-name{
+  margin-right: 40px;
+}
+.doc-inside{
+  width:330px;
+}
+.doc-1{
+  display: flex;
+  flex-direction: row;
+}
+.vis-download{
+  display: flex;
+  flex-direction: row;
+  gap:5px;
+  margin-right: 8px !important;
+}
+.vis-download img:hover{
+ cursor: pointer;
+}
+
+
+.btn-reject {
+  width: 140px;
+  height: 40px;
+  border-radius: 8px;
+  background: $dark-red;
+}
+.btn-approve {
+  width: 140px;
+  height: 40px;
+  border-radius: 8px;
+  background: $dark-green;
+  margin-left: 58px;
+}

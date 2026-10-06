@@ -1,0 +1,221 @@
+<div class="login">
+  <div class="leftBox">
+    <img src="../../../assets/icons/loginBg.png" alt="" />
+    <div class="loginHeading">
+      <p>Automating the skies.</p>
+      <p>Connecting operators with authorities for a safer airspace</p>
+    </div>
+  </div>
+  <div class="rightBox">
+    <div class="logo">
+      <img
+        src="../../../assets/common-layout/SkyeUTM logoWhite.svg"
+        alt="SkyeUTM"
+        title="SkyeUTM Logo"
+      />
+    </div>
+    <div class="loginFormBox">
+      <p class="rightBoxlogin text-white">Register</p>
+      <div class="formBox">
+        <form [formGroup]="signUpForm">
+          <div class="form-group my-2">
+            <label for="formGroupExampleInput"
+              >Full Name<span class="astrik f-14">*</span></label
+            >
+            <input
+              type="text"
+              class="form-control dark-medium text-white"
+              formControlName="Fullname"
+              [ngClass]="{
+                'is-invalid': submitted && signUp.Fullname.errors
+              }"
+              #fullName
+            />
+            <div
+              *ngIf="submitted && signUp.Fullname.errors"
+              class="invalid-feedback f-12"
+            >
+              <div *ngIf="submitted && signUp.Fullname.errors.required">
+                Full Name is required
+              </div>
+              <div *ngIf="submitted && signUp.Fullname.errors.minlength">
+                Minimum length is 3
+              </div>
+              <div *ngIf="submitted && signUp.Fullname.errors.alphabeticalOnly">
+                Name should not contain number
+              </div>
+            </div>
+          </div>
+          <div class="form-group my-2">
+            <label for="formGroupExampleInput"
+              >Email ID<span class="astrik f-14">*</span></label
+            >
+            <input
+              type="email"
+              class="form-control dark-medium text-white"
+              formControlName="EmailID"
+              [ngClass]="{
+                'is-invalid': submitted && signUp.EmailID.errors
+              }"
+            />
+            <div
+              *ngIf="submitted && signUp.EmailID.errors"
+              class="invalid-feedback f-12"
+            >
+              <div *ngIf="submitted && signUp.EmailID.errors.required">
+                Email ID is required
+              </div>
+              <div *ngIf="submitted && signUp.EmailID.errors.email">
+                Invalid Email ID
+              </div>
+            </div>
+            <div
+              *ngIf="value == 'Email' || value == 'EmailMobile'"
+              class="text-danger f-12"
+            >
+              Email number is already registered
+            </div>
+          </div>
+          <div class="form-group my-2">
+            <label for="formGroupExampleInput"
+              >WhatsApp No<span class="astrik f-14">*</span></label
+            >
+            <input
+              type="number"
+              class="form-control dark-medium text-white"
+              formControlName="WhatsAppnumber"
+              [ngClass]="{
+                'is-invalid': submitted && signUp.WhatsAppnumber.errors
+              }"
+            />
+            <div
+              *ngIf="submitted && signUp.WhatsAppnumber.errors"
+              class="invalid-feedback f-12"
+            >
+              <div *ngIf="submitted && signUp.WhatsAppnumber.errors.required">
+                WhatsAppnumber is required
+              </div>
+              <div *ngIf="submitted && signUp.WhatsAppnumber.errors.pattern">
+                Invalid WhatsAppnumber
+              </div>
+            </div>
+            <div
+              *ngIf="value == 'Mobile' || value == 'EmailMobile'"
+              class="text-danger f-12"
+            >
+              Mobile number is already registered
+            </div>
+          </div>
+          <div class="form-group my-2">
+            <label for="formGroupExampleInput"
+              >Country<span class="astrik f-14">*</span></label
+            >
+            <input
+              type="Text"
+              class="form-control dark-medium text-white"
+              formControlName="Country"
+              readonly
+            />
+          </div>
+          <div class="form-group input-checkbox text-white mt-3">
+            <input
+              type="checkbox"
+              class="checkbox-class form-control dark-medium text-white mt-1"
+              formControlName="Checkbox"
+            />
+            <div>
+              I agree to accept
+              <p class="terms-condition primary-outline-btn">
+                terms and conditions
+              </p>
+            </div>
+            <div
+              *ngIf="submitted && signUp.Checkbox.errors"
+              class="invalid-feedback f-12"
+            >
+              <div
+                *ngIf="submitted && signUp.Checkbox.errors.required"
+                class="invalid-feedback f-12"
+              >
+                Please agree terms and condition
+              </div>
+            </div>
+          </div>
+
+          <div
+            *ngIf="submitted && signUp.Checkbox.errors"
+            class="text-danger f-12"
+          >
+            Please agree terms and conditions
+          </div>
+          <div class="loginBtn mt-3">
+            <button
+              class="btn primary-btn px-5"
+              (click)="operatorRegister()"
+              *ngIf="!loader"
+            >
+              Register
+            </button>
+            <div *ngIf="loader">
+              <button class="btn primary-btn px-5">
+                <img
+                  src="../../../../../assets/common-layout/SquareLoader.gif"
+                  width="20px"
+                />
+              </button>
+            </div>
+          </div>
+
+          <div class="text-center mt-3 signUpText">
+            <span class="text-white">Already have an account? </span>
+            <a
+              (click)="router.navigateByUrl('operator-login')"
+              class="primary-outline-btn"
+              >Sign in</a
+            >
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="overlay" *ngIf="isConfirm">
+  <div class="confirm-popup" *ngIf="isConfirm">
+    <div class="text-white f-18">Confirmation</div>
+    <div class="text-white-50 f-14 mt-3">
+      Are you sure you have added correct email address and mobile number?
+    </div>
+    <div class="text-white-50 f-14 mt-3">
+      <img
+        src="../../../assets/common-layout/del.svg"
+        class="mr-2"
+        width="16px"
+      />{{ signUpForm.value.EmailID }}
+    </div>
+    <div class="text-white-50 f-14 mt-2">
+      <img
+        src="../../../assets/common-layout/del.svg"
+        class="mr-2"
+        width="16px"
+      />{{ signUpForm.value.WhatsAppnumber }}
+    </div>
+    <div class="confirm-popup-btn mt-2">
+      <button class="btn-cancel f-14 mt-2" (click)="isCancel()">Cancel</button>
+      <button
+        class="btn-confirm f-14"
+        *ngIf="!loaderConfirm"
+        (click)="operatorRegistration()"
+      >
+        Confirm
+      </button>
+      <div *ngIf="loaderConfirm">
+        <button class="btn-confirm f-14">
+          <img
+            src="../../../../../assets/common-layout/SquareLoader.gif"
+            width="20px"
+          />
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

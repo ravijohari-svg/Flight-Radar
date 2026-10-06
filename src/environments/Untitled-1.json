@@ -1,0 +1,349 @@
+{
+    "data": {
+        "MainData": {
+            "OnGoingMissionList": [{
+                "Altitude": [
+                    0,
+                    110,
+                    110,
+                    0
+                ],
+                "CreatedByName": "Aditya kulshrestha",
+                "ApprovalMode": "Auto",
+                "OperationName": "Samsung",
+                "Longitude": [
+                    77.586073,
+                    77.586073,
+                    77.58222222,
+                    77.586073
+                ],
+                "Latitude": [
+                    12.914461000000001,
+                    12.914461000000001,
+                    12.89055556,
+                    12.914461000000001
+                ],
+                "LiveStatus": "InActive",
+                "EndTime": "2022-06-27T17:48",
+                "PermissionStatus": [{
+                        "Permission": "Auto-Approve",
+                        "Type": "UAVInfoType",
+                        "Category": "UAV Info",
+                        "Module": "DroneParameters"
+                    },
+                    {
+                        "Permission": "Auto-Approve",
+                        "Type": "UAVInfoGPSType",
+                        "Category": "UAV Info",
+                        "Module": "DroneParameters"
+                    },
+                    {
+                        "Permission": "Auto-Approve",
+                        "Type": "UAVInfoClass",
+                        "Category": "UAV Info",
+                        "Module": "DroneParameters"
+                    },
+                    {
+                        "Permission": "Auto-Approve",
+                        "Type": "UAVMakeInfoManufacturer",
+                        "Category": "UAV Info",
+                        "Module": "DroneParameters"
+                    },
+                    {
+                        "Permission": "Auto-Approve",
+                        "Type": "AvionicsGCS",
+                        "Category": "UAV Info",
+                        "Module": "DroneParameters"
+                    },
+                    {
+                        "Permission": "Auto-Approve",
+                        "Type": "AvionicsFlightController",
+                        "Category": "UAV Info",
+                        "Module": "DroneParameters"
+                    },
+                    {
+                        "Permission": "Auto-Approve",
+                        "Type": "CommsType",
+                        "Category": "UAV Info",
+                        "Module": "DroneParameters"
+                    },
+                    {
+                        "Permission": "Auto-Approve",
+                        "Type": "AvionicsProtocol",
+                        "Category": "UAV Info",
+                        "Module": "DroneParameters"
+                    },
+                    {
+                        "Permission": "Auto-Approve",
+                        "Type": "ActivityType",
+                        "Category": "Activity Type",
+                        "Module": "MissionParameters"
+                    },
+                    {
+                        "Permission": "Auto-Approve",
+                        "Type": "Weather",
+                        "Category": "Weather",
+                        "Module": "WeatherParameters"
+                    },
+                    {
+                        "Permission": "Auto-Approve",
+                        "Type": "Weather",
+                        "Category": "Weather",
+                        "Module": "WeatherParameters"
+                    },
+                    {
+                        "Permission": "Auto-Approve",
+                        "Type": "Weather",
+                        "Category": "Weather",
+                        "Module": "WeatherParameters"
+                    },
+                    {
+                        "Permission": "Auto-Approve",
+                        "Type": "Weather",
+                        "Category": "Weather",
+                        "Module": "WeatherParameters"
+                    },
+                    {
+                        "Permission": "Auto-Approve",
+                        "Type": "Weather",
+                        "Category": "Weather",
+                        "Module": "WeatherParameters"
+                    },
+                    {
+                        "Permission": "Auto-Approve",
+                        "Type": "Weather",
+                        "Category": "Weather",
+                        "Module": "WeatherParameters"
+                    },
+                    {
+                        "Permission": "Auto-Approve",
+                        "Type": "Weather",
+                        "Category": "Weather",
+                        "Module": "WeatherParameters"
+                    },
+                    {
+                        "Permission": "Auto-Approve",
+                        "Type": "Weather",
+                        "Category": "Weather",
+                        "Module": "WeatherParameters"
+                    },
+                    {
+                        "Permission": "Auto-Approve",
+                        "Type": "Weather",
+                        "Category": "Weather",
+                        "Module": "WeatherParameters"
+                    },
+                    {
+                        "Permission": "Auto-Approve",
+                        "Type": "Weather",
+                        "Category": "Weather",
+                        "Module": "WeatherParameters"
+                    },
+                    {
+                        "Permission": "Auto-Approve",
+                        "Type": "Weather",
+                        "Category": "Weather",
+                        "Module": "WeatherParameters"
+                    },
+                    {
+                        "Permission": "Auto-Approve",
+                        "Type": "Weather",
+                        "Category": "Weather",
+                        "Module": "WeatherParameters"
+                    },
+                    {
+                        "Permission": "Auto-Approve",
+                        "Type": "Temperature",
+                        "Category": "Weather",
+                        "Module": "WeatherParameters"
+                    },
+                    {
+                        "Permission": "Auto-Approve",
+                        "Type": "Temperature",
+                        "Category": "Weather",
+                        "Module": "WeatherParameters"
+                    },
+                    {
+                        "Permission": "Auto-Approve",
+                        "Type": "Temperature",
+                        "Category": "Weather",
+                        "Module": "WeatherParameters"
+                    },
+                    {
+                        "Permission": "Auto-Approve",
+                        "Type": "Temperature",
+                        "Category": "Weather",
+                        "Module": "WeatherParameters"
+                    },
+                    {
+                        "Permission": "Manual",
+                        "Type": "VFR",
+                        "Category": "Airspace Restrictions",
+                        "Module": "MissionParameters"
+                    },
+                    {
+                        "Permission": "Manual",
+                        "Type": "VFR",
+                        "Category": "Airspace Restrictions",
+                        "Module": "MissionParameters"
+                    }
+                ],
+                "MissionStatus": "Approved",
+                "ActivityType": "BVLOS Medical Delivery",
+                "MaximumAltitude": 400,
+                "BufferRegion": [{
+                        "x": 1337282.684590065,
+                        "y": 6073094.615442587,
+                        "z": 1413648.3130293966
+                    },
+                    {
+                        "x": 1337275.6752619497,
+                        "y": 6073104.613309654,
+                        "z": 1413612.2350652488
+                    },
+                    {
+                        "x": 1337244.693771391,
+                        "y": 6073115.969602491,
+                        "z": 1413592.8849574851
+                    },
+                    {
+                        "x": 1337207.8886548975,
+                        "y": 6073122.031957884,
+                        "z": 1413601.5977360383
+                    },
+                    {
+                        "x": 1337186.819850132,
+                        "y": 6073119.249130864,
+                        "z": 1413633.2695737935
+                    },
+                    {
+                        "x": 1336651.6992778685,
+                        "y": 6072632.369942139,
+                        "z": 1416211.2116388516
+                    },
+                    {
+                        "x": 1336658.705491318,
+                        "y": 6072622.357921876,
+                        "z": 1416247.2863520163
+                    },
+                    {
+                        "x": 1336689.6857116744,
+                        "y": 6072610.995774116,
+                        "z": 1416266.6351220417
+                    },
+                    {
+                        "x": 1336726.4921455698,
+                        "y": 6072604.939290016,
+                        "z": 1416257.9237011434
+                    },
+                    {
+                        "x": 1336747.5640828416,
+                        "y": 6072607.736276419,
+                        "z": 1416226.2551218993
+                    },
+                    {
+                        "x": 1337282.684590065,
+                        "y": 6073094.615442587,
+                        "z": 1413648.3130293966
+                    }
+                ],
+                "wayPointFileDetails": [
+                    [
+                        "QGC WPL 110\r"
+                    ],
+                    [
+                        "0",
+                        "1",
+                        "0",
+                        "16",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "12.914461",
+                        "77.586073",
+                        "931.260000",
+                        "1\r",
+                        "931.260000"
+                    ],
+                    [
+                        "1",
+                        "0",
+                        "3",
+                        "22",
+                        "0.00000000",
+                        "0.00000000",
+                        "0.00000000",
+                        "0.00000000",
+                        "12.91446020",
+                        "77.58607280",
+                        "110.000000",
+                        "1\r",
+                        "1041.26"
+                    ],
+                    [
+                        "2",
+                        "0",
+                        "3",
+                        "16",
+                        "0.00000000",
+                        "0.00000000",
+                        "0.00000000",
+                        "0.00000000",
+                        "12.89055556",
+                        "77.58222222",
+                        "110.000000",
+                        "1\r",
+                        "1041.26"
+                    ],
+                    [
+                        "3",
+                        "0",
+                        "3",
+                        "19",
+                        "10.00000000",
+                        "0.00000000",
+                        "0.00000000",
+                        "0.00000000",
+                        "0.00000000",
+                        "0.00000000",
+                        "0.000000",
+                        "1\r",
+                        "931.26"
+                    ],
+                    [
+                        "4",
+                        "0",
+                        "3",
+                        "20",
+                        "0.00000000",
+                        "0.00000000",
+                        "0.00000000",
+                        "0.00000000",
+                        "0.00000000",
+                        "0.00000000",
+                        "0.000000",
+                        "1\r",
+                        "931.26"
+                    ],
+                    [
+                        ""
+                    ]
+                ],
+                "MissionId": "Mission00505",
+                "PilotContact": "918577926218",
+                "DroneName": " Skye Ship onee-Multirotor-Small (>2kg, <=25kg)-SkyeAir Mobility-00015",
+                "WayPointNum": [
+                    "0",
+                    "1",
+                    "2",
+                    "3"
+                ],
+                "StartTime": "2022-06-27T17:38"
+            }],
+            "OnGoingCount": 1
+        }
+    },
+    "error": null,
+    "statusCode": 200
+}

@@ -1,0 +1,527 @@
+{
+    "CreatedByName": "Guest User",
+    "Altitude": [
+        0,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        0,
+        0
+    ],
+    "PreflightURL": "https://navifly-files-dev.s3.eu-west-1.amazonaws.com/protected/Operator/OPRTR68/Mission/Mission06208/preflight/preflight_20240208T095624Z.pdf",
+    "ApprovalMode": "Manual",
+    "principalSubdivisionCode": "IN-HR",
+    "Longitude": [
+        75.5914307,
+        75.5914307,
+        75.6119442,
+        75.6280804,
+        75.6371784,
+        75.6375217,
+        75.6321144,
+        75.6153774,
+        75.5950356,
+        75.5873966,
+        75.5873966
+    ],
+    "CreatedById": "OPRTR68",
+    "Latitude": [
+        29.247613899999994,
+        29.247613899999994,
+        29.2536048,
+        29.253155499999995,
+        29.246041199999997,
+        29.236979200000004,
+        29.229713999999998,
+        29.2262684,
+        29.230013599999996,
+        29.245517000000003,
+        29.245517000000003
+    ],
+    "LiveStatus": "Upcoming",
+    "EndTime": "2023-12-19T12:00",
+    "PermissionStatus": [
+        {
+            "Permission": "Auto-Approve",
+            "Type": "UAVInfoType",
+            "Category": "UAV Info",
+            "Module": "DroneParameters"
+        },
+        {
+            "Permission": "Auto-Approve",
+            "Type": "UAVInfoGPSType",
+            "Category": "UAV Info",
+            "Module": "DroneParameters"
+        },
+        {
+            "Permission": "Auto-Approve",
+            "Type": "UAVInfoClass",
+            "Category": "UAV Info",
+            "Module": "DroneParameters"
+        },
+        {
+            "Permission": "Auto-Approve",
+            "Type": "UAVMakeInfoManufacturer",
+            "Category": "UAV Info",
+            "Module": "DroneParameters"
+        },
+        {
+            "Permission": "Auto-Approve",
+            "Type": "AvionicsGCS",
+            "Category": "UAV Info",
+            "Module": "DroneParameters"
+        },
+        {
+            "Permission": "Auto-Approve",
+            "Type": "AvionicsFlightController",
+            "Category": "UAV Info",
+            "Module": "DroneParameters"
+        },
+        {
+            "Permission": "Auto-Approve",
+            "Type": "CommsType",
+            "Category": "UAV Info",
+            "Module": "DroneParameters"
+        },
+        {
+            "Permission": "Auto-Approve",
+            "Type": "AvionicsProtocol",
+            "Category": "UAV Info",
+            "Module": "DroneParameters"
+        },
+        {
+            "Permission": "Auto-Approve",
+            "Type": "ActivityType",
+            "Category": "Activity Type",
+            "Module": "MissionParameters"
+        },
+        {
+            "Permission": "Auto-Approve",
+            "Type": "FlightPurpose",
+            "Category": "Flight Purpose",
+            "Module": "MissionParameters"
+        },
+        {
+            "Permission": "Auto-Approve",
+            "Type": "WindSpeed",
+            "Category": "Weather",
+            "Module": "WeatherParameters"
+        },
+        {
+            "Permission": "Auto-Approve",
+            "Type": "WindSpeed",
+            "Category": "Weather",
+            "Module": "WeatherParameters"
+        },
+        {
+            "Permission": "Auto-Approve",
+            "Type": "WindDeg",
+            "Category": "Weather",
+            "Module": "WeatherParameters"
+        },
+        {
+            "Permission": "Auto-Approve",
+            "Type": "WindDeg",
+            "Category": "Weather",
+            "Module": "WeatherParameters"
+        },
+        {
+            "Permission": "Auto-Approve",
+            "Type": "WindDeg",
+            "Category": "Weather",
+            "Module": "WeatherParameters"
+        },
+        {
+            "Permission": "Auto-Approve",
+            "Type": "WindDeg",
+            "Category": "Weather",
+            "Module": "WeatherParameters"
+        },
+        {
+            "Permission": "Auto-Approve",
+            "Type": "Weather",
+            "Category": "Weather",
+            "Module": "WeatherParameters"
+        },
+        {
+            "Permission": "Auto-Approve",
+            "Type": "Weather",
+            "Category": "Weather",
+            "Module": "WeatherParameters"
+        },
+        {
+            "Permission": "Auto-Approve",
+            "Type": "Weather",
+            "Category": "Weather",
+            "Module": "WeatherParameters"
+        },
+        {
+            "Permission": "Auto-Approve",
+            "Type": "Weather",
+            "Category": "Weather",
+            "Module": "WeatherParameters"
+        },
+        {
+            "Permission": "Auto-Approve",
+            "Type": "Temperature",
+            "Category": "Weather",
+            "Module": "WeatherParameters"
+        },
+        {
+            "Permission": "Auto-Approve",
+            "Type": "Temperature",
+            "Category": "Weather",
+            "Module": "WeatherParameters"
+        },
+        {
+            "Permission": "Auto-Approve",
+            "Type": "Temperature",
+            "Category": "Weather",
+            "Module": "WeatherParameters"
+        },
+        {
+            "Permission": "Auto-Approve",
+            "Type": "Temperature",
+            "Category": "Weather",
+            "Module": "WeatherParameters"
+        },
+        {
+            "Permission": "Auto-Approve",
+            "Category": "Airspace Restrictions",
+            "Module": "MissionParameters"
+        },
+        {
+            "Permission": "Auto-Approve",
+            "Category": "Flight Time",
+            "Module": "MissionParameters"
+        }
+    ],
+    "Waypoints": [
+        {
+            "x": 1385880.3474800962,
+            "y": 5394298.086415335,
+            "z": 3097876.2971930723
+        },
+        {
+            "x": 1385880.3474800962,
+            "y": 5394298.086415335,
+            "z": 3097876.2971930723
+        },
+        {
+            "x": 1383868.3224876805,
+            "y": 5394479.635949804,
+            "z": 3098455.657982801
+        },
+        {
+            "x": 1382355.0618917732,
+            "y": 5394892.735090131,
+            "z": 3098412.2087747324
+        },
+        {
+            "x": 1381593.9663423512,
+            "y": 5395485.425213454,
+            "z": 3097724.200867295
+        },
+        {
+            "x": 1381683.3480210989,
+            "y": 5395969.024109344,
+            "z": 3096847.767074736
+        },
+        {
+            "x": 1382290.175915328,
+            "y": 5396219.571741616,
+            "z": 3096145.056099763
+        },
+        {
+            "x": 1383912.7650659448,
+            "y": 5395996.187273796,
+            "z": 3095811.7706236085
+        },
+        {
+            "x": 1385778.0002503956,
+            "y": 5395308.190772717,
+            "z": 3096174.035241452
+        },
+        {
+            "x": 1386288.4112821822,
+            "y": 5394310.475055958,
+            "z": 3097673.504804221
+        },
+        {
+            "x": 1386288.4112821822,
+            "y": 5394310.475055958,
+            "z": 3097673.504804221
+        }
+    ],
+    "TS_Created": "2024-02-08T09:54:55.614Z",
+    "Correlation": {
+        "FIC": [],
+        "vfr": [],
+        "TerrainAdvisory": [],
+        "greenzone": [],
+        "reservedAirspace": [],
+        "geozone": [],
+        "airport": []
+    },
+    "MaximumAltitude": 120,
+    "BufferRegion": [
+        {
+            "x": 1383899.7759440402,
+            "y": 5394631.950070315,
+            "z": 3098485.2482531276
+        },
+        {
+            "x": 1382412.739578148,
+            "y": 5395037.891378041,
+            "z": 3098442.552537648
+        },
+        {
+            "x": 1381677.0296511445,
+            "y": 5395610.8132305695,
+            "z": 3097777.492504374
+        },
+        {
+            "x": 1381763.127577089,
+            "y": 5396076.645644868,
+            "z": 3096933.2563289558
+        },
+        {
+            "x": 1382347.4297307811,
+            "y": 5396317.893108878,
+            "z": 3096256.630449024
+        },
+        {
+            "x": 1383939.6811517323,
+            "y": 5396098.684295525,
+            "z": 3095929.5757884057
+        },
+        {
+            "x": 1385770.6509915604,
+            "y": 5395423.3287635585,
+            "z": 3096285.186494757
+        },
+        {
+            "x": 1386274.0191329191,
+            "y": 5394439.375040379,
+            "z": 3097763.966610757
+        },
+        {
+            "x": 1386297.3917621884,
+            "y": 5394419.945526389,
+            "z": 3097787.184973172
+        },
+        {
+            "x": 1386334.5865664773,
+            "y": 5394410.644550026,
+            "z": 3097786.7391339443
+        },
+        {
+            "x": 1386363.815332807,
+            "y": 5394416.92049736,
+            "z": 3097762.890259731
+        },
+        {
+            "x": 1386367.9562464347,
+            "y": 5394435.097003865,
+            "z": 3097729.6086990484
+        },
+        {
+            "x": 1385857.5332206585,
+            "y": 5395432.836279138,
+            "z": 3096230.103760281
+        },
+        {
+            "x": 1385826.501449703,
+            "y": 5395455.469515202,
+            "z": 3096204.723875594
+        },
+        {
+            "x": 1383961.2224827772,
+            "y": 5396143.482201893,
+            "z": 3095842.4507249445
+        },
+        {
+            "x": 1383940.0247056563,
+            "y": 5396148.788800641,
+            "z": 3095842.6758005316
+        },
+        {
+            "x": 1382317.3974524892,
+            "y": 5396372.178482468,
+            "z": 3096175.9691271866
+        },
+        {
+            "x": 1382285.2477720312,
+            "y": 5396369.644831849,
+            "z": 3096194.6127279736
+        },
+        {
+            "x": 1381678.4055969045,
+            "y": 5396119.091262656,
+            "z": 3096897.340274446
+        },
+        {
+            "x": 1381667.111834295,
+            "y": 5396107.465100099,
+            "z": 3096922.467239324
+        },
+        {
+            "x": 1381577.7280188228,
+            "y": 5395623.854789293,
+            "z": 3097798.921733989
+        },
+        {
+            "x": 1381589.5424778757,
+            "y": 5395602.942026535,
+            "z": 3097829.86885274
+        },
+        {
+            "x": 1382350.655904601,
+            "y": 5395010.237937841,
+            "z": 3098517.893044763
+        },
+        {
+            "x": 1382379.9520839322,
+            "y": 5394996.325470444,
+            "z": 3098528.9720103624
+        },
+        {
+            "x": 1383893.2482724448,
+            "y": 5394583.216611815,
+            "z": 3098572.422247963
+        },
+        {
+            "x": 1383910.5015073614,
+            "y": 5394580.077480842,
+            "z": 3098570.1967025152
+        },
+        {
+            "x": 1385922.5738232352,
+            "y": 5394398.523700955,
+            "z": 3097990.8221914573
+        },
+        {
+            "x": 1385953.6395881209,
+            "y": 5394403.170169192,
+            "z": 3097968.9808205236
+        },
+        {
+            "x": 1385960.8490283797,
+            "y": 5394420.51467639,
+            "z": 3097935.7775444416
+        },
+        {
+            "x": 1385939.9789527692,
+            "y": 5394440.397045256,
+            "z": 3097910.662392191
+        },
+        {
+            "x": 1385903.25476856,
+            "y": 5394451.17045341,
+            "z": 3097908.3474778994
+        },
+        {
+            "x": 1383899.7759440402,
+            "y": 5394631.950070315,
+            "z": 3098485.2482531276
+        }
+    ],
+    "AltitudeRef": [
+        "0",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3"
+    ],
+    "PlusCode": "7JXQ",
+    "FIRID": [
+        "VIDF"
+    ],
+    "MissionId": "Mission06208",
+    "PilotContact": "7300572899",
+    "PlusCodeMap": "7JXQ6HXR+2H",
+    "WayPointNum": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10"
+    ],
+    "StartTime": "2023-12-18T01:01",
+    "TS_Updated": "2024-02-08T09:56:23.818Z",
+    "OperationName":"Guest Mission",
+    "Country": "India",
+    "principalSubdivision": "Haryana",
+    "FlightPurpose": "Blood Vaccine",
+    "MissionStatus": "Approved",
+    "ActivityType": "BVLOS Medical Delivery",
+    "DroneId": "Drone00332",
+    "CountryCode": "IN",
+    "wayPointFileDetails": [],
+    "OperatorId": "OPRTR68",
+    "DroneName": "Gear-001-Hybrid e-VTOL-Medium (>25kg, <=150kg)-AMOS-00332",
+    "FlyingRiskScore": 50,
+    "LatLong": [
+        {
+            "Latitude": 29.247613899999994,
+            "Longitude": 75.5914307
+        },
+        {
+            "Latitude": 29.247613899999994,
+            "Longitude": 75.5914307
+        },
+        {
+            "Latitude": 29.2536048,
+            "Longitude": 75.6119442
+        },
+        {
+            "Latitude": 29.253155499999995,
+            "Longitude": 75.6280804
+        },
+        {
+            "Latitude": 29.246041199999997,
+            "Longitude": 75.6371784
+        },
+        {
+            "Latitude": 29.236979200000004,
+            "Longitude": 75.6375217
+        },
+        {
+            "Latitude": 29.229713999999998,
+            "Longitude": 75.6321144
+        },
+        {
+            "Latitude": 29.2262684,
+            "Longitude": 75.6153774
+        },
+        {
+            "Latitude": 29.230013599999996,
+            "Longitude": 75.5950356
+        },
+        {
+            "Latitude": 29.245517000000003,
+            "Longitude": 75.5873966
+        },
+        {
+            "Latitude": 29.245517000000003,
+            "Longitude": 75.5873966
+        }
+    ]
+}

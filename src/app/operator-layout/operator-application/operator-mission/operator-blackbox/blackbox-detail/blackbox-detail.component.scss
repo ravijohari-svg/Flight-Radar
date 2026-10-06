@@ -1,0 +1,560 @@
+@import "../../../../../../scss/colorCodes.scss";
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans&display=swap");
+
+@mixin font($font-size, $font-weight) {
+  font-size: $font-size;
+  font-weight: $font-weight;
+}
+
+@mixin colors($color, $background-color) {
+  color: $color;
+  background-color: $background-color;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+.main-panel {
+  min-height: calc(100vh - 54px);
+}
+.heading {
+  display: flex;
+  flex-direction: row;
+  height: 40px;
+  margin-top: 10px;
+  align-items: center;
+  color: #fff;
+
+  .back_btn {
+    color: #fff;
+    height: 32px;
+    font-size: 12px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    margin: 28px 12px 28px 24px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: solid 1px $black-light;
+    background-color: transparent;
+  }
+}
+.blackbox_mission_details {
+  display: flex;
+  flex-direction: row;
+  margin: 24px;
+  color: #fff;
+  min-height: calc(100vh - 152px);
+
+  .blackbox_mission_left {
+    flex: 1 1 40%;
+    margin-right: 20px;
+
+    .mission {
+      border-radius: 8px;
+      box-shadow: 0 4px 12px 0 $dialog-shadow;
+      background-color: $dialog-color;
+      .mission_name {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 12px;
+        border-bottom: 1px solid $kb-color;
+      }
+      .misson_details {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+
+        & > * {
+          border-right: 1px solid $border_grey;
+          border-top: 1px solid $border_grey;
+          padding: 10px;
+        }
+        & > *:nth-child(2n) {
+          grid-column: 2 / 3;
+          border-right: none;
+        }
+
+        & div {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          font-size: 14px;
+
+          & p:last-child {
+            font-size: 10px;
+            color: $description-color;
+          }
+        }
+      }
+    }
+
+    .mission_deleted {
+      border-radius: 8px;
+      margin-top: 24px;
+      box-shadow: 0 4px 12px 0 $dialog-shadow;
+      background-color: $dialog-color;
+      .mission_deleted_inner {
+        color: $dark-red;
+        text-align: center;
+        padding: 10px 12px;
+      }
+    }
+    .mission_compliance {
+      margin-top: 24px;
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px 0 $dialog-shadow;
+      .complainceBox {
+        width: 100%;
+        background-color: $dialog-color;
+        border-radius: 8px;
+        .complaince {
+          width: 20px;
+          height: 20px;
+          border-radius: 4px;
+        }
+        > div {
+          display: flex;
+          align-items: center;
+          flex-direction: row;
+          gap: 10px;
+          margin-bottom: 16px;
+        }
+      }
+      .reports {
+        background-color: $dialog-color;
+        width: 100%;
+        border-radius: 8px;
+
+        > div {
+          display: flex;
+          flex-direction: column;
+
+          > div {
+            margin: 16px 0 15px;
+            height: 74px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 8px;
+            border-radius: 4px;
+            border: solid 1px $black-light;
+            background-color: #1b1f27;
+            cursor: pointer;
+            > div {
+              height: max-content;
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+              gap: 8px;
+              font-size: 14px;
+              > span:last-child {
+                color: $kb-color;
+                font-size: 12px;
+              }
+            }
+          }
+        }
+      }
+    }
+    .mission_IntersectionDetails {
+      margin-top: 24px;
+      background: $dialog-color;
+      padding: 16px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px 0 $dialog-shadow;
+      .mission_IntersectionDetails_cards {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        > div {
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-start;
+          align-items: center;
+          padding: 12px;
+          gap: 8px;
+          border-radius: 8px;
+          background: $black-light;
+          > div {
+            display: flex;
+            flex-direction: column;
+            > p:first-child {
+              font-weight: bold;
+            }
+            > p:last-child {
+              font-size: 14px;
+              color: $description-color;
+            }
+          }
+        }
+        > div:nth-child(1) {
+          border: 1px solid $pending;
+        }
+        > div:nth-child(2) {
+          border: 1px solid $reject;
+        }
+        > div:nth-child(3) {
+          border: 1px solid $pending_1;
+        }
+        > div:nth-child(4) {
+          border: 1px solid $approval;
+        }
+      }
+    }
+    .inFlight_status {
+      margin-top: 24px;
+      background: $dialog-color;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px 0 $dialog-shadow;
+
+      > div:first-child {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid $kb-color;
+        & h4 {
+          padding: 12px;
+          font-size: 24px;
+        }
+        p {
+          padding: 12px;
+          font-size: 14px;
+        }
+      }
+      > div:last-child {
+        padding-bottom: 40px;
+      }
+      .heading {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        font-size: 20px;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+        p {
+          font-size: 14px;
+          color: $description-color;
+        }
+      }
+      .StepProgress-item {
+        padding-right: 16px;
+        .inflight_blackBox {
+          background: $black-light;
+          border-radius: 8px;
+          box-shadow: 0 4px 12px 0 $dialog-shadow;
+          padding: 12px;
+          .misson_details {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 10px;
+
+            & div {
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              font-size: 14px;
+              text-transform: capitalize;
+
+              & p:last-child {
+                font-size: 10px;
+                color: $description-color;
+              }
+            }
+          }
+          .blackBox_error {
+            background: $dialog-shadow;
+            border-radius: 8px;
+            .heading {
+              display: block;
+              padding: 10px;
+              font-size: 16px;
+              font-weight: bold;
+
+              i {
+                color: $pending;
+                font-size: 12px;
+              }
+            }
+            .error_details {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              padding: 0px 10px 10px 10px;
+
+              div {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                font-size: 14px;
+                text-transform: capitalize;
+
+                & p:last-child {
+                  font-size: 10px;
+                  color: $description-color;
+                }
+              }
+            }
+          }
+        }
+      }
+      .mission_end {
+        color: #fff;
+      }
+      .StepProgress {
+        position: relative;
+        padding-left: 40px;
+        list-style: none;
+
+        &::before {
+          display: inline-block;
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 15px;
+          width: 10px;
+          height: 100%;
+          border-left: 1px dashed $text-white-opacity;
+        }
+        &-item {
+          position: relative;
+          counter-increment: list;
+
+          &::before {
+            display: inline-block;
+            content: " ";
+            position: absolute;
+            left: -30px;
+            height: 100%;
+            width: 10px;
+          }
+
+          &::after {
+            content: " ";
+            display: inline-block;
+            position: absolute;
+            top: 0;
+            left: -32px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 2px solid $green;
+            background-color: $green;
+          }
+
+          &.warning {
+            &::after {
+              font-size: 7px;
+              color: #fff;
+              text-align: center;
+              border: 2px solid $fa-circle-color;
+              background-color: $fa-circle-color;
+            }
+          }
+          &.mission_end {
+            h4 {
+              position: relative;
+              font-size: 14px;
+              top: 10px;
+              color: $description-color;
+              margin-top: 20px;
+              line-height: 0;
+            }
+            &::after {
+              top: 100%;
+              border: 2px solid $black-light;
+              background-color: $black-light;
+            }
+          }
+        }
+      }
+    }
+  }
+  .blackbox_mission_right {
+    flex: 1 1 60%;
+    .mission_info {
+      border-radius: 8px;
+      box-shadow: 0 4px 12px 0 $dialog-shadow;
+      background-color: $dialog-color;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+      > div {
+        display: flex;
+        gap: 4px;
+        justify-content: center;
+        align-items: center;
+        padding: 12px;
+        font-size: 16px;
+      }
+    }
+
+    .main-map {
+      height: 60vh;
+      position: relative;
+      .map_button_container {
+        top: 8px;
+        right: 50px;
+        position: absolute;
+        .align-map-buttons {
+          font-weight: 600;
+          display: flex;
+          flex-direction: row;
+          font-family: "DM Sans", sans-serif;
+        }
+
+        .osm-button {
+          z-index: 1000;
+          width: 117px !important;
+          font-size: 12px !important;
+          background-color: #ffff;
+          color: $osm-button !important;
+          border-radius: 15px !important;
+          height: 30px;
+          padding: 5px;
+          transition: all 0.2s;
+          cursor: pointer;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          opacity: 0.7;
+        }
+        .slideToggle-button {
+          z-index: 1000;
+          width: 103px !important;
+          font-size: 12px !important;
+          background-color: #ffff;
+          color: rgba(40, 40, 40, 0.92) !important;
+          border-radius: 15px !important;
+          height: 30px;
+          padding: 5px;
+          transition: all 0.2s;
+          cursor: pointer;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: row;
+          opacity: 0.7;
+        }
+
+        @media screen and (max-width: 993px) and (min-width: 768px) {
+          .align-map-buttons {
+            top: 14.9rem !important;
+          }
+        }
+        @media screen and (max-width: 1206px) and (min-width: 992px) {
+          .align-map-buttons {
+            top: 15.9rem !important;
+          }
+        }
+        @media screen and (max-width: 768px) {
+          .align-map-buttons {
+            top: 25.5rem !important;
+          }
+        }
+      }
+    }
+    .mission_trailing {
+      border-radius: 8px;
+      box-shadow: 0 4px 12px 0 $dialog-shadow;
+      background-color: $dialog-color;
+      padding: 16px;
+      padding-right: 2px;
+      color: #fff;
+      .drone-trail-section {
+        background-color: $dialog-color;
+        overflow-x: auto;
+        max-height: 400px;
+        padding-right: 12px;
+
+        table {
+          width: 100%;
+          border-collapse: collapse;
+
+          th,
+          td {
+            padding: 12px;
+            text-align: left;
+            color: white;
+            font-size: 12px;
+          }
+
+          th {
+            position: sticky;
+            top: 0;
+            background-color: $dialog-color;
+            z-index: 1;
+            border: none;
+            font-weight: 600;
+          }
+
+          tbody {
+            tr {
+              background-color: #000;
+              cursor: pointer;
+            }
+            tr:hover,
+            tr.active {
+              background-color: $dialog-color;
+            }
+
+            td {
+              border: 2px solid $dialog-shadow;
+              border-left: none;
+              border-right: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 1024px) {
+  .blackbox_mission_details {
+    flex-direction: column;
+    .blackbox_mission_left,
+    .blackbox_mission_right {
+      flex: 1 1 100%;
+    }
+  }
+  .main-map {
+    height: 50vh;
+  }
+  .mission_info {
+    margin-top: 24px;
+  }
+}
+.drone-trail-section::-webkit-scrollbar {
+  width: 0.3em;
+}
+
+.drone-trail-section::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 2px $scrollbar;
+}
+
+.drone-trail-section::-webkit-scrollbar-thumb {
+  background-color: $black-light;
+}
+.displaydownlaod {
+  display: none;
+}
+.displaydownlaod1 {
+  display: block;
+}
+.elevation_graph {
+  border-radius: 8px;
+  box-shadow: 0 4px 12px 0 $dialog-shadow;
+  background-color: $dialog-color;
+}

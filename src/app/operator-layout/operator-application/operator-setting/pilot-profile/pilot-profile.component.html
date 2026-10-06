@@ -1,0 +1,976 @@
+<div>
+  <div *ngIf="loader" class="loader">
+    <div class="logo">
+      <img
+        src="../../../../../assets/common-layout/SquareLoader.gif"
+        width="30px"
+      />
+      <img
+        src="../../../../../assets/common-layout/SkyeUTM logoWhite.svg"
+        width="200px"
+      />
+    </div>
+  </div>
+  <div *ngIf="!loader">
+    <div class="mx-md-3 mx-2 my-3">
+      <div>
+        <form [formGroup]="basicDetails">
+          <div class="full-card">
+            <div class="details-card">
+              <!-- General details  -->
+              <div class="card card-outer card-color">
+                <div
+                  *ngIf="profileDetails"
+                  [ngClass]="{ 'disabled-div': !editable }"
+                  [disabled]="!editable"
+                  class="card-body cardbody-margin px-4"
+                >
+                  <div class="my-1">
+                    <div class="list-values">General Details</div>
+                    <div class="row">
+                      <div class="col-md-4 px-3 py-2 my-2">
+                        <div class="input-label text-white">
+                          Full Name<span class="astrik">*</span>
+                        </div>
+                        <input
+                          class="form-control input-general"
+                          type="text"
+                          placeholder=""
+                          formControlName="fullName"
+                          [ngClass]="{
+                            'is-invalid': submitted && basic.fullName.errors
+                          }"
+                          (keydown.enter)="$event.preventDefault()"
+                        />
+                        <div
+                          *ngIf="submitted && basic.fullName.errors"
+                          class="error-message my-2"
+                        >
+                          <div *ngIf="basic.fullName.errors.required">
+                            This field is required
+                          </div>
+                          <div *ngIf="basic.fullName.errors.pattern">
+                            Invalid input. Only alphanumeric characters allowed.
+                          </div>
+                          <div *ngIf="basic.fullName.errors.textOnly">
+                            Number is not allowed in name
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-4 px-3 py-2 my-2">
+                        <div class="input-label text-white">
+                          Email ID<span class="astrik">*</span>
+                        </div>
+                        <input
+                          class="form-control input-general"
+                          type="text"
+                          placeholder=""
+                          formControlName="emailID"
+                          [ngClass]="{
+                            'is-invalid': submitted && basic.emailID.errors
+                          }"
+                        />
+                        <div
+                          *ngIf="submitted && basic.emailID.errors"
+                          class="error-message my-2"
+                        >
+                          <div *ngIf="basic.emailID.errors.required">
+                            This field is required
+                          </div>
+                          <!-- <div *ngIf="basic.emailID.errors.pattern">Please enter a valid input</div> -->
+                        </div>
+                      </div>
+
+                      <div class="col-md-4 px-3 py-2 my-2">
+                        <div class="input-label text-white">
+                          WhatsApp Number<span class="astrik">*</span>
+                        </div>
+                        <input
+                          class="form-control input-general"
+                          type="text"
+                          placeholder=""
+                          formControlName="phoneNumber"
+                          (input)="onPhoneNumberChange()"
+                          [ngClass]="{
+                            'is-invalid': submitted && basic.phoneNumber.errors
+                          }"
+                        />
+                        <div
+                          *ngIf="submitted && basic.phoneNumber.errors"
+                          class="error-message my-2"
+                        >
+                          <div *ngIf="basic.phoneNumber.errors.required">
+                            This field is required
+                          </div>
+                          <div *ngIf="basic.phoneNumber.errors.pattern">
+                            Please enter a valid number
+                          </div>
+                        </div>
+                        <div [ngClass]="[!editable ? 'disabled-cursor' : '']">
+                          <div
+                            class="status-whatsapp f-12 ml-2 text-white-50"
+                            *ngIf="sendOTP"
+                          >
+                            <img
+                              class="mr-1"
+                              src="../../../../../assets/common-layout/check.svg"
+                            />Verified
+                          </div>
+                          <div
+                            class="status-whatsapp f-12 ml-2 text-white-50"
+                            *ngIf="!sendOTP"
+                          >
+                            <img
+                              class="mr-1"
+                              src="../../../../../assets/common-layout/Error.svg"
+                            />Not Verified,<span
+                              *ngIf="!verifiyAfterSubmit"
+                              class="verify-whatsapp"
+                              (click)="whatsappSendOTP()"
+                            >
+                              Click here</span
+                            >
+                            <span *ngIf="verifiyAfterSubmit">
+                              Get verfied after click on confirm details.</span
+                            >
+                          </div>
+                        </div>
+                        <!-- <div class="status-whatsapp f-12 ml-2 text-white-50"  *ngIf="verifiyAfterSubmit"><img class="mr-1"
+                        src="../../../../../assets/common-layout/Error.svg">Not Verified, get verfied after form submit</div> -->
+                      </div>
+
+                      <div class="col-md-4 px-3 py-2 mb-2">
+                        <div class="input-label text-white">
+                          Date of Birth<span class="astrik">*</span>
+                        </div>
+                        <input
+                          type="text"
+                          (change)="dateChange($event)"
+                          class="form-control input-general"
+                          formControlName="dateOfBirth"
+                          bsDatepicker
+                          [bsConfig]="{
+                            adaptivePosition: true,
+                            dateInputFormat: 'DD-MM-YYYY'
+                          }"
+                          [ngClass]="{
+                            'is-invalid': submitted && basic.dateOfBirth.errors
+                          }"
+                        />
+                        <div
+                          *ngIf="submitted && basic.dateOfBirth.errors"
+                          class="invalid-feedback"
+                        >
+                          <div *ngIf="basic.dateOfBirth.errors.required">
+                            Date of Birth is required
+                          </div>
+                          <div *ngIf="basic.dateOfBirth.errors.age">
+                            Must be atleast 18 years or older
+                          </div>
+                        </div>
+                        <!-- <div *ngIf="submitted && basic.dateOfBirth.errors" class="error-message my-2">
+                        <div *ngIf="basic.dateOfBirth.errors.required">This field is required</div>
+                      </div> -->
+                      </div>
+
+                      <div class="col-md-4 px-3 py-2 mb-2">
+                        <div class="input-label text-white">
+                          Country<span class="astrik">*</span>
+                        </div>
+                        <input
+                          formControlName="country"
+                          (change)="countryChange($event)"
+                          [typeahead]="countryArr"
+                          class="form-control input-general"
+                          [ngClass]="{
+                            'is-invalid':
+                              submitted &&
+                              (basic.country.errors || !CountryCode)
+                          }"
+                          (keydown.enter)="$event.preventDefault()"
+                        />
+                        <div
+                          *ngIf="
+                            submitted && (basic.country.errors || !CountryCode)
+                          "
+                          class="error-message"
+                        >
+                          <div *ngIf="basic.country?.errors?.required">
+                            Country is required
+                          </div>
+                          <div *ngIf="!CountryCode">Country is invalid</div>
+                        </div>
+                        <!-- <div *ngIf="submitted && basic.country.errors" class="error-message my-2">
+                      <div *ngIf="basic.country.errors.required">This field is required</div>
+                    </div> -->
+                      </div>
+
+                      <div class="col-md-4 px-3 py-2 mb-2">
+                        <div class="input-label text-white">
+                          Certification Type<span class="astrik">*</span>
+                        </div>
+                        <div class="input-group mb-2 mr-sm-2">
+                          <input
+                            type="text"
+                            class="form-control input-general"
+                            id="inlineFormInputGroupUsername2"
+                            placeholder="Please enter"
+                            formControlName="certificationType"
+                            [ngClass]="{
+                              'is-invalid':
+                                submitted && basic.certificationType.errors
+                            }"
+                            (keydown.enter)="$event.preventDefault()"
+                          />
+                          <!-- <div class="input-group-append">
+                          <div class="input-group-text">km/hr</div>
+                        </div> -->
+                        </div>
+                        <div
+                          *ngIf="submitted && basic.certificationType.errors"
+                          class="error-message my-2"
+                        >
+                          <div *ngIf="basic.certificationType.errors.required">
+                            This field is required
+                          </div>
+                          <!-- <div *ngIf="basic.Certification Type.errors.pattern">Please enter a valid input</div> -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- upload predefined waypoints  -->
+              <div class="card card-outer card-color mt-3">
+                <div
+                  *ngIf="profileDetails"
+                  [ngClass]="{ 'disabled-div': !editable }"
+                  [disabled]="!editable"
+                  class="card-body cardbody-margin px-4"
+                >
+                  <div class="my-1">
+                    <div class="list-values">Waypoints Template</div>
+                    <div class="row">
+                      <div class="col-md-4 px-3 py-2 my-2">
+                        <div class="input-label">Waypoint/KML file-1</div>
+                        <div
+                          class="input-group border-style file-label text-center align-middle uploadFILE"
+                          [ngClass]="{
+                            'upload-section': !kmlFileUrlFlag,
+                            'initial-pos': kmlFileUrlFlag
+                          }"
+                        >
+                          <label
+                            class="text-drag"
+                            for="kmlFileUploads"
+                            [ngClass]="{ 'label-sec': kmlFileUrlFlag }"
+                          >
+                            <img
+                              src="../../../../../assets/common-layout/Upload.svg"
+                              for="kmlFileUploads"
+                              class="ml-2 upload-img2 mt-2"
+                              *ngIf="!kmlFileUrlFlag"
+                            />
+                            <div *ngIf="!kmlFileUrlFlag" class="ml-2">
+                              Drag-and-drop .Kml/.Waypoint file,or
+                            </div>
+                            <p *ngIf="!kmlFileUrlFlag">
+                              <span class="text-primary-drag ml-4"
+                                >browse computer</span
+                              >
+                            </p>
+                            <span
+                              for="kmlFileUploads"
+                              class="kml-name"
+                              *ngIf="kmlFileUrlFlag"
+                            >
+                              {{ truncateText(kmlFileName, 18) }}
+                            </span>
+                            <!-- <span for="kmlFileUploads" class="kml-name" *ngIf="kmlFileUrlFlag"
+                          >Already Uploaded</span> -->
+                          </label>
+
+                          <input
+                            type="file"
+                            #kmlFile
+                            class="form-control"
+                            name="CSVFile"
+                            id="kmlFileUploads"
+                            accept=".txt,.waypoints,.shp,.plan,.kml"
+                            (change)="kmlFileUploads($event)"
+                            (click)="kmlFile.value = ''"
+                            [ngClass]="{
+                              'is-invalid': submitted && basic.kmlFile.errors
+                            }"
+                            [disabled]="!editable"
+                          />
+                          <img
+                            src="../../../../../assets/common-layout/file-close.svg"
+                            class="mb-3 close-hover"
+                            (click)="editable && resetKmlFile()"
+                            *ngIf="kmlFileUrlFlag"
+                          />
+                        </div>
+                        <div
+                          *ngIf="kmlFileSizeError"
+                          class="error-message my-2"
+                        >
+                          <div *ngIf="kmlFileSizeError && sizeGreater">
+                            File size should be less than or equal to 500KB
+                          </div>
+                          <div *ngIf="kmlFileSizeError && !sizeGreater">
+                            Please upload the valid kml/waypoint file
+                          </div>
+                        </div>
+                        <div
+                          *ngIf="
+                            submitted &&
+                            basic.kmlFile.errors &&
+                            kmlFileName == ''
+                          "
+                          class="error-message my-2"
+                        >
+                          <div *ngIf="basic.kmlFile.errors.required">
+                            KML file is required
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-4 px-3 py-2 my-2">
+                        <div class="input-label">Waypoint/KML file-2</div>
+                        <div
+                          class="input-group border-style file-label text-center align-middle uploadFILE"
+                          [ngClass]="{
+                            'upload-section': !kmlFileUrlFlag1,
+                            'initial-pos': kmlFileUrlFlag1
+                          }"
+                        >
+                          <!-- <label class="py-2 row labelClass" for="kmlFileUploads1">
+                      <img
+                        src="../../../../../assets/common-layout/file-logo.svg"
+                        for="kmlFileUploads1"
+                        class="file-logo"
+                      />
+                      <span for="kmlFileUploads1" *ngIf="!kmlFileUrlFlag1">
+                        {{ kmlFileName1 }}</span
+                      >
+                      <span for="kmlFileUploads1" *ngIf="kmlFileUrlFlag1"
+                        >Already Uploaded</span
+                      >
+                    </label> -->
+                          <label
+                            class="text-drag"
+                            for="kmlFileUploads1"
+                            [ngClass]="{ 'label-sec': kmlFileUrlFlag1 }"
+                          >
+                            <img
+                              src="../../../../../assets/common-layout/Upload.svg"
+                              for="kmlFileUploads1"
+                              class="ml-2 upload-img2 mt-2"
+                              *ngIf="!kmlFileUrlFlag1"
+                            />
+                            <div *ngIf="!kmlFileUrlFlag1" class="ml-2">
+                              Drag-and-drop .Kml/.Waypoint file,or
+                            </div>
+                            <p *ngIf="!kmlFileUrlFlag1">
+                              <span class="text-primary-drag ml-4"
+                                >browse computer</span
+                              >
+                            </p>
+                            <span
+                              for="kmlFileUploads1"
+                              class="kml-name"
+                              *ngIf="kmlFileUrlFlag1"
+                            >
+                              {{ truncateText(kmlFileName1, 18) }}
+                            </span>
+                            <!-- <span for="kmlFileUploads" class="kml-name" *ngIf="kmlFileUrlFlag"
+                        >Already Uploaded</span> -->
+                          </label>
+                          <input
+                            type="file"
+                            #kmlFile1
+                            class="form-control"
+                            name="CSVFile"
+                            accept=".txt,.waypoints,.shp,.plan,.kml"
+                            id="kmlFileUploads1"
+                            (change)="kmlFileUploads1($event)"
+                            (click)="kmlFile1.value = ''"
+                            [ngClass]="{
+                              'is-invalid': submitted && basic.kmlFile1.errors
+                            }"
+                            [disabled]="!editable"
+                          />
+                          <img
+                            src="../../../../../assets/common-layout/file-close.svg"
+                            (click)="editable && resetKmlFile1()"
+                            class="mb-3 close-hover"
+                            *ngIf="kmlFileUrlFlag1"
+                          />
+                        </div>
+                        <!-- <div *ngIf="kmlFileSizeError1" class="error-message my-2">
+                    <div>File size should be less than or equal to 500KB</div>
+                  </div> -->
+                        <div
+                          *ngIf="kmlFileSizeError1"
+                          class="error-message my-2"
+                        >
+                          <div *ngIf="kmlFileSizeError1 && sizeGreater1">
+                            File size should be less than or equal to 500KB
+                          </div>
+                          <div *ngIf="kmlFileSizeError1 && !sizeGreater1">
+                            Please upload the valid kml/waypoint file
+                          </div>
+                        </div>
+
+                        <div
+                          *ngIf="
+                            submitted &&
+                            basic.kmlFile1.errors &&
+                            kmlFileName1 == ''
+                          "
+                          class="error-message my-2"
+                        >
+                          <div *ngIf="basic.kmlFile1.errors.required">
+                            KML file is required
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-4 px-3 py-2 my-2">
+                        <div class="input-label">Waypoint/KML file-3</div>
+                        <div
+                          class="input-group border-style file-label text-center align-middle uploadFILE"
+                          [ngClass]="{
+                            'upload-section': !kmlFileUrlFlag2,
+                            'initial-pos': kmlFileUrlFlag2
+                          }"
+                        >
+                          <!-- <label class="py-2 row labelClass" for="kmlFileUploads1">
+                      <img
+                        src="../../../../../assets/common-layout/file-logo.svg"
+                        for="kmlFileUploads1"
+                        class="file-logo"
+                      />
+                      <span for="kmlFileUploads1" *ngIf="!kmlFileUrlFlag1">
+                        {{ kmlFileName1 }}</span
+                      >
+                      <span for="kmlFileUploads1" *ngIf="kmlFileUrlFlag1"
+                        >Already Uploaded</span
+                      >
+                    </label> -->
+                          <label
+                            class="text-drag"
+                            for="kmlFileUploads2"
+                            [ngClass]="{ 'label-sec': kmlFileUrlFlag2 }"
+                          >
+                            <img
+                              src="../../../../../assets/common-layout/Upload.svg"
+                              for="kmlFileUploads2"
+                              class="ml-2 upload-img2 mt-2"
+                              *ngIf="!kmlFileUrlFlag2"
+                            />
+                            <div *ngIf="!kmlFileUrlFlag2" class="ml-2">
+                              Drag-and-drop .Kml/.Waypoint file,or
+                            </div>
+                            <p *ngIf="!kmlFileUrlFlag2">
+                              <span class="text-primary-drag ml-4"
+                                >browse computer</span
+                              >
+                            </p>
+                            <span
+                              for="kmlFileUploads2"
+                              class="kml-name"
+                              *ngIf="kmlFileUrlFlag2"
+                            >
+                              {{ truncateText(kmlFileName2, 18) }}
+                            </span>
+                            <!-- <span for="kmlFileUploads" class="kml-name" *ngIf="kmlFileUrlFlag"
+                        >Already Uploaded</span> -->
+                          </label>
+                          <input
+                            type="file"
+                            #kmlFile2
+                            class="form-control"
+                            accept=".txt,.waypoints,.shp,.plan,.kml"
+                            name="CSVFile"
+                            id="kmlFileUploads2"
+                            (change)="kmlFileUploads2($event)"
+                            (click)="kmlFile2.value = ''"
+                            [ngClass]="{
+                              'is-invalid': submitted && basic.kmlFile2.errors
+                            }"
+                            [disabled]="!editable"
+                          />
+                          <img
+                            src="../../../../../assets/common-layout/file-close.svg"
+                            (click)="editable && resetKmlFile2()"
+                            class="mb-3 close-hover"
+                            *ngIf="kmlFileUrlFlag2"
+                          />
+                        </div>
+                        <!-- <div *ngIf="kmlFileSizeError2" class="error-message my-2">
+                    <div>File size should be less than or equal to 500KB</div>
+                  </div> -->
+                        <div
+                          *ngIf="kmlFileSizeError2"
+                          class="error-message my-2"
+                        >
+                          <div *ngIf="kmlFileSizeError2 && sizeGreater2">
+                            File size should be less than or equal to 500KB
+                          </div>
+                          <div *ngIf="kmlFileSizeError2 && !sizeGreater2">
+                            Please upload the valid kml/waypoint file
+                          </div>
+                        </div>
+                        <div
+                          *ngIf="
+                            submitted &&
+                            basic.kmlFile2.errors &&
+                            kmlFileName2 == ''
+                          "
+                          class="error-message my-2"
+                        >
+                          <div *ngIf="basic.kmlFile2.errors.required">
+                            KML file is required
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-4 px-3 py-2 my-2">
+                        <div class="input-label">Waypoint/KML file-4</div>
+                        <div
+                          class="input-group border-style file-label text-center align-middle uploadFILE"
+                          [ngClass]="{
+                            'upload-section': !kmlFileUrlFlag3,
+                            'initial-pos': kmlFileUrlFlag3
+                          }"
+                        >
+                          <label
+                            class="text-drag"
+                            for="kmlFileUploads3"
+                            [ngClass]="{ 'label-sec': kmlFileUrlFlag3 }"
+                          >
+                            <img
+                              src="../../../../../assets/common-layout/Upload.svg"
+                              for="kmlFileUploads3"
+                              class="ml-2 upload-img2 mt-2"
+                              *ngIf="!kmlFileUrlFlag3"
+                            />
+                            <div *ngIf="!kmlFileUrlFlag3" class="ml-2">
+                              Drag-and-drop .Kml/.Waypoint file,or
+                            </div>
+                            <p *ngIf="!kmlFileUrlFlag3">
+                              <span class="text-primary-drag ml-4"
+                                >browse computer</span
+                              >
+                            </p>
+                            <span
+                              for="kmlFileUploads3"
+                              class="kml-name"
+                              *ngIf="kmlFileUrlFlag3"
+                            >
+                              {{ truncateText(kmlFileName3, 18) }}</span
+                            >
+                            <!-- <span for="kmlFileUploads" class="kml-name" *ngIf="kmlFileUrlFlag"
+                        >Already Uploaded</span> -->
+                          </label>
+                          <input
+                            type="file"
+                            #kmlFile3
+                            class="form-control"
+                            name="CSVFile"
+                            id="kmlFileUploads3"
+                            accept=".txt,.waypoints,.shp,.plan,.kml"
+                            (change)="kmlFileUploads3($event)"
+                            (click)="kmlFile3.value = ''"
+                            [ngClass]="{
+                              'is-invalid': submitted && basic.kmlFile3.errors
+                            }"
+                            [disabled]="!editable"
+                          />
+                          <img
+                            src="../../../../../assets/common-layout/file-close.svg"
+                            (click)="editable && resetKmlFile3()"
+                            class="mb-3 close-hover"
+                            *ngIf="kmlFileUrlFlag3"
+                          />
+                        </div>
+                        <!-- <div *ngIf="kmlFileSizeError3" class="error-message my-2">
+                    <div>File size should be less than or equal to 500KB</div>
+                  </div> -->
+                        <div
+                          *ngIf="kmlFileSizeError3"
+                          class="error-message my-2"
+                        >
+                          <div *ngIf="kmlFileSizeError3 && sizeGreater3">
+                            File size should be less than or equal to 500KB
+                          </div>
+                          <div *ngIf="kmlFileSizeError3 && !sizeGreater3">
+                            Please upload the valid kml/waypoint file
+                          </div>
+                        </div>
+                        <div
+                          *ngIf="
+                            submitted &&
+                            basic.kmlFile3.errors &&
+                            kmlFileName3 == ''
+                          "
+                          class="error-message my-2"
+                        >
+                          <div *ngIf="basic.kmlFile3.errors.required">
+                            KML file is required
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-4 px-3 py-2 my-2">
+                        <div class="input-label">Waypoint/KML file-5</div>
+                        <div
+                          class="input-group border-style file-label text-center align-middle uploadFILE"
+                          [ngClass]="{
+                            'upload-section': !kmlFileUrlFlag4,
+                            'initial-pos': kmlFileUrlFlag4
+                          }"
+                        >
+                          <label
+                            class="text-drag"
+                            for="kmlFileUploads4"
+                            [ngClass]="{ 'label-sec': kmlFileUrlFlag4 }"
+                          >
+                            <img
+                              src="../../../../../assets/common-layout/Upload.svg"
+                              for="kmlFileUploads4"
+                              class="ml-2 upload-img2 mt-2"
+                              *ngIf="!kmlFileUrlFlag4"
+                            />
+                            <div *ngIf="!kmlFileUrlFlag4" class="ml-2">
+                              Drag-and-drop .Kml/.Waypoint file,or
+                            </div>
+                            <p *ngIf="!kmlFileUrlFlag4">
+                              <span class="text-primary-drag ml-4"
+                                >browse computer</span
+                              >
+                            </p>
+                            <span
+                              for="kmlFileUploads4"
+                              class="kml-name"
+                              *ngIf="kmlFileUrlFlag4"
+                            >
+                              {{ truncateText(kmlFileName4, 18) }}
+                            </span>
+                            <!-- <span for="kmlFileUploads" class="kml-name" *ngIf="kmlFileUrlFlag"
+                        >Already Uploaded</span> -->
+                          </label>
+                          <input
+                            type="file"
+                            #kmlFile4
+                            class="form-control"
+                            accept=".txt,.waypoints,.shp,.plan,.kml"
+                            name="CSVFile"
+                            id="kmlFileUploads4"
+                            (change)="kmlFileUploads4($event)"
+                            (click)="kmlFile4.value = ''"
+                            [ngClass]="{
+                              'is-invalid': submitted && basic.kmlFile4.errors
+                            }"
+                            [disabled]="!editable"
+                          />
+                          <img
+                            src="../../../../../assets/common-layout/file-close.svg"
+                            (click)="editable && resetKmlFile4()"
+                            class="mb-3 close-hover"
+                            *ngIf="kmlFileUrlFlag4"
+                          />
+                        </div>
+                        <!-- <div *ngIf="kmlFileSizeError4" class="error-message my-2">
+                    <div>File size should be less than or equal to 500KB</div>
+                  </div> -->
+                        <div
+                          *ngIf="kmlFileSizeError4"
+                          class="error-message my-2"
+                        >
+                          <div *ngIf="kmlFileSizeError4 && sizeGreater4">
+                            File size should be less than or equal to 500KB
+                          </div>
+                          <div *ngIf="kmlFileSizeError4 && !sizeGreater4">
+                            Please upload the valid kml/waypoint file
+                          </div>
+                        </div>
+                        <div
+                          *ngIf="
+                            submitted &&
+                            basic.kmlFile4.errors &&
+                            kmlFileName4 == ''
+                          "
+                          class="error-message my-2"
+                        >
+                          <div *ngIf="basic.kmlFile4.errors.required">
+                            KML file is required
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-4 px-3 py-2 my-2">
+                        <div class="input-label">Waypoint/KML file-6</div>
+                        <div
+                          class="input-group border-style file-label text-center align-middle uploadFILE"
+                          [ngClass]="{
+                            'upload-section': !kmlFileUrlFlag5,
+                            'initial-pos': kmlFileUrlFlag5
+                          }"
+                        >
+                          <label
+                            class="text-drag"
+                            for="kmlFileUploads5"
+                            [ngClass]="{ 'label-sec': kmlFileUrlFlag5 }"
+                          >
+                            <img
+                              src="../../../../../assets/common-layout/Upload.svg"
+                              for="kmlFileUploads5"
+                              class="ml-2 upload-img2 mt-2"
+                              *ngIf="!kmlFileUrlFlag5"
+                            />
+                            <div *ngIf="!kmlFileUrlFlag5" class="ml-2">
+                              Drag-and-drop .Kml/.Waypoint file,or
+                            </div>
+                            <p *ngIf="!kmlFileUrlFlag5">
+                              <span class="text-primary-drag ml-4"
+                                >browse computer</span
+                              >
+                            </p>
+                            <span
+                              for="kmlFileUploads5"
+                              class="kml-name"
+                              *ngIf="kmlFileUrlFlag5"
+                            >
+                              {{ truncateText(kmlFileName5, 18) }}
+                            </span>
+                            <!-- <span for="kmlFileUploads" class="kml-name" *ngIf="kmlFileUrlFlag"
+                        >Already Uploaded</span> -->
+                          </label>
+                          <input
+                            type="file"
+                            #kmlFile5
+                            class="form-control"
+                            name="CSVFile"
+                            accept=".txt,.waypoints,.shp,.plan,.kml"
+                            id="kmlFileUploads5"
+                            (change)="kmlFileUploads5($event)"
+                            (click)="kmlFile5.value = ''"
+                            [ngClass]="{
+                              'is-invalid': submitted && basic.kmlFile5.errors
+                            }"
+                            [disabled]="!editable"
+                          />
+                          <img
+                            src="../../../../../assets/common-layout/file-close.svg"
+                            (click)="editable && resetKmlFile5()"
+                            class="mb-3 close-hover"
+                            *ngIf="kmlFileUrlFlag5"
+                          />
+                        </div>
+                        <!-- <div *ngIf="kmlFileSizeError5" class="error-message my-2">
+                    <div>File size should be less than or equal to 500KB</div>
+                  </div> -->
+                        <div
+                          *ngIf="kmlFileSizeError5"
+                          class="error-message my-2"
+                        >
+                          <div *ngIf="kmlFileSizeError5 && sizeGreater5">
+                            File size should be less than or equal to 500KB
+                          </div>
+                          <div *ngIf="kmlFileSizeError5 && !sizeGreater5">
+                            Please upload the valid kml/waypoint file
+                          </div>
+                        </div>
+                        <div
+                          *ngIf="
+                            submitted &&
+                            basic.kmlFile5.errors &&
+                            kmlFileName5 == ''
+                          "
+                          class="error-message my-2"
+                        >
+                          <div *ngIf="basic.kmlFile5.errors.required">
+                            KML file is required
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- side rectangle  -->
+            <div class="ml-4 side-rec">
+              <div
+                class="circle"
+                [style.background]="getConicGradient(progressValue)"
+              >
+                <span class="initials"
+                  >{{ firstLetter }}{{ secondLetter }}</span
+                >
+                <div class="inner-circle" (click)="editableForm()">
+                  <img
+                    src="../../../../../assets/common-layout/pencil.svg"
+                    width="25px"
+                  />
+                </div>
+              </div>
+              <!-- <div class="circle-text text-white-50">
+              Abhishek Chauhan
+            </div> -->
+              <button class="button-logout" (click)="onExit()">
+                <img
+                  src="../../../../../assets/common-layout/logout.svg"
+                  width="15px"
+                />
+                Logout
+              </button>
+            </div>
+          </div>
+        </form>
+
+        <div *ngIf="editable" class="width-align">
+          <div class="my-3" style="float: right">
+            <button
+              class="primary-outline-btn btn button-text2 button-text"
+              (click)="formCancel()"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              class="primary-btn btn button-text"
+              (click)="formSumbit()"
+            >
+              Confirm details
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="overlay" *ngIf="verifyOTP">
+  <div class="verify-otp" *ngIf="verifyOTP">
+    <div class="verify-otp-text text-white mt-5 f-16">
+      OTP has been sent to {{ this.profileDetails?.PhoneNumber }}
+    </div>
+    <div class="otp-input mt-4">
+      <input
+        type="number"
+        required
+        pattern="^(0|[1-9][0-9]*)$"
+        maxlength="1"
+        (keydown)="move($event, '', otp1, otp2)"
+        (input)="lockLastInput($event, otp1)"
+        (keydown.arrowup)="preventUpDown($event)"
+        (keydown.arrowdown)="preventUpDown($event)"
+        #otp1
+        class="text-white"
+        inputmode="none"
+      />
+      <input
+        type="number"
+        maxlength="1"
+        (keydown)="move($event, otp1, otp2, otp3)"
+        (input)="lockLastInput($event, otp2)"
+        (keydown.arrowup)="preventUpDown($event)"
+        (keydown.arrowdown)="preventUpDown($event)"
+        #otp2
+        class="text-white"
+        inputmode="none"
+      />
+      <input
+        type="number"
+        maxlength="1"
+        (keydown)="move($event, otp2, otp3, otp4)"
+        (input)="lockLastInput($event, otp3)"
+        (keydown.arrowup)="preventUpDown($event)"
+        (keydown.arrowdown)="preventUpDown($event)"
+        #otp3
+        class="text-white"
+        inputmode="none"
+      />
+      <input
+        type="number"
+        maxlength="1"
+        (keydown)="move($event, otp3, otp4, otp5)"
+        (input)="lockLastInput($event, otp4)"
+        (keydown.arrowup)="preventUpDown($event)"
+        (keydown.arrowdown)="preventUpDown($event)"
+        #otp4
+        class="text-white"
+        inputmode="none"
+      />
+      <input
+        type="number"
+        maxlength="1"
+        (keydown)="move($event, otp4, otp5, otp6)"
+        (input)="lockLastInput($event, otp5)"
+        (keydown.arrowup)="preventUpDown($event)"
+        (keydown.arrowdown)="preventUpDown($event)"
+        #otp5
+        class="text-white"
+        inputmode="none"
+      />
+      <input
+        type="number"
+        required
+        pattern="[0-9\.]+"
+        maxlength="1"
+        (keydown)="move($event, otp5, otp6, '')"
+        (input)="lockLastInput($event, otp6)"
+        (keydown.arrowup)="preventUpDown($event)"
+        (keydown.arrowdown)="preventUpDown($event)"
+        #otp6
+        class="text-white"
+        inputmode="none"
+      />
+    </div>
+    <div
+      class="verify-code text-white-50 mt-3 f-16"
+      *ngIf="!resendOTP"
+      (click)="whatsappSendOTP(); resendOTPs()"
+    >
+      Resend OTP
+    </div>
+    <div class="verify-code text-white-50 mt-3 f-16" *ngIf="resendOTP">
+      OTP sent
+    </div>
+    <div class="text-danger" *ngIf="invalidOTP">Invalid OTP</div>
+    <button
+      class="verify-button mt-3 text-white-50"
+      *ngIf="!whatsappLoader"
+      (click)="whatsappVerifyOTP()"
+    >
+      Verify
+    </button>
+    <button *ngIf="whatsappLoader" class="verify-button mt-3 text-white-50">
+      <img
+        src="../../../../../assets/common-layout/SquareLoader.gif"
+        width="20px"
+      />
+    </button>
+  </div>
+</div>
+<div class="overlay" *ngIf="sureExit">
+  <div class="exit-button" *ngIf="sureExit">
+    <div class="exit-button-text text-white f-16">
+      Are you sure you want to exit
+    </div>
+    <div class="exit-buttons">
+      <button class="exit-button-1 mt-3 text-white-50" (click)="onStay()">
+        Cancel
+      </button>
+      <button class="exit-button-1 mt-3 text-white-50" (click)="onLogout()">
+        Ok
+      </button>
+    </div>
+  </div>
+</div>

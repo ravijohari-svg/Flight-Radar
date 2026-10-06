@@ -1,0 +1,359 @@
+<div *ngIf="loader" class="loader">
+  <div class="logo">
+    <img
+      src="../../../../../assets/common-layout/SquareLoader.gif"
+      width="30px"
+    />
+    <img
+      src="../../../../../assets/common-layout/SkyeUTM logoWhite.svg"
+      width="200px"
+    />
+  </div>
+</div>
+<div class="main-panel mx-0 position-relative">
+  <!-- <div class="map-col">
+    <div class="main-map px-0">
+      <div class="map-container">
+        <ng-template appResuableOutlet></ng-template>
+      </div>
+    </div>
+  </div> -->
+  <!-- <div class="h-100"> -->
+  <!-- <hr *ngIf="!loader" class="mt-0"> -->
+  <div *ngIf="!loader" class="mission-container">
+    <div class="card mission-detail-box">
+      <div class="card-body p-2">
+        <div class="btn-img mb-3">
+          <button class="btn back-button py-2 px-2" (click)="onBack()">
+            <img
+              class="mt-1"
+              style="width: 12px"
+              src="../../../../../assets/common-layout/Chevron_Left.svg"
+            />
+            <div class="text-white f-12">Back</div>
+          </button>
+          <div class="white-text f-16 my-1">Missions Details</div>
+        </div>
+        <div class="card approval-card p-2">
+          <div class="my-2">
+            <span
+              class="py-0 px-1 f-12 my-2 br-15"
+              [ngClass]="{
+                approve: missionDetails.MissionStatus == 'Approved',
+                reject: missionDetails.MissionStatus == 'Rejected',
+                pending: missionDetails.MissionStatus == 'Pending'
+              }"
+            >
+              {{ missionDetails?.MissionStatus }} ({{
+                missionDetails?.ApprovalMode
+              }})
+            </span>
+          </div>
+          <div class="white-text f-20 font-weight-bold">
+            {{ missionDetails.OperationName }}
+          </div>
+          <span class="f-12 rpto-tag" *ngIf="missionDetails.GeoFence">
+            RPTO
+          </span>
+          <div class="white-text-opacity f-14 my-1">
+            <span class="fw-400">
+              {{ missionDetails.StartTime | date : "h:mm a" }} to
+              {{ missionDetails.EndTime | date : "h:mm a" }} ,
+            </span>
+            <span>
+              {{ missionDetails.StartTime | date : "d MMM y" }}
+            </span>
+          </div>
+        </div>
+        <!-- Flight documents -->
+        <div class="card flight-card p-2 my-2">
+          <div class="text-white f-14 fw-700 mt-2">Flights Documents</div>
+          <div>
+            <div>
+              <div class="text-white f-12 mt-2">Pre-Flight report</div>
+              <div class="documents">
+                <div class="doc-1">
+                  <img
+                    src="../../../../../assets/icons/description.svg"
+                    width="20px"
+                  />
+                  <div class="text-white f-14 fw-400 ml-2">
+                    {{ missionDetails.OperationName }}-preflight
+                  </div>
+                </div>
+                <div class="vis-download mr-2">
+                  <img
+                    (click)="openFileInNewTab(missionDetails.PreflightURL)"
+                    src="../../../../../assets/icons/eye.svg"
+                    width="20px"
+                  />
+                  <img
+                    (click)="downloadFiles(missionDetails.PreflightURL)"
+                    src="../../../../../assets/icons/Download.svg"
+                    width="20px"
+                  />
+                </div>
+              </div>
+            </div>
+            <div *ngIf="complaince && complaince.MissionDoc[0]">
+              <div class="text-white f-12 fw-500">Mission Compliance</div>
+              <div
+                class="doc-inside"
+                *ngFor="let data of complaince.MissionDoc"
+              >
+                <div class="documents mb-1">
+                  <div class="doc-1">
+                    <img
+                      src="../../../../../assets/icons/description.svg"
+                      width="20px"
+                    />
+                    <div class="text-white f-14 fw-400 ml-2">
+                      {{ data.docName }}
+                    </div>
+                  </div>
+                  <div class="vis-download mr-2">
+                    <img
+                      (click)="openFileInNewTab(data.url)"
+                      src="../../../../../assets/icons/eye.svg"
+                      width="20px"
+                    />
+                    <img
+                      (click)="downloadFile(data.url)"
+                      src="../../../../../assets/icons/Download.svg"
+                      width="20px"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="complaince && complaince.GeneralDoc[0]">
+              <div class="text-white f-12">General Compliance</div>
+              <div
+                class="doc-inside"
+                *ngFor="let data of complaince.GeneralDoc"
+              >
+                <div class="documents mb-1">
+                  <div class="doc-1">
+                    <img
+                      src="../../../../../assets/icons/description.svg"
+                      width="20px"
+                    />
+                    <div class="text-white f-14 fw-400 ml-2">
+                      {{ data.docName }}
+                    </div>
+                  </div>
+
+                  <div class="vis-download mr-2">
+                    <img
+                      (click)="openFileInNewTab(data.url)"
+                      src="../../../../../assets/icons/eye.svg"
+                      width="20px"
+                    />
+                    <img
+                      (click)="downloadFile(data.url)"
+                      src="../../../../../assets/icons/Download.svg"
+                      width="20px"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="complaince && complaince.AdditionalDoc">
+                <div class="text-white f-12">Additional documents</div>
+                <div
+                  class="doc-inside"
+                  *ngFor="let data of complaince.AdditionalDoc"
+                >
+                  <div class="documents mb-1">
+                    <div class="doc-1">
+                      <img
+                        src="../../../../../assets/icons/description.svg"
+                        width="20px"
+                      />
+                      <div class="text-white f-14 fw-400 ml-2">
+                        {{ data.docName }}
+                      </div>
+                    </div>
+
+                    <div class="mr-2 vis-download">
+                      <img
+                        (click)="openFileInNewTab(data.url)"
+                        src="../../../../../assets/icons/eye.svg"
+                        width="20px"
+                      />
+                      <img
+                        (click)="downloadFile(data.url)"
+                        src="../../../../../assets/icons/Download.svg"
+                        width="20px"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- complaince part  -->
+        <div *ngIf="missionPermissionsList" class="card complaince-card mt-2">
+          <div class="card-body p-2">
+            <div class="my-1 f-16 white-text font-weight-bold">Compliance</div>
+            <div class="row">
+              <div
+                class="col-md-6"
+                *ngFor="
+                  let category of missionPermissionsList.slice(0, 3);
+                  let i = index
+                "
+              >
+                <div class="row my-2">
+                  <div class="col-1 custom-height text-right">
+                    <div
+                      class="complaince complaince-color"
+                      [ngClass]="{
+                        approve: category?.permission == 'Auto-Approve',
+                        reject: category?.permission == 'Auto-Reject',
+                        pending: category?.permission == 'Manual'
+                      }"
+                    ></div>
+                  </div>
+                  <div class="col-8 custom-height f-12 white-text">
+                    {{ category?.Name }}
+                  </div>
+                </div>
+              </div>
+              <div
+                class="col-md-6"
+                *ngFor="
+                  let category of missionPermissionsList.slice(3, 6);
+                  let i = index
+                "
+              >
+                <div class="row my-2">
+                  <div class="col-1 custom-height text-right">
+                    <div
+                      class="complaince complaince-color"
+                      [ngClass]="{
+                        approve: category?.permission == 'Auto-Approve',
+                        reject: category?.permission == 'Auto-Reject',
+                        pending: category?.permission == 'Manual'
+                      }"
+                    ></div>
+                  </div>
+                  <div class="col-6 custom-height f-12 white-text">
+                    {{ category?.Name }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Drone type  -->
+        <div class="card drone-card p-2 my-2">
+          <div class="list-values-dark">
+            {{ missionDetails?.DroneName }}
+          </div>
+          <div class="list-description-dark">Drone Type</div>
+        </div>
+        <!-- Pilot information  -->
+        <div class="row mx-0 pilot-card mb-3">
+          <div class="col-shift col-6 py-2">
+            <div class="list-values-dark f-14">
+              {{ missionDetails?.CreatedByName }}
+            </div>
+            <div class="list-description-dark f-10">Pilot Name</div>
+          </div>
+          <div class="col-6 col-shift py-2">
+            <div class="list-values-dark f-14">
+              {{ missionDetails?.PilotContact }}
+            </div>
+            <div class="list-description-dark f-10">Pilot Contact</div>
+          </div>
+          <div class="col-6 col-shift py-2">
+            <div class="list-values-dark f-14">
+              {{ missionDetails?.MaximumAltitude }} m
+            </div>
+            <div class="list-description-dark f-10">Maximum Altitude</div>
+          </div>
+          <div class="col-6 col-shift py-2">
+            <div class="list-values-dark f-14">
+              {{ missionDetails?.ActivityType }}
+            </div>
+            <div class="list-description-dark f-10">Activity Type</div>
+          </div>
+          <div class="col-6 col-shift py-2">
+            <div class="list-values-dark f-14">
+              {{ missionDetails?.LatLong?.length }}
+            </div>
+            <div class="list-description-dark f-10">Waypoints</div>
+          </div>
+        </div>
+        <!-- Button for approving -->
+        <div class="row my-2" *ngIf="missionDetails.MissionStatus == 'Pending'">
+          <!-- class="col-md-7 col-sm-5" -->
+          <div
+            *ngIf="
+              missionDetails.MissionStatus == 'Pending' &&
+              (profileDetails.Level == 'L1' || profileDetails.Level == 'L2')
+            "
+            class="col-sm text-right"
+          >
+            <button
+              class="btn btn-reject"
+              (click)="onReject(missionDetails.MissionId)"
+            >
+              <img src="../../../../../assets/common-layout/Close.svg" />
+              <span class="text-white f-16 ml-2">Decline</span>
+            </button>
+            <button
+              class="btn btn-approve"
+              (click)="onApprove(missionDetails.MissionId)"
+            >
+              <img
+                src="../../../../../assets/common-layout/Check_Outline.svg"
+              />
+              <span class="text-white f-16 ml-2 font-weight-light"
+                >Approve</span
+              >
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- </div> -->
+  <!-- osm-building-button -->
+  <!-- <div>
+    <div class="osm-button" (click)="osmBuildings()" for="osm" style="word-wrap:break-word;">
+      <div class="row">
+        <div style="margin-top: 0.3rem;"><input class="osm-button-input" type="checkbox" id="osm" [checked]="osmBuilding">
+        </div>
+        <div style="margin-top: 0.2rem; margin-left: 0.2rem">OSM Buildings</div>
+      </div>
+    </div>
+  </div> -->
+  <!-- HeatMaps  -->
+  <div class="heatmap px-lg-2">
+    <!-- <app-heatmap
+    (teleSwitch)="telecomApi($event)"
+    (popSwitch)="popHeatmap($event)"
+    (toggSwitch)="toggle2D3D($event)"
+    (terrSwitch)="osmBuildings($event)"
+    ></app-heatmap> -->
+    <app-heatmap (toggSwitch)="toggle2D3D($event)"></app-heatmap>
+  </div>
+  <!-- UI Card  -->
+  <div class="map-ui">
+    <app-map-ui
+      *ngIf="isView"
+      [isView]="isView"
+      [title]="entityDescription?.title"
+      [fircode]="entityDescription?.airspaceInfo?.FIRCodes"
+      [airspacetype]="entityDescription?.airspaceInfo?.Type"
+      [fic]="entityDescription?.airspaceInfo.FIC"
+      [country]="entityDescription?.groundInfo.Country"
+      [state]="entityDescription?.groundInfo.States"
+      [elevation]="entityDescription?.groundInfo.elevation"
+      (changeIsView)="close(val)"
+    >
+    </app-map-ui>
+  </div>
+</div>

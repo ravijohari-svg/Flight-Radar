@@ -1,0 +1,57 @@
+<div
+  class="weatherIcon2 px-2 py-1"
+  [class.weatherIcon2width]="
+    toggle && (label == 'Latitude' || label == 'Longitude')
+  "
+>
+  <div class="core">
+    <img
+      src="../.../../../../../assets/icons/{{ icon }}"
+      alt="{{ label }}"
+      width="15"
+    />
+    <div>
+      <div class="list-description-dark f-10">{{ label }}</div>
+      <div class="text-white f-14" *ngIf="value">
+        <span *ngIf="label === 'Battery' && !toggle"
+          >{{ value }} {{ unit1 }}</span
+        >
+        <span *ngIf="label !== 'Battery' && label !== 'Voltage' && !toggle"
+          >{{ value | number : format }} {{ unit1 }}</span
+        >
+        <span *ngIf="label === 'Voltage' && !toggle"
+        >{{ value | number : format }} {{ unit1 }}</span
+      >
+      <span *ngIf="label === 'Mode'"
+        >{{ value }}</span
+      >
+        <span *ngIf="toggle">
+          <ng-container [ngSwitch]="label">
+            <span *ngSwitchCase="'Speed'"
+              >{{ value | speed | number : format }} {{ unit2 }}</span
+            >
+            <span *ngSwitchCase="'Latitude'"
+              >{{ value | dMScordinate }} {{ unit2 }}</span
+            >
+            <span *ngSwitchCase="'Longitude'"
+              >{{ value | dMScordinate : false }} {{ unit2 }}</span
+            >
+            <span *ngSwitchCase="'Altitude'"
+              >{{ value | metertofeet }} {{ unit2 }}</span
+            >
+          </ng-container>
+        </span>
+      </div>
+      <div class="text-white f-14" *ngIf="!value">------</div>
+    </div>
+  </div>
+  <div class="props" *ngIf="value && label != 'Battery'  && label != 'Voltage' ">
+    <span (click)="copyToClipboard()" *ngIf="!copiedToClipboard">
+      <img src="../../../../../assets/icons/copy.svg" alt="copy" />
+    </span>
+    <span><mat-slide-toggle (click)="toggleUnit()"></mat-slide-toggle></span>
+    <div *ngIf="copiedToClipboard" class="text-white f-10">
+      Copied to clipboard
+    </div>
+  </div>
+</div>

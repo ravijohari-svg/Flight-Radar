@@ -1,0 +1,260 @@
+@import "../../../scss/colorCodes.scss";
+
+@mixin font($font-size, $font-weight) {
+  font-size: $font-size;
+  font-weight: $font-weight;
+}
+
+@mixin colors($color, $background-color) {
+  color: $color;
+  background-color: $background-color;
+}
+* {
+  margin: 0%;
+  padding: 0%;
+  box-sizing: border-box;
+}
+.login {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+
+  .leftBox {
+    position: relative;
+    width: 70%;
+
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .loginHeading {
+      position: absolute;
+      width: 100%;
+      top: 0%;
+      // background-color: $loginBG2;
+      color: $loginText;
+      padding: 2.5rem;
+      :first-child {
+        font-size: 5vw;
+        font-weight: 700;
+        line-height: 5vw;
+        margin-right: 20rem;
+      }
+      :nth-child(2) {
+        color: $loginText;
+        font-size: 1.5vw;
+        margin-right: 15rem;
+        margin-top: 12px;
+      }
+    }
+  }
+  .rightBox {
+    width: 30%;
+    background: $loginBG;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    .logo {
+      margin: 20px 0 0 0;
+      width: 250px;
+    }
+    .loginFormBox {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .rightBoxlogin {
+      font-size: 2rem;
+      font-weight: 400;
+    }
+    .formBox {
+      input {
+        width: 22em;
+        height: 3.2rem;
+        background: $loginText;
+        color: $form-box-color;
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+      }
+      .passwordType {
+        -ms-reveal: none;
+        position: relative;
+        padding-right: 3rem;
+      }
+      .input-group-append {
+        position: absolute;
+        right: 0;
+        height: 100%;
+        border-radius: 0.5rem;
+        border-right: none;
+        z-index: 100;
+        background-color: $loginText;
+        cursor: pointer;
+        .input-group-text {
+          padding: 0 10px;
+          background: none;
+          .fa {
+            color: $loginEye;
+            font-size: 1.4rem;
+          }
+        }
+      }
+      .error-message,
+      .invalid-feedback {
+        margin-top: 5px;
+        color: $red;
+      }
+      label {
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+        color: $text-white;
+      }
+      .loginBtn {
+        button {
+          height: 3.2rem;
+          width: 100%;
+          font-size: 0.9rem;
+        }
+      }
+      .forgotText {
+        color: $loginText;
+        font-size: 0.8rem;
+        text-decoration-line: underline;
+        cursor: pointer;
+      }
+    }
+    .rightBoxLinks {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin: 0 !important;
+      li {
+        a {
+          font-size: 0.6rem;
+          color: $loginText;
+        }
+      }
+    }
+    .signUpText {
+      font-size: 0.9rem;
+    }
+  }
+}
+// @media (max-width: 1024px) {
+//   .login {
+//     .leftBox {
+//       width: 60%;
+//       .loginHeading {
+//         :first-child {
+//           margin-right: 0rem;
+//         }
+//         :nth-child(2) {
+//           margin-right: 0rem;
+//         }
+//       }
+//     }
+//     .rightBox {
+//       width: 40%;
+//       .logo {
+//         width: 9.75rem;
+//         margin-top: 2vw;
+//       }
+//       .rightBoxlogin {
+//         font-size: 2rem;
+//         margin-top: 1vw;
+//       }
+//     }
+//   }
+// }
+// @media (min-width: 600px) and (max-width: 912px) {
+//   .login {
+//     .leftBox {
+//       display: none;
+//     }
+//     .rightBox {
+//       width: 100%;
+//       justify-content: center;
+//       align-items: center;
+//       .formBox {
+//         input {
+//           width: 25em;
+//         }
+//       }
+//     }
+//   }
+// }
+// @media (max-width: 768px) {
+//   .leftBox {
+//     display: none;
+//   }
+//   .login {
+//     .rightBox {
+//       width: 100%;
+//     }
+//   }
+// }
+
+@media (min-width: 913px) {
+  .login {
+    .leftBox {
+      width: 60%;
+      .loginHeading {
+        :first-child {
+          margin-right: 0rem;
+        }
+        :nth-child(2) {
+          margin-right: 0rem;
+        }
+      }
+    }
+    .rightBox {
+      width: 40%;
+      .logo {
+        width: 250px;
+        margin: 20px 0 0 0;
+      }
+      .rightBoxlogin {
+        font-size: 2rem;
+        margin-top: 0.5vw;
+        margin-bottom: 0px;
+      }
+    }
+  }
+}
+@media (min-width: 600px) and (max-width: 912px) {
+  .login {
+    .leftBox {
+      display: none;
+    }
+    .rightBox {
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      .formBox {
+        input,
+        select {
+          width: 25em;
+        }
+      }
+    }
+  }
+}
+@media (max-width: 768px) {
+  .leftBox {
+    display: none;
+  }
+  .login {
+    .rightBox {
+      width: 100%;
+    }
+  }
+}

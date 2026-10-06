@@ -1,0 +1,153 @@
+.list-values {
+  color: #121212;
+  font-size: 93%;
+  font-weight: 600;
+}
+
+.list-description {
+  color: #8c8c8c;
+  font-size: 80%;
+}
+
+.btn-reject {
+  border: 1px solid #dc3545 !important;
+  color: #dc3545;
+  background-color: #faeaea;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.btn-approve {
+  border: 1px solid #2bc43f !important;
+  color: #2bc43f;
+  background-color: #edfdee;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.mission-name {
+  color: #3056af;
+  font-size: 93%;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.hover-card {
+  display: none;
+  position: absolute;
+  width: 320px;
+  background-color: #ffffff;
+  z-index: 10;
+}
+
+@media screen and (max-width: 992px) {
+  .hover-card {
+    width: 150px;
+  }
+}
+.info-btn {
+  color: #c9c9c9;
+}
+
+.info-btn:hover + .hover-card {
+  display: block;
+}
+
+.reject {
+  border: 1px solid #dc3545 !important;
+  color: #dc3545;
+  background-color: #faeaea;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.approve {
+  border: 1px solid #2bc43f !important;
+  color: #2bc43f;
+  background-color: #edfdee;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.pending {
+  border: 1px solid #ffcb3d !important;
+  color: #ffcb3d;
+  background-color: #feffe2;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.main-map {
+  height: 75vh;
+}
+
+@media screen and (max-width: 1300px) {
+  .main-map {
+    height: 80vh;
+  }
+}
+.document-map {
+  overflow: hidden;
+  height: 0px;
+}
+
+.doc-container {
+  zoom: 0.5;
+  overflow: hidden;
+  height: 0px;
+}
+
+#page {
+  background-color: #ececec;
+  width: 1684px;
+}
+
+.report-header {
+  font-size: 45px;
+  font-weight: 600;
+}
+
+.doc-table.table-bordered {
+  background-color: #ffffff;
+}
+
+.doc-table.table-bordered tbody tr {
+  padding: 20px !important;
+}
+
+.doc-table.table-bordered thead tr th {
+  color: #121212;
+  opacity: 0.8;
+  font-size: 32px;
+  font-weight: 600;
+  padding: 0.7rem;
+}
+
+.doc-table.table-bordered tbody tr td:first-child {
+  max-width: 400px;
+  background-color: #f2f2f2;
+  font-size: 34px;
+  font-weight: 600;
+}
+
+.doc-table.table-bordered tbody tr td {
+  font-size: 34px;
+  font-weight: 400;
+  padding: 0.7rem;
+  border: 1px solid rgba(0, 0, 0, 0.5) !important;
+}
+
+.doc-table.table-bordered tbody tr td button {
+  font-size: 34px;
+  font-weight: 600;
+}
+
+.doc-table.table-bordered th,
+.doc-table.table-bordered td {
+  vertical-align: middle;
+}
+
+.fa-minus-circle {
+  color: #8c8c8c;
+  font-size: 60px;
+}/*# sourceMappingURL=upcoming-mission-list.component.css.map */

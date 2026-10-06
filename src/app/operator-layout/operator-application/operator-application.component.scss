@@ -1,0 +1,195 @@
+@import "../../../scss/colorCodes.scss";
+
+@mixin font($font-size, $font-weight) {
+  font-size: $font-size;
+  font-weight: $font-weight;
+}
+
+//Top Nav bar
+.clear {
+  clear: both;
+  display: block;
+}
+
+.bg-light {
+  background-color: $nav-link  !important;
+}
+
+//Side navbar
+mat-sidenav-content {
+  // background-color: $nav-link ;
+  background-color: $black-dark;
+  margin-left: 198px !important;
+  transition: 0.3s ease-in-out;
+}
+mat-sidenav-content.sidenav-content-small {
+  margin-left: 53px !important;
+}
+mat-sidenav {
+  // background-image: linear-gradient(169deg, #1c2428 0%, #0c1011 97%);
+  width: 200px;
+  transition: 0.3s ease-in-out;
+}
+mat-sidenav.small-sidenav {
+  width: 55px;
+}
+.nav-link {
+  color: $nav-link ;
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+.nav-link.active {
+  // color: $fa-circle-color;
+  opacity: 1;
+  border-radius: 8px;
+  background-color: $black-light;
+  font-weight: 600;
+}
+
+.bottom-container {
+  position: absolute;
+  bottom: 0;
+}
+.w-90 {
+  width: 90%;
+}
+.btn-create-mission {
+  background-color: $btn-create-mission-bg;
+  color: $nav-link ;
+  opacity: 0.58;
+  font-size: 14px;
+}
+
+.example-is-mobile .example-toolbar {
+  position: fixed;
+  /* Make sure the toolbar will stay on top of the content as it scrolls past. */
+  z-index: 2;
+}
+
+.fa-bars {
+  color: $fa-circle-color;
+}
+
+//Dropdown
+.nav-item {
+  @include font(75%, 400);
+}
+.navbar-top.navbar-nav .nav-item.dropdown .nav-link,
+.navbar-light .navbar-nav .nav-link {
+  color: $navbar-dark !important;
+  opacity: 1;
+  @include font(75%, 600);
+}
+
+.dropdown-item {
+  color: $text-light;
+  @include font(72%, 600);
+}
+
+.dropdown-menu {
+  float: left;
+}
+
+// Dark Theme
+// Sidebar
+.main-container {
+  width: 99vw;
+  margin: 0;
+  height: 99vh;
+  display: flex;
+  background-color: $black-medium;
+  transition: 1s ease;
+}
+
+.sidebar {
+  width: 20%;
+  height: 100%;
+  background-color:$sidebar-bg;
+  transition: 1s ease;
+  position: relative;
+  margin: 0px;
+}
+
+.main-content {
+  width: 80%;
+  height: 100%;
+  background-color: $main-content-bg;
+  transition: 1s ease;
+}
+
+.main-content_large {
+  width: 90%;
+}
+
+.sidebar_small {
+  width: 10%;
+}
+.primary-btn {
+  font-size: 12px;
+}
+.profile-detail div {
+  font-size: 12px;
+  text-align: left;
+}
+.profile-avatar {
+  background-color: $black-light;
+  color: $text-white-opacity;
+  font-size: 12px;
+  padding: 10px 15px;
+}
+
+//Payment card
+// .payment-card {
+//   position: absolute;
+//   top: 5%;
+//   left: 3%;
+//   z-index: 1000;
+// }
+
+.weather-button {
+  // background-color: #fcfcfc;
+  color: $text-dark;
+  // border: 1px solid rgba(0, 0, 0, 0.125);
+  position: absolute;
+  top: 17%;
+  left: 80%;
+}
+
+.form-control {
+  border: 0.2px solid $text-white-opacity;
+}
+
+.form-control:focus,
+.weather-button:focus {
+  outline: none;
+  box-shadow: none;
+  background-color: $black-medium;
+}
+
+.card-body {
+  flex: 1 1 auto;
+  min-height: 1px;
+  padding: 0.25rem;
+  margin-left: 15px;
+  margin-bottom: 5px;
+}
+
+.text-align {
+  text-align: initial !important;
+}
+
+.settings-text {
+  position: absolute;
+  bottom: 6rem;
+  width: 183px;
+}
+.settings-text2 {
+  bottom: 3rem;
+  width: 38px;
+}
+
+.disable-click {
+  pointer-events: none;
+  opacity: 1;
+}

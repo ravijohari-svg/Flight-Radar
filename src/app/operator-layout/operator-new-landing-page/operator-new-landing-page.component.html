@@ -1,0 +1,259 @@
+<div class="main">
+
+
+<div class="landing-header-container">
+    <div class="landing-header pt-4">
+        <div class="header-left">
+            <img src="assets/landing-img/skyeair_logo.png" alt="Skye UTM Logo" class="logo logo-heading" />
+
+        </div>
+        <div class="header-right">
+            <button class="custom-btn-login btn btn-dark mobile-view" (click)="navigate('LOGIN')">Log In</button>
+        </div>
+    </div>
+</div>
+
+<div class="main-landing-section">
+    <div class="main-wrapper text-center px-3 pb-5 pt-1">
+        <img src="assets/landing-img/utm_logo.png" height="41" alt="Skye UTM Logo" class="logo mb-2" />
+        <h1 class="display-5 fw-bold tagline">{{ headingData?.TagLine }}</h1>
+        <p class="lead text-muted mb-4">
+            {{ headingData?.Info }}
+        </p>
+
+        <div class="position-relative map-section">
+            <!-- <img src="{{ headingData?.ImageURL }}" width="68%"  class=" rounded map-background"
+                alt="Map" /> -->
+            <img src="https://landing-page-media-uat.s3.eu-west-1.amazonaws.com/UTM/Heading/Heading.png"  class=" rounded map-background"
+            alt="Map" />
+            <img class="mission-img" src="https://landing-page-media-uat.s3.eu-west-1.amazonaws.com/UTM/Heading/Banner_GIF.gif"  alt="Skye UTM Logo"  />
+            <!-- <img class="mission-img" src="{{ headingData?.GifURL }}"  alt="Skye UTM Logo"  /> -->
+
+        </div>
+        <div class="main-zone-btn">
+            <button class="custom-btn " (click)="navigate('GEOZONE')">Geo Zone</button>
+            <button class="custom-btn " (click)="navigate('CONTACT')">Request a Demo</button>
+        </div>
+    </div>
+</div>
+
+<div class="feature-container">
+    <div class="feature">
+        <h1 class="heading text-center mt-5 common-heading">FEATURES</h1>
+        <div class="feature-carousel pr-4 pl-4">
+            <owl-carousel-o [options]="customOptions" class="custom-carousel"  (translated)="onTranslated($event)">
+                <ng-template carouselSlide *ngFor="let type of features; let i = index">
+                  <div class="slide-1">
+                    <div class="flip-card-inner">
+                      <!-- Front face -->
+                      <div class="flip-card-front">
+                        <div class="slide1">
+                          <div class="bottom-left-vertical"></div>
+                          <div class="bottom-left-horizontal"></div>
+                          <img width="100%" height="80px" [src]="type.icon" />
+                        </div>
+                        <div class="slide2">
+                          <div class="title mt-2 mb-2">{{ type.Title }}</div>
+                        </div>
+                      </div>
+              
+                      <!-- Back face -->
+                      <div class="flip-card-back">
+                        <div class="back-text">{{ type.Description }}</div>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              
+                <!-- Custom dot with number -->
+                <ng-template carouselDot *ngFor="let type of features; let i = index">
+                  <span>{{ i + 1 }}</span>
+                </ng-template>
+              
+              </owl-carousel-o>
+              <div class="slide-counter">
+                {{ currentSlide }} / {{ totalSlides }}
+              </div>
+        </div>
+    </div>
+</div>  
+
+
+<div class="feature-detail-container">
+
+    <h1 class="text-center mt-5 mb-4 feature-detail-header">{{ featureDetailData?.Title }}</h1>
+  
+    <!-- Locked Scroll Wrapper -->
+    <!-- <div id="stack-wrapper" [class.locked]="!isUnlocked">
+      <div id="smooth-content">
+        <div
+          *ngFor="let card of infoCards; let i = index"
+          #cardEl
+          class="card-container stack-section"
+          [ngClass]="{ 'reverse': i % 2 !== 0, 'blurred': i !== 0 }"
+          [ngStyle]="{ 'background-color': card.backgroundColor }"
+        >
+          <div class="text-section">
+            <h2>{{ card.title }}</h2>
+            <p>{{ card.description }}</p>
+            <button class="btn btn-primary">{{ card.buttonText }}</button>
+          </div>
+          <div class="image-section">
+            <img [src]="card.imageUrl" alt="{{ card.title }}" />
+          </div>
+        </div>
+      </div>
+    </div> -->
+  
+<!-- <section class="feature-section">
+    <div
+      class="feature-slide"
+      *ngFor="let feature of features1; let i = index"
+      [style.--index]="i"
+    >
+      <div class="content">{{ feature }}</div>
+    </div>
+  </section>
+   -->
+
+    <section class="feature-section">
+        <div
+        class="feature-slide"
+        *ngFor="let card of featureDetailData?.Features; let i = index"
+        [style.--index]="i"
+       
+        #slideRef
+        >
+        <div class="content" [ngStyle]="{ 'background-color': card.BgColor || '#cacaca' }"  [ngClass]="{ 'reverse': i % 2 !== 0 }">
+            <div class="text-section">
+            <h2 class="feature-heading">{{ card.Title }}</h2>
+            <p>{{ card.Description }}</p>
+            <ul class="">
+                <li *ngFor="let item of card.KeyPoints">{{ item }}</li>
+              </ul>
+            <button class="req-demo-btn mt-3" (click)="navigate('CONTACT')">Request a Demo</button>
+            </div>
+            <div class="image-section">
+            <img [src]="card.Image" alt="{{ card.title }}" />
+            </div>
+        </div>
+        </div>
+    </section>
+  
+
+  
+  </div>
+  
+
+ <div class="description-container">
+    <h1 class="desc-heading">Skye UTM offers a streamlined portal for mission <span class="blue-text">planning</span>
+        with <span class="blue-text">real time</span> oversight for authorities.
+        <span class="green-text">WhatsApp</span> integration enables easy <span class="blue-text">mission
+            creation</span>, simplifying end-to-end operations for efficient,
+        compliant <span class="blue-text">deliveries</span> across industries.
+    </h1>
+</div>
+
+<div class="faq-container">
+    <h2 class="faq-heading ">{{ faqData?.Title }}</h2>
+
+    <div class="faq-section">
+        <cdk-accordion class="example-accordion">
+            <cdk-accordion-item *ngFor="let item of faqData?.Steps; let index = index" #accordionItem="cdkAccordionItem"
+                class="example-accordion-item" role="button" tabindex="0" [attr.id]="'accordion-header-' + index"
+                [attr.aria-expanded]="accordionItem.expanded" [attr.aria-controls]="'accordion-body-' + index">
+                <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
+                    <span class="heading-acc">{{ item.Title }}</span>
+                    <span class="icon-circle" [ngClass]="{
+                      'icon-plus': !accordionItem.expanded,
+                      'icon-minus': accordionItem.expanded
+          }"></span>
+                </div>
+
+                <div class="example-accordion-item-body" role="region"
+                    [style.display]="accordionItem.expanded ? '' : 'none'" [attr.id]="'accordion-body-' + index"
+                    [attr.aria-labelledby]="'accordion-header-' + index">
+                    {{ item.Description }}
+                </div>
+            </cdk-accordion-item>
+        </cdk-accordion>
+    </div> 
+</div>
+
+<div class="footer-container">
+    <div class="footer">
+        <div class="footer-section description">
+            <div class="p-left">
+                <img src="{{logo}}" alt="Logo" class="footer-logo-icon" height="50" />
+            </div>
+            <br /><br />
+            <p class="mt-0">Skye air provides the ultimate solution for making the fastest, most efficient contact-free deliveries
+            </p>
+            <br />
+            CIN: U63030HR2022PTC104123
+        </div>
+
+        <div class="footer-section links">
+            <h5 class="mb-4">Company</h5>
+            <ul>
+                <li><a (click)="scroll()">Solutions</a></li>
+                <li><a href="http://skyeair-website-uat.s3-website.ap-south-1.amazonaws.com/about">About Skye Air</a></li>
+                <li><a href="http://skyeair-website-uat.s3-website.ap-south-1.amazonaws.com/media" >Media & Partners</a></li>
+                <li><a routerLink="/contact">Contact Us</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section contact-info">
+            <h5>Office Address</h5>
+            <div class="contact-details-section contact-info address-footer">
+                <div class="d-flex">
+                    <img [src]="location" height="17" class="mt-3 mr-3" />
+                    <p>{{footerData?.OfficeAddress}}</p>
+                </div>
+                <div class="d-flex">
+                    <img [src]="email" height="12" class="mt-3 mr-3" />
+                    <p>{{footerData?.OfficeEmail}}</p>
+                </div>
+                <div class="d-flex">
+                    <img [src]="phone" height="14" class="mt-3 mr-3 ml-1" />
+                    <p>{{footerData?.OfficeContact}}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-queries-section">
+            <div *ngFor="let item of footerData?.Contacts; let index = index" class="footer-queries"
+                [attr.key]="index">
+                <h5 class="mb-4">{{item.Department}}</h5>
+                <p class="footer-para">{{item.Name}}</p>
+                <p class="footer-para">{{item.Email}}</p>
+                <p class="footer-para">{{item.Number}}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <div>
+            <span class="footer-para" style="position: relative; left: -20px">Privacy Policy</span>
+            <span class="ml-3 footer-para">Terms of Services</span>
+        </div>
+        <div class="footer-para">
+            ©2025 Skye Air Mobility Pvt Ltd - All Rights Reserved
+        </div>
+        <div class="social-media-icons">
+            <a href="https://www.facebook.com/OfficialSkyeAirMobility/" target="_blank">
+                <img [src]="logo1" alt="Logo" class="footer-logo" height="25" />
+            </a>
+            <a href="https://www.instagram.com/skyeairofficial/" target="_blank">
+                <img [src]="logo2" alt="Logo" class="footer-logo" height="25" />
+            </a>
+            <a href="https://x.com/air_skye" target="_blank">
+                <img [src]="logo3" alt="Logo" class="footer-logo" height="25" />
+            </a>
+            <a href="https://in.linkedin.com/company/skyeairmobility" target="_blank">
+                <img [src]="logo4" alt="Logo" class="footer-logo" height="25" />
+            </a>
+        </div>
+    </div>
+</div>
+</div>

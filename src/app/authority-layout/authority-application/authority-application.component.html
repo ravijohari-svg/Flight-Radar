@@ -1,0 +1,120 @@
+<ng-container *ngIf="!shouldShowSidebar">
+  <div class="example-container">
+    <mat-sidenav-container class="example-container">
+      <mat-sidenav
+        #sidenav
+        mode="side"
+        [opened]="true"
+        [fixedInViewport]="true"
+        [fixedTopGap]="0"
+        [fixedBottomGap]="0"
+        class="dark-new sideNav"
+        style="background: #1f2937;"
+        [ngClass]="{ 'small-sidenav': toggleSideNav == true }"
+      >
+        <ul class="nav navbar-nav my-2 mx-2">
+          <div class="row mx-0">
+            <div *ngIf="!toggleSideNav" class="col-10 px-0">
+              <img
+                src="../../assets/common-layout/SkyeUTM logoWhite.svg"
+                alt="SkyeUTM"
+                title="SkyeUTM Logo"
+                width="120px"
+                *ngIf="profileDetails.UserId !== 'AUTRTY2'"
+              />
+              <div class="himachallogo">
+                <img
+                  src="../../../assets/icons/logo.png"
+                  alt="SkyeUTM"
+                  title="Himachal Gvt. Logo"
+                  width="110px"
+                  height="75px"
+                  *ngIf="profileDetails.UserId === 'AUTRTY2'"
+                />
+              </div>
+            </div>
+            <button
+              class="col-2 btn px-0"
+              [ngClass]="{ 'ml-2': toggleSideNav == true }"
+              (click)="toggleSideNav = !toggleSideNav"
+            >
+              <img src="../../assets/common-layout/Menu Open.svg" />
+            </button>
+          </div>
+          <div class="mt-4">
+            <li *ngFor="let path of activeURLArr" class="nav-item align-middle">
+              <a
+                *ngIf="path.level.includes(profileDetails.Level)"
+                class="nav-link px-2"
+                href="javascript:void(0)"
+                [ngClass]="{ active: isActiveMenuItem(path) }"
+                (click)="navigateToPath(path)"
+              >
+                <span>
+                  <img src="{{ path.img }}" width="15px" class="mx-1" />
+                  <span *ngIf="!toggleSideNav"> {{ path.name }}</span>
+                </span>
+              </a>
+            </li>
+          </div>
+
+          <div
+            class="bottom-container text-center pb-lg-2 pb-1"
+            [ngClass]="{ 'w-90': toggleSideNav == false }"
+          >
+            <!-- <div class="mx-2"> -->
+            <li class="nav-item align-middle">
+              <button class="nav-link px-2 btn" (click)="onLogout()">
+                <img
+                  src="../../assets/common-layout/log-out.svg"
+                  width="15px"
+                  class="mx-1"
+                />
+                <span *ngIf="!toggleSideNav">Logout</span>
+              </button>
+            </li>
+            <!-- </div> -->
+            <div title="{{ profileDetails.FirstName }}" class="row mx-0 py-2">
+              <div class="col-3 px-0">
+                <span class="profile-avatar rounded-circle">
+                  {{ profileDetails.FirstName[0] }}
+                </span>
+              </div>
+              <div *ngIf="!toggleSideNav" class="col-9 px-2 profile-detail">
+                <div class="white-text">{{ profileDetails.FirstName }}</div>
+                <div class="white-text-opacity">
+                  {{ profileDetails.UserId }}
+                </div>
+              </div>
+            </div>
+            <div *ngIf="!toggleSideNav" class="row mx-0">
+              <div
+                *ngIf="profileDetails.UserId !== 'AUTRTY2'"
+                class="col rounded dark-light img-text p-1 m-1 f-10 w-100"
+              >
+                <span class="font-weight-bold">Regulatory</span
+                ><span class="font-weight-light"> Access</span>
+              </div>
+              <div
+                *ngIf="profileDetails.UserId === 'AUTRTY2'"
+                class="col rounded dark-light img-text p-1 m-1 f-10 w-100"
+              >
+                <span class="font-weight-light">Powered by</span
+                ><span class="font-weight-bold"> Himachal Government</span>
+              </div>
+            </div>
+          </div>
+        </ul>
+      </mat-sidenav>
+      <mat-sidenav-content
+        [ngClass]="{ 'sidenav-content-small': toggleSideNav == true }"
+      >
+        <div class="">
+          <router-outlet class="clear"></router-outlet>
+        </div>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div>
+</ng-container>
+<div *ngIf="shouldShowSidebar"><router-outlet></router-outlet></div>
+<app-notification></app-notification>

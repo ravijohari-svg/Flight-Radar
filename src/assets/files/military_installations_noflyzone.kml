@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:ns2="http://www.google.com/kml/ext/2.2" xmlns:ns3="http://www.w3.org/2005/Atom" xmlns:ns4="urn:oasis:names:tc:ciq:xsdschema:xAL:2.0">
+    <Document>
+        <Schema name="military_installations_noflyzone_1" id="military_installations_noflyzone_1">
+            <SimpleField type="string" name="name"/>
+            <SimpleField type="bool" name="verified"/>
+        </Schema>
+        <Folder>
+            <name>military_installations_noflyzone</name>
+            <Placemark id="military_installations_noflyzone.3845">
+                <ExtendedData>
+                    <SchemaData schemaUrl="#military_installations_noflyzone_1">
+                        <SimpleData name="name">Kopt Kolkata</SimpleData>
+                        <SimpleData name="verified">true</SimpleData>
+                    </SchemaData>
+                </ExtendedData>
+                <Polygon>
+                    <outerBoundaryIs>
+                        <LinearRing>
+                            <tessellate>1</tessellate>
+                            <coordinates>88.32359190998866,22.547674429351314 88.31987654115187,22.551389798188104 88.31645927954287,22.55809655172199 88.31686013454127,22.55789230589875 88.32084230589875,22.553910134541265 88.32339901729331,22.54889230589875 88.32359190998866,22.547674429351314</coordinates>
+                        </LinearRing>
+                    </outerBoundaryIs>
+                </Polygon>
+            </Placemark>
+        </Folder>
+    </Document>
+</kml>

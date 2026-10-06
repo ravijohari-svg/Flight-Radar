@@ -1,0 +1,45 @@
+.contact-page-wrapper{
+    height: 100vh;
+    background-color: #0E377E;
+
+    label{
+        font-size:12px;
+        line-height: 16px;
+        font-weight: 500;
+    }
+
+    .required::after{
+        content: "*";
+        color: #F04438;
+    }
+    .text-danger{
+        font-size: 12px;
+        margin-top: 5px;
+    }
+
+    .submit-btn{
+        background-color: #3D6EC2 !important;
+        width: 100%;
+        border:none;
+        padding: 10px 10px;
+        border-radius: 4px;
+        color: #fff;
+    }
+
+    .left-section{
+        padding-top: 45px;
+    }
+    .logo{
+        height:45px;
+    }
+
+    @media screen and (max-width: 768px) {
+        .logo{
+            height:32px;
+        }
+        .contact-heading{
+            font-size:1.5rem;
+        }
+    }
+    
+}

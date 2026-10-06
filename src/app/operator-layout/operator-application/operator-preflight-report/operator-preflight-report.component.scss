@@ -1,0 +1,185 @@
+@import '../../../../scss/colorCodes.scss';
+
+@mixin font($font-size, $font-weight) {
+  font-size: $font-size;
+  font-weight: $font-weight;
+}
+
+//Document Generation
+.main-map {
+  height: 900px;
+  width: 1100px;
+}
+
+@media screen and (max-width: 1300px) {
+  .main-map {
+    height: 800px;
+    width: 1000px;
+  }
+}
+
+
+.document-map {
+  overflow: hidden;
+  height: 0px;
+}
+
+.doc-container {
+  zoom: 0.5;
+  overflow: hidden;
+  height: 0px;
+}
+
+.declaration-checkbox{
+  font-size: 12px !important;
+  height: 30px;
+  width: 30px;
+}
+
+.declaration-font{
+  font-size: 30px;
+    font-weight: 600;
+}
+
+#page {
+  background-color: #ececec;
+  // width: 595.28px;
+  width: 1684px;
+  // height: 1190px;
+
+}
+
+.page {
+  width: 1684px;
+}
+
+.report-header {
+  color: $text-dark;
+  font-size: 54px;
+  font-weight: 600;
+}
+
+.sub-report-header {
+  font-size: 38px;
+  font-weight: 600;
+}
+
+.section-header {
+  color: $text-dark;
+  font-size: 34px;
+  font-weight: 600;
+}
+
+.doc-table.table-bordered {
+  background-color: #ffffff;
+}
+
+.doc-table.table-bordered tbody tr {
+  padding: 20px !important;
+}
+
+.doc-table.table-bordered thead tr th {
+  color: $text-dark;
+  opacity: 0.8;
+  @include font(30px, 600);
+  padding: 0.7rem;
+}
+
+.doc-table.table-bordered tbody tr td {
+  width: 700px;
+}
+
+.doc-table.table-bordered tbody tr td:first-child {
+  width: 400px !important;
+  background-color: #f2f2f2;
+  @include font(30px, 600);
+}
+
+.doc-table.table-bordered tbody tr td {
+  @include font(30px, 400);
+  padding: 0.7rem;
+  border: 1px solid rgba(0, 0, 0, 0.5) !important;
+}
+
+.doc-table.table-bordered tbody tr td button {
+  @include font(30px, 600);
+
+}
+
+.doc-table.table-bordered th,
+.doc-table.table-bordered td {
+  vertical-align: middle;
+}
+
+.map-img {
+  // max-height: 1000px;
+  height: 70%;
+  width: 70%;
+}
+
+//Weather
+.list-values-doc {
+  color: $text-dark;
+  @include font(32px, 600);
+}
+
+.list-description-doc {
+  color: $text-light;
+  @include font(30px, 600);
+}
+
+.weather-card-doc {
+  background-color: #fcfcfc;
+}
+
+.normal-text-doc {
+  color: $text-dark;
+  @include font(32px, 400);
+}
+
+.alert-light-doc.alert-light {
+  @include font(28px, 400);
+  border-color: rgba(0, 0, 0, 0.125);
+}
+
+.alert-danger.alert-danger-doc {
+  @include font(28px, 400);
+}
+
+.disclaimeer-heading-doc {
+  @include font(32px, 400);
+  color: $text-dark;
+}
+
+.orange-text {
+  color: #ff8e00;
+}
+
+
+
+//Complaince
+.card-list-values {
+  color: $text-dark;
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.fa-check-circle {
+  color: #4fc55f;
+}
+
+.fa-times-circle,
+.fa-times,
+.fa-circle.red {
+  color: #dc3545;
+}
+
+.fa-dot-circle-o, .fa-circle.manual {
+  color: #ffcb3d;
+}
+
+.risk-chart-doc {
+  width: 700px;
+  height:700px;
+  margin: auto;
+}

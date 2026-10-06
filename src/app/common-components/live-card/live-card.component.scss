@@ -1,0 +1,113 @@
+@import "../../../scss/colorCodes.scss";
+
+.trapz {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 0;
+  border: 80px solid transparent;
+  -o-text-overflow: clip;
+  text-overflow: clip;
+  -webkit-transform: rotateX(180deg);
+  transform: rotateX(180deg);
+  position: relative;
+  transition: all 0.5s ease;
+}
+.liveCard {
+  position: relative;
+  .trapz3 {
+    border: 40px solid transparent;
+    border-bottom: 0 solid;
+    border-top: 100px solid $dark-new;
+    margin-bottom: 0px;
+    // width: 750px;
+    width: 840px;
+  }
+  .livelogs {
+    -webkit-transform: rotateX(180deg);
+    transform: rotateX(180deg);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    .livelogsBox {
+      position: relative;
+      left: 50%;
+      top: 5px;
+      transform: translateX(-50%);
+    }
+    .live {
+      position: absolute;
+      width: 65px;
+      bottom: -6px;
+      div {
+        position: absolute;
+      }
+    }
+    .live1 {
+      border-bottom: 86px solid $red;
+      left: -28px;
+      border-left: 32px solid transparent;
+      cursor: default;
+      div {
+        top: 30px;
+        left: -5px;
+        img,
+        svg {
+          position: relative;
+          left: 5px;
+          margin-bottom: 2px;
+        }
+      }
+    }
+    .live2 {
+      border-bottom: 86px solid $blue-dark;
+      right: -28px;
+      border-right: 32px solid transparent;
+      cursor: pointer;
+      div {
+        top: 35px;
+        left: 10px;
+      }
+    }
+    .borderColor {
+      border: 1px solid $black-light;
+    }
+    .liveLogsData,
+    .liveTrack {
+      display: flex;
+      gap: 5px;
+      padding: 6px;
+    }
+
+    .liveTrack {
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+}
+@keyframes animateSVG {
+  0% {
+    stroke: white;
+  }
+  100% {
+    stroke: $dark-red;
+  }
+}
+.path-animation1 {
+  animation: animateSVG 1s infinite 0.5s;
+}
+.path-animation2 {
+  animation: animateSVG 1s infinite 0.25s;
+}
+.path-animation3 {
+  animation: animateSVG 1s infinite 0.125s;
+}
+.unavailable {
+  border-bottom: 86px solid $black-medium !important;
+  pointer-events: none;
+}
+
+.tracking-on {
+  border-bottom: 86px solid   #4caf50 !important;
+}

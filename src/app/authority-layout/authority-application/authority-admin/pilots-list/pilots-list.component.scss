@@ -1,0 +1,335 @@
+@import "../../../../../scss/colorCodes.scss";
+@import url("https://fonts.googleapis.com/css2?family=Podkova:wght@700&family=Roboto+Slab:wght@700&family=Roboto:wght@400;500&display=swap");
+@mixin font($font-size, $font-weight) {
+  font-size: $font-size;
+  font-weight: $font-weight;
+}
+
+@mixin colors($color, $background-color) {
+  color: $color;
+  background-color: $background-color;
+}
+.main-panel {
+  min-height: 100vh;
+}
+.table-bordered {
+  //colors btw the rows
+  border-collapse: collapse;
+  border: 1px solid $black-only;
+  border-radius: 5em !important;
+  background-color: $dark-v1;
+}
+.table-bordered thead {
+  @include colors($text-white, $black-light);
+  background-color: $dark-v1;
+}
+
+.table-bordered tbody tr {
+  padding: 20px !important;
+  //colors btw the rows
+  border-bottom: 1.5px solid $black-light;
+}
+.table-bordered tbody tr:last-child {
+  border-bottom: none;
+}
+.table-bordered thead tr {
+  //colors btw the rows
+  border-bottom: 1.5px solid $black-light;
+}
+
+.table-bordered thead tr th {
+  border: none !important;
+  // color: $text-dark;
+  // @include colors($text-white,$black-light);
+  // opacity: 0.8;
+  // @include font(11px, 600);
+  font-family: SFProText;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 0.5rem;
+  // background-color:$black-light;
+}
+
+.table-header {
+  font-size: 22px;
+  font-weight: 600;
+  color: $black-only;
+  // padding: 0.5rem;
+  padding-left: 0rem !important;
+}
+
+.btn-edit {
+  color: $text-light;
+  @include font(77%, 400);
+}
+.btn-delete {
+  color: $red;
+  @include font(77%, 400);
+}
+
+.primary-btn:disabled {
+  background-color: $black-only;
+  color: $text-white;
+}
+.primary-btn {
+  font-size: 12px;
+}
+.primary-btn-alignment {
+  margin-top: 2.5px;
+}
+.table-bordered tbody tr td {
+  border-right: none;
+  border-left: none;
+  border-top: 1px solid;
+  border-bottom: none;
+  border-color: $black-only !important;
+  width: 150px;
+  // @include font(12px, 400);
+  @include colors($text-white-opacity, $black-medium);
+  padding: 0.5rem;
+  font-family: SFProText;
+  font-size: 14px;
+}
+
+.table-bordered tbody tr td button {
+  @include font(12px, 600);
+}
+
+.table-bordered th,
+.table-bordered td {
+  vertical-align: middle;
+}
+.card-grey {
+  background-color: $screen-color;
+  border: none;
+}
+.card-no-border {
+  border: none;
+}
+.main-header {
+  // color: $text-dark;
+  @include font(85%, 600);
+}
+
+.list-values {
+  // color: $text-dark;
+  color: $text-white-opacity;
+  font-size: 75%;
+  font-weight: 600;
+}
+//Icons
+.fa-times {
+  font-size: 70%;
+  color: $black-only;
+}
+.primary-outline-btn,
+.primary-btn {
+  @include font(75%, 600);
+}
+.form-control {
+  height: 40px;
+  @include font(80%, 400);
+  background-color: $black-medium;
+}
+.form-check-label {
+  color: $text-white-opacity;
+  font-size: 75%;
+}
+.form-group label {
+  @include font(14px, normal);
+  color: $text-light;
+}
+.button-flex {
+  //   display: flex;
+  flex-direction: row;
+  display: flex;
+  justify-content: flex-end;
+}
+.Icon-Button {
+  margin-right: 10px;
+  width: 40px;
+  height: 28px;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: solid 1px $black-light;
+}
+.Icon-Button:hover {
+  cursor: pointer;
+}
+.Regular-Button1 {
+  width: 153px;
+  height: 40px;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin: 24px 12px 0;
+  padding: 12px 16px;
+  border-radius: 8px;
+}
+.Button-label:hover {
+  cursor: pointer;
+}
+.Button-label {
+  width: 97px;
+  height: 16px;
+  flex-grow: 0;
+  font-family: "DM Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: 0.32px;
+  text-align: center;
+  color: $text-white;
+}
+.search-text {
+  margin-bottom: 5px;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: SFProText;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: 0.32px;
+  text-align: left;
+  color: $text-white;
+}
+.Regular-Button2 {
+  width: 145px;
+  height: 40px;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin: 24px 0 0 12px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: solid 1px $black-light;
+}
+.form-control2 {
+  height: 29px;
+  // @include font(80%, 400);
+  background-color: $black-dark;
+  color: $text-white;
+  border: none;
+  font-family: "DM Sans", sans-serif;
+  font-size: 16px;
+}
+.search-row {
+  margin-bottom: 15px;
+}
+
+.textColorgrey {
+  font-weight: 400;
+  font-size: 1rem;
+}
+#certificate {
+  overflow: hidden;
+  height: 0px;
+  box-sizing: border-box;
+  width: 1200px;
+  background: $pilotCertificateBG;
+  color: #000;
+  font-family: "Roboto";
+  .pdfContainer {
+    text-align: center;
+    background-image: url(../../../../../assets/icons/svg_border.svg);
+    background-size: 15px;
+    background-position: center;
+    padding: 15px;
+    .containerBorder {
+      background: linear-gradient(
+        to right,
+        $pilotCertificateBorder1,
+        $pilotCertificateBorder2
+      );
+      padding: 16px;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      .containerBorder2 {
+        padding: 10px;
+        background: #fff;
+        .containerBorder3 {
+          background-color: #fff;
+          border: 2px solid;
+          border-image: linear-gradient(
+              to right,
+              $pilotCertificateBorder1,
+              $pilotCertificateBorder2
+            )
+            1;
+          padding: 20px;
+        }
+      }
+    }
+    .certificateBorder {
+      font-family: "Podkova";
+      margin: 18px;
+      font-weight: 700;
+      font-size: 50px;
+      line-height: 65px;
+      text-transform: uppercase;
+      color: $pilotCertificateText;
+    }
+    .name {
+      font-family: "Roboto Slab";
+      font-weight: 700;
+      font-size: 55.287px;
+      line-height: 73px;
+    }
+    .date {
+      font-weight: 500;
+      font-size: 24px;
+      line-height: 30px;
+    }
+    .desc {
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 33px;
+    }
+    .footer {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      height: 150px;
+      position: relative;
+      div {
+        display: flex;
+        flex-direction: column;
+        line-height: 2px;
+      }
+      .stamp {
+        align-items: center;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+
+        img {
+          width: 108px;
+          height: 108px;
+          margin-bottom: 10px;
+        }
+        p {
+          font-size: 13px;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+}
+.wait-cursor {
+  cursor: wait;
+}

@@ -1,0 +1,42 @@
+@import "../../../../scss/colorCodes.scss";
+
+.weatherIcon2 {
+  width: 120px;
+  background-color: $black-light;
+  border-radius: 4px;
+  cursor: default;
+  position: relative;
+  overflow: hidden;
+  .props,
+  .core {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .props {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0%;
+    justify-content: center;
+    border-radius: 4px;
+    background-color: $black-medium;
+    span {
+      cursor: pointer;
+      width: 30px;
+      .mat-drawer-container {
+        background-color: white;
+      }
+    }
+  }
+}
+.weatherIcon2:hover {
+  .props {
+    opacity: 100%;
+  }
+}
+.weatherIcon2width {
+  width: 138px;
+}

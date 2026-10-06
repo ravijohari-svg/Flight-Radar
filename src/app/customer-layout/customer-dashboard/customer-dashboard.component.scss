@@ -1,0 +1,302 @@
+@import '../../../scss/colorCodes.scss';
+
+@mixin colors($color, $background-color) {
+  color: $color;
+  background-color: $background-color;
+}
+
+@mixin font($font-size, $font-weight) {
+  font-size: $font-size;
+  font-weight: $font-weight;
+}
+
+// Common
+.mission-layout,
+.header {
+  position: absolute;
+  z-index: 100;
+  left: 3%;
+  // width: 75%;
+}
+
+#right-logo {
+  float: right;
+  position: absolute;
+  z-index: 100;
+  right: 3%;
+  bottom: 2%;
+  background-color: #1f1f1fb0;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+// Header
+.header {
+  top: 3%;
+  background: transparent;
+}
+
+// Missions
+.mission-layout {
+  top: 12%;
+  width: 350px;
+  background-color: #fff;
+  border-radius: 7px;
+}
+
+// Map
+.main-map {
+  height: 100vh;
+}
+
+.sub-header {
+  color: $text-dark;
+  @include font(90%, 600);
+}
+
+.list-description.active {
+  color: $blue;
+
+  font: {
+    size: 13px;
+    weight: 600;
+  }
+}
+
+.list-values {
+  color: $text-dark;
+  font-size: 80%;
+  font-weight: 600;
+}
+
+.list-description {
+  color: $text-light;
+  font-size: 80%;
+}
+
+.fa-chevron-circle-left,
+.fa-chevron-circle-right {
+  color: $text-light;
+}
+
+.btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.info-btn {
+  color: #cccccc;
+}
+
+.info-btn:hover+.hover-card {
+  display: block;
+  // color: red;
+}
+
+.hover-card {
+  display: none;
+  position: fixed;
+  width: 350px;
+  background-color: #ffffff;
+  left: 20%;
+  z-index: 1000000;
+}
+
+.hover-card-top5 {
+  top: 50%;
+}
+
+.hover-card-top10 {
+  top: 30%;
+}
+
+.hover-card-top15 {
+  top: 10%;
+}
+
+.hover-card-top-large {
+  top: 2%;
+}
+
+@media screen and (max-width: 1300px) and (min-width: 992px) {
+  .hover-card {
+    left: 25%;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .hover-card {
+    left: 40%;
+    width: 150px;
+  }
+}
+
+//Mission Status
+.reject {
+  border: 1px solid #dc3545 !important;
+  color: #dc3545;
+  background-color: #faeaea;
+  @include font(11px, 600);
+}
+
+.approve {
+  border: 1px solid #2bc43f !important;
+  color: #2bc43f;
+  background-color: #edfdee;
+  @include font(11px, 600);
+}
+
+.pending {
+  border: 1px solid #ffcb3d !important;
+  color: #ffcb3d;
+  background-color: #feffe2;
+  @include font(11px, 600);
+}
+
+
+
+
+//Accordion
+accordion {
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.mission-section {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  background-color: #f2f2f2;
+}
+
+.btn-tabs.active {
+  border-radius: 0;
+  border-bottom: 3px solid $blue;
+  color: $blue;
+}
+
+.btn-tabs {
+  font-size: 75%;
+  font-weight: 600;
+}
+
+.btn-tabs:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.card-list-values {
+  color: $text-dark;
+  font-size: 80%;
+  font-weight: 600;
+}
+
+//Scrollbar
+accordion::-webkit-scrollbar {
+  width: 0.3em;
+}
+
+accordion::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.2);
+}
+
+accordion::-webkit-scrollbar-thumb {
+  background-color: #adadad;
+  // outline: 1px solid slategrey;
+}
+
+.empty-state-header {
+  color:$text-dark !important;
+}
+.empty-state-text {
+  color: $text-light !important;
+}
+
+//Large lg Responsive
+@media (min-width: 992px) {
+  .map-col {
+    margin-top: -3rem !important;
+  }
+}
+
+.white-background {
+  background-color: #fdfdfd;
+  border-radius: 5px;
+  width: 60px;
+}
+
+.light-txt-label {
+  color: $text-light;
+  @include font(70%, 600);
+}
+
+// Font awesome
+.fa-circle.fa-circle-live {
+  color: #ff3742;
+  font-size: 8px;
+}
+
+.fa-minus-circle {
+  color: $text-light;
+  font-size: 50px;
+}
+
+//Complaince
+.card-list-header {
+  color: $text-dark;
+  font-size: 90%;
+  font-weight: 600;
+}
+
+.mission-col {
+  max-height: 72vh;
+  overflow-y: auto;
+}
+
+@media screen and (max-width: 1300px) {
+  .mission-col {
+    max-height: 77vh;
+  }
+}
+
+//Scrollbar
+.mission-col::-webkit-scrollbar {
+  width: 0.3em;
+}
+
+.mission-col::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.1);
+}
+
+.mission-col::-webkit-scrollbar-thumb {
+  background-color: #b9b9b9;
+  // outline: 1px solid slategrey;
+}
+
+
+
+.fa-check-circle {
+  color: #4fc55f;
+}
+
+.fa-times-circle,
+.fa-times {
+  color: #dc3545;
+}
+
+.fa-circle.red {
+  color: #dc3545;
+  // color: rgba(0, 0, 0, 0.125);
+  // border-radius: 50%;
+}
+
+.fa-dot-circle-o,
+.fa-circle.manual {
+  color: #ffcb3d;
+}
+
+.huge-txt {
+  font-size: 13px;
+  font-weight: 600;
+  background-color: #fff;
+  border-radius: 5px;
+  cursor: context-menu;
+}

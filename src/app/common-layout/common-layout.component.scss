@@ -1,0 +1,38 @@
+@import '../../scss/colorCodes.scss';
+
+@mixin font($font-size, $font-weight) {
+    font-size: $font-size;
+    font-weight: $font-weight;
+}
+@mixin colors($color, $background-color) {
+     color: $color;
+     background-color: $background-color;
+}
+
+// Navigation Bar
+.bg-dark {
+//    background-color: $black !important;
+   background-color:$dark-v1 !important;
+}
+.active {
+    color: $yellow !important;
+}
+.align-middle {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.nav-item, .primary-btn {
+   @include font(14px, normal);
+}
+
+.navbar-expand-lg .navbar-nav .nav-link {
+    padding-right: 1.7rem !important;
+    padding-left: 1.7rem !important;
+    color: $nav-link;
+}
+@media (min-width: 992px) {
+.navbar-expand-lg .navbar-nav .nav-link {
+    padding-right: 1.7rem !important;
+    padding-left: 1.7rem !important;
+}
+}

@@ -1,0 +1,184 @@
+<div *ngIf="loader" class="loader">
+  <app-loader [PhaseKey]="loaderKey"></app-loader>
+</div>
+<!-- Implementation of trackBy  -->
+<div
+  *ngFor="let category of droneParameters; trackBy: getCategory"
+  class="my-2"
+>
+  <div class="white-text f-14 font-weight-bold">{{ category.Category }}</div>
+  <div class="row row-eq-height px-1">
+    <div
+      *ngFor="let parameter of category.Parameters; trackBy: getParameter"
+      class="col-xl-4 col-lg-6 my-3 px-2"
+    >
+      <div class="card dark-medium card-no-border h-100">
+        <!-- h-100 -->
+        <div class="card-body p-3 d-flex flex-column h-100">
+          <!--d-flex flex-column h-100  -->
+
+          <div class="row">
+            <div class="d-flex d-column" style="width: 100%">
+              <!-- d-flex -->
+              <div class="col-sm-9 white-text f-12 font-weight-bold pr-0 pt-1">
+                {{ parameter.Name }}
+              </div>
+              <div class="col-sm-3 px-0 text-right">
+                <button
+                  class="btn primary-outline-btn py-0"
+                  (click)="addDroneParameter(addDrone, parameter.Value)"
+                >
+                  + Add
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- <div *ngFor="let type of parameter.Types" class="card card-no-border dark-light my-2 "> -->
+          <!-- Implementation of trackBy  -->
+          <div
+            *ngFor="let type of parameter.Types; trackBy: getItemId"
+            class="card card-no-border dark-light my-2"
+          >
+            <!-- d-flex -->
+            <div class="card-body py-2">
+              <div class="row">
+                <div class="col-9">
+                  <div class="white-text font-weight-bold f-10">
+                    {{ type.Value }}
+                  </div>
+                </div>
+                <div class="col text-right">
+                  <button
+                    class="btn btn-edit py-0 px-0"
+                    (click)="
+                      onEditDroneParameters(addDrone, type, parameter.Value)
+                    "
+                  >
+                    <i
+                      class="fa fa-pencil white-text-opacity"
+                      aria-hidden="true"
+                    ></i>
+                  </button>
+                  <button
+                    class="btn btn-delete py-0 px-0 ml-2"
+                    (click)="
+                      showSwal('delete-droneParameter', type, parameter.Value)
+                    "
+                  >
+                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                    <!-- <i class="fa fa-edit"></i> -->
+                  </button>
+                </div>
+                <!-- <div class="col px-0 text-right">
+
+                </div> -->
+              </div>
+              <div class="white-text-opacity f-10">
+                Permission: {{ type.Permission }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #addDrone id="addDrone" let-c="close" let-d="dismiss">
+  <div class="card dark-medium modal-body">
+    <div class="row">
+      <div class="main-header white-text-opacity float-left mt-2 col-9">
+        <span *ngIf="!editFlag">Add</span>
+        <span *ngIf="editFlag">Apply</span> Parameter
+      </div>
+      <div class="text-right col-3">
+        <button
+          type="button"
+          class="close"
+          aria-label="Close"
+          (click)="onCancel()"
+        >
+          <span aria-hidden="true"><i class="fa fa-times"></i></span>
+        </button>
+      </div>
+    </div>
+    <hr class="my-2" />
+    <div class="mt-4">
+      <form [formGroup]="addDroneParameterForm">
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter parameter name"
+            formControlName="Value"
+            [ngClass]="{
+              'is-invalid': submitted && droneParameter.Value.errors
+            }"
+          />
+          <div
+            *ngIf="submitted && droneParameter.Value.errors"
+            class="error-message"
+          >
+            <div *ngIf="droneParameter.Value.errors.required">
+              This field is required
+            </div>
+          </div>
+        </div>
+        <div class="mt-3">
+          <div class="list-values my-1">Permission Type</div>
+          <div
+            *ngFor="let permission of permissionList; trackBy: getPermisssion"
+            class="form-check form-check-inline"
+          >
+            <input
+              class="form-check-input"
+              type="radio"
+              name="Permission"
+              value="permission.Value"
+              (click)="onPermissionChange(permission.Value)"
+              [checked]="
+                permission.Value == addDroneParameterForm.value.Permission
+              "
+            />
+            <label class="form-check-label" for="flexRadioDefault1">
+              {{ permission.Name }}
+            </label>
+          </div>
+          <div
+            *ngIf="submitted && droneParameter.Permission.errors"
+            class="error-message"
+          >
+            <div *ngIf="droneParameter.Permission.errors.required">
+              This field is required
+            </div>
+          </div>
+        </div>
+        <div class="my-2 float-right">
+          <button
+            type="button"
+            class="btn btn-dark-border mb-3 f-12 px-4 mx-2"
+            (click)="onCancel()"
+          >
+            Cancel
+          </button>
+          <button
+            *ngIf="!editFlag"
+            type="button"
+            class="btn primary-btn mb-3 px-4"
+            (click)="addDroneParameterSubmit()"
+          >
+            Add
+          </button>
+          <button
+            *ngIf="editFlag"
+            type="button"
+            class="btn primary-btn mb-3 px-4"
+            (click)="editDroneParameterSubmit()"
+          >
+            Apply
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</ng-template>

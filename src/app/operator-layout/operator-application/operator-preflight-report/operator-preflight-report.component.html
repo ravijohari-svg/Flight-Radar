@@ -1,0 +1,216 @@
+<div class="doc-container">
+    <div *ngIf='reportValues' id="page">
+      <div class="page px-5 py-4 mx-5 my-3">
+        <div class="row py-5">
+          <div class="col-6 mt-1">
+            <div class="report-header">Pre-flight Report
+            </div>
+            <div class="my-1 section-header" *ngIf="missionType == 'LOS' "> Line of Sight(LOS) </div>
+            <div class="my-1 section-header" *ngIf="missionType == 'BVLOS' "> Beyond Visual Line of Sight(BVLOS) </div>
+  
+          </div>
+          <div class="col-6 text-right">
+            <img src="../../../../assets/common-layout/SkyeUTM logoDark.png" width="440px">
+          </div>
+        </div>
+        <div class="my-5">
+          <div class="normal-text-doc">
+            Utilise the document to notify the stakeholders of your flight such as team members, property owners,
+            citizens you fly over, regulators, ATC and local law enforcement. Please conduct a safe and informed
+            flight.
+          </div>
+        </div>
+        <div class="my-5">
+          <div class="sub-report-header py-4">Mission Details</div>
+          <table  class="doc-table table table-bordered">
+            <tbody>
+              <tr>
+                <td>Operation Name</td>
+                <td>{{missionDetails?.OperationName}}</td>
+              </tr>
+              <tr>
+                <td>OperatorId</td>
+                <td>{{profileDetails?.UserId}}</td>
+              </tr>
+              <tr>
+                <td>Location</td>
+                <td>{{currentWeatherDetails?.name}}</td>
+              </tr>
+              <tr>
+                <td>Maximum Altitude</td>
+                <td> <{{missionDetails?.MaximumAltitude}} m</td>
+              </tr>
+              <tr>
+                <td>Activity Type</td>
+                <td>{{missionDetails?.ActivityType.ActivityType}}</td>
+              </tr>
+              <tr>
+                <td>Start Time</td>
+                <td>{{missionDetails?.StartTime | date : 'dd MMM yyyy, h:mm a'}}</td>
+              </tr>
+              <tr>
+                <td>End Time</td>
+                <td>{{missionDetails?.EndTime | date : 'dd MMM yyyy, h:mm a'}}</td>
+              </tr>
+              <tr>
+                <td>DroneName</td>
+                <td>{{missionDetails?.DroneName}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="my-5">
+          <div class="sub-report-header py-4">Pilot Details</div>
+          <table class="doc-table table table-bordered">
+            <tbody>
+              <tr>
+                <td>Name</td>
+                <td>{{missionDetails?.Pilot}} </td>
+              </tr>
+              <tr>
+                <td>Contact</td>
+                <td>{{missionDetails?.PilotContact}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="my-5">
+          <div class="sub-report-header py-4">Current Weather Details</div>
+          <table class="doc-table table table-bordered">
+            <tbody>
+              <!-- <tr>
+                <td>Location</td>
+                <td>{{currentWeatherDetails?.name}}</td>
+              </tr> -->
+              <tr>
+                <td>Temperature</td>
+                <td>{{currentWeatherDetails?.main.temp | frantCelcius:'C'}}°C</td>
+              </tr>
+              <tr>
+                <td>Wind Speed</td>
+                <td> {{currentWeatherDetails?.wind.speed}} m/s</td>
+              </tr>
+              <tr>
+                <td>Climate</td>
+                <td *ngFor="let climate of currentWeatherDetails?.weather">
+                  {{climate?.description | titlecase }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="mt-5">
+            <div class="sub-report-header py-4">Compliance</div>
+            <div class="card">
+              <div class="card-body p-3">
+                <div class="row">
+                  <div class="col-4 px-5" *ngFor="let category of missionPermissionsList; let i = index">
+                    <!-- style="width:100%"  -->
+                    <!-- <div *ngFor="let category of module.category" class="col-6"> -->
+                    <!-- my-1  -->
+                    <div class=" row">
+                      <div class="col-9 card-list-values"> {{category?.Name}} </div>
+                      <div class="col-3 text-right">
+                        <i *ngIf="category?.permission == 'Auto-Approve'" class="fa fa-check-circle fa-2x"
+                          aria-hidden="true"></i>
+                        <i *ngIf="category?.permission == 'Auto-Reject'" class="fa fa-times-circle fa-2x"></i>
+                        <i *ngIf="category?.permission == 'Manual'" class="fa fa-circle manual fa-2x"
+                          aria-hidden="true"></i>
+                      </div>
+                    </div>
+                    <!-- </div> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+      <div class="page px-5 py-4 mx-5 my-3">
+        <div class="my-5">
+          <div class="sub-report-header py-4">Airspace Permissions</div>
+  
+  
+          <div class="py-3">
+            <div class="section-header my-3">Intersection Details</div>
+  
+            <table *ngIf="coRelationFlag" class="doc-table table table-bordered">
+              <tbody>
+                <tr *ngIf="interesectionArr.vfr.length != 0">
+                  <td>Flight Rules (Airspace regulations placed by DGCA)</td>
+                  <td>
+                    <span *ngFor="let vfr of interesectionArr.vfr; let i = index" class="list-values-doc">
+                      {{vfr.type}} <span *ngIf="i != interesectionArr.vfr.length - 1"> ,</span>
+                    </span>
+                  </td>
+                </tr>
+                <tr *ngIf="interesectionArr.geozone.length != 0">
+                  <td>Airspace geozones</td>
+                  <td>
+                    <span *ngFor="let geozone of interesectionArr.geozone; let i = index" class="list-values-doc">
+                      {{geozone.type}} <span *ngIf="i != interesectionArr.geozone.length - 1"> ,</span>
+                    </span>
+                  </td>
+                </tr>
+                <tr *ngIf="interesectionArr.airport.length != 0">
+                  <td> Airports</td>
+                  <td>
+                    <span *ngFor="let airport of interesectionArr.airport; let i = index" class="list-values-doc">
+                      {{airport.type}} <span *ngIf="i != interesectionArr.airport.length - 1"> ,</span>
+                    </span>
+                  </td>
+                </tr>
+                <tr class="orange-text" *ngIf="interesectionArr.reservedAirspace.length != 0">
+                  <td>Active airspace</td>
+                  <td>{{interesectionArr.reservedAirspace.length}} active drone flights are occurring within/around
+                    the
+                    geofence</td>
+                </tr>
+              </tbody>
+            </table>
+            <div *ngIf="coRelationFlag" class="my-5">
+              <div class="alert alert-danger alert-danger-doc" role="alert">
+                <div>Note:</div>
+                <div *ngIf="interesectionArr?.reservedAirspace.length != 0">
+                  A pilot/pilots are conducting active UAV/UAS operations nearby, your drone may be at high risk.
+                </div>
+                <div
+                  *ngIf="interesectionArr?.vfr.length != 0 || interesectionArr?.airport.length != 0 || interesectionArr?.geozone.length != 0">
+                  Your flight plan is entering into a sensitive airspace/airspaces.
+                  To avoid issues during your flight, please resubmit a better flight-plan or declare that you
+                  have the necessary documents to conduct this mission.
+                </div>
+              </div>
+            </div>
+            <div class="declaration-font"*ngIf="interesectionArr?.vfr.length != 0 || interesectionArr?.airport.length != 0 || interesectionArr?.geozone.length != 0">
+              <input class="declaration-checkbox" type="checkbox" [checked]="true">
+              The pilot has declared that he/she has all the documents/permission to conduct the mission.
+
+            </div>
+            <div *ngIf="!coRelationFlag" class="normal-text-doc">Your Mission is flying in Green Zone</div>
+          </div>
+          <div class="py-3">
+            <div class="section-header my-3">Notified Area</div>
+            <div class="text-center " *ngIf="mapScreenshotURL">
+              <img src={{mapScreenshotURL}} height="900px">
+            </div>
+          </div>
+        </div>
+        <div class="my-5">
+          <div class="alert alert-light alert-light-doc" role="alert">
+            Disclaimer - This document is an instrument to increase flight awareness and airspace safety. This is not
+            a
+            legal document.
+            Skye UTM and/or it's affiliates cannot be held accountable for any mishaps, privacy invasions and loss of property
+            or
+            life.
+          </div>
+        </div>
+      </div>
+      <div *ngIf="riskChartOptions" class="page px-5 py-4 mx-5 my-3">
+        <div class="mt-5">
+          <div class="sub-report-header py-4">Flight Risk score</div>
+          <div echarts [options]="riskChartOptions" class="demo-chart risk-chart-doc"></div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,19 @@
+<div class="px-3 py-3 mx-1 main-panel">
+  <div class="tabs my-2">
+    <a
+      class="btn btn-tabs white-text"
+      [routerLink]="['drone-parameters']"
+      routerLinkActive="active"
+      >Drone Parameters</a
+    >
+    <a
+      class="btn btn-tabs white-text"
+      [routerLink]="['mission-parameters']"
+      routerLinkActive="active"
+      >Mission Parameters</a
+    >
+  </div>
+  <div style="min-height: calc(100vh - 90px)">
+    <router-outlet></router-outlet>
+  </div>
+</div>

@@ -1,0 +1,331 @@
+.main-panel {
+  position: relative;
+}
+
+ac-map {
+  width: 100%;
+  height: 100%;
+}
+
+.main-map {
+  height: 100vh;
+}
+
+.mission-card {
+  min-height: 90vh;
+}
+
+.form-group-headings {
+  font-size: 12px;
+  font-weight: 500;
+  color: #657786;
+}
+
+.btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.nav-link.btn {
+  font-size: 14px;
+}
+
+.active {
+  border-bottom: 2px solid #3056af;
+  border-radius: 0;
+  color: #3056af;
+}
+
+.width-75 {
+  width: 75px;
+}
+
+.units {
+  background-color: #fbfcfd;
+  color: #3056af;
+}
+
+#uploadwayPoint {
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
+}
+
+.waypoints-table thead th {
+  background-color: #f2f2f2;
+  border-bottom: none;
+  font-size: 13px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.waypoints-table {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.waypoints-table thead th {
+  background-color: #f2f2f2;
+  border-bottom: none;
+  font-size: 12px;
+  width: 180px;
+}
+
+.waypoints-table tbody tr td {
+  padding: 0px;
+  width: 180px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.waypoints-table tbody tr td input {
+  border-radius: 0px;
+}
+
+.waypoints-table tbody tr td input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+table {
+  width: 100%;
+}
+
+.alert-light {
+  font-size: 80%;
+  border-color: rgba(0, 0, 0, 0.125);
+}
+
+.disclaimeer-heading {
+  font-size: 14px;
+  font-weight: 600;
+  color: #121212;
+}
+
+.light-txt {
+  font-size: 75%;
+  color: #8c8c8c;
+}
+
+.list-values {
+  color: #121212;
+  font-size: 80%;
+  font-weight: 600;
+}
+
+.list-description {
+  color: #8c8c8c;
+  font-size: 80%;
+}
+
+.table-bordered {
+  border-collapse: separate;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 5px;
+  background-color: #ffffff;
+}
+
+.table-bordered tbody tr {
+  padding: 20px !important;
+}
+
+.table-bordered thead tr th {
+  border: none !important;
+  color: #121212;
+  opacity: 0.8;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 0.7rem;
+}
+
+.table-header {
+  font-size: 22px;
+  font-weight: 600;
+  color: #111111;
+  padding-left: 0rem !important;
+}
+
+.table-bordered tbody tr td {
+  border-right: none;
+  border-left: none;
+  border-top: 1px solid;
+  border-bottom: none;
+  border-color: rgba(0, 0, 0, 0.125) !important;
+  width: 150px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 0.7rem;
+}
+
+.table-bordered tbody tr td button {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.table-bordered th,
+.table-bordered td {
+  vertical-align: middle;
+}
+
+.primary-btn,
+.primary-outline-btn {
+  font-size: 90%;
+}
+
+.input-group-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: #3056af !important;
+  background-color: #ffffff !important;
+}
+
+.doc-container {
+  zoom: 0.5;
+  overflow: hidden;
+  height: 0px;
+}
+
+#page {
+  background-color: #ececec;
+  width: 1684px;
+}
+
+.page {
+  width: 1684px;
+}
+
+.report-header {
+  color: #121212;
+  font-size: 54px;
+  font-weight: 600;
+}
+
+.sub-report-header {
+  font-size: 38px;
+  font-weight: 600;
+}
+
+.section-header {
+  color: #121212;
+  font-size: 34px;
+  font-weight: 600;
+}
+
+.doc-table.table-bordered {
+  background-color: #ffffff;
+}
+
+.doc-table.table-bordered tbody tr {
+  padding: 20px !important;
+}
+
+.doc-table.table-bordered thead tr th {
+  color: #121212;
+  opacity: 0.8;
+  font-size: 30px;
+  font-weight: 600;
+  padding: 0.7rem;
+}
+
+.doc-table.table-bordered tbody tr td {
+  width: 700px;
+}
+
+.doc-table.table-bordered tbody tr td:first-child {
+  width: 400px !important;
+  background-color: #f2f2f2;
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.doc-table.table-bordered tbody tr td {
+  font-size: 30px;
+  font-weight: 400;
+  padding: 0.7rem;
+  border: 1px solid rgba(0, 0, 0, 0.5) !important;
+}
+
+.doc-table.table-bordered tbody tr td button {
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.doc-table.table-bordered th,
+.doc-table.table-bordered td {
+  vertical-align: middle;
+}
+
+.list-values-doc {
+  color: #121212;
+  font-size: 32px;
+  font-weight: 600;
+}
+
+.list-description-doc {
+  color: #8c8c8c;
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.weather-card-doc {
+  background-color: #fcfcfc;
+}
+
+.normal-text-doc {
+  color: #121212;
+  font-size: 32px;
+  font-weight: 400;
+}
+
+.alert-light-doc.alert-light {
+  font-size: 28px;
+  font-weight: 400;
+  border-color: rgba(0, 0, 0, 0.125);
+}
+
+.alert-danger.alert-danger-doc {
+  font-size: 28px;
+  font-weight: 400;
+}
+
+.disclaimeer-heading-doc {
+  font-size: 32px;
+  font-weight: 400;
+  color: #121212;
+}
+
+.orange-text {
+  color: #ff8e00;
+}
+
+.card-list-values {
+  color: #121212;
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.fa-check-circle {
+  color: #4fc55f;
+}
+
+.fa-times-circle,
+.fa-times,
+.fa-circle.red {
+  color: #dc3545;
+}
+
+.fa-dot-circle-o, .fa-circle.manual {
+  color: #ffcb3d;
+}
+
+.risk-chart {
+  width: 350px;
+  height: 350px;
+  margin: auto;
+}
+
+.risk-chart-doc {
+  width: 700px;
+  height: 700px;
+  margin: auto;
+}/*# sourceMappingURL=operator-create-mission.component.css.map */

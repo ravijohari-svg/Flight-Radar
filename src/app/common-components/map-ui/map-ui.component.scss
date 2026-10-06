@@ -1,0 +1,180 @@
+@import "../../../scss/colorCodes.scss";
+// UI card
+.template-card {
+  position: absolute;
+  height: 500px;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  top: 120px;
+  right: 10px;
+  border-radius: 5px;
+}
+.template-card .twobuttons:hover {
+  cursor: pointer;
+}
+.title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 2px solid $text-white;
+  height: 45px;
+  width: 100%;
+}
+.info {
+  display: flex;
+  flex-direction: column;
+  height: 455px;
+  width: 100%;
+}
+.bottomLiveCard {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-44%);
+}
+.decHeight {
+  position: absolute;
+  animation-name: decheight;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+.incHeight {
+  position: absolute;
+  animation-name: incheight;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+}
+
+@keyframes decheight {
+  from {
+    height: 500px;
+  }
+  to {
+    height: 45px;
+  }
+}
+@keyframes incheight {
+  from {
+    height: 45px;
+  }
+  to {
+    height: 500px;
+  }
+}
+
+.dropstate {
+  height: 0%;
+}
+.template-card {
+  overflow: hidden;
+}
+.dropdown-open {
+  height: 45px;
+}
+.dropdown-open-1 {
+  height: 45px;
+}
+.pic-info {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  height: 60px;
+  width: 100%;
+}
+.pic-info img {
+  border-radius: 3px;
+}
+.middle-section {
+  margin-top: 80px;
+  display: flex;
+  flex-direction: column;
+  height: 270px;
+  width: 100%;
+}
+.text-1 {
+  display: flex;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  height: 80px;
+  width: 100%;
+  border-radius: 6px;
+}
+.expandinfo {
+  width: 380px;
+  height: 200px;
+  border-radius: 6px;
+}
+.showaccords {
+  position: relative;
+  animation-name: showsaccord;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+.hideaccords {
+  position: relative;
+  animation-name: hideaccord;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+@keyframes showsaccord {
+  from {
+    height: 80px;
+  }
+  to {
+    height: 400px;
+  }
+}
+@keyframes hideaccord {
+  from {
+    height: 400px;
+  }
+  to {
+    height: 80px;
+  }
+}
+.green {
+  border: 2px solid $green;
+}
+.yellow {
+  border: 2px solid $card-color;
+}
+.red {
+  border: 2px solid $dark-red;
+}
+.img-display {
+  flex: 0 0 15%;
+  display: flex;
+  margin-top: 8px;
+  width: 17%;
+}
+.text-2 {
+  flex: 0 0 70%;
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin-top: 12px;
+}
+.updownbutton {
+  flex: 0 0 15%;
+  display: flex;
+  margin-top: 14px;
+  margin-top: 14px;
+  width: 13%;
+}
+.text-1 .updownbutton:hover {
+  cursor: pointer;
+}
+.twobuttons {
+  display: flex;
+  gap: 10px;
+  flex-direction: row;
+}
+.airground{
+  height: 125px;
+  width: 100%;
+}

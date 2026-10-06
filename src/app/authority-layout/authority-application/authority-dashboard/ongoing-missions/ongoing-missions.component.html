@@ -1,0 +1,119 @@
+<div *ngIf="loader" class="loader">
+  <div class="logo">
+    <img
+      src="../../../../../assets/common-layout/SquareLoader.gif"
+      width="30px"
+    />
+    <img
+      src="../../../../../assets/common-layout/SkyeUTM logoWhite.svg"
+      width="200px"
+    />
+  </div>
+</div>
+<div class="main-panel">
+  <!-- <div class="himachalAuth" *ngIf="profileDetails?.UserId === 'AUTRTY2'">
+    <img
+      src="../../../assets/icons/logo.png"
+      alt="SkyeUTM"
+      title="Himachal Gvt. Logo"
+      width="110px"
+      height="75px"
+    />
+  </div> -->
+    <!-- HeatMaps  -->
+    <div class="heatmap" >
+      <!-- <app-heatmap
+      (teleSwitch)="telecomApi($event)"
+      (popSwitch)="popHeatmap($event)"
+      (toggSwitch)="toggle2D3D($event)"
+      (terrSwitch)="osmBuildings($event)"
+      ></app-heatmap> -->
+      <app-heatmap (toggSwitch)="toggle2D3D($event)"></app-heatmap>
+    </div>
+     <!-- UI Card  -->
+    <div class="map-ui">
+      <app-map-ui
+      *ngIf="isView"
+      [isView]="isView"
+      [title]="entityDescription?.title"
+      [fircode]="entityDescription?.airspaceInfo?.FIRCodes"
+      [airspacetype]="entityDescription?.airspaceInfo?.Type"
+      [fic]="entityDescription?.airspaceInfo.FIC"
+      [country]="entityDescription?.groundInfo.Country"
+      [state]="entityDescription?.groundInfo.States"
+      [elevation]="entityDescription?.groundInfo.elevation"
+      (changeIsView)="close(val)"
+    >
+   </app-map-ui>
+     </div>
+  <div class="infoCard" *ngIf="selectedMission">
+    <app-weather-card
+      [currentWeatherDetails]="currentWeatherDetails"
+      [responseCityName]="responseCityName"
+      [droneName]="droneName"
+    ></app-weather-card>
+  </div>
+  <div class="bottomLiveCard" *ngIf="selectedMission">
+
+    <app-live-card
+      [liveLatitude]="latestMissionLogs?.lat"
+      [liveLongitude]="latestMissionLogs?.lng"
+      [liveAltitude]="latestMissionLogs?.alt"
+      [battery_remaining]="latestMissionLogs?.battery_remaining"
+      [batteryVoltage]="latestMissionLogs?.battery_voltage"
+      [groundspeed]="latestMissionLogs?.groundspeed"
+      [flightTime]="latestMissionLogs?.flightTime"
+      [distTraveled]="latestMissionLogs?.distTraveled"
+      (trackDrone)="TrackDrone()"
+      [droneFollow]="droneFollow"
+    ></app-live-card>
+  </div>
+  <!-- <div class="">
+    <div class="map-col">
+      <div class="main-map px-0">
+        <ng-template appResuableOutlet></ng-template>
+      </div>
+    </div>
+  </div> -->
+
+
+  <div
+    authority
+    class="mission-card dark-body"
+    
+    [class.collapsed]="toggleMissionDetailstab"
+  >
+    <div class="dropdown" (click)="toggleMissionDetails()">
+      <img
+        src="../../../../assets/icons/chevron-left.svg"
+        [alt]="toggleMissionDetailstab ? 'left' : 'right'"
+        [class.rotate]="!toggleMissionDetailstab"
+      />
+    </div>
+    <div class="spaceCard mb-2"></div>
+    <div class="missionList px-lg-2" *ngIf="ongoingMissionCount === 0">
+      <div class="py-2">
+        <div class="noMission mt-1 dark-new">
+          <img
+            src="../../../../../assets/icons/noMission.svg"
+            alt="NoMission"
+            width="70%"
+          />
+          <div class="text-white empty-state-header">No Missions Found at this Moment</div>
+        </div>
+      </div>
+    </div>
+    <div class="missionList px-lg-2">
+      <div
+        *ngFor="let mission of onGoingMissionsList"
+        [class.activeMission]="selectedMission === mission?.MissionId"
+        (click)="stoplogs(mission?.MissionId)"
+      >
+        <app-mission-card
+          [mission]="mission"
+          [latestMissionLogs]="latestMissionLogs"
+        ></app-mission-card>
+      </div>
+    </div>
+  </div>
+</div>

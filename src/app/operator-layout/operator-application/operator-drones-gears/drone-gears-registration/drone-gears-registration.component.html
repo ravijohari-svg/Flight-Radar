@@ -1,0 +1,814 @@
+<div *ngIf="loader" class="loader">
+  <div class="logo">
+    <img
+      src="../../../../../assets/common-layout/SquareLoader.gif"
+      width="30px"
+    />
+    <img
+      src="../../../../../assets/common-layout/SkyeUTM logoWhite.svg"
+      width="200px"
+    />
+  </div>
+</div>
+<div *ngIf="!loader" style="height: 100vh">
+  <div class="mx-md-3 mx-2 my-5">
+    <div class="back_button" (click)="backButton()">
+      <img
+        src="../../../../../assets/common-layout/Chevron_Left.svg"
+        class="ChevronLeft"
+      /><span class="back_button_label"> Back to drones & Gear </span>
+    </div>
+    <div *ngIf="!addEditFlag" class="add-new-drone-text">Add new drone</div>
+    <div *ngIf="addEditFlag" class="add-new-drone-text">
+      Edit {{ modelName }}
+    </div>
+
+    <div>
+      <form [formGroup]="droneRegisterForm">
+        <div class="card card-outer card-color">
+          <div *ngIf="droneParameters" class="card-body cardbody-margin px-4">
+            <div formGroupName="droneImage" class="my-3">
+              <div class="list-values">Upload Drone Photos</div>
+              <div class="row my-2">
+                <div class="col-md-4 px-3 py-2">
+                  <div class="Upload">
+                    <div class="input-label">
+                      Front View<sup class="star">*</sup>
+                    </div>
+                    <!-- Before upload -->
+                    <div class="File-Upload" *ngIf="droneFrontImageFlag == 0">
+                      <div>
+                        <img
+                          src="../../../../../assets/common-layout/Upload.svg"
+                          class="upload-img2"
+                        />
+                        <div class="text-drag">
+                          Drag-and-drop a JPEG/PNG file,
+                          <p>
+                            or
+                            <span class="text-primary-drag"
+                              >browse computer</span
+                            >
+                          </p>
+                        </div>
+                      </div>
+                      <input
+                        type="file"
+                        id="uploadDocumentsFile"
+                        (change)="droneFrontImageFileUploads($event)"
+                        [ngClass]="{
+                          'is-invalid':
+                            submitted && droneFrontImageFileName == ''
+                        }"
+                      />
+                    </div>
+                    <!-- After Upload -->
+                    <div class="File-Uploaded" *ngIf="droneFrontImageFlag == 1">
+                      <img
+                        src="../.../../../../../../assets/common-layout/file-logo.svg"
+                        class="file-logo"
+                      />
+                      <span class="filenamepdf f-14">
+                        {{ droneFrontImageFileName }}
+                      </span>
+                      <span class="KB"> </span>
+                      <img
+                        src="../.../../../../../../assets/common-layout/file-close.svg"
+                        class="file-close"
+                        (click)="resetFrontImageFileUploads()"
+                      />
+                    </div>
+                    <div
+                      *ngIf="droneFrontImageFileSizeError"
+                      class="error-message"
+                    >
+                      <div>File size should be less than or equal to 500KB</div>
+                    </div>
+                    <div
+                      *ngIf="droneFrontImageFileTypeError"
+                      class="error-message"
+                    >
+                      <div>Invalid type, Please upload JPEG/PNG files.</div>
+                    </div>
+                    <div
+                      *ngIf="submitted && droneImage.droneFrontImageFile.errors"
+                      class="error-message"
+                    >
+                      <div
+                        *ngIf="
+                          submitted &&
+                          droneImage.droneFrontImageFile.errors.required
+                        "
+                      >
+                        This field is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-4 px-3 py-2">
+                  <div class="Upload">
+                    <div class="input-label">Side View</div>
+                    <!-- Before upload -->
+                    <div class="File-Upload" *ngIf="droneSideImageFlag == 0">
+                      <div>
+                        <img
+                          src="../../../../../assets/common-layout/Upload.svg"
+                          class="upload-img2"
+                        />
+                        <div class="text-drag">
+                          Drag-and-drop a JPEG/PNG file,
+                          <p>
+                            or
+                            <span class="text-primary-drag"
+                              >browse computer</span
+                            >
+                          </p>
+                        </div>
+                      </div>
+                      <input
+                        type="file"
+                        id="uploadDocumentsFile"
+                        (change)="droneSideImageFileUploads($event)"
+                        [ngClass]="{
+                          'is-invalid':
+                            submitted && droneSideImageFileName == ''
+                        }"
+                      />
+                    </div>
+                    <!-- After Upload -->
+                    <div class="File-Uploaded" *ngIf="droneSideImageFlag == 1">
+                      <img
+                        src="../.../../../../../../assets/common-layout/file-logo.svg"
+                        class="file-logo"
+                      />
+                      <span class="filenamepdf f-14">
+                        {{ droneSideImageFileName }}
+                      </span>
+                      <span class="KB"> </span>
+                      <img
+                        src="../.../../../../../../assets/common-layout/file-close.svg"
+                        class="file-close"
+                        (click)="resetSideImageFileUploads()"
+                      />
+                    </div>
+                    <div
+                      *ngIf="droneSideImageFileSizeError"
+                      class="error-message"
+                    >
+                      <div>File size should be less than or equal to 500KB</div>
+                    </div>
+                    <div
+                      *ngIf="droneSideImageFileTypeError"
+                      class="error-message"
+                    >
+                      <div>Invalid type, Please upload JPEG/PNG files.</div>
+                    </div>
+                    <div
+                      *ngIf="submitted && droneImage.droneSideImageFile.errors"
+                      class="error-message"
+                    >
+                      <div
+                        *ngIf="
+                          submitted &&
+                          droneImage.droneSideImageFile.errors.required
+                        "
+                      >
+                        This field is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-4 px-3 py-2">
+                  <div class="Upload">
+                    <div class="input-label">Isometric View</div>
+                    <!-- Before upload -->
+                    <div
+                      class="File-Upload"
+                      *ngIf="droneIsometricImageFlag == 0"
+                    >
+                      <div>
+                        <img
+                          src="../../../../../assets/common-layout/Upload.svg"
+                          class="upload-img2"
+                        />
+                        <div class="text-drag">
+                          Drag-and-drop a JPEG/PNG file,
+                          <p>
+                            or
+                            <span class="text-primary-drag"
+                              >browse computer</span
+                            >
+                          </p>
+                        </div>
+                      </div>
+                      <input
+                        type="file"
+                        id="uploadDocumentsFile"
+                        (change)="droneIsometricImageFileUploads($event)"
+                        [ngClass]="{
+                          'is-invalid':
+                            submitted && droneIsometricImageFileName == ''
+                        }"
+                      />
+                    </div>
+                    <!-- After Upload -->
+                    <div
+                      class="File-Uploaded"
+                      *ngIf="droneIsometricImageFlag == 1"
+                    >
+                      <img
+                        src="../.../../../../../../assets/common-layout/file-logo.svg"
+                        class="file-logo"
+                      />
+                      <span class="filenamepdf f-14">
+                        {{ droneIsometricImageFileName }}
+                      </span>
+                      <span class="KB"> </span>
+                      <img
+                        src="../.../../../../../../assets/common-layout/file-close.svg"
+                        class="file-close"
+                        (click)="resetIsometricImageFileUploads()"
+                      />
+                    </div>
+                    <div
+                      *ngIf="droneIsometricImageFileSizeError"
+                      class="error-message"
+                    >
+                      <div>File size should be less than or equal to 500KB</div>
+                    </div>
+                    <div
+                      *ngIf="droneIsometricImageFileTypeError"
+                      class="error-message"
+                    >
+                      <div>Invalid type, Please upload JPEG/PNG files.</div>
+                    </div>
+                    <div
+                      *ngIf="
+                        submitted && droneImage.droneIsometricImageFile.errors
+                      "
+                      class="error-message"
+                    >
+                      <div
+                        *ngIf="
+                          submitted &&
+                          droneImage.droneIsometricImageFile.errors.required
+                        "
+                      >
+                        This field is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card card-outer card-color">
+          <div *ngIf="droneParameters" class="card-body cardbody-margin px-4">
+            <div formGroupName="uavInfo" class="my-3">
+              <div class="list-values">UAV/UAS Info</div>
+              <div class="row">
+                <div class="col-md-4 px-3 py-2 my-2">
+                  <div class="input-label">Model</div>
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="What model is your drone?"
+                    formControlName="model"
+                    [ngClass]="{
+                      'is-invalid': submitted && uavInfo.model.errors
+                    }"
+                  />
+                  <div
+                    *ngIf="submitted && uavInfo.model.errors"
+                    class="error-message my-2"
+                  >
+                    <div *ngIf="uavInfo.model.errors.required">
+                      This field is required
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 px-3 py-2 my-2">
+                  <div class="input-label">UIN Number</div>
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="eg: U1234567"
+                    formControlName="uinNumber"
+                    [ngClass]="{
+                      'is-invalid': submitted && uavInfo.uinNumber.errors
+                    }"
+                  />
+                  <div
+                    *ngIf="submitted && uavInfo.uinNumber.errors"
+                    class="error-message my-2"
+                  >
+                    <div *ngIf="uavInfo.uinNumber.errors.required">
+                      This field is required
+                    </div>
+                    <div *ngIf="uavInfo.uinNumber.errors.pattern">
+                      Please enter a valid input
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 px-3 py-2 my-2">
+                  <div class="input-label">Type</div>
+                  <!-- value={{value}} {{value.Value}} -->
+                  <!-- <select required formControlName="type"
+                    [ngClass]="{ 'is-invalid': submitted && uavInfo.type.errors }">
+                    <option selected value="" disabled>Select..</option>
+                    <option *ngFor="let value of droneParameters['uav-info-type']" [ngValue]="value" 
+                    [attr.selected]="value.Value == this.matchedDrone?.UAVInfoType.Value ? true : null" > {{value.Value}}
+                    </option>
+                  </select> -->
+                  <select
+                    required
+                    formControlName="type"
+                    [ngClass]="{
+                      'is-invalid': submitted && uavInfo.type.errors
+                    }"
+                  >
+                    <option selected value="" disabled>Select..</option>
+                    <option *ngFor="let value of typeArr" [ngValue]="value">
+                      {{ value }}
+                    </option>
+                  </select>
+                  <div
+                    *ngIf="submitted && uavInfo.type.errors"
+                    class="error-message my-2"
+                  >
+                    <div *ngIf="uavInfo.type.errors.required">
+                      This field is required
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 px-3 py-2 my-2">
+                  <!-- <div class="input-group mb-2 mr-sm-2"> -->
+                  <div class="input-label">Class/Weight (kgs)</div>
+                  <!-- value={{value}} {{value.Value}} -->
+                  <select
+                    required
+                    formControlName="class"
+                    [ngClass]="{
+                      'is-invalid': submitted && uavInfo.class.errors
+                    }"
+                  >
+                    <option selected value="" disabled>Select..</option>
+                    <option *ngFor="let value of classArr" [ngValue]="value">
+                      {{ value }}
+                    </option>
+                  </select>
+                  <!-- <div class="input-group-append">
+                    <div class="input-group-text">kg</div>
+                  </div> -->
+                  <!-- </div> -->
+                  <div
+                    *ngIf="submitted && uavInfo.class.errors"
+                    class="error-message my-2"
+                  >
+                    <div *ngIf="uavInfo.class.errors.required">
+                      This field is required
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 px-3 py-2 my-2">
+                  <div class="input-label">Endurance</div>
+                  <div class="input-group mb-2 mr-sm-2">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="inlineFormInputGroupUsername2"
+                      placeholder="Please enter"
+                      formControlName="endurance"
+                      [ngClass]="{
+                        'is-invalid': submitted && uavInfo.endurance.errors
+                      }"
+                    />
+                    <div class="input-group-append">
+                      <div class="input-group-text">min</div>
+                    </div>
+                  </div>
+                  <div
+                    *ngIf="submitted && uavInfo.endurance.errors"
+                    class="error-message my-2"
+                  >
+                    <div *ngIf="uavInfo.endurance.errors.required">
+                      This field is required
+                    </div>
+                    <div *ngIf="uavInfo.endurance.errors.pattern">
+                      Please enter a valid input
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 px-3 py-2 my-2">
+                  <div class="input-label">Maximum Speed</div>
+                  <div class="input-group mb-2 mr-sm-2">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="inlineFormInputGroupUsername2"
+                      placeholder="Please enter"
+                      formControlName="maxSpeed"
+                      [ngClass]="{
+                        'is-invalid': submitted && uavInfo.maxSpeed.errors
+                      }"
+                    />
+                    <div class="input-group-append">
+                      <div class="input-group-text">km/hr</div>
+                    </div>
+                  </div>
+                  <div
+                    *ngIf="submitted && uavInfo.maxSpeed.errors"
+                    class="error-message my-2"
+                  >
+                    <div *ngIf="uavInfo.maxSpeed.errors.required">
+                      This field is required
+                    </div>
+                    <div *ngIf="uavInfo.maxSpeed.errors.pattern">
+                      Please enter a valid input
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 px-3 py-2 my-2">
+                  <span class="input-label"> GPS Manufacturer </span>
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="Who is the manufacturer?"
+                    formControlName="gpsManufacturer"
+                    [ngClass]="{
+                      'is-invalid': submitted && uavInfo.gpsManufacturer.errors
+                    }"
+                  />
+                  <div
+                    *ngIf="submitted && uavInfo.gpsManufacturer.errors"
+                    class="error-message my-2"
+                  >
+                    <div *ngIf="uavInfo.gpsManufacturer.errors.required">
+                      This field is required
+                    </div>
+                  </div>
+                  <!-- (PPK/RTK) -->
+                </div>
+                <div class="col-md-4 px-3 py-2 my-2">
+                  <span class="input-label"> GPS Model </span>
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="Please enter"
+                    formControlName="gpsModel"
+                    [ngClass]="{
+                      'is-invalid': submitted && uavInfo.gpsModel.errors
+                    }"
+                  />
+                  <div
+                    *ngIf="submitted && uavInfo.gpsModel.errors"
+                    class="error-message my-2"
+                  >
+                    <div *ngIf="uavInfo.gpsModel.errors.required">
+                      This field is required
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 px-3 py-2 my-2">
+                  <span class="input-label"> GPS Type </span>
+                  <select
+                    required
+                    formControlName="gpsType"
+                    [ngClass]="{
+                      'is-invalid': submitted && uavInfo.gpsType.errors
+                    }"
+                  >
+                    <option selected value="" disabled>Select..</option>
+                    <option *ngFor="let value of gpsTypeArr" [ngValue]="value">
+                      {{ value }}
+                    </option>
+                  </select>
+                  <div
+                    *ngIf="submitted && uavInfo.gpsType.errors"
+                    class="error-message my-2"
+                  >
+                    <div *ngIf="uavInfo.gpsType.errors.required">
+                      This field is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card card-outer card-color">
+          <div *ngIf="droneParameters" class="card-body cardbody-margin px-4">
+            <div formGroupName="uavMakeInfo" class="my-3">
+              <div class="list-values">UAV/UAS Make Info</div>
+              <div class="row my-2">
+                <div class="col-md-4 px-3 py-2">
+                  <div class="input-label">Manufacturer</div>
+                  <select
+                    required
+                    formControlName="manufacturer"
+                    [ngClass]="{
+                      'is-invalid': submitted && uavMakeInfo.manufacturer.errors
+                    }"
+                  >
+                    <option selected value="" disabled>Select..</option>
+                    <option
+                      *ngFor="let value of infoManufacturerArr"
+                      [ngValue]="value"
+                    >
+                      {{ value }}
+                    </option>
+                  </select>
+                  <div
+                    *ngIf="submitted && uavMakeInfo.manufacturer.errors"
+                    class="error-message my-2"
+                  >
+                    <div *ngIf="uavMakeInfo.manufacturer.errors.required">
+                      This field is required
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-4 px-3 py-2">
+                  <div class="input-label">Maximum dimensions</div>
+                  <div class="input-group mb-2 mr-sm-2">
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Please enter"
+                      formControlName="maxDimension"
+                      [ngClass]="{
+                        'is-invalid':
+                          submitted && uavMakeInfo.maxDimension.errors
+                      }"
+                    />
+                    <div class="input-group-append">
+                      <div class="input-group-text">m</div>
+                    </div>
+                  </div>
+                  <div
+                    *ngIf="submitted && uavMakeInfo.maxDimension.errors"
+                    class="error-message my-2"
+                  >
+                    <div *ngIf="uavMakeInfo.maxDimension.errors.required">
+                      This field is required
+                    </div>
+                    <div *ngIf="uavMakeInfo.maxDimension.errors.pattern">
+                      Please enter a valid input
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-4 px-3 py-2">
+                  <div class="input-label">Certificate</div>
+                  <label class="input-label">
+                    <input
+                      type="radio"
+                      formControlName="certificate"
+                      value="true"
+                    />
+                    Yes
+                  </label>
+                  <label class="input-label m-2">
+                    <input
+                      type="radio"
+                      formControlName="certificate"
+                      value="false"
+                    />
+                    No
+                  </label>
+                  <div
+                    *ngIf="submitted && uavMakeInfo.certificate.errors"
+                    class="error-message my-2"
+                  >
+                    <div *ngIf="uavMakeInfo.certificate.errors.required">
+                      This field is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card card-outer card-color">
+          <div *ngIf="droneParameters" class="card-body cardbody-margin px-4">
+            <div formGroupName="avionics" class="my-3">
+              <div class="list-values">Avionics</div>
+              <div class="row">
+                <div class="col-md-4 px-3 py-2 my-2">
+                  <div class="input-label">Flight Controller</div>
+                  <select
+                    required
+                    formControlName="flightController"
+                    [ngClass]="{
+                      'is-invalid':
+                        submitted && avionics.flightController.errors
+                    }"
+                  >
+                    <option selected value="" disabled>Select..</option>
+                    <option
+                      *ngFor="let value of flightControllerArr"
+                      [ngValue]="value"
+                    >
+                      {{ value }}
+                    </option>
+                  </select>
+                  <div
+                    *ngIf="submitted && avionics.flightController.errors"
+                    class="error-message my-2"
+                  >
+                    <div *ngIf="avionics.flightController.errors.required">
+                      This field is required
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 px-3 py-2 my-2">
+                  <div class="input-label">GCS</div>
+                  <select
+                    required
+                    formControlName="gcs"
+                    [ngClass]="{
+                      'is-invalid': submitted && avionics.gcs.errors
+                    }"
+                  >
+                    <option selected value="" disabled>Select..</option>
+                    <option
+                      *ngFor="let value of avionicsGcsArr"
+                      [ngValue]="value"
+                    >
+                      {{ value }}
+                    </option>
+                  </select>
+                  <div
+                    *ngIf="submitted && avionics.gcs.errors"
+                    class="error-message my-2"
+                  >
+                    <div *ngIf="avionics.gcs.errors.required">
+                      This field is required
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 px-3 py-2 my-2">
+                  <div class="input-label">Protocol</div>
+                  <select
+                    required
+                    formControlName="protocol"
+                    [ngClass]="{
+                      'is-invalid': submitted && avionics.protocol.errors
+                    }"
+                  >
+                    <option selected value="" disabled>Select..</option>
+                    <option
+                      *ngFor="let value of avionicsProtocolArr"
+                      [ngValue]="value"
+                    >
+                      {{ value }}
+                    </option>
+                  </select>
+                  <div
+                    *ngIf="submitted && avionics.protocol.errors"
+                    class="error-message my-2"
+                  >
+                    <div *ngIf="avionics.protocol.errors.required">
+                      This field is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card card-outer card-color">
+          <div *ngIf="droneParameters" class="card-body cardbody-margin px-4">
+            <div formGroupName="comms" class="my-3">
+              <div class="list-values">Comms</div>
+              <div class="row my-2">
+                <div class="col-md-4 px-3 py-2">
+                  <div class="input-label">Type</div>
+                  <select
+                    required
+                    formControlName="commsType"
+                    [ngClass]="{
+                      'is-invalid': submitted && comms.commsType.errors
+                    }"
+                  >
+                    <option selected value="" disabled>Select..</option>
+                    <option
+                      *ngFor="let value of commsTypeArr"
+                      [ngValue]="value"
+                    >
+                      {{ value }}
+                    </option>
+                  </select>
+                  <div
+                    *ngIf="submitted && comms.commsType.errors"
+                    class="error-message my-2"
+                  >
+                    <div *ngIf="comms.commsType.errors.required">
+                      This field is required
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 px-3 py-2">
+                  <div class="input-label">Range</div>
+                  <div class="input-group mb-2 mr-sm-2">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="inlineFormInputGroupUsername2"
+                      placeholder="Please enter"
+                      formControlName="commsRange"
+                      [ngClass]="{
+                        'is-invalid': submitted && comms.commsRange.errors
+                      }"
+                    />
+                    <div class="input-group-append">
+                      <div class="input-group-text">m</div>
+                    </div>
+                  </div>
+                  <div
+                    *ngIf="submitted && comms.commsRange.errors"
+                    class="error-message my-2"
+                  >
+                    <div *ngIf="comms.commsRange.errors.required">
+                      This field is required
+                    </div>
+                    <div *ngIf="comms.commsRange.errors.pattern">
+                      Please enter a valid input
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 px-3 py-2">
+                  <div class="input-label">Make</div>
+                  <div class="input-group mb-2 mr-sm-2">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="inlineFormInputGroupUsername2"
+                      placeholder="Please enter"
+                      formControlName="commsMake"
+                      [ngClass]="{
+                        'is-invalid': submitted && comms.commsMake.errors
+                      }"
+                    />
+                  </div>
+                  <div
+                    *ngIf="submitted && comms.commsMake.errors"
+                    class="error-message my-2"
+                  >
+                    <div *ngIf="comms.commsMake.errors.required">
+                      This field is required
+                    </div>
+                    <div *ngIf="comms.commsMake.errors.pattern">
+                      Please enter a valid input
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <div *ngIf="droneParameters" class="width-align">
+        <div class="my-3" style="float: right">
+          <button
+            class="primary-outline-btn btn button-text2 button-text"
+            (click)="onDroneRegCancel()"
+            *ngIf="!addEditFlag"
+          >
+            Cancel
+          </button>
+          <button
+            class="primary-outline-btn btn button-text2 button-text"
+            (click)="onDiscardChanges()"
+            *ngIf="addEditFlag"
+          >
+            Discard changes
+          </button>
+          <button
+            type="submit"
+            class="primary-btn btn button-text"
+            (click)="onDroneRegistration()"
+            *ngIf="!addEditFlag"
+          >
+            Confirm details
+          </button>
+          <button
+            type="submit"
+            class="primary-btn btn button-text3"
+            (click)="onDroneUpdate()"
+            *ngIf="addEditFlag"
+          >
+            Save Changes & Confirm
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

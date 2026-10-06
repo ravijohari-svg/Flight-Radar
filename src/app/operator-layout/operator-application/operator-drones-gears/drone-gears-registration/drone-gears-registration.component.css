@@ -1,0 +1,23 @@
+.form-control, .input-group-text {
+  height: 50px;
+  font-size: 0.8rem;
+}
+
+.input-group-text {
+  background-color: transparent;
+}
+
+.list-values {
+  color: #121212;
+  font-size: 93%;
+  font-weight: 600;
+}
+
+.list-description {
+  color: #8c8c8c;
+  font-size: 75%;
+}
+
+.form-control.is-invalid {
+  background-image: none !important;
+}/*# sourceMappingURL=drone-gears-registration.component.css.map */

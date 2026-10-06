@@ -1,0 +1,31 @@
+{
+    "TS_Updated": "2023-12-14T08:18:36.323Z",
+    "ApprovalStatus": "Pending",
+    "EmailId": "animeshv301@gmail.com",
+    "Indexid": 276,
+    "Country": "India",
+    "UserActive": false,
+    "SkipTour": true,
+    "Search_First_Name": "guest",
+    "SubscriptionPlan": "Free",
+    "UserStatus": true,
+    "WhatsappVerification": true,
+    "TS_Created": "2023-12-11T07:23:37.855Z",
+    "UserId": "OPRTR276",
+    "CountryCode": "IN",
+    "PhoneNumber": "917428221111",
+    "Search_Last_Name": "guest",
+    "FirstName": "Guest",
+    "LastLogin": "2023-12-13T15:15:50.438Z",
+    "LastName": "Guest",
+    "WhatsappOTP": 118389,
+    "waypoints": [],
+    "MapLayers": [
+        "GeoZone",
+        "FIC",
+        "NoFlyZone",
+        "InnerYellowZone",
+        "OuterYellowZone"
+    ],
+    "UserMode": "Guest"
+}

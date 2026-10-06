@@ -1,0 +1,152 @@
+.main-panel {
+  min-height: calc(100vh - 55px);
+}
+
+.header {
+  font-size: 20px;
+  font-weight: 600;
+  color: #121212;
+}
+
+.table-bordered {
+  border-collapse: separate;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 5px;
+  background-color: #ffffff;
+}
+
+.table-bordered tbody tr {
+  padding: 20px !important;
+}
+
+.table-bordered thead tr th {
+  border: none !important;
+  color: #121212;
+  opacity: 0.8;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 0.7rem 0.3rem;
+}
+
+.table-header {
+  font-size: 22px;
+  font-weight: 600;
+  color: #111111;
+  padding-left: 0rem !important;
+}
+
+.table-bordered thead tr th:first-child,
+.table-bordered tbody tr td:first-child {
+  padding-left: 0.7rem !important;
+}
+
+.table-bordered tbody tr td:last-child {
+  padding-right: 0.7rem !important;
+}
+
+.table-bordered tbody tr td {
+  border-right: none;
+  border-left: none;
+  border-top: 1px solid;
+  border-bottom: none;
+  border-color: rgba(0, 0, 0, 0.125) !important;
+  width: 150px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 0.7rem 0.3rem;
+}
+
+.table-bordered tbody tr td button {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.table-bordered th,
+.table-bordered td {
+  vertical-align: middle;
+}
+
+.btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.un-success {
+  color: #dc3545;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.success {
+  color: #2bc43f;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.flagged {
+  color: #ffcb3d;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.input-group-text {
+  background: #ffffff;
+  border-right: 0px;
+  color: #8c8c8c;
+  padding-right: 0.1rem;
+}
+
+.form-control {
+  height: 40px;
+}
+
+.input-group .form-control {
+  border-left: 0px;
+}
+
+.input-group .form-control::-moz-placeholder {
+  color: #8c8c8c;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.input-group .form-control:-ms-input-placeholder {
+  color: #8c8c8c;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.input-group .form-control::placeholder {
+  color: #8c8c8c;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+select {
+  color: #8c8c8c;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.dropdown-item {
+  color: #8c8c8c;
+  font-size: 72%;
+  font-weight: 600;
+}
+
+.form-control {
+  font-size: 75%;
+}
+
+.primary-outline-btn {
+  font-size: 75%;
+}
+
+.fa-long-arrow-right, .fa-search {
+  color: #8c8c8c;
+  position: absolute;
+  left: 85%;
+  top: 20%;
+  z-index: 10;
+  font-size: 13px;
+}/*# sourceMappingURL=authority-pilots-list.component.css.map */

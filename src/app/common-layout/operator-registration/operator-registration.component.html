@@ -1,0 +1,639 @@
+<div class="main-panel mx-md-4 mx-0">
+  <div class="row m-1">
+    <div class="col-lg-8">
+      <div class="page-title mt-3 pr-0 text-white">Register</div>
+      <!-- <div class="row"> -->
+
+      <div>
+        <mat-horizontal-stepper
+          linear
+          #stepper
+          (selectionChange)="selectionChange($event)"
+          class="dark-medium"
+        >
+          <mat-step state="first" [completed]="completed" label="Basic Details">
+          </mat-step>
+          <mat-step
+            state="second"
+            [completed]="completed"
+            label="Phone number Verification"
+          >
+          </mat-step>
+          <mat-step
+            state="third"
+            [completed]="completed"
+            label="Password & Email Verification"
+          >
+          </mat-step>
+          <ng-template matStepperIcon="edit">
+            <mat-icon> {{ stepperIndexValue + 1 }} </mat-icon>
+          </ng-template>
+          <ng-template matStepperIcon="first">
+            <mat-icon> 1 </mat-icon>
+          </ng-template>
+          <ng-template matStepperIcon="second">
+            <mat-icon> 2 </mat-icon>
+          </ng-template>
+          <ng-template matStepperIcon="third">
+            <mat-icon> 3 </mat-icon>
+          </ng-template>
+        </mat-horizontal-stepper>
+      </div>
+      <!-- </div> -->
+      <div>
+        <div class="mr-md-3">
+          <div *ngIf="stepperIndexValue == 0">
+            <form [formGroup]="basicDetails">
+              <div>
+                <div class="form-titles mb-4">Enter Basic Details</div>
+                <div class="row my-2">
+                  <div class="col-md">
+                    <div class="form-group">
+                      <label for="formGroupExampleInput">Full Name</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        formControlName="Name"
+                        [ngClass]="{
+                          'is-invalid': submitted && basic.Name.errors
+                        }"
+                        minlength="2"
+                        #regFullName
+                      />
+                      <div
+                        *ngIf="submitted && basic.Name.errors"
+                        class="invalid-feedback"
+                      >
+                        <div *ngIf="basic.Name.errors.required">
+                          Name is required
+                        </div>
+                        <div *ngIf="basic.Name.errors.minlength">
+                          Name should be at least
+                          {{ basic.Name.errors.minlength.requiredLength }}
+                          characters long.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md">
+                    <div class="form-group">
+                      <label for="formGroupExampleInput">Email ID</label>
+                      <input
+                        type="email"
+                        class="form-control"
+                        formControlName="EmailId"
+                        [ngClass]="{
+                          'is-invalid': submitted && basic.EmailId.errors
+                        }"
+                      />
+                      <div
+                        *ngIf="submitted && basic.EmailId.errors"
+                        class="invalid-feedback"
+                      >
+                        <div *ngIf="basic.EmailId.errors.required">
+                          Email Id is required
+                        </div>
+                        <div *ngIf="basic.EmailId.errors.email">
+                          Invalid format
+                        </div>
+                      </div>
+                      <div
+                        *ngIf="
+                          submitted &&
+                          regErrMessage === 'Email Id already exists'
+                        "
+                        class="error-message"
+                      >
+                        {{ regErrMessage }}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md">
+                    <div class="form-group">
+                      <label for="formGroupExampleInput">Phone Number</label>
+                      <span class="hint">
+                        <span class="tooltiptext"
+                          >Please enter a valid Whatsapp Number</span
+                        >
+                        <i
+                          style="color: white"
+                          class="fa fa-info-circle"
+                          aria-hidden="true"
+                        ></i
+                      ></span>
+
+                      <input
+                        type="text"
+                        class="form-control icon-prefix"
+                        formControlName="PhoneNumber"
+                        [ngClass]="{
+                          'is-invalid': submitted && basic.PhoneNumber.errors
+                        }"
+                        maxlength="10"
+                      />
+                      <span class="prefix-form">+91 </span>
+                      <div
+                        *ngIf="submitted && basic.PhoneNumber.errors"
+                        class="invalid-feedback"
+                      >
+                        <div *ngIf="basic.PhoneNumber.errors.required">
+                          Phone Number is required
+                        </div>
+                        <div
+                          *ngIf="
+                            basic.PhoneNumber.errors.pattern ||
+                            basic.PhoneNumber.errors.minlength ||
+                            basic.PhoneNumber.errors.maxlength
+                          "
+                        >
+                          Please enter a proper phone number
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row my-2">
+                  <div class="col-md">
+                    <div class="form-group">
+                      <label for="formGroupExampleInput">Date of Birth</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        formControlName="DOB"
+                        bsDatepicker
+                        [bsConfig]="{
+                          adaptivePosition: true,
+                          dateInputFormat: 'DD-MM-YYYY'
+                        }"
+                        [ngClass]="{
+                          'is-invalid': submitted && basic.DOB.errors
+                        }"
+                      />
+                      <div
+                        *ngIf="submitted && basic.DOB.errors"
+                        class="invalid-feedback"
+                      >
+                        <div *ngIf="basic.DOB.errors.required">
+                          Date of Birth is required
+                        </div>
+                        <div *ngIf="basic.DOB.errors.age">
+                          Must be atleast 18 years or older
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- <div class="col-md">
+                                    <div class="form-group">
+                                        <label for="formGroupExampleInput">Location</label>
+                                        <input formControlName="Location" [typeahead]="country" [typeaheadMinLength]="0"
+                                            class="form-control" [ngClass]="{ 'is-invalid': submitted && basic.Location.errors }">
+                                        <div *ngIf="submitted && basic.Location.errors" class="invalid-feedback">
+                                            <div *ngIf="basic.Location.errors.required">Location is required</div>
+                                        </div>
+                                    </div>
+                                </div> -->
+
+                  <div class="col-md">
+                    <div class="form-group">
+                      <label for="formGroupExampleInput">Country</label>
+                      <input
+                        formControlName="Country"
+                        [typeahead]="country"
+                        class="form-control"
+                        [ngClass]="{
+                          'is-invalid':
+                            submitted && (basic.Country.errors || !CountryCode)
+                        }"
+                        (typeaheadOnSelect)="onCountrySelect($event)"
+                      />
+                      <div
+                        *ngIf="
+                          submitted && (basic.Country.errors || !CountryCode)
+                        "
+                        class="error-message"
+                      >
+                        <div *ngIf="basic.Country?.errors?.required">
+                          Country is required
+                        </div>
+                        <div
+                          class="error-message"
+                          *ngIf="
+                            !basic.Country?.errors?.required && !CountryCode
+                          "
+                        >
+                          Country is invalid
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md">
+                    <div class="form-group">
+                      <label for="formGroupExampleInput"
+                        >Certification Type</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        formControlName="Certification"
+                        [ngClass]="{
+                          'is-invalid': submitted && basic.Certification.errors
+                        }"
+                      />
+                      <div
+                        *ngIf="submitted && basic.Certification.errors"
+                        class="invalid-feedback"
+                      >
+                        <div *ngIf="basic.Certification.errors.required">
+                          Certification Type is required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row my-2">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="formGroupExampleInput">Aadhar Number</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        formControlName="AadharNumber"
+                        [ngClass]="{
+                          'is-invalid': submitted && basic.AadharNumber.errors
+                        }"
+                        (input)="applyAadharNumberMask($event)"
+                        maxlength="14"
+                      />
+                      <div
+                        *ngIf="submitted && basic.AadharNumber.errors"
+                        class="invalid-feedback"
+                      >
+                        <div *ngIf="basic.AadharNumber.errors.required">
+                          Aadhar Number is required
+                        </div>
+                        <div
+                          *ngIf="
+                            basic.AadharNumber.errors.minlength ||
+                            basic.AadharNumber.errors.maxlength ||
+                            basic.AadharNumber.errors.pattern
+                          "
+                        >
+                          Enter a valid Aadhar Number
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="my-2">
+                <div class="form-titles mb-4">Documents</div>
+                <div class="row my-2">
+                  <div class="col-md-4">
+                    <div
+                      class="form-group file-label text-center align-middle"
+                      [ngClass]="{
+                        'invalid-data': submitted && basic.Picture.errors
+                      }"
+                    >
+                      <label class="py-2" for="uploadProfilePicture">
+                        <i class="fa fa-user-circle file-icons pr-2"></i>
+                        <span>Upload Profile Photo</span>
+                        <input
+                          type="file"
+                          name="CSVFile"
+                          id="uploadProfilePicture"
+                          accept=".jpeg,.png,.jpg"
+                          (change)="uploadProfilePicture($event)"
+                          [ngClass]="{
+                            'is-invalid': submitted && basic.Picture.errors
+                          }"
+                        />
+                      </label>
+                      <!-- <input type="file" name="CSVFile" id="uploadProfilePicture" accept=".jpeg,.png,.jpg" (change)="uploadProfilePicture($event)"
+                                          [ngClass]="{ 'is-invalid': submitted && basic.Picture.errors }"/> -->
+                      <div
+                        *ngIf="submitted && basic.Picture.errors"
+                        class="invalid-feedback text-left"
+                      >
+                        <div *ngIf="basic.Picture.errors.required">
+                          Profile Photo is required
+                        </div>
+                      </div>
+                    </div>
+                    <div class="file-name" *ngIf="profilePic != ''">
+                      ({{ profilePic }})
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div
+                      class="form-group file-label text-center align-middle"
+                      [ngClass]="{
+                        'invalid-data': submitted && basic.PassportCopy.errors
+                      }"
+                    >
+                      <label class="py-2" for="uploadPassportProof">
+                        <i class="fa fa-file-pdf-o file-icons pr-2"></i>
+                        <span>Upload Passport Copy</span>
+                      </label>
+                      <input
+                        type="file"
+                        name="CSVFile"
+                        id="uploadPassportProof"
+                        accept=".pdf"
+                        (change)="uploadPassportProof($event)"
+                        [ngClass]="{
+                          'is-invalid': submitted && basic.PassportCopy.errors
+                        }"
+                      />
+                      <div
+                        *ngIf="submitted && basic.PassportCopy.errors"
+                        class="invalid-feedback text-left"
+                      >
+                        <div *ngIf="basic.PassportCopy.errors.required">
+                          Passport Copy is required
+                        </div>
+                      </div>
+                    </div>
+                    <div class="file-name" *ngIf="passportProof != ''">
+                      ({{ passportProof }})
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div
+                      class="form-group file-label text-center align-middle"
+                      [ngClass]="{
+                        'invalid-data': submitted && basic.AddressProof.errors
+                      }"
+                    >
+                      <label class="py-2" for="uploadAddressProof">
+                        <i class="fa fa-file-pdf-o file-icons pr-2"></i>
+                        <span>Upload Address Proof</span></label
+                      >
+                      <input
+                        type="file"
+                        name="CSVFile"
+                        id="uploadAddressProof"
+                        accept=".pdf"
+                        (change)="uploadAddressProof($event)"
+                        [ngClass]="{
+                          'is-invalid': submitted && basic.AddressProof.errors
+                        }"
+                      />
+                      <div
+                        *ngIf="submitted && basic.AddressProof.errors"
+                        class="invalid-feedback text-left"
+                      >
+                        <div *ngIf="basic.AddressProof.errors.required">
+                          Address Proof is required
+                        </div>
+                      </div>
+                    </div>
+                    <div class="file-name" *ngIf="addressProof != ''">
+                      ({{ addressProof }})
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf="fileSizeError" class="error-message">
+                  File size should be less than or equal to 500kb
+                </div>
+              </div>
+            </form>
+          </div>
+          <div *ngIf="stepperIndexValue == 1">
+            <div class="my-3">
+              <div class="form-titles">Verify Phone Number</div>
+              <div class="title-description">
+                A verification code is sent to your phone number
+                {{ registrationForm.value.basicDetails.PhoneNumber }}
+              </div>
+            </div>
+            <ng-otp-input
+              #ngOtpInput
+              (onInputChange)="onWhatsappOtpChange($event)"
+              [config]="config"
+            ></ng-otp-input>
+            <div
+              *ngIf="submitted && whatsappOTPForm.errors"
+              class="invalid-text my-2 f-12"
+            >
+              <div *ngIf="whatsappOTPForm.errors.required">
+                Verification Code is required
+              </div>
+              <div *ngIf="whatsappOTPForm.errors.minlength">
+                Fill a valid verification code
+              </div>
+            </div>
+            <div
+              *ngIf="submitted && whatsappOtpErrmsg"
+              class="error-message my-2"
+            >
+              {{ whatsappOtpErrmsg }}
+            </div>
+          </div>
+          <div *ngIf="stepperIndexValue == 2">
+            <form [formGroup]="verification">
+              <div class="my-2">
+                <div class="form-titles mb-4">Set Profile Password</div>
+                <div class="row my-2">
+                  <div class="col-md">
+                    <div class="form-group">
+                      <label for="formGroupExampleInput">Create Password</label>
+                      <div class="input-group flex-wrap">
+                        <input
+                          [type]="fieldTextTypePass ? 'text' : 'password'"
+                          class="form-control"
+                          formControlName="Password"
+                          [ngClass]="{
+                            'is-invalid':
+                              submitted &&
+                              (verify.Password.errors ||
+                                mismatch?.passwordNotMatch)
+                          }"
+                        />
+                        <div class="input-group-append">
+                          <span class="input-group-text">
+                            <i
+                              class="fa"
+                              [ngClass]="{
+                                'fa-eye-slash': fieldTextTypePass,
+                                'fa-eye': !fieldTextTypePass
+                              }"
+                              (click)="toggleFieldTextTypePass()"
+                            ></i>
+                          </span>
+                        </div>
+                        <div
+                          *ngIf="submitted && verify.Password.errors"
+                          class="invalid-feedback"
+                        >
+                          <div *ngIf="verify.Password.errors.required">
+                            Password is required
+                          </div>
+                          <div *ngIf="verify.Password.errors.minlength">
+                            Minimum of 8 characters is required
+                          </div>
+                        </div>
+                        <div
+                          *ngIf="submitted && mismatch?.passwordNotMatch"
+                          class="invalid-feedback"
+                        >
+                          Password Mismatch
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md">
+                    <div class="form-group">
+                      <label for="formGroupExampleInput"
+                        >Confirm Password</label
+                      >
+                      <div class="input-group flex-wrap">
+                        <input
+                          [type]="
+                            fieldTextTypeConfirmPass ? 'text' : 'password'
+                          "
+                          class="form-control"
+                          formControlName="ConfirmPassword"
+                          [ngClass]="{
+                            'is-invalid':
+                              submitted &&
+                              (verify.ConfirmPassword.errors ||
+                                mismatch?.passwordNotMatch)
+                          }"
+                        />
+                        <div class="input-group-append">
+                          <span class="input-group-text">
+                            <i
+                              class="fa"
+                              [ngClass]="{
+                                'fa-eye-slash': fieldTextTypeConfirmPass,
+                                'fa-eye': !fieldTextTypeConfirmPass
+                              }"
+                              (click)="toggleFieldTextTypeConfirmPass()"
+                            ></i>
+                          </span>
+                        </div>
+                        <div
+                          *ngIf="submitted && verify.ConfirmPassword.errors"
+                          class="invalid-feedback"
+                        >
+                          <div *ngIf="verify.ConfirmPassword.errors.required">
+                            Confirm Password is required
+                          </div>
+                          <div *ngIf="verify.ConfirmPassword.errors.minlength">
+                            Minimum of 8 characters is required
+                          </div>
+                        </div>
+                        <div
+                          *ngIf="submitted && mismatch?.passwordNotMatch"
+                          class="invalid-feedback"
+                        >
+                          Password Mismatch
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="my-2">
+                <div class="form-titles">Verify Email ID</div>
+                <div class="title-description">
+                  A verification code is sent to your email id
+                  {{ registrationForm.value.basicDetails.EmailId }}
+                </div>
+              </div>
+              <div class="my-2">
+                <ng-otp-input
+                  #ngOtpInput
+                  (onInputChange)="onOtpChange($event)"
+                  [config]="config"
+                ></ng-otp-input>
+                <div
+                  *ngIf="submitted && verify.VerificationCode.errors"
+                  class="invalid-text my-2 f-12"
+                >
+                  <div *ngIf="verify.VerificationCode.errors.required">
+                    Verification Code is required
+                  </div>
+                  <div *ngIf="verify.VerificationCode.errors.minlength">
+                    Fill a valid verification code
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="formSubmitErr" class="error-message">
+                {{ formSubmitErr }}
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="submit_createaccount_form">
+          <div>
+            <span class="text-white f-12">Already have account? </span>
+            <button
+              class="btn primary-outline-btn f-12 px-0 button-link"
+              (click)="router.navigateByUrl('operator/operator-login')"
+            >
+              Login Now
+            </button>
+          </div>
+          <div>
+            <span class="pr-4 stepper-indication"
+              >Step {{ stepperIndexValue + 1 }} of 3</span
+            >
+            <button
+              [disabled]="disabled"
+              *ngIf="stepperIndexValue == 0"
+              class="btn primary-btn my-3 px-4"
+              (click)="onNextStepper(stepper)"
+            >
+              <span *ngIf="!loader">Next</span>
+              <span *ngIf="loader"
+                ><img
+                  src="../../../../../assets/common-layout/SquareLoader.gif"
+                  width="25px"
+              /></span>
+            </button>
+            <button
+              [disabled]="disabled"
+              *ngIf="stepperIndexValue == 1"
+              class="btn primary-btn my-3 px-4"
+              (click)="onWhatsappVerification(stepper)"
+            >
+              <span *ngIf="!loader">Next</span>
+              <span *ngIf="loader"
+                ><img
+                  src="../../../../../assets/common-layout/SquareLoader.gif"
+                  width="25px"
+              /></span>
+            </button>
+            <button
+              [disabled]="disabled"
+              *ngIf="stepperIndexValue == 2"
+              class="btn primary-btn my-3 px-4"
+              (click)="onFormSubmit(stepper)"
+            >
+              <span *ngIf="!loader">Submit</span>
+              <span *ngIf="loader"
+                ><img
+                  src="../../../../../assets/common-layout/SquareLoader.gif"
+                  width="25px"
+              /></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 image-section pt-4 text-white">
+      <div class="px-4 image-header">Automating <br />the skies.</div>
+      <div class="image-text px-4 pt-3 pb-5">
+        Connecting operators with authorities for a safer airspace
+      </div>
+      <img
+        class="pt-5 mt-3"
+        src="../../../assets/common-layout/BackgroundLoginImg.svg"
+        alt="SkyeUTM Login Image"
+        title="Login Image"
+      />
+    </div>
+  </div>
+</div>

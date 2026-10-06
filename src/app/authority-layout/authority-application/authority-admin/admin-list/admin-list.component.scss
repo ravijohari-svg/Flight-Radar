@@ -1,0 +1,531 @@
+@import '../../../../../scss/colorCodes.scss';
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans&display=swap');
+
+@mixin font($font-size, $font-weight) {
+  font-size: $font-size;
+  font-weight: $font-weight;
+}
+
+@mixin colors($color, $background-color) {
+  color: $color;
+  background-color: $background-color;
+}
+
+@font-face {
+  font-family: SFProText;
+  src: url(../../../../../assets/fonts/SFProText-Regular.ttf) format('truetype');
+}
+
+.main-panel {
+  min-height: 100vh;
+}
+
+.table-bordered {
+  //colors btw the rows
+  border-collapse: collapse;
+  border: 1px solid $black-only;
+  border-radius: 5em !important;
+  background-color: $dark-v1;
+
+}
+
+.table-bordered thead {
+  @include colors($text-white, $black-light);
+  background-color: $dark-v1;
+
+}
+
+.table-bordered tbody tr {
+  padding: 20px !important;
+  //colors btw the rows
+  border-bottom: 1.5px solid $black-light;
+}
+
+.table-bordered tbody tr:last-child {
+  border-bottom: none;
+}
+
+.table-bordered thead tr {
+  //colors btw the rows
+  border-bottom: 1.5px solid $black-light;
+}
+
+.table-bordered thead tr th {
+  border: none !important;
+  // color: $text-dark;
+  // @include colors($text-white,$black-light);
+  // opacity: 0.8;
+  // @include font(11px, 600);
+  font-family: SFProText;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 0.5rem;
+  // background-color:$black-light;
+}
+
+.table-header {
+  font-size: 22px;
+  font-weight: 600;
+  color: #111111;
+  // padding: 0.5rem;
+  padding-left: 0rem !important;
+}
+
+.btn-edit {
+  color: $text-light;
+  @include font(77%, 400);
+}
+
+.btn-delete {
+  color: $red;
+  @include font(77%, 400);
+}
+
+.primary-btn:disabled {
+  background-color: $black-only;
+  color: $text-white;
+}
+
+.primary-btn {
+  font-size: 12px;
+}
+
+.font-DMsans .primary-btn {
+  // font-size: 12px;
+  // font-family: 'DM Sans', sans-serif;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.primary-btn-alignment {
+  margin-top: 2.5px;
+}
+
+.table-bordered tbody tr td {
+  border-right: none;
+  border-left: none;
+  border-top: 1px solid;
+  border-bottom: none;
+  border-color: $black-only !important;
+  width: 150px;
+  // @include font(12px, 400);
+  @include colors($text-white-opacity, $black-medium);
+  padding: 0.5rem;
+  font-family: SFProText;
+  font-size: 14px;
+}
+
+.table-bordered tbody tr td button {
+  @include font(12px, 600);
+
+}
+
+.table-bordered th,
+.table-bordered td {
+  vertical-align: middle;
+}
+
+.card-grey {
+  background-color: $screen-color;
+  border: none;
+}
+
+.card-no-border {
+  border: none;
+}
+
+.main-header {
+  // color: $text-dark;
+  @include font(85%, 600);
+}
+
+.list-values {
+  // color: $text-dark;
+  color: $text-white-opacity;
+  font-size: 75%;
+  font-weight: 600;
+}
+
+//Icons
+.fa-times {
+  font-size: 70%;
+  color: $black-only;
+}
+
+.primary-outline-btn,
+.primary-btn {
+  @include font(75%, 600);
+}
+
+.form-control {
+
+  // width: 220px;
+  height: 40px;
+  @include font(80%, 400);
+  background-color: $black-medium;
+  font-family: SFProText;
+  font-size: 16px;
+  color: $text-white;
+}
+
+.form-check-label {
+  color: $text-white-opacity;
+  font-size: 75%;
+}
+
+.form-group label {
+  @include font(14px, normal);
+  color: $text-light;
+}
+
+.search-text {
+  margin-bottom: 5px;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: SFProText;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: 0.32px;
+  text-align: left;
+  color: $text-white;
+}
+
+.search-control {
+  height: 40px;
+  max-width: 90rem;
+  min-width: 10%;
+  align-self: stretch;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 9px;
+  border-radius: 8px;
+  // border: solid 1px var(--neutral-700);
+  // background-color: var(--neutral-900);
+}
+
+.fa-long-arrow-right,
+.fa-search {
+  color: $text-light;
+  position: absolute;
+  left: 36rem;
+  top: 20%;
+  z-index: 10;
+  font-size: 13px;
+}
+
+.Regular-Button1 {
+  width: 153px;
+  height: 40px;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin: 24px 12px 0;
+  padding: 12px 16px;
+  border-radius: 8px;
+
+}
+
+.Regular-Button {
+  width: 145px;
+  height: 40px;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin: 24px 0 0 12px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: solid 1px $black-light;
+}
+
+.Button-label:hover {
+  cursor: pointer
+}
+
+.refresh-cw-01:hover {
+  cursor: pointer
+}
+
+.Button-label {
+  width: 97px;
+  height: 16px;
+  flex-grow: 0;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: 0.32px;
+  text-align: center;
+  color: $text-white;
+}
+
+.Button-label2 {
+  width: 64px;
+  height: 16px;
+  flex-grow: 0;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: 0.32px;
+  text-align: center;
+  color: $text-white;
+}
+
+img.refresh-cw-01 {
+  width: 16px;
+  height: 16px;
+  flex-grow: 0;
+  object-fit: contain;
+}
+
+.Regular-Button2 {
+  width: 145px;
+  height: 40px;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin: 24px 0 0 12px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: solid 1px $black-light;
+}
+
+.Filter-List {
+  width: 16px;
+  height: 16px;
+  flex-grow: 0;
+  object-fit: contain;
+}
+
+.Button-label2:hover {
+  cursor: pointer
+}
+
+.Filter-List:hover {
+  cursor: pointer
+}
+
+.form-control2 {
+  height: 29px;
+  // @include font(80%, 400);
+  background-color:$black-dark;
+  color: $text-white;
+  border: none;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.search-row {
+  margin-bottom: 15px;
+}
+
+//  tr:first-child td:first-child { border-top-left-radius: 10px }
+// tr:first-child td:last-child { border-top-right-radius: 10px; }
+img.Delete {
+  width: 16px;
+  height: 16px;
+  flex-grow: 0;
+  object-fit: contain;
+}
+
+.Icon-Button {
+  margin-right: 10px;
+  width: 40px;
+  height: 28px;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: solid 1px $black-light;
+}
+
+.Edit-Button {
+  height: 28px;
+  // float: right;
+  width: 85px;
+  // flex-grow: 1;
+  width: 73px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background-color: $blue-medium;
+}
+
+.Edit-label {
+  width: 24px;
+  height: 12px;
+  flex-grow: 0;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: 0.24px;
+  text-align: center;
+  color: $black-medium;
+}
+
+.Icon-Button:hover {
+  cursor: pointer
+}
+
+.Edit-Button:hover {
+  cursor: pointer
+}
+
+.form-control2:hover {
+  cursor: pointer
+}
+
+.Title {
+  height: 28px;
+  flex-grow: 1;
+  font-family: 'DM Sans', sans-serif;
+  // font-size: 24px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.17;
+  letter-spacing: -1px;
+  text-align: left;
+  color: $text-white;
+}
+
+.Frame-Label {
+  width: 540px;
+  height: 24px;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 0;
+}
+
+.label {
+  height: 24px;
+  align-self: stretch;
+  flex-grow: 0;
+  // padding: 0 164px 8px 0;
+}
+
+.input-label {
+  width: 96px;
+  height: 16px;
+  flex-grow: 0;
+  font-family: SFProText;
+  font-size: 14px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.14;
+  letter-spacing: 0.28px;
+  text-align: left;
+  color: $text-white;
+}
+
+.Frame-Input {
+  width: 540px;
+  height: 64px;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 0;
+}
+
+
+// .label-frame {
+//   height: 28px;
+//   align-self: stretch;
+//   flex-grow: 0;
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: flex-start;
+//   align-items: center;
+//   gap: 8px;
+//   padding: 8px 9px;
+//   border-radius: 8px;
+//   border: solid 1px $black-light;
+//   background-color: $black-medium;
+// }
+
+.Frame-Input .form-control {
+  width: 220px;
+  border-radius: 8px;
+  border: solid 1px $black-light;
+}
+
+.msg-align {
+  // display: flex;
+  margin-top: -21px;
+  padding-bottom: 18px;
+}
+
+.align-right {
+  float: right;
+  padding-right: 92px;
+}
+
+.button-flex {
+  //   display: flex;
+  flex-direction: row;
+  display: flex;
+  justify-content: flex-end
+}
+
+.ngSelect-width {
+  width: 220px;
+}
+
+.font-DMsans .btn-dark-border2 {
+  color: $text-white;
+  border: 0.5px solid $text-white-opacity;
+  //remove below
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.bg-color {
+  background-color: $dark-v1;
+}
+.age-leftMargin{
+  margin-left: 140px;
+}
+.fir-leftMargin{
+  margin-left: 186px
+}
+.maplayerdd-width{
+  width: 465px;
+}

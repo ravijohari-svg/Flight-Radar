@@ -1,0 +1,2460 @@
+<div *ngIf="setwaypointloader" class="loader">
+  <app-loader [PhaseKey]="loaderKey"></app-loader>
+</div>
+<div
+  class="main-panel dark"
+  [ngClass]="dialogFlag == true && 'BG---Opacity-70'"
+>
+  <!-- map -->
+  <div class="card dark-medium h-100">
+    <div class="main-map">
+      <div class="map-container create-mission-module">
+        <ng-template appResuableOutlet></ng-template>
+      </div>
+    </div>
+  </div>
+  <!-- mission-creation -->
+  <div class="mission-creation" [class.disabled-div]="disableBackground">
+   
+    <button class="no-opacity" (click)="swalShow()">Refresh Button </button>
+     <div class="card dark-medium">
+      <div class="mission-cards">
+        <div
+          class="fill"
+          [ngClass]="{
+            'filled-1': isFilled == 1,
+            'filled-2': isFilled == 2,
+            'filled-3': isFilled == 3,
+            'filled-4':
+              isFilled == 4 ||
+              (profileDetails?.RPTO &&
+                profileDetails?.GeoFence &&
+                profileDetails?.GeoFence?.FileURL)
+          }"
+        ></div>
+        <!-- Top header title  -->
+        <div class="top-section">
+          <div class="text-white mission-header">
+            <div class="text-title">Create Flight Plan</div>
+            <div class="img-close" (click)="operatorOpen()">
+              <img src="../../../../assets/icons/ellipse.svg" />
+            </div>
+          </div>
+        </div>
+        <!-- Top header title  -->
+        <!-- Alert pop up -->
+        <div class="overlay" *ngIf="isShowWarning">
+          <div class="card text-center warning-card" *ngIf="isShowWarning">
+            <div class="card-header warning-header">
+              <div>
+                <img src="../../../../assets/icons/delete-pop.svg" />
+              </div>
+              <div class="f-16 text-white">
+                You currently have unsaved changes
+                <div class="f-12 text-white-50 mt-2">
+                  Are you sure you want to exit without saving?
+                </div>
+              </div>
+            </div>
+            <div class="card-body warning-body">
+              <button
+                class="stay-page text-white px-1 py-1 f-12"
+                (click)="closePopUp()"
+              >
+                Stay On This Page
+              </button>
+              <button
+                class="leave-page px-1 py-1 py-1 px-1 f-12 text-dark font-weight-bold"
+                (click)="closeMission()"
+              >
+                Leave This Page
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Alert pop up -->
+        <!-- Payment gateway -->
+        <div
+          *ngIf="limitReach === true"
+          class="text-right f-10 my-2 error-message"
+        >
+          Your flight submission plan is exceeded.
+        </div>
+        <!-- payment gateway  -->
+        <div *ngIf="tabIndex == 1" class="payment-gat">
+          <p class="mr-3">
+            Remaining Flights:{{ profileDetails?.NumberOfFlightSubmission }}
+          </p>
+        </div>
+
+        <form [formGroup]="missionDetails">
+          <div *ngIf="tabIndex == 0">
+            <div class="my-3">
+              <div class="form-group form-property">
+                <label class="form-group-headings" for="exampleInputEmail1"
+                  >Operation Name
+                  <span class="f-14 required-asterisk">*</span></label
+                >
+                <input
+                  type="text"
+                  class="form-control form-select focus-input"
+                  formControlName="OperationName"
+                  aria-describedby="emailHelp"
+                  [ngClass]="{
+                    'is-invalid': submitted && f?.OperationName.errors
+                  }"
+                  minlength="2"
+                  #operationName
+                  placeholder="Enter.."
+                />
+                <div
+                  *ngIf="submitted && f?.OperationName.errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f?.OperationName.errors.required">
+                    Operation Name is required
+                  </div>
+                  <div *ngIf="f?.OperationName.errors.minlength">
+                    Operation Name should be at least
+                    {{ f?.OperationName.errors.minlength.requiredLength }}
+                    characters long.
+                  </div>
+                </div>
+              </div>
+              <div class="form-group form-property">
+                <label class="form-group-headings" for="exampleInputEmail1"
+                  >Activity Type
+                  <img src="../../../../assets/icons/info.svg" />
+                  <span class="f-14 required-asterisk">*</span></label
+                >
+                <select
+                  class="form-control form-select focus-input"
+                  formControlName="ActivityType"
+                  [ngClass]="{
+                    'is-invalid': submitted && f?.ActivityType.errors,
+                    'disable-field':
+                      profileDetails?.RPTO &&
+                      profileDetails?.GeoFence &&
+                      profileDetails?.GeoFence?.FileURL
+                  }"
+                >
+                  <option value="" disabled selected>Select..</option>
+                  <option
+                    *ngFor="
+                      let activityType of activityType;
+                      trackBy: getActivity
+                    "
+                    [ngValue]="activityType"
+                  >
+                    <!-- .ActivityType -->
+                    {{ activityType.ActivityType }}
+                  </option>
+                </select>
+                <div
+                  *ngIf="submitted && f?.ActivityType.errors"
+                  class="invalid-feedback inv-feedback"
+                >
+                  Activity Type is required
+                </div>
+              </div>
+              <div class="form-group form-property">
+                <label class="form-group-headings" for="exampleInputEmail1"
+                  >Flight Purpose
+                  <img src="../../../../assets/icons/info.svg" />
+                  <span class="f-14 required-asterisk">*</span></label
+                >
+                <select
+                  class="form-control form-select focus-input"
+                  formControlName="FlightPurpose"
+                  [ngClass]="{
+                    'is-invalid': submitted && f?.FlightPurpose.errors,
+                    'disable-field':
+                      profileDetails?.RPTO &&
+                      profileDetails?.GeoFence &&
+                      profileDetails?.GeoFence?.FileURL
+                  }"
+                >
+                  <option
+                    value=""
+                    disabled
+                    selected
+                    class="placeholder-option text-white"
+                  >
+                    Select..
+                  </option>
+                  <option
+                    *ngFor="let flight of flightPurpose; trackBy: getFlight"
+                    [ngValue]="flight"
+                  >
+                    <!-- .ActivityType -->
+                    {{ flight.FlightPurpose }}
+                  </option>
+                </select>
+                <div
+                  *ngIf="submitted && f?.FlightPurpose.errors"
+                  class="invalid-feedback inv-feedback"
+                >
+                  Fight Purpose is required
+                </div>
+              </div>
+              <div class="form-group form-property">
+                <label class="form-group-headings" for="exampleInputEmail1"
+                  >Drone <img src="../../../../assets/icons/info.svg" /><span
+                    class="f-14 required-asterisk"
+                    >*</span
+                  ></label
+                >
+                <select
+                  class="form-control form-select focus-input"
+                  formControlName="DroneId"
+                  [ngClass]="{ 'is-invalid': submitted && f?.DroneId.errors }"
+                >
+                  <option value="" disabled selected>Select..</option>
+                  <option
+                    *ngFor="
+                      let droneAndGear of dronesAndGearList;
+                      trackBy: getDrone
+                    "
+                    [value]="droneAndGear.DroneId"
+                  >
+                    {{ droneAndGear.DroneNum }}
+                  </option>
+                </select>
+                <div
+                  *ngIf="submitted && f?.DroneId.errors"
+                  class="invalid-feedback inv-feedback"
+                >
+                  Drone is required
+                </div>
+              </div>
+              <div class="form-group form-property focus-input">
+                <label class="form-group-headings" for="exampleInputEmail1"
+                  >Start Time<span class="f-14 ml-1 required-asterisk"
+                    >*</span
+                  ></label
+                >
+                <input
+                  type="datetime-local"
+                  class="form-control form-select focus-input"
+                  formControlName="StartTime"
+                  [ngClass]="{
+                    'is-invalid':
+                      submitted && (f?.StartTime.errors || errors?.startEndTime)
+                  }"
+                />
+                <div
+                  *ngIf="submitted && f?.StartTime.errors"
+                  class="invalid-feedback inv-feedback"
+                >
+                  <div *ngIf="f?.StartTime.errors.required">
+                    Start Time is required
+                  </div>
+                  <div *ngIf="f?.StartTime.errors.startTime">
+                    Start Time has to be greater than or equal to Current time
+                  </div>
+                </div>
+                <div
+                  *ngIf="submitted && errors?.startEndTime"
+                  class="error-message"
+                >
+                  Start Time has to be less than End Time
+                </div>
+              </div>
+              <div class="form-group form-property">
+                <label class="form-group-headings" for="exampleInputEmail1"
+                  >End Time <span class="f-14 required-asterisk">*</span></label
+                >
+                <input
+                  type="datetime-local"
+                  class="form-control form-select focus-input"
+                  formControlName="EndTime"
+                  [ngClass]="{
+                    'is-invalid':
+                      submitted && (f?.EndTime.errors || errors?.startEndTime)
+                  }"
+                />
+                <div
+                  *ngIf="submitted && f?.EndTime.errors"
+                  class="invalid-feedback inv-feedback"
+                >
+                  End Time is required
+                </div>
+                <div
+                  *ngIf="submitted && errors?.startEndTime"
+                  class="error-message"
+                >
+                  End Time has to be greater than Start Time
+                </div>
+              </div>
+              <button
+                *ngIf="
+                  !(
+                    profileDetails?.RPTO &&
+                    profileDetails?.GeoFence &&
+                    profileDetails?.GeoFence?.FileURL
+                  )
+                "
+                [disabled]="limitReach || !this.missionDetails.valid"
+                class="button-next mt-1 text-white"
+                (click)="onNextStepper()"
+                [ngClass]="{ 'button-show': this.missionDetails.valid == true }"
+              >
+                Next
+              </button>
+              <button
+                *ngIf="
+                  profileDetails?.RPTO &&
+                  profileDetails?.GeoFence &&
+                  profileDetails?.GeoFence?.FileURL
+                "
+                [disabled]="!this.missionDetails.valid || submitFlag"
+                class="button-next mt-1 text-white"
+                (click)="rptoSubmit(createMission)"
+                [ngClass]="{ 'button-show': this.missionDetails.valid == true }"
+              >
+                <span *ngIf="!submitFlag"> Submit Mission </span>
+                <span *ngIf="submitFlag"
+                  ><img
+                    src="../../../../../assets/common-layout/SquareLoader.gif"
+                    width="20px"
+                /></span>
+              </button>
+            </div>
+          </div>
+          <div class="my-3 second-screen" *ngIf="tabIndex == 1">
+            <div class="form-flow">
+              <div class="input-button mt-3">
+                <input
+                  class="form-check-input ml-3"
+                  type="radio"
+                  name="inlineRadioOptions"
+                  id="inlineRadio1"
+                  value="0"
+                  (change)="isDrawPoint()"
+                />
+                <div>
+                  <img src="../../../../assets/icons/pencil.svg" />
+                </div>
+              </div>
+              <div class="input-button-content">
+                <div class="input-button-content1 mr-1">Draw Waypoints</div>
+                <div class="input-button-content2 mr-1">
+                  you can draw waypoints by drawing on a map directly in the
+                  system
+                </div>
+              </div>
+            </div>
+            <div class="divider-class">
+              <div class="divider">OR</div>
+            </div>
+            <div class="form-flow-1">
+              <div class="input-button mt-3">
+                <input
+                  class="form-check-input ml-3"
+                  type="radio"
+                  name="inlineRadioOptions"
+                  id="inlineRadio1"
+                  value="0"
+                  (change)="isUploaded()"
+                />
+                <div>
+                  <img src="../../../../assets/icons/file-upload.svg" />
+                </div>
+              </div>
+              <div class="input-button-content">
+                <div class="input-button-content1 mr-1">Upload Waypoints</div>
+                <div class="input-button-content2 mr-1">
+                  you can upload external waypoints file and it will be visible
+                  in the system.
+                </div>
+              </div>
+            </div>
+            <div
+              class="divider-class"
+              *ngIf="this.waypointTemplates.length >= 1"
+            >
+              <div class="divider">OR</div>
+            </div>
+            <select
+              *ngIf="this.waypointTemplates.length >= 1"
+              class="form-control form-select mt-3 select-hover focus-input"
+              #waypointsSelect
+              (change)="
+                onWaypointSelected(
+                  waypointsSelect.value,
+                  waypointTemplates[waypointsSelect.value]
+                )
+              "
+            >
+              <option
+                value=""
+                class="placeholder-option f-14"
+                disabled
+                selected
+              >
+                Upload your pre-uploaded Template
+              </option>
+              <option
+                *ngFor="let waypoints of waypointTemplates; let i = index"
+                [value]="i"
+              >
+                {{ i + 1 }}. {{ waypoints }}
+              </option>
+            </select>
+            <div class="back-next-button mt-3">
+              <button class="back-button" (click)="backStepper()">
+                <img src="../../../../assets/icons/left-btn.svg" width="25" />
+              </button>
+              <button
+                class="next-button text-white"
+                (click)="nextOperation()"
+                [ngClass]="{
+                  'back-color': this.isNext == 2 || this.isNext == 3
+                }"
+                [disabled]="this.isNext !== 2 && this.isNext !== 3"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+
+          <div *ngIf="tabIndex == 2">
+            <div class="form-group max-alt">
+              <label
+                for="inputPassword"
+                class="pr-3 f-12 mt-2"
+                *ngIf="wayPointsForm.value.wayPoints.length > 1"
+                >Maximum Altitude(m)</label
+              >
+              <div
+                class="input-group"
+                *ngIf="wayPointsForm.value.wayPoints.length > 1"
+              >
+                <input
+                  type="number"
+                  class="alt-change text-white rounded-left"
+                  aria-describedby="emailHelp"
+                  formControlName="MaximumAltitude"
+                  (change)="onMaximumAltitudeChange()"
+                  [readonly]="true"
+                  [ngClass]="{
+                    'is-invalid': submitted && f?.MaximumAltitude.errors
+                  }"
+                />
+                <div
+                  *ngIf="submitted && f?.MaximumAltitude.errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f?.MaximumAltitude.errors.required">
+                    Maximum Altitude is required
+                  </div>
+                  <div *ngIf="f?.MaximumAltitude.errors.max">
+                    Value should be less than or equal to 120
+                  </div>
+                  <div *ngIf="f?.MaximumAltitude.errors.pattern">
+                    Invalid Data
+                  </div>
+                </div>
+              </div>
+              <div class="way-down-btn">
+                <span
+                  class="waypoint-show-1 summary-width f-16 fw-100 mt-3"
+                  *ngIf="latitudeArr.length > 1"
+                >
+                  Waypoint Summary
+                  <div>{{ correlationData?.zoneCount[0] }}</div>
+                  <div>{{ correlationData?.zoneCount[1] }}</div>
+                  <div>{{ correlationData?.zoneCount[2] }}</div>
+                </span>
+                <button
+                  class="text-white download-btn-1 f-12 p-1 mt-3 mr-1"
+                  (click)="downloadWaypoints()"
+                  *ngIf="latitudeArr.length > 1"
+                >
+                  Download
+                </button>
+              </div>
+
+              <!-- <button
+                class="btn"
+                style="display: none"
+                (click)="onMaximumAltitudeChange()"
+              ></button> -->
+            </div>
+          </div>
+
+          <div *ngIf="tabIndex == 3">
+            <div class="white-text f-16">
+              <div class="upload-title">
+                <span
+                  *ngIf="isReset"
+                  class="waypoint-show f-16 fw-100 mt-3 ml-2"
+                >
+                  Waypoint Summary
+                  <div>{{ correlationData?.zoneCount[0] }}</div>
+                  <div>{{ correlationData?.zoneCount[1] }}</div>
+                  <div>{{ correlationData?.zoneCount[2] }}</div>
+                </span>
+                <span
+                  *ngIf="!isReset"
+                  class="upload-waypoint-text f-13 mt-2 ml-2"
+                  >Upload Waypoint file (.KML/.Waypoints)
+                </span>
+                <span
+                  class="reset-position f-12 ml-4"
+                  *ngIf="isReset"
+                  (click)="
+                    onUploadReset();
+                    setWaypointFlag = false;
+                    resetFlag = false;
+                    completePathFlag = false
+                  "
+                  ><img
+                    class="text-white"
+                    src="../../../../../assets/icons/Refresh.svg"
+                  />Reset
+                </span>
+              </div>
+              <div
+                class="upload-data ml-3 mr-2"
+                [ngClass]="{
+                  'div-hide': wayPointsArr.length > 0
+                }"
+              >
+                <div class="mt-2 upload-waypoint-div">
+                  <div class="upload-img">
+                    <img
+                      src="../../../../../assets/common-layout/Upload.svg"
+                      alt="Upload"
+                    />
+                  </div>
+                  <div for="uploadwayPoint">
+                    <p class="text-center f-12 parahover text-white">
+                      Drag-and-drop file , or
+                      <span class="f-12 browse-link" *ngIf="!coRelationFlag">
+                        browse computer</span
+                      >
+                    </p>
+                  </div>
+                  <input
+                    #uploadwayPoint
+                    type="file"
+                    name="CSVFile"
+                    id="uploadwayPoint"
+                    (change)="onWayPointsUpload($event); uploadFiles($event)"
+                    [ngClass]="{
+                      'is-invalid': submitted
+                    }"
+                  />
+                </div>
+                <div *ngIf="invalidFile" class="error-message">
+                  Invalid file type, Please upload 'waypoints' or 'kml' files.
+                  <div
+                    *ngIf="
+                      submitted &&
+                      (wayPointsInvalid === undefined ||
+                        wayPointsInvalid === null)
+                    "
+                    class="error-message"
+                  >
+                    Please draw or upload waypoints
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <div *ngIf="tabIndex == 2 || tabIndex == 3">
+          <div *ngIf="wayPointsForm.value.wayPoints.length > 1" class="mt-3">
+            <form [formGroup]="wayPointsForm" *ngIf="isVisible">
+              <div
+                class="card w-100 waypoint-card"
+                *ngFor="
+                  let point of this.wayPointsForm.get('wayPoints')['controls'];
+                  let i = index
+                "
+              >
+                <app-waypoint-form-card
+                  *ngIf="isVisible"
+                  [waypointNo]="i"
+                  [waypoint]="point"
+                  [correlationData]="correlationData"
+                  [submitted]="waypointformSubmitted"
+                  [isDisable]="isDisable"
+                  [showCorr]="showCorrelation"
+                  (formValueChanged)="onValueChange($event)"
+                  (waypointError)="onErrorFind($event)"
+                ></app-waypoint-form-card>
+              </div>
+            </form>
+          </div>
+
+          <div class="my-4 mx-3 display-flex" *ngIf="tabIndex == 2">
+            <button
+              class="back-button-1"
+              (click)="
+                onUploadReset();
+                startDrawPolyline('reset');
+                setWaypointFlag = false;
+                resetFlag = false;
+                completePathFlag = false
+              "
+            >
+              <img
+                src="../../../../../assets/icons/left-btn.svg"
+                width="25px"
+              />
+            </button>
+
+            <button
+              [disabled]="resetFlag"
+              class="back-button text-white"
+              (click)="startDrawPolyline('reset')"
+            >
+              <span
+                ><img
+                  class="mr-1"
+                  src="../../../../../assets/icons/Refresh.svg" /></span
+              >Reset
+            </button>
+
+            <button
+              *ngIf="!completeWaypoint"
+              class="text-white f-16 inc-widths"
+              (click)="onCompletePath()"
+              [disabled]="completePathFlag"
+            >
+              <span
+                ><img src="../../../../../assets/icons/Check_Outline.svg"
+              /></span>
+              Complete Path
+            </button>
+
+            <button
+              *ngIf="completeWaypoint"
+              [disabled]="setWaypointFlag || errorFind"
+              class="text-white f-16 inc-widths"
+              (click)="submit(intersection, createMission)"
+              [ngClass]="{
+                'setwaypoint-button-1': errorFind,
+                'setwaypoint-button-1': !errorFind && latitudeArr.length < 2,
+                'set-waypoint-button-1': !errorFind && latitudeArr.length >= 2
+              }"
+            >
+              <span *ngIf="!submitFlag"> Set Waypoints </span>
+              <span *ngIf="submitFlag"
+                ><img
+                  src="../../../../../assets/common-layout/SquareLoader.gif"
+                  width="20px"
+              /></span>
+            </button>
+          </div>
+
+          <div class="my-4 mx-3 display-flex" *ngIf="tabIndex == 3">
+            <button
+              class="back-button"
+              (click)="
+                onUploadReset();
+                startDrawPolyline('reset');
+                setWaypointFlag = false;
+                resetFlag = false;
+                completePathFlag = false
+              "
+            >
+              <img
+                src="../../../../../assets/icons/left-btn.svg"
+                width="25px"
+              />
+            </button>
+            <button
+              [disabled]="setWaypointFlag || errorFind"
+              class="text-white inc-width"
+              (click)="submit(intersection, createMission)"
+              [ngClass]="{
+                'setwaypoint-button': errorFind,
+                'setwaypoint-button': !errorFind && latitudeArr.length < 2,
+                'set-waypoint-button': !errorFind && latitudeArr.length >= 2
+              }"
+            >
+              <span *ngIf="!submitFlag"> Set Waypoints </span>
+              <span *ngIf="submitFlag"
+                ><img
+                  src="../../../../../assets/common-layout/SquareLoader.gif"
+                  width="20px"
+              /></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Elevation graph -->
+  <div
+    *ngIf="isClicked"
+    class="card dark-medium elevationGraph"
+    [ngClass]="{
+      expanded: isExpanded && !isMinimized,
+      expandeds: isExpanded,
+      minimizedGraph: isMinimized && !isExpanded,
+      minimizedGraph1: isMinimized,
+      orignalPos: !isMinimized && initialPost
+    }"
+  >
+    <div
+      class="card dark-medium header-1"
+      [ngClass]="{
+        expanded1: isExpanded && !isMinimized,
+        expanded1s: isExpanded,
+        minimizedGraphs: isMinimized && !isExpanded,
+        minimizedGraphs1: !isMinimized
+      }"
+    >
+      <div class="text-left f-14"><span>Elevation Graph</span></div>
+      <div class="header">
+        <button class="minimize-btn" (click)="toggleMinimize()">
+          <img src="../../../../../assets/common-layout/min.png" width="20px" />
+        </button>
+        <button class="expand-btn" (click)="toggleExpand()">
+          <img src="../../../../../assets/common-layout/max.png" width="15px" />
+        </button>
+      </div>
+    </div>
+    <div
+      class="content"
+      [ngClass]="{
+        expanded2: isExpanded && !isMinimized,
+        expanded2s: isExpanded,
+        minimized: isMinimized && !isExpanded,
+        minimized1: isMinimized
+      }"
+    >
+      <div class="elevation_graph mt-3 p-16 pr-2 text-white">
+        <div class="chart-container" echarts [options]="chartOption"></div>
+      </div>
+    </div>
+  </div>
+  <!--wheather-bar -->
+  <div class="info-card">
+    <div class="card border-0 weather-color my-2">
+      <div class="card-body py-2">
+        <div class="row">
+          <div class="col-lg-3 pt-1">
+            <div class="city-width">
+              <input
+                [(ngModel)]="cityName"
+                type="text"
+                class="form-control city-width f-12 white-text-opacity py-3"
+                placeholder="Enter a city"
+                aria-label="City Name"
+                aria-describedby="basic-addon2"
+              />
+              <button
+                class="btn weather-button icon p-0"
+                (click)="onWeatherForm()"
+              >
+                <img src="../../../../assets/common-layout/Arrow_Right.svg" />
+              </button>
+            </div>
+            <div class="error-message f-10" *ngIf="NotFound">
+              City not found
+            </div>
+          </div>
+          <div class="col-lg-9 weather-info align-items-center pt-1">
+            <div class="row">
+              <div class="col-sm-3 row">
+                <div class="col-3 px-1 pt-1 text-right">
+                  <span class="rounded-circle dark-light icon-circle">
+                    <img
+                      src="../.../../../../../assets/common-layout/LocPinDropIcon.svg"
+                      alt="Location"
+                    />
+                  </span>
+                </div>
+                <div class="col px-2">
+                  <div class="list-description-dark f-10">Location</div>
+                  <div class="text-white f-12">{{ responseCityName }}</div>
+                </div>
+              </div>
+              <div class="col-sm-3 row">
+                <div class="col-3 px-1 pt-1 text-right">
+                  <span class="rounded-circle dark-light icon-circle">
+                    <img
+                      src="../.../../../../../assets/common-layout/TempIcon.svg"
+                      alt="Temperature"
+                    />
+                  </span>
+                </div>
+                <div class="col px-2">
+                  <div class="list-description-dark f-10">Temperature</div>
+                  <div class="text-white f-12">
+                    {{
+                      currentWeatherDetails?.main?.temp | frantCelcius : "C"
+                    }}°C
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3 row">
+                <div class="col-3 px-1 pt-1 text-right">
+                  <span class="rounded-circle dark-light icon-circle">
+                    <img
+                      src="../.../../../../../assets/common-layout/WindIcon.svg"
+                      alt="Wind"
+                    />
+                  </span>
+                </div>
+                <div class="col px-2">
+                  <div class="list-description-dark f-10">Wind Speed</div>
+                  <div class="text-white f-12">
+                    {{ currentWeatherDetails?.wind.speed }} m/s
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 row">
+                <div class="col-3 px-1 pt-1 text-right">
+                  <span class="rounded-circle dark-light icon-circle">
+                    <img
+                      src="../.../../../../../assets/common-layout/Climate.svg"
+                      alt="Climate"
+                    />
+                  </span>
+                </div>
+                <div class="col px-2">
+                  <div class="list-description-dark f-10">Climate</div>
+                  <div
+                    class="text-white f-12"
+                    *ngFor="
+                      let climate of currentWeatherDetails?.weather;
+                      trackBy: getClimate
+                    "
+                  >
+                    {{ climate.description | titlecase }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- mission info card -->
+  <div *ngIf="tabIndex == 2">
+    <div class="mission-info-card card-body px-1 py-1">
+      <div class="text-white text-center text-waypoint mt-1 f-12">
+        {{ wayPointsForm.value.wayPoints.length }} Waypoints added
+      </div>
+      <div class="white-text-opacity text-center text-waypoint-2 ml-1 f-10">
+        Click on a location to add path
+      </div>
+
+      <!-- <div class="bottom-card-button">
+        <button
+          [disabled]="resetFlag"
+          class="btn-reset btn-block bottom-reset f-12 br-2 p-1"
+          (click)="startDrawPolyline('reset')"
+        >
+          <span
+            ><img
+              class="mr-1"
+              src="../../../../../assets/icons/Refresh.svg" /></span
+          >Reset
+        </button>
+        <button
+          class="btn primary-btn f-10 p-1 bottom-complete"
+          (click)="onCompletePath()"
+          [disabled]="completePathFlag"
+        >
+          <span
+            ><img src="../../../../../assets/icons/Check_Outline.svg"
+          /></span>
+          Complete Path
+        </button>
+      </div> -->
+    </div>
+  </div>
+  <!-- <div
+    *ngIf="tabIndex == 2 && wayPointsArr.length > 0 && doubleClick"
+    class="alert alert-warning alert-dismissible fade show alert-card"
+    role="alert"
+  >
+    <p class="white-text-opacity text-center alertText-mt">
+      Please double click to complete path
+    </p>
+    <button
+      class="close alertButton-mt"
+      data-dismiss="alert"
+      aria-label="close"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div> -->
+  <!-- osm-building -->
+  <!-- osm-building -->
+  <!-- <div class="create-mission">
+    <div class="align-map-buttons">
+      <div
+        class="osm-button"
+        *ngIf="toggleflagText == '3D'"
+        (click)="osmBuildings()"
+        style="word-wrap: break-word; margin-right: 5px"
+      >
+        <mat-slide-toggle>Obstacles</mat-slide-toggle>
+      </div>
+      <div class="slideToggle-button" style="word-wrap: break-word">
+        <span style="margin-right: 5px">2D</span>
+        <mat-slide-toggle (click)="toggle2D3D()">3D</mat-slide-toggle>
+      </div>
+    </div>
+  </div> -->
+  <!-- <div class="mt-3 pop-content">
+    <div class="pop-header f-16">Heatmaps</div>
+    <div class="form-check pop-check ml-4">
+      <input class="form-check-input check-input" [(ngModel)]="telecom" (click)="telecomApi()" style="width: 18px; height: 18px;" type="checkbox" value="" id="flexCheckDefault">
+      <label class="form-check-label f-14 " for="flexCheckDefault">
+        Telecom Tower
+      </label>
+    </div>
+    <div class="form-check pop-check ml-4">
+      <input class="form-check-input check-input" [(ngModel)]="heatmap" style="width: 18px; height: 18px;" (click)="popHeatmap()" type="checkbox" value="" id="flexCheckChecked" checked>
+      <label class="form-check-label  f-14 " for="flexCheckChecked">
+        Population
+      </label>
+    </div>
+ </div> -->
+  <!-- <app-heatmap
+   (teleSwitch)="telecomApi($event)"
+   (popSwitch)="popHeatmap($event)"
+   (toggSwitch)="toggle2D3D($event)"
+   (terrSwitch)="osmBuildings($event)"
+   ></app-heatmap> -->
+  <app-heatmap (toggSwitch)="toggle2D3D($event)"></app-heatmap>
+
+  <!-- dialog box -->
+  <dialog *ngIf="dialogFlag" class="dialog">
+    <!-- <div class="CleanShot-2022-10-14-at-1246-1"> -->
+    <div class="dialog-content">
+      <header class="dialog-header">
+        <div class="Icon-Badge">
+          <img src="../.../../../../../../assets/common-layout/imgInfo.svg" />
+        </div>
+        <span class="Title f-20 text-white"> Manual Approval Required </span>
+      </header>
+      <span class="Description f-16 fw-200">
+        Looks like you’re heading into restricted airspace. You’ll require
+        manual approval on your mission from the nearest ATC to your location.
+      </span>
+      <div class="Right">
+        <div class="Buttons">
+          <button
+            class="Regular-Button"
+            (click)="
+              dialogFlag = false;
+              disableBackground = false;
+              router.navigateByUrl('operator/operator-app/dashboard')
+            "
+          >
+            <span class="Button-label f-12"> Cancel </span>
+          </button>
+          <button class="Regular-Button2" (click)="uploadRequiredDocuments()">
+            <span class="Button-label2 f-12"> Upload required documents </span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- </div> -->
+  </dialog>
+
+  <!-- dialog box for rejected mission-->
+  <dialog *ngIf="dialogRejectedFlag" class="dialog">
+    <div class="dialog-content">
+      <header class="dialog-header">
+        <div class="Icon-Badge Icon-Badge2">
+          <img
+            src="../.../../../../../../assets/common-layout/Error_Rejected_Mission.svg"
+          />
+        </div>
+        <span class="Title f-20 text-left"> Mission Rejected </span>
+      </header>
+      <span class="Description f-16 fw-300">
+        Your mission has been rejected since you don’t have the right
+        permissions for the assigned flight path. If you’d still like to apply,
+        SKYE UTM can submit it on your behalf.
+      </span>
+      <div class="Right">
+        <div class="Buttons">
+          <button
+            class="Regular-Button rejected-dialog-width"
+            (click)="
+              dialogRejectedFlag = false;
+              disableBackground = false;
+              router.navigateByUrl('operator/operator-app/dashboard')
+            "
+          >
+            <span class="Button-label f-12"> Cancel </span>
+          </button>
+          <button
+            class="Regular-Button2 rejected-dialog-width2"
+            (click)="uploadRequiredDocuments()"
+          >
+            <span class="Button-label2 f-12">
+              <img
+                src="../.../../../../../../assets/common-layout/star-06.svg"
+                class="mr-1"
+              />
+              Apply via SKYE UTM
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Upload Documents -->
+  <div class="Rectangle-1" *ngIf="uploadDocumentsFlag">
+    <div class="rec-header mb-2">
+      <span class="Upload-Documents f-20"> Upload Documents </span>
+      <div class="Upload-Documents-Description text-sm fw-100">
+        To proceed with your selected flight plan, we will require the following
+        documents:
+      </div>
+    </div>
+
+    <!-- accordian -->
+    <div class="accordian-class px-2 py-2 mt-1">
+      <mat-accordion [multi]="false">
+        <form [formGroup]="generalCompliance">
+          <mat-expansion-panel [expanded]="true">
+            <mat-expansion-panel-header class="accor-header">
+              <mat-panel-title class="white-text-opacity mat-title f-16">
+                Mission complaince (3)
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="Frame-Uploads px-2">
+              <div class="Upload">
+                <span class="Document-Uploaded f-14 text-white-50">
+                  KML file<sup class="star">*</sup></span
+                >
+                <!-- Before upload -->
+                <div class="File-Upload" *ngIf="kmlFlag == 0">
+                  <div>
+                    <img
+                      src="../../../../../assets/common-layout/Upload.svg"
+                      class="upload-img2"
+                    />
+                    <div class="text-drag">
+                      Drag-and-drop a WAYPOINTS/KML file,
+                      <div>
+                        or
+                        <span class="text-primary-drag">browse computer</span>
+                      </div>
+                    </div>
+                    <!-- <div *ngIf="invalidFile" class="error-message">
+            Invalid file type, Please upload 'waypoints' or 'kml' files.
+          </div> -->
+                  </div>
+                  <!-- (click)="documentFlag('document1Flag')" -->
+                  <input
+                    type="file"
+                    id="uploadDocumentsFile"
+                    (change)="kmlFileUploads($event)"
+                    [ngClass]="{
+                      'is-invalid': generalComplianceSubmit && kmlFileName == ''
+                    }"
+                    style="background-color: brown"
+                  />
+                </div>
+                <!-- After Upload -->
+                <div class="File-Uploaded" *ngIf="kmlFlag == 1">
+                  <img
+                    src="../.../../../../../../assets/common-layout/file-logo.svg"
+                    class="file-logo"
+                  />
+                  <span class="filenamepdf f-14">
+                    {{ kmlFileName }}
+                  </span>
+                  <!-- 150KB -->
+                  <span class="KB"> </span>
+                  <img
+                    src="../.../../../../../../assets/common-layout/file-close.svg"
+                    class="file-close"
+                    (click)="resetKmlFileUploads()"
+                  />
+                </div>
+                <div *ngIf="kmlFileTypeError" class="error-message">
+                  <div>
+                    Invalid type, Please upload 'waypoints' or 'kml' files.
+                  </div>
+                </div>
+                <div *ngIf="kmlFileSizeError" class="error-message">
+                  <div>
+                    <div>File size should be less than or equal to 500KB</div>
+                  </div>
+                </div>
+                <div
+                  *ngIf="
+                    generalComplianceSubmit &&
+                    generalCompliance.controls.kmlFile.errors
+                  "
+                  class="error-message"
+                >
+                  <div
+                    *ngIf="generalCompliance.controls.kmlFile.errors.required"
+                  >
+                    KML file is required
+                  </div>
+                </div>
+              </div>
+
+              <div class="Upload">
+                <span class="Document-Uploaded f-14 text-white-50">
+                  Operations Plan<sup class="star">*</sup>
+                </span>
+                <!-- Before upload -->
+                <div class="File-Upload" *ngIf="operationsPlanFlag == 0">
+                  <div>
+                    <img
+                      src="../../../../../assets/common-layout/Upload.svg"
+                      class="upload-img2"
+                    />
+                    <div class="text-drag">
+                      Drag-and-drop a PDF/JPEG/PNG file,
+                      <p>
+                        or
+                        <span class="text-primary-drag">browse computer</span>
+                      </p>
+                    </div>
+                  </div>
+                  <input
+                    type="file"
+                    id="uploadDocumentsFile"
+                    (change)="operationsPlanFileUploads($event)"
+                    [ngClass]="{
+                      'is-invalid':
+                        generalComplianceSubmit && operationsFileName == ''
+                    }"
+                  />
+                </div>
+                <!-- After Upload -->
+                <div class="File-Uploaded" *ngIf="operationsPlanFlag == 1">
+                  <img
+                    src="../.../../../../../../assets/common-layout/file-logo.svg"
+                    class="file-logo"
+                  />
+                  <span class="filenamepdf f-14">
+                    {{ operationsPlanFileName }}
+                  </span>
+                  <span class="KB"> </span>
+                  <img
+                    src="../.../../../../../../assets/common-layout/file-close.svg"
+                    class="file-close"
+                    (click)="resetOperationsFileUploads()"
+                  />
+                </div>
+                <div *ngIf="operationsPlanFileSizeError" class="error-message">
+                  <div>File size should be less than or equal to 500KB</div>
+                </div>
+                <div *ngIf="operationsPlanFileTypeError" class="error-message">
+                  <div>Invalid type, Please upload PDF/JPEG/PNG files.</div>
+                </div>
+                <div
+                  *ngIf="
+                    generalComplianceSubmit &&
+                    generalCompliance.controls.operationsPlanFile.errors
+                  "
+                  class="error-message"
+                >
+                  <div
+                    *ngIf="
+                      generalCompliance.controls.operationsPlanFile.errors
+                        .required
+                    "
+                  >
+                    Operations Plan file is required
+                  </div>
+                </div>
+              </div>
+
+              <div class="Upload">
+                <span class="Document-Uploaded f-14 text-white-50">
+                  UIN certificate<sup class="star">*</sup>
+                </span>
+                <!-- Before upload -->
+                <div class="File-Upload" *ngIf="uinCertificateFlag == 0">
+                  <div>
+                    <img
+                      src="../../../../../assets/common-layout/Upload.svg"
+                      class="upload-img2"
+                    />
+                    <div class="text-drag">
+                      Drag-and-drop a PDF/JPEG/PNG file,
+                      <p>
+                        or
+                        <span class="text-primary-drag">browse computer</span>
+                      </p>
+                    </div>
+                  </div>
+                  <input
+                    type="file"
+                    id="uploadDocumentsFile"
+                    (change)="uinCertificateFileUploads($event)"
+                    [ngClass]="{
+                      'is-invalid':
+                        generalComplianceSubmit && uinCertificateFileName == ''
+                    }"
+                  />
+                </div>
+                <!-- After Upload -->
+                <div class="File-Uploaded" *ngIf="uinCertificateFlag == 1">
+                  <img
+                    src="../.../../../../../../assets/common-layout/file-logo.svg"
+                    class="file-logo"
+                  />
+                  <span class="filenamepdf f-14">
+                    {{ uinCertificateFileName }}
+                  </span>
+                  <span class="KB"> </span>
+                  <img
+                    src="../.../../../../../../assets/common-layout/file-close.svg"
+                    class="file-close"
+                    (click)="resetUinCertificateFileUploads()"
+                  />
+                </div>
+                <div *ngIf="uinCertificateFileSizeError" class="error-message">
+                  <div>File size should be less than or equal to 500KB</div>
+                </div>
+                <div *ngIf="uinCertificateFileTypeError" class="error-message">
+                  <div>Invalid type, Please upload PDF/JPEG/PNG files.</div>
+                </div>
+                <div
+                  *ngIf="
+                    generalComplianceSubmit &&
+                    generalCompliance.controls.uinCertificateFile.errors
+                  "
+                  class="error-message"
+                >
+                  <div
+                    *ngIf="
+                      generalCompliance.controls.uinCertificateFile.errors
+                        .required
+                    "
+                  >
+                    UIN certificate file is required
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel class="mt-2" [expanded]="false">
+            <mat-expansion-panel-header class="accor-header">
+              <mat-panel-title class="mat-title f-16">
+                General Compliance (4)
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="document-card">
+              <div class="Frame-Upload px-2">
+                <div class="Upload">
+                  <span class="mr-1 Document-Uploaded f-14 text-white-50"
+                    >Incorporation Certificate
+                  </span>
+                  <!-- Before upload -->
+                  <div class="File-Upload" *ngIf="incorporationFlag == 0">
+                    <div>
+                      <img
+                        src="../../../../../assets/common-layout/Upload.svg"
+                        class="upload-img2"
+                      />
+                      <div class="text-drag">
+                        Drag-and-drop a PDF/JPEG/PNG file,
+                        <div>
+                          or
+                          <span class="text-primary-drag">browse computer</span>
+                        </div>
+                      </div>
+                    </div>
+                    <input
+                      type="file"
+                      id="uploadDocumentsFile"
+                      (change)="incorporationFileUploads($event)"
+                      [ngClass]="{
+                        'is-invalid':
+                          generalComplianceSubmit && incorporationFileName == ''
+                      }"
+                    />
+                  </div>
+                  <!-- After Upload -->
+                  <div class="File-Uploaded" *ngIf="incorporationFlag == 1">
+                    <img
+                      src="../.../../../../../../assets/common-layout/file-logo.svg"
+                      class="file-logo"
+                    />
+                    <span class="filenamepdf f-14">
+                      {{ incorporationFileName }}
+                    </span>
+                    <!-- 150KB -->
+                    <span class="KB"> </span>
+                    <img
+                      src="../.../../../../../../assets/common-layout/file-close.svg"
+                      class="file-close"
+                      (click)="resetIncorporationFileUploads()"
+                    />
+                  </div>
+                  <div *ngIf="incorporationFileSizeError" class="error-message">
+                    <div>File size should be less than or equal to 500KB</div>
+                  </div>
+                  <div *ngIf="incorporationFileTypeError" class="error-message">
+                    <div>Invalid type, Please upload PDF/JPEG/PNG files.</div>
+                  </div>
+                  <div
+                    *ngIf="
+                      generalComplianceSubmit &&
+                      generalCompliance.controls.incorporationFile.errors
+                    "
+                    class="error-message"
+                  >
+                    <div
+                      *ngIf="
+                        generalCompliance.controls.incorporationFile.errors
+                          .required
+                      "
+                    >
+                      Incorporation file is required
+                    </div>
+                  </div>
+                </div>
+                <div class="Upload">
+                  <span class="Document-Uploaded f-14 text-white-50">
+                    Company Profile
+                  </span>
+                  <!-- Before upload -->
+                  <div class="File-Upload" *ngIf="companyProfileFlag == 0">
+                    <div>
+                      <img
+                        src="../../../../../assets/common-layout/Upload.svg"
+                        class="upload-img2"
+                      />
+                      <div class="text-drag">
+                        Drag-and-drop a PDF/JPEG/PNG file,
+                        <p>
+                          or
+                          <span class="text-primary-drag">browse computer</span>
+                        </p>
+                      </div>
+                    </div>
+                    <input
+                      type="file"
+                      id="uploadDocumentsFile"
+                      (change)="companyProfileFileUploads($event)"
+                      [ngClass]="{
+                        'is-invalid':
+                          generalComplianceSubmit && operationsFileName == ''
+                      }"
+                    />
+                  </div>
+                  <!-- After Upload -->
+                  <div class="File-Uploaded" *ngIf="companyProfileFlag == 1">
+                    <img
+                      src="../.../../../../../../assets/common-layout/file-logo.svg"
+                      class="file-logo"
+                    />
+                    <span class="filenamepdf f-14">
+                      {{ companyProfileFileName }}
+                    </span>
+                    <span class="KB"> </span>
+                    <img
+                      src="../.../../../../../../assets/common-layout/file-close.svg"
+                      class="file-close"
+                      (click)="resetCompanyProfileFileUploads()"
+                    />
+                  </div>
+                  <div
+                    *ngIf="companyProfileFileSizeError"
+                    class="error-message"
+                  >
+                    <div>File size should be less than or equal to 500KB</div>
+                  </div>
+                  <div
+                    *ngIf="companyProfileFileTypeError"
+                    class="error-message"
+                  >
+                    <div>Invalid type, Please upload PDF/JPEG/PNG files.</div>
+                  </div>
+                  <div
+                    *ngIf="
+                      generalComplianceSubmit &&
+                      generalCompliance.controls.companyProfileFile.errors
+                    "
+                    class="error-message"
+                  >
+                    <div
+                      *ngIf="
+                        generalCompliance.controls.companyProfileFile.errors
+                          .required
+                      "
+                    >
+                      Operations Plan file is required
+                    </div>
+                  </div>
+                </div>
+                <div class="Upload">
+                  <span class="Document-Uploaded f-14 text-white-50">
+                    Pilot DGCA certificate<sup class="star">*</sup>
+                  </span>
+                  <!-- Before upload -->
+                  <div class="File-Upload" *ngIf="dgcaCertificateFlag == 0">
+                    <div>
+                      <img
+                        src="../../../../../assets/common-layout/Upload.svg"
+                        class="upload-img2"
+                      />
+                      <div class="text-drag">
+                        Drag-and-drop a PDF/JPEG/PNG file,
+                        <div>
+                          or
+                          <span class="text-primary-drag">browse computer</span>
+                        </div>
+                      </div>
+                    </div>
+                    <input
+                      type="file"
+                      id="uploadDocumentsFile"
+                      (change)="dgcaCertificateFileUploads($event)"
+                      [ngClass]="{
+                        'is-invalid':
+                          generalComplianceSubmit &&
+                          dgcaCertificateFileName == ''
+                      }"
+                    />
+                  </div>
+                  <!-- After Upload -->
+                  <div class="File-Uploaded" *ngIf="dgcaCertificateFlag == 1">
+                    <img
+                      src="../.../../../../../../assets/common-layout/file-logo.svg"
+                      class="file-logo"
+                    />
+                    <span class="filenamepdf f-14">
+                      {{ dgcaCertificateFileName }}
+                    </span>
+                    <!-- 150KB -->
+                    <span class="KB"> </span>
+                    <img
+                      src="../.../../../../../../assets/common-layout/file-close.svg"
+                      class="file-close"
+                      (click)="resetDgcaCertificateFileUploads()"
+                    />
+                  </div>
+                  <div
+                    *ngIf="dgcaCertificateFileSizeError"
+                    class="error-message"
+                  >
+                    <div>File size should be less than or equal to 500KB</div>
+                  </div>
+                  <div
+                    *ngIf="dgcaCertificateFileTypeError"
+                    class="error-message"
+                  >
+                    <div>Invalid type, Please upload PDF/JPEG/PNG files.</div>
+                  </div>
+                  <div
+                    *ngIf="
+                      generalComplianceSubmit &&
+                      generalCompliance.controls.dgcaCertificateFile.errors
+                    "
+                    class="error-message"
+                  >
+                    <div
+                      *ngIf="
+                        generalCompliance.controls.dgcaCertificateFile.errors
+                          .required
+                      "
+                    >
+                      Pilot DGCA Certificate file is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="Frame-Upload px-2">
+                <div class="Upload">
+                  <span class="Document-Uploaded f-14 text-white-50">
+                    Insurance<sup class="star">*</sup>
+                  </span>
+                  <!-- Before upload -->
+                  <div class="File-Upload" *ngIf="insuranceFlag == 0">
+                    <div>
+                      <img
+                        src="../../../../../assets/common-layout/Upload.svg"
+                        class="upload-img2"
+                      />
+                      <div class="text-drag">
+                        Drag-and-drop a PDF/JPEG/PNG file,
+                        <p>
+                          or
+                          <span class="text-primary-drag">browse computer</span>
+                        </p>
+                      </div>
+                    </div>
+                    <input
+                      type="file"
+                      id="uploadDocumentsFile"
+                      (change)="insuranceFileUploads($event)"
+                      [ngClass]="{
+                        'is-invalid':
+                          generalComplianceSubmit && insuranceFileName == ''
+                      }"
+                    />
+                  </div>
+                  <!-- After Upload -->
+                  <div class="File-Uploaded" *ngIf="insuranceFlag == 1">
+                    <img
+                      src="../.../../../../../../assets/common-layout/file-logo.svg"
+                      class="file-logo"
+                    />
+                    <span class="filenamepdf f-14">
+                      {{ insuranceFileName }}
+                    </span>
+                    <span class="KB"> </span>
+                    <img
+                      src="../.../../../../../../assets/common-layout/file-close.svg"
+                      class="file-close"
+                      (click)="resetInsuranceFileUploads()"
+                    />
+                  </div>
+                  <div *ngIf="insuranceFileSizeError" class="error-message">
+                    <div>File size should be less than or equal to 500KB</div>
+                  </div>
+                  <div *ngIf="insuranceFileTypeError" class="error-message">
+                    <div>Invalid type, Please upload PDF/JPEG/PNG files.</div>
+                  </div>
+                  <div
+                    *ngIf="
+                      generalComplianceSubmit &&
+                      generalCompliance.controls.insuranceFile.errors
+                    "
+                    class="error-message"
+                  >
+                    <div
+                      *ngIf="
+                        generalCompliance.controls.insuranceFile.errors.required
+                      "
+                    >
+                      Insurance file is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel class="mt-2">
+            <mat-expansion-panel-header class="accor-header">
+              <mat-panel-title class="mat-title f-16">
+                Additional Documents (4)
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="document-card">
+              <div class="Frame-Upload px-2">
+                <div class="Upload">
+                  <span class="Document-Uploaded f-14 text-white-50"
+                    >Other Document 1</span
+                  >
+                  <!-- Before upload -->
+                  <div class="File-Upload" *ngIf="document1Flag == 0">
+                    <div>
+                      <img
+                        src="../../../../../assets/common-layout/Upload.svg"
+                        class="upload-img2"
+                      />
+                      <div class="text-drag">
+                        Drag-and-drop a PDF/JPEG/PNG file,
+                        <div>
+                          or
+                          <span class="text-primary-drag">browse computer</span>
+                        </div>
+                      </div>
+                    </div>
+                    <input
+                      type="file"
+                      id="uploadDocumentsFile"
+                      (change)="document1FileUploads($event)"
+                      [ngClass]="{
+                        'is-invalid':
+                          generalComplianceSubmit && document1FileName == ''
+                      }"
+                    />
+                  </div>
+                  <!-- After Upload -->
+                  <div class="File-Uploaded" *ngIf="document1Flag == 1">
+                    <img
+                      src="../.../../../../../../assets/common-layout/file-logo.svg"
+                      class="file-logo"
+                    />
+                    <span class="filenamepdf f-14">
+                      {{ document1FileName }}
+                    </span>
+                    <!-- 150KB -->
+                    <span class="KB"> </span>
+                    <img
+                      src="../.../../../../../../assets/common-layout/file-close.svg"
+                      class="file-close"
+                      (click)="resetDocument1FileUploads()"
+                    />
+                  </div>
+                  <div *ngIf="document1FileSizeError" class="error-message">
+                    <div>File size should be less than or equal to 500KB</div>
+                  </div>
+                  <div *ngIf="document1FileTypeError" class="error-message">
+                    <div>Invalid type, Please upload PDF/JPEG/PNG files.</div>
+                  </div>
+                  <div
+                    *ngIf="
+                      generalComplianceSubmit &&
+                      generalCompliance.controls.document1File.errors
+                    "
+                    class="error-message"
+                  >
+                    <div
+                      *ngIf="
+                        generalCompliance.controls.document1File.errors.required
+                      "
+                    >
+                      Document 1 file is required
+                    </div>
+                  </div>
+                </div>
+                <div class="Upload">
+                  <span class="Document-Uploaded f-14 text-white-50">
+                    Other Document 2
+                  </span>
+                  <!-- Before upload -->
+                  <div class="File-Upload" *ngIf="document2Flag == 0">
+                    <div>
+                      <img
+                        src="../../../../../assets/common-layout/Upload.svg"
+                        class="upload-img2"
+                      />
+                      <div class="text-drag">
+                        Drag-and-drop a PDF/JPEG/PNG file,
+                        <p>
+                          or
+                          <span class="text-primary-drag">browse computer</span>
+                        </p>
+                      </div>
+                    </div>
+                    <input
+                      type="file"
+                      id="uploadDocumentsFile"
+                      (change)="document2FileUploads($event)"
+                      [ngClass]="{
+                        'is-invalid':
+                          generalComplianceSubmit && operationsFileName == ''
+                      }"
+                    />
+                  </div>
+                  <!-- After Upload -->
+                  <div class="File-Uploaded" *ngIf="document2Flag == 1">
+                    <img
+                      src="../.../../../../../../assets/common-layout/file-logo.svg"
+                      class="file-logo"
+                    />
+                    <span class="filenamepdf f-14">
+                      {{ document2FileName }}
+                    </span>
+                    <span class="KB"> </span>
+                    <img
+                      src="../.../../../../../../assets/common-layout/file-close.svg"
+                      class="file-close"
+                      (click)="resetDocument2FileUploads()"
+                    />
+                  </div>
+                  <div *ngIf="document2FileSizeError" class="error-message">
+                    <div>File size should be less than or equal to 500KB</div>
+                  </div>
+                  <div *ngIf="document2FileTypeError" class="error-message">
+                    <div>Invalid type, Please upload PDF/JPEG/PNG files.</div>
+                  </div>
+                  <div
+                    *ngIf="
+                      generalComplianceSubmit &&
+                      generalCompliance.controls.document2File.errors
+                    "
+                    class="error-message"
+                  >
+                    <div
+                      *ngIf="
+                        generalCompliance.controls.document2File.errors.required
+                      "
+                    >
+                      Document 2 file is required
+                    </div>
+                  </div>
+                </div>
+                <div class="Upload">
+                  <span class="Document-Uploaded f-14 text-white-50">
+                    Other Document 3
+                  </span>
+                  <!-- Before upload -->
+                  <div class="File-Upload" *ngIf="document3Flag == 0">
+                    <div>
+                      <img
+                        src="../../../../../assets/common-layout/Upload.svg"
+                        class="upload-img2"
+                      />
+                      <div class="text-drag">
+                        Drag-and-drop a PDF/JPEG/PNG file,
+                        <div>
+                          or
+                          <span class="text-primary-drag">browse computer</span>
+                        </div>
+                      </div>
+                    </div>
+                    <input
+                      type="file"
+                      id="uploadDocumentsFile"
+                      (change)="document3FileUploads($event)"
+                      [ngClass]="{
+                        'is-invalid':
+                          generalComplianceSubmit && document3FileName == ''
+                      }"
+                    />
+                  </div>
+                  <!-- After Upload -->
+                  <div class="File-Uploaded" *ngIf="document3Flag == 1">
+                    <img
+                      src="../.../../../../../../assets/common-layout/file-logo.svg"
+                      class="file-logo"
+                    />
+                    <span class="filenamepdf f-14">
+                      {{ document3FileName }}
+                    </span>
+                    <!-- 150KB -->
+                    <span class="KB"> </span>
+                    <img
+                      src="../.../../../../../../assets/common-layout/file-close.svg"
+                      class="file-close"
+                      (click)="resetDocument3FileUploads()"
+                    />
+                  </div>
+                  <div *ngIf="document3FileSizeError" class="error-message">
+                    <div>File size should be less than or equal to 500KB</div>
+                  </div>
+                  <div *ngIf="document3FileTypeError" class="error-message">
+                    <div>Invalid type, Please upload PDF/JPEG/PNG files.</div>
+                  </div>
+                  <div
+                    *ngIf="
+                      generalComplianceSubmit &&
+                      generalCompliance.controls.document3File.errors
+                    "
+                    class="error-message"
+                  >
+                    <div
+                      *ngIf="
+                        generalCompliance.controls.document3File.errors.required
+                      "
+                    >
+                      Document 3 Certificate file is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="Frame-Upload px-2">
+                <div class="Upload">
+                  <span class="Document-Uploaded f-14 text-white-50">
+                    Other Document 4
+                  </span>
+                  <!-- Before upload -->
+                  <div class="File-Upload" *ngIf="document4Flag == 0">
+                    <div>
+                      <img
+                        src="../../../../../assets/common-layout/Upload.svg"
+                        class="upload-img2"
+                      />
+                      <div class="text-drag">
+                        Drag-and-drop a PDF/JPEG/PNG file,
+                        <p>
+                          or
+                          <span class="text-primary-drag">browse computer</span>
+                        </p>
+                      </div>
+                    </div>
+                    <input
+                      type="file"
+                      id="uploadDocumentsFile"
+                      (change)="document4FileUploads($event)"
+                      [ngClass]="{
+                        'is-invalid':
+                          generalComplianceSubmit && document4FileName == ''
+                      }"
+                    />
+                  </div>
+                  <!-- After Upload -->
+                  <div class="File-Uploaded" *ngIf="document4Flag == 1">
+                    <img
+                      src="../.../../../../../../assets/common-layout/file-logo.svg"
+                      class="file-logo"
+                    />
+                    <span class="filenamepdf f-14">
+                      {{ document4FileName }}
+                    </span>
+                    <span class="KB"> </span>
+                    <img
+                      src="../.../../../../../../assets/common-layout/file-close.svg"
+                      class="file-close"
+                      (click)="resetDocument4FileUploads()"
+                    />
+                  </div>
+                  <div *ngIf="document4FileSizeError" class="error-message">
+                    <div>File size should be less than or equal to 500KB</div>
+                  </div>
+                  <div *ngIf="document4FileTypeError" class="error-message">
+                    <div>Invalid type, Please upload PDF/JPEG/PNG files.</div>
+                  </div>
+                  <div
+                    *ngIf="
+                      generalComplianceSubmit &&
+                      generalCompliance.controls.document4File.errors
+                    "
+                    class="error-message"
+                  >
+                    <div
+                      *ngIf="
+                        generalCompliance.controls.document4File.errors.required
+                      "
+                    >
+                      Document 4 file is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mat-expansion-panel>
+        </form>
+      </mat-accordion>
+      <!-- <div class="Frame document-card">
+    </div> -->
+    </div>
+    <!-- Inside buttons -->
+    <div class="accordian-button-group mt-1">
+      <div class="Buttons2">
+        <button
+          class="Regular-Button-waypoints"
+          (click)="
+            uploadDocumentsFlag = false;
+            doubleClick = true;
+            missionStatus == 'Rejected'
+              ? (dialogRejectedFlag = true)
+              : (dialogFlag = true)
+          "
+        >
+          <img
+            src="../.../../../../../../assets/common-layout/Chevron_Left.svg"
+            class="Chevron_Left"
+          />
+          <span class="Button-label-waypoints fs-6"> Back </span>
+        </button>
+        <button
+          class="Regular-Button-submit"
+          *ngIf="!uploadLoader"
+          (click)="uploadRequiredDocumentsSubmit()"
+        >
+          <img
+            src="../.../../../../../../assets/common-layout/Check_Outline.svg"
+            class="Check-Outline"
+          />
+          <span class="Button-label-submit fs-6">
+            Submit For Manual Review
+          </span>
+        </button>
+        <button class="Regular-Button-submit" *ngIf="uploadLoader">
+          <img
+            src="../../../../../assets/common-layout/SquareLoader.gif"
+            width="20px"
+          />
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- UI Card  -->
+  <div
+    *ngIf="isView && isDraw"
+    class="template-card body-color"
+    [ngClass]="isView ? (isDropdownOpen ? 'decHeight' : 'incHeight') : ''"
+  >
+    <!-- Title part  -->
+    <div
+      class="title text-white f-18 text p-2"
+      [ngClass]="{ 'dropdown-open-1': isDropdownOpen }"
+    >
+      <div>{{ this.entityDescription.title || "....." }}</div>
+      <div class="twobuttons">
+        <div class="slidedown" (click)="toggleDrop()" *ngIf="isDropdownOpen">
+          <img src="/../../../assets/common-layout/dropdown.png" width="18px" />
+        </div>
+        <div class="slideup" (click)="toggleDrop()" *ngIf="!isDropdownOpen">
+          <img src="../../../../assets/icons/arrowUp.svg" width="18px" />
+        </div>
+        <div (click)="close()">
+          <img src="/../../../assets/common-layout/close.png" width="18px" />
+        </div>
+      </div>
+    </div>
+    <!-- Title part  -->
+    <!-- Card main part  -->
+    <div class="info p-2" [ngStyle]="{ height: isDropdownOpen ? 'auto' : '0' }">
+      <div class="pic-info mt-3 text-left">
+        <div>
+          <img
+            *ngIf="
+              this.entityDescription.title == 'AirportInnerYellowZone' ||
+              this.entityDescription.title == 'AirportOuterYellowZone'
+            "
+            src="/../../../assets/common-layout/atc.png"
+            width="110px"
+            height="120px"
+          />
+          <img
+            *ngIf="this.entityDescription.title == 'AirportRedZone'"
+            src="/../../../assets/common-layout/airport.jpg"
+            width="110px"
+            height="120px"
+          />
+          <img
+            *ngIf="
+              this.entityDescription.title == 'GeoZone' ||
+              this.entityDescription.title == 'GreenZone' ||
+              this.entityDescription.title == 'VIDF' ||
+              this.entityDescription.title == 'VOMF' ||
+              this.entityDescription.title == 'VECF' ||
+              this.entityDescription.title == 'VABF'
+            "
+            src="/../../../assets/common-layout/fir.png"
+            width="110px"
+            height="120px"
+          />
+        </div>
+        <div class="text-left text-white">
+          <div class="f-12" *ngIf="this.entityDescription.title == 'GreenZone'">
+            Your flight zone falls under the green zone. You are free to fly
+            below 400 ft AGL. Your flight will be notified to the respective FIR
+            for and/or FIC for further safety of your flight.
+          </div>
+          <div class="f-12" *ngIf="this.entityDescription.title == 'VIDF'">
+            VIDF is the FIR code for the Delhi Flight Information Region (FIR),
+            which is responsible for managing air traffic control operations and
+            flight information in and around Delhi, India
+          </div>
+          <div class="f-12" *ngIf="this.entityDescription.title == 'VABF'">
+            VABF is the FIR code for the Mumbai Flight Information Region (FIR)
+            in India. Mumbai FIR is responsible for managing air traffic control
+            operations, communication, and coordination within its designated
+            airspace.
+          </div>
+          <div class="f-12" *ngIf="this.entityDescription.title == 'VECF'">
+            VECF is the FIR code for the Kolkata Flight Information Region
+            (FIR), which is responsible for managing air traffic control
+            operations and flight information in and around Kolkata, India.
+          </div>
+          <div class="f-12" *ngIf="this.entityDescription.title == 'VOMF'">
+            VOMF is the FIR code for the Chennai Flight Information Region
+            (FIR), which is responsible for managing air traffic control
+            operations and flight information in and around Chennai, India
+          </div>
+          <div
+            class="f-12"
+            *ngIf="
+              this.entityDescription.title == 'AirportInnerYellowZone' ||
+              this.entityDescription.title == 'AirportOuterYellowZone'
+            "
+          >
+            Your flight zone falls under the Yellow zone of the Airport. You
+            will require permissions to begin flight. The airport zone refers to
+            a ATC controlled airspace wherein coordination will be required with
+            the ATC's for a safe and coordinated flight. You can apply for
+            permissions within the Skye UTM system.
+          </div>
+          <div *ngIf="this.entityDescription.title == 'GeoZone'">
+            Restricted Airspace - fly with permission
+          </div>
+          <div *ngIf="this.entityDescription.title == 'AirportRedZone'">
+            Airport zone - fly with permission
+          </div>
+        </div>
+      </div>
+      <div
+        class="middle-section"
+        [ngClass]="showdata && showAccordian ? 'showaccords' : 'hideaccords'"
+      >
+        <div
+          class="text-1 f-12 dark-light p-2"
+          [ngClass]="{
+            red:
+              this.entityDescription.title == 'GeoZone' ||
+              this.entityDescription.title == 'AirportRedZone',
+            yellow:
+              this.entityDescription.title == 'AirportInnerYellowZone' ||
+              this.entityDescription.title == 'AirportOuterYellowZone',
+            green:
+              this.entityDescription.title == 'GreenZone' ||
+              this.entityDescription.title == 'VIDF' ||
+              this.entityDescription.title == 'VABF' ||
+              this.entityDescription.title == 'VECF' ||
+              this.entityDescription.title == 'VOMF'
+          }"
+        >
+          <div class="img-display ml-2">
+            <img
+              *ngIf="
+                this.entityDescription.title == 'GeoZone' ||
+                this.entityDescription.title == 'AirportRedZone'
+              "
+              src="/../../../assets/common-layout/warning.png"
+              width="30px"
+            />
+            <img
+              *ngIf="
+                this.entityDescription.title == 'GreenZone' ||
+                this.entityDescription.title == 'VIDF' ||
+                this.entityDescription.title == 'VOMF' ||
+                this.entityDescription.title == 'VECF' ||
+                this.entityDescription.title == 'VABF'
+              "
+              src="../../../../assets/icons/check-circle.svg"
+              width="30px"
+            />
+            <img
+              *ngIf="
+                this.entityDescription.title == 'AirportInnerYellowZone' ||
+                this.entityDescription.title == 'AirportOuterYellowZone'
+              "
+              src="../../../../assets/icons/warning.svg"
+              width="30px"
+            />
+          </div>
+          <div class="text-2 ml-0 text-left" style="width: 70%">
+            <h5 class="text-white">{{ this.entityDescription.title }}</h5>
+            <p
+              class="text-white"
+              *ngIf="
+                this.entityDescription.title == 'GreenZone' ||
+                this.entityDescription.title == 'VIDF' ||
+                this.entityDescription.title == 'VABF' ||
+                this.entityDescription.title == 'VECF' ||
+                this.entityDescription.title == 'VOMF'
+              "
+            >
+              No intersection with any Restricted zone.
+            </p>
+            <p
+              class="text-white"
+              *ngIf="
+                this.entityDescription.title == 'AirportRedZone' ||
+                this.entityDescription.title == 'AirportInnerYellowZone' ||
+                this.entityDescription.title == 'AirportOuterYellowZone'
+              "
+            >
+              Restricted area.
+            </p>
+            <p
+              class="text-white"
+              *ngIf="this.entityDescription.title == 'GeoZone'"
+            >
+              Prohibited area.
+            </p>
+          </div>
+          <div
+            class="updownbutton ml-3"
+            (click)="showdatas()"
+            *ngIf="!showdata"
+          >
+            <img
+              src="/../../../assets/common-layout/dropdown.png"
+              width="18px"
+            />
+          </div>
+          <div class="updownbutton ml-3" (click)="showdatas()" *ngIf="showdata">
+            <img src="../../../../assets/icons/arrowUp.svg" width="18px" />
+          </div>
+        </div>
+        <!-- Accordian part  -->
+        <div
+          *ngIf="showAccordian"
+          [ngClass]="{
+            red:
+              this.entityDescription.title == 'GeoZone' ||
+              this.entityDescription.title == 'AirportRedZone',
+            yellow:
+              this.entityDescription.title == 'AirportInnerYellowZone' ||
+              this.entityDescription.title == 'AirportOuterYellowZone',
+            green:
+              this.entityDescription.title == 'GreenZone' ||
+              this.entityDescription.title == 'VIDF' ||
+              this.entityDescription.title == 'VECF' ||
+              this.entityDescription.title == 'VOMF' ||
+              this.entityDescription.title == 'VABF'
+          }"
+          class="expandinfo p-2 f-12 mt-1"
+        >
+          <div
+            class="text-white text-left"
+            *ngIf="this.entityDescription.title == 'VIDF'"
+          >
+            VIDF- The VIDF FIR covers a significant portion of northern India,
+            including the airspace around Delhi and its surrounding regions. It
+            extends over parts of the states of Delhi, Haryana, Uttar Pradesh,
+            Rajasthan, Punjab, and Himachal Pradesh.
+          </div>
+          <div
+            class="text-white text-left"
+            *ngIf="this.entityDescription.title == 'VABF'"
+          >
+            VABF- The Mumbai FIR covers a significant portion of western India,
+            including the states of Maharashtra, Goa, Gujarat, and parts of
+            Madhya Pradesh and Rajasthan. It extends over the Arabian Sea and
+            covers a large area of oceanic airspace.
+          </div>
+          <div
+            class="text-white text-left"
+            *ngIf="this.entityDescription.title == 'VOMF'"
+          >
+            VOMF- The VOMF FIR covers a significant portion of southern India,
+            including the airspace around Chennai and its surrounding regions.
+            It extends over parts of the states of Tamil Nadu, Kerala, Andhra
+            Pradesh, and parts of Karnataka.
+          </div>
+          <div
+            class="text-white text-left"
+            *ngIf="this.entityDescription.title == 'VECF'"
+          >
+            VECF- The VECF FIR covers a significant portion of eastern India,
+            including the airspace around Kolkata and its surrounding regions.
+            It extends over parts of the states of West Bengal, Bihar,
+            Jharkhand, Odisha, and parts of northeastern India.
+          </div>
+          <div
+            class="text-white text-left"
+            *ngIf="this.entityDescription.title == 'GreenZone'"
+          >
+            Green- No Intersections with any restricted and probhited area.
+          </div>
+          <div
+            class="text-white"
+            *ngIf="this.entityDescription.title == 'GeoZone'"
+          >
+            You’ve intersected a red zone these are the prohibited areas.
+          </div>
+          <div
+            class="text-white"
+            *ngIf="this.entityDescription.title == 'AirportRedZone'"
+          >
+            Red Zone - Airport red zones are areas near airport perimeters where
+            drone flights are strictly prohibited. These zones typically have a
+            radius of 5 kilometers around the airport
+          </div>
+          <div
+            class="text-white text-left"
+            *ngIf="
+              this.entityDescription.title == 'AirportInnerYellowZone' ||
+              this.entityDescription.title == 'AirportOuterYellowZone'
+            "
+          >
+            Yellow Zone - Drone flights are prohibited without permission from
+            the concerned air traffic control authority and DGCA. Request
+            permission and coordinate with DGCA(drone.dgca@gov.in) to obtain
+            necessary permissions to operate in this area.
+          </div>
+        </div>
+        <!-- Accordian part End  -->
+      </div>
+      <div class="airground">
+        <!-- Airspace region  -->
+        <div class="card no-border body-color p-2">
+          <div class="f-18 text-white">Airspace Information</div>
+          <div class="row">
+            <div class="list-description-dark mt-1">
+              <div class="column">
+                <div class="f-10 col-12 text-truncate">FIR Codes:</div>
+                <div class="f-14 text-white col-12 ps-2">
+                  {{ this.entityDescription.airspaceInfo.FIRCodes || "....." }}
+                </div>
+              </div>
+            </div>
+            <div class="list-description-dark mt-1">
+              <div class="column">
+                <div class="f-10 col-12 text-truncate">Type:</div>
+                <div class="f-14 text-white col-12 ps-2">
+                  {{ this.entityDescription.airspaceInfo.Type || "....." }}
+                </div>
+              </div>
+            </div>
+            <div class="list-description-dark mt-1">
+              <div class="column">
+                <div class="f-10 col-12 text-truncate">FIC</div>
+                <div class="f-14 text-white col-12 ps-2">
+                  {{ this.entityDescription.airspaceInfo.FIC || "....." }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Ground region  -->
+        <div class="card no-border body-color p-2">
+          <div class="f-18 text-white">Ground Information</div>
+          <div class="row">
+            <div class="list-description-dark mt-1">
+              <div class="column">
+                <div class="f-10 col-12 text-truncate">Country:</div>
+                <div class="f-14 text-white col-12 ps-2">
+                  {{ this.entityDescription.groundInfo.Country || "....." }}
+                </div>
+              </div>
+            </div>
+            <div class="list-description-dark mt-1">
+              <div class="cloumn">
+                <div class="f-10 col-12 text-truncate">State:</div>
+                <div class="f-14 text-white col-12 ps-2">
+                  {{ this.entityDescription.groundInfo.States || "....." }}
+                </div>
+              </div>
+            </div>
+            <div class="list-description-dark mt-1">
+              <div class="cloumn">
+                <div class="f-10 col-12 text-truncate">Elevation:</div>
+                <div class="f-14 text-white col-12 ps-2">
+                  {{
+                    this.entityDescription.groundInfo.elevation !== undefined
+                      ? this.entityDescription.groundInfo.elevation + "m"
+                      : "....."
+                  }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div></div>
+  </div>
+  <ng-template #intersection>
+    <div class="card intersection-card py-1 px-3">
+      <div class="row">
+        <div
+          class="text-white main-header float-left mt-2 col-9 disclaimeer-heading"
+        >
+          <img
+            src="../../../../assets/icons/intersection.svg"
+            class="mt-2"
+            style="margin-right: 5px; height: 24px; width: 24px"
+          />
+          <p class="text-white f-24">Intersection</p>
+        </div>
+      </div>
+      <div class="light-txt intersection-text">
+        <div class="mt-1 white-text-opacity f-16">
+          The waypoints are intersecting with the Restricted Zones.You might
+          encounter higher probability of rejection.
+        </div>
+      </div>
+      <!-- <div class="white-text-opacity list-values">Intersection Details</div> -->
+      <div class="table-responsive mt-3 mb-2">
+        <table class="white-text-opacity table table-bordered">
+          <thead class="text-white f-14 thread-body">
+            <tr>
+              <th scope="col">Zone</th>
+              <th scope="col">Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- <tr
+              class="tbody-body f-14"
+              *ngFor="let entity of interesectedEntities; trackBy: getEntity"
+            >
+              <td>{{ entity.value }}</td>
+              <td>{{ entity.type }}</td>
+            </tr> -->
+            <tr class="tbody-body f-14" *ngFor="let entity of interesectedZone">
+              <td>{{ entity.zone }}</td>
+              <td>{{ entity.type }}</td>
+            </tr>
+            <tr
+              class="tbody-body"
+              *ngFor="
+                let entity of reservedAirspaceIntersection;
+                trackBy: getEntitys
+              "
+            >
+              <td>{{ entity.value }}</td>
+              <td>{{ entity.type }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="">
+        <div class="intersection-form text-white f-16">
+          <input type="checkbox" class="check-box" (click)="isAgreed()" />
+          <p>
+            I agree to the flight parameters mentioned in the Terms & Conditions
+            and understand the implications of flying in restricted zones
+            without the proper clearances.
+          </p>
+        </div>
+        <div class="intersection-button">
+          <button
+            class="btn btn-dark-border mb-3 px-4 mx-2 f-12"
+            (click)="
+              modalRef?.hide();
+              completePathFlag = false;
+              resetFlag = false;
+              setWaypointFlag = false;
+              isAgree = false
+            "
+          >
+            Cancel
+          </button>
+          <button
+            class="btn primary-btn mb-3 px-4 f-12"
+            (click)="coRelationFormSubmit(createMission); modalRef?.hide()"
+            [disabled]="!isAgree"
+          >
+            Submit
+          </button>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #createMission id="createMission" let-c="close" let-d="dismiss">
+    <div class="modal-body card dark-medium">
+      <div
+        *ngIf="riskChartOptions"
+        echarts
+        [options]="riskChartOptions"
+        class="demo-chart risk-chart"
+      ></div>
+      <div>
+        <div
+          *ngIf="missionStatus !== 'Pending' && missionStatus !== 'Rejected'"
+          class="disclaimeer-head my-3 text-center white-text-opacity"
+        >
+          Your Mission created successfully!
+        </div>
+        <div
+          *ngIf="missionStatus == 'Pending' || missionStatus == 'Rejected'"
+          class="disclaimeer-head my-3 white-text-opacity"
+          style="margin-left: 35px"
+        >
+          Your Mission has been {{ missionStatus }}.
+        </div>
+        <div
+          *ngIf="missionStatus == 'Pending' || missionStatus == 'Rejected'"
+          class="reason-of-rejection2 reason-of-rejection card mission-col my-2 p-2"
+        >
+          <div class="white-text-opacity f-12 reasons">Reasons:</div>
+          <div
+            *ngIf="profileDetails.RPTO"
+            style="margin-left: 5px; margin-top: 10px"
+            class="f-14 white-text-opacity text-center"
+          >
+            Mission is in pending state, waiting for approval from instructor.
+          </div>
+          <div
+            *ngIf="
+              !(
+                profileDetails?.RPTO &&
+                profileDetails?.GeoFence &&
+                profileDetails?.GeoFence?.FileURL
+              )
+            "
+          >
+            <div
+              *ngFor="let category of missionPermissionsList; let i = index"
+              style="margin-left: 5px"
+            >
+              <div
+                *ngIf="
+                  category?.permission == 'Manual' ||
+                  category?.permission == 'Auto-Reject'
+                "
+                class="row my-2"
+              >
+                <div class="col-6 f-10 white-text-opacity">
+                  {{ category?.Name }}
+                </div>
+                <div class="col-4">
+                  <div class="float-right">
+                    <div
+                      class="complaince"
+                      [ngClass]="{
+                        approve: category?.permission == 'Auto-Approve',
+                        reject: category?.permission == 'Auto-Reject',
+                        pending: category?.permission == 'Manual'
+                      }"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="text-center"
+          *ngIf="
+            profileDetails?.RPTO &&
+            profileDetails?.GeoFence &&
+            profileDetails?.GeoFence?.FileURL
+          "
+        >
+          <button
+            class="btn primary-btn"
+            (click)="
+              modalRef?.hide();
+              router.navigateByUrl('operator/operator-app/dashboard')
+            "
+          >
+            Okay
+          </button>
+        </div>
+        <div
+          class="text-center"
+          *ngIf="
+            !(
+              profileDetails?.RPTO &&
+              profileDetails?.GeoFence &&
+              profileDetails?.GeoFence?.FileURL
+            )
+          "
+        >
+          <button
+            *ngIf="missionStatus !== 'Pending' && missionStatus !== 'Rejected'"
+            class="btn primary-btn"
+            (click)="
+              modalRef?.hide();
+              router.navigateByUrl('operator/operator-app/dashboard')
+            "
+          >
+            Okay
+          </button>
+          <!-- button for pending mission -->
+          <button
+            *ngIf="missionStatus == 'Pending'"
+            class="btn primary-btn"
+            (click)="modalRef?.hide(); manualApprovalRequired()"
+          >
+            Okay
+          </button>
+          <!-- button for rejected mission -->
+          <button
+            *ngIf="missionStatus == 'Rejected'"
+            class="btn primary-btn"
+            (click)="modalRef?.hide(); missionRejected()"
+          >
+            Okay
+          </button>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+  <app-operator-payment-page></app-operator-payment-page>
+</div>

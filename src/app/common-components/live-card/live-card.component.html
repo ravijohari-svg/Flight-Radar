@@ -1,0 +1,140 @@
+<div class="liveCard">
+  <div class="trapz trapz3">
+    <div class="livelogs">
+      <div class="live live1 text-white" [class.unavailable]="!liveLatitude">
+        <div class="f-14">
+          <span
+            ><svg
+              *ngIf="liveLatitude"
+              width="14"
+              height="22"
+              viewBox="0 0 14 22"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                class="path-animation1"
+                d="M13 7L7 0.999999L1 7"
+                stroke="white"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                class="path-animation2"
+                d="M13 14L7 8L1 14"
+                stroke="white"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                class="path-animation3"
+                d="M13 21L7 15L1 21"
+                stroke="white"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <img
+              *ngIf="!liveLatitude"
+              src="../../../../assets/icons/live_icon.svg"
+              alt="live"
+            />
+          </span>
+          Live
+        </div>
+      </div>
+      <div class="livelogsBox">
+        <div class="liveLogsData">
+          <app-live-units
+            icon="lat_long.svg"
+            label="Latitude"
+            [value]="liveLatitude"
+            format="1.4-4"
+            unit1="°"
+          ></app-live-units>
+          <app-live-units
+            icon="lat_long.svg"
+            label="Longitude"
+            [value]="liveLongitude"
+            format="1.4-4"
+            unit1="°"
+          ></app-live-units>
+          <app-live-units
+            icon="altitude.svg"
+            label="Altitude"
+            [value]="liveAltitude"
+            format="1.4-4"
+            unit1="m"
+            unit2="ft"
+          ></app-live-units>
+          <app-live-units *ngIf="!mode"
+            icon="battery.svg"
+            label="Battery"
+            [value]="battery_remaining"
+            format="0"
+            unit1="%"
+          ></app-live-units>
+          <app-live-units *ngIf="mode"
+          icon="speed.svg"
+          label="Mode"
+          [value]="modeVal"
+        ></app-live-units>
+          <app-live-units
+            icon="speed.svg"
+            label="Speed"
+            [value]="groundspeed"
+            format="1.3-3"
+            unit1="m/s"
+            unit2="kn"
+          ></app-live-units>
+          <app-live-units
+          icon="battery.svg"
+          label="Voltage"
+          [value]="batteryVoltage"
+          format="1.2-2"
+          unit1="v"
+        ></app-live-units>
+        </div>
+        <div class="borderColor"></div>
+        <div class="liveTrack">
+          <div class="text-white-50 f-12">
+            Flight Time :
+            <span class="text-white" *ngIf="flightTime">{{ flightTime }}</span>
+            <span class="text-white" *ngIf="!flightTime">------</span>
+          </div>
+          <div>
+            <button
+              *ngIf="showOneLap"
+              class="text-white-50 f-12 border-0 bg-transparent"
+              (click)="connectToOneLap()"
+            >
+              Connect N-Tracker
+            </button>
+          </div>
+          <div class="text-white-50 f-12">
+            Distance Traveled :
+            <span class="text-white" *ngIf="distTraveled"
+              >{{ distTraveled / 1000 | number : "1.3-3" }} km</span
+            >
+            <span class="text-white" *ngIf="!distTraveled">------</span>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="live live2"
+        [class.unavailable]="!liveLatitude && !droneFollow"
+        [class.tracking-on]="liveLatitude && droneFollow"
+        (click)="TrackDrone()"
+      >
+        <div class="f-12 text-white">
+          <span><img src="../../../../assets/icons/track.png" alt="" /></span>
+          Track
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,78 @@
+.bg-dark {
+  background-color: #0c1011 !important;
+}
+
+.image-section {
+  background-color: #f7fafc;
+  border-radius: 25px 25px 0px 0px;
+}
+
+.image-header {
+  font-size: 40px;
+  font-weight: 500;
+}
+
+.image-text {
+  font-size: 20px;
+  font-weight: 300;
+}
+
+.page-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: #121212;
+}
+
+.form-titles {
+  font-size: 20px;
+  font-weight: 500;
+  color: #121212;
+}
+
+.form-control {
+  height: 50px;
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: normal;
+  color: #8c8c8c;
+}
+
+.input-group-text {
+  background-color: #ffffff;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  border-left: none;
+}
+
+.change-btn {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.primary-outline-btn {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.primary-btn {
+  font-size: 15px;
+  font-weight: normal;
+} /*# sourceMappingURL=authority-login.component.css.map */
+
+@media (min-width: 992px) {
+  .col-lg-8 {
+    max-width: 60% !important;
+    flex: 0 0 60% !important;
+  }
+  .col-lg-4 {
+    max-width: 40% !important;
+    flex: 0 0 40% !important;
+  }
+}
+@media only screen and (max-width: 991px) {
+  .col-lg-4 {
+    display: none;
+  }
+}

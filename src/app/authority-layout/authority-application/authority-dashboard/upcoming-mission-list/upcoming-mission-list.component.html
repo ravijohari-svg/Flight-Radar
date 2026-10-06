@@ -1,0 +1,164 @@
+<div *ngIf="loader" class="loader">
+  <div class="logo">
+    <img
+      src="../../../../../assets/common-layout/SquareLoader.gif"
+      width="30px"
+    />
+    <img
+      src="../../../../../assets/common-layout/SkyeUTM logoWhite.svg"
+      width="200px"
+    />
+  </div>
+</div>
+<div class="mx-0 main-panel">
+  <div
+    *ngIf="upcomingMissionListArr && upcomingMissionListArr.length == 0"
+    class="empty-state-container"
+  >
+    <img
+      src="../../../../..//assets/common-layout/Empty_State.svg"
+      width="70%"
+    />
+    <div class="empty-state-header">No Upcoming Missions at the moment!</div>
+    <div class="my-2 empty-state-text text-center">
+      View, Approve or Reject Pilot's Upcoming Missions
+    </div>
+  </div>
+  <!-- HeatMaps  -->
+  <div class="heatmap">
+    <!-- <app-heatmap
+    (teleSwitch)="telecomApi($event)"
+    (popSwitch)="popHeatmap($event)"
+    (toggSwitch)="toggle2D3D($event)"
+    (terrSwitch)="osmBuildings($event)"
+    ></app-heatmap> -->
+    <app-heatmap (toggSwitch)="toggle2D3D($event)"></app-heatmap>
+  </div>
+  <!-- UI Card  -->
+  <div class="map-ui">
+    <app-map-ui
+      *ngIf="isView"
+      [isView]="isView"
+      [title]="entityDescription?.title"
+      [fircode]="entityDescription?.airspaceInfo?.FIRCodes"
+      [airspacetype]="entityDescription?.airspaceInfo?.Type"
+      [fic]="entityDescription?.airspaceInfo.FIC"
+      [country]="entityDescription?.groundInfo.Country"
+      [state]="entityDescription?.groundInfo.States"
+      [elevation]="entityDescription?.groundInfo.elevation"
+      (changeIsView)="close(val)"
+    >
+    </app-map-ui>
+  </div>
+
+  <div
+    class="big-box"
+    *ngFor="
+      let upcomingMission of upcomingMissionListArr;
+      trackBy: missionsListTrack
+    "
+  >
+    <div class="card mission-box mb-2">
+      <div class="card-body p-2 d-flex flex-column">
+        <div class="card mission-box-card p-2">
+          <div class="mb-2 status-detail">
+            <span
+              class="px-2 py-1 f-12 br-15"
+              [ngClass]="{
+                approve: upcomingMission.MissionStatus == 'Approved',
+                reject: upcomingMission.MissionStatus == 'Rejected',
+                pending: upcomingMission.MissionStatus == 'Pending'
+              }"
+            >
+              {{ upcomingMission?.MissionStatus }} ({{
+                upcomingMission?.ApprovalMode
+              }})
+            </span>
+            <div
+              [ngClass]="
+                upcomingMission.MissionStatus == 'Pending' &&
+                (profileDetails.Level == 'L1' || profileDetails.Level == 'L2')
+              "
+            >
+              <button
+                class="btn py-2 btn-dark-border f-12 rounded"
+                (click)="missionDetails(upcomingMission.MissionId)"
+              >
+                Details
+              </button>
+            </div>
+          </div>
+          <div class="white-text f-16 font-weight-bold">
+            {{ upcomingMission.OperationName }}
+          </div>
+          <span class="f-12 rpto-tag" *ngIf="upcomingMission.GeoFence"> RPTO </span>
+          <div class="white-text-opacity f-12 my-1">
+            <span class="font-weight-bold">
+              {{ upcomingMission.StartTime | date : "h:mm a" }} to
+              {{ upcomingMission.EndTime | date : "h:mm a" }} ,
+            </span>
+            <span>
+              {{ upcomingMission.StartTime | date : "d MMM y" }}
+            </span>
+          </div>
+        </div>
+        <div class="row my-2">
+          <div class="col-sm-6 py-2">
+            <div class="list-values-dark f-14">
+              {{ upcomingMission.CreatedByName }}
+            </div>
+            <div class="list-description-dark f-10">Pilot</div>
+          </div>
+          <div class="col-sm-6 py-2">
+            <div class="list-values-dark f-14">
+              {{ upcomingMission.ActivityType }}
+            </div>
+            <div class="list-description-dark f-10">Activity Type</div>
+          </div>
+          <div class="col-sm-6 py-2">
+            <div class="list-values-dark f-14">
+              {{ upcomingMission.MaximumAltitude }} m
+            </div>
+            <div class="list-description-dark f-10">Maximum Altitude</div>
+          </div>
+          <div class="col-sm-6 py-2">
+            <!-- @SL - 17/04/23 - Changed from LatLong to Latitude to reduce unncessary computation of LatLong -->
+            <div class="list-values-dark f-14">
+              {{ upcomingMission.Latitude.length }}
+            </div>
+            <div class="list-description-dark f-10">Waypoints</div>
+          </div>
+        </div>
+        <div class="row my-2">
+          <!-- class="col-md-7 col-sm-5" -->
+          <div
+            *ngIf="
+              upcomingMission.MissionStatus == 'Pending' &&
+              (profileDetails.Level == 'L1' || profileDetails.Level == 'L2')
+            "
+            class="col-sm text-right"
+          >
+            <button
+              class="btn btn-reject"
+              (click)="onReject(upcomingMission.MissionId)"
+            >
+              <img src="../../../../../assets/common-layout/Close.svg" />
+              <span class="text-white f-16 ml-2">Decline</span>
+            </button>
+            <button
+              class="btn btn-approve"
+              (click)="onApprove(upcomingMission.MissionId)"
+            >
+              <img
+                src="../../../../../assets/common-layout/Check_Outline.svg"
+              />
+              <span class="text-white f-16 ml-2 font-weight-light"
+                >Approve</span
+              >
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

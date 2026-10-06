@@ -1,0 +1,288 @@
+<div *ngIf="loader" class="loader">
+  <app-loader [PhaseKey]="'getMissionList'"></app-loader>
+</div>
+<div *ngIf="!loader" class="px-3 py-3 main-panel">
+  <div class="mx-0">
+    <div class="white-text f-20 font-weight-bold mt-3">Black Box</div>
+    <div
+      *ngIf="blackBoxListArr && blackBoxListArr.length == 0"
+      class="empty-state-container mx-auto"
+    >
+      <div class="text-center">
+        <img
+          src="../../../../../assets/common-layout/Empty-State_Horizontal.svg"
+          width="100%"
+        />
+        <div class="empty-state-header">No Blackbox Missions found!</div>
+        <div class="my-2 empty-state-text">
+          Pilot's Blackbox Mission details will appear once they complete a
+          Mission.
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-3" *ngIf="blackBoxListArr && blackBoxListArr.length != 0">
+      <div class="row" *ngIf="!flag_FileteredData_Or_BlackBoxList">
+        <div class="col-md-3">
+          <input
+            type="text"
+            class="form-control dark-medium"
+            placeholder="Search"
+            aria-label="Search"
+            aria-describedby="basic-addon1"
+            [(ngModel)]="selected"
+            [typeahead]="missionSearchBy"
+            [typeaheadSelectFirstItem]="false"
+            typeaheadOptionField="custom"
+            (typeaheadOnSelect)="searchByOnSelect($event)"
+            (keydown)="onKeyDownEvent($event)"
+          />
+
+          <button
+            type="submit"
+            class="btn px-0 py-2"
+            (click)="onSearchKeyWord()"
+          >
+            <i class="fa fa-search"></i>
+          </button>
+        </div>
+        <div *ngIf="searchByFlag" class="col-md-1 px-0">
+          <button
+            type="button"
+            class="btn f-14 font-weight-bold primary-outline-btn px-0 py-2"
+            (click)="clearSearch()"
+          >
+            Clear
+          </button>
+        </div>
+        <div [ngClass]="searchByFlag == true ? 'col-md-8' : 'col-md-9'">
+          <div class="float-right" style="margin-top: 12px">
+            <!-- <pagination-controls class="pagination pagination-sm m-0 float-right f-12 font-weight-bold mt-3" (pageChange)="getPage($event)"></pagination-controls> -->
+            <button
+              class="btn previous f-12"
+              style="margin-right: 5px"
+              [disabled]="indexing == 0"
+              (click)="getPrevious()"
+            >
+              &laquo; Previous
+            </button>
+            <button
+              class="btn next f-12"
+              [disabled]="!paginationKey && !pageArray.includes(indexing + 1)"
+              (click)="getNext()"
+            >
+              Next &raquo;
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-responsive-md my-1">
+        <table class="table table-bordered dark-medium">
+          <thead>
+            <tr>
+              <th scope="col" style="width: 70px">MISSION ID</th>
+              <th scope="col" style="width: 70px">OPERATOR ID</th>
+              <th scope="col">DATE AND TIME</th>
+              <!-- <th scope="col">START-END TIME</th> -->
+              <th scope="col">PILOT</th>
+              <th scope="col">MISSION TYPE</th>
+              <th scope="col">STATUS</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="!flag_FileteredData_Or_BlackBoxList">
+            <tr
+              *ngFor="
+                let blackBoxList of paginationArray[indexing];
+                trackBy: trackByPaginationArray
+              "
+            >
+              <td style="width: 70px">
+                <!-- <button *ngIf="blackBoxList.Status == 'Success'" class="btn primary-outline-btn p-0"
+                  (click)="onBlackBoxDetail(blackBoxList.MissionId, blackBoxList.OperatorId)">
+                  {{blackBoxList.MissionId}}
+                </button>
+                <div *ngIf="blackBoxList.Status != 'Success' "> {{blackBoxList.MissionId}} </div> -->
+                <button
+                  class="btn btn_text primary-outline-btn p-0"
+                  (click)="
+                    onBlackBoxDetail(
+                      blackBoxList.MissionId,
+                      blackBoxList.OperatorId,
+                      blackBoxList.Status
+                    )
+                  "
+                >
+                  {{ blackBoxList.MissionId }}
+                </button>
+              </td>
+
+              <td style="width: 70px">{{ blackBoxList.OperatorId }}</td>
+              <td>
+                {{ blackBoxList.StartTime | date : "dd MMM yyyy" }},
+                {{ blackBoxList.StartTime | date : "h:mm a" }} -
+                {{ blackBoxList.EndTime | date : "h:mm a" }}
+              </td>
+              <td>{{ blackBoxList.CreatedByName }}</td>
+              <td>{{ blackBoxList.ActivityType }}</td>
+              <td class="light-semi-bold">
+                <div *ngIf="blackBoxList.Status == 'Success'">
+                  <span class="py-0 px-1 f-12 my-2 br-15 approve">
+                    Successful
+                    <span *ngIf="blackBoxList.ApprovalMode"
+                      >( {{ blackBoxList.ApprovalMode }} )</span
+                    >
+                  </span>
+                </div>
+                <div *ngIf="blackBoxList.Status == 'UnSuccess'">
+                  <span class="py-0 px-1 f-12 my-2 br-15 reject">
+                    Unsuccessful
+                    <span *ngIf="blackBoxList.ApprovalMode"
+                      >( {{ blackBoxList.ApprovalMode }} )</span
+                    >
+                  </span>
+                </div>
+                <div *ngIf="blackBoxList.Status == 'Rejected'">
+                  <span class="py-0 px-1 f-12 my-2 br-15 reject">
+                    Rejected
+                    <span *ngIf="blackBoxList.ApprovalMode"
+                      >( {{ blackBoxList.ApprovalMode }} )</span
+                    >
+                  </span>
+                </div>
+                <div *ngIf="blackBoxList.LiveStatus == 'Active'">
+                  <span class="py-0 px-1 f-12 my-2 br-15 approve">
+                    Live
+                    <span *ngIf="blackBoxList.ApprovalMode"
+                      >( {{ blackBoxList.ApprovalMode }} )</span
+                    >
+                  </span>
+                </div>
+                <div *ngIf="blackBoxList.Status == 'Approved'">
+                  <span class="py-0 px-1 f-12 my-2 br-15 approve">
+                    Approved
+                    <span *ngIf="blackBoxList.ApprovalMode"
+                      >( {{ blackBoxList.ApprovalMode }} )</span
+                    >
+                  </span>
+                </div>
+                <div *ngIf="blackBoxList.Status == 'Pending'">
+                  <span class="py-0 px-1 f-12 my-2 br-15 pending">
+                    Pending
+                    <span *ngIf="blackBoxList.ApprovalMode"
+                      >( {{ blackBoxList.ApprovalMode }} )</span
+                    >
+                  </span>
+                </div>
+                <div *ngIf="blackBoxList.Status == 'Deleted'">
+                  <span class="py-0 px-1 f-12 my-2 br-15 deleted">
+                    Deleted
+                    <span *ngIf="blackBoxList.ApprovalMode"
+                      >( {{ blackBoxList.ApprovalMode }} )</span
+                    >
+                  </span>
+                </div>
+
+                <div *ngIf="blackBoxList.Status == 'UnExecuted'">
+                  <span class="py-0 px-1 f-12 my-2 br-15 reject">
+                    UnExecuted
+                    <span *ngIf="blackBoxList.ApprovalMode"
+                      >( {{ blackBoxList.ApprovalMode }} )</span
+                    >
+                  </span>
+                </div>
+
+                <div *ngIf="blackBoxList.Status == 'Upcoming'">
+                  <span class="py-0 px-1 f-12 my-2 br-15 approve">
+                    Upcoming
+                    <span *ngIf="blackBoxList.ApprovalMode"
+                      >( {{ blackBoxList.ApprovalMode }} )</span
+                    >
+                  </span>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+
+          <!-- <tr>coming from dashboard=> activeRoute?.snapshot?.paramMap?.get('metric')</tr> -->
+          <tbody *ngIf="flag_FileteredData_Or_BlackBoxList">
+            <tr
+              *ngFor="
+                let blackBoxList of blackBoxListArr;
+                trackBy: trackByblackBoxListArr
+              "
+            >
+              <td style="width: 70px">
+                <button
+                  *ngIf="blackBoxList.Status == 'Success'"
+                  class="btn primary-outline-btn p-0"
+                  (click)="
+                    onBlackBoxDetail(
+                      blackBoxList.MissionId,
+                      blackBoxList.OperatorId
+                    )
+                  "
+                >
+                  {{ blackBoxList.MissionId }}
+                </button>
+                <div *ngIf="blackBoxList.Status != 'Success'">
+                  {{ blackBoxList.MissionId }}
+                </div>
+              </td>
+              <td style="width: 70px">{{ blackBoxList.OperatorId }}</td>
+              <td>
+                {{ blackBoxList.StartTime | date : "dd MMM yyyy" }},
+                {{ blackBoxList.StartTime | date : "h:mm a" }} -
+                {{ blackBoxList.EndTime | date : "h:mm a" }}
+              </td>
+              <td>{{ blackBoxList.CreatedByName }}</td>
+              <td>{{ blackBoxList.ActivityType }}</td>
+              <td class="light-semi-bold">
+                <div *ngIf="blackBoxList.Status == 'Success'">
+                  <span class="py-0 px-1 f-12 my-2 br-15 approve">
+                    Successful
+                    <span *ngIf="blackBoxList.ApprovalMode"
+                      >( {{ blackBoxList.ApprovalMode }} )</span
+                    >
+                  </span>
+                </div>
+                <div *ngIf="blackBoxList.Status == 'UnSuccess'">
+                  <span class="py-0 px-1 f-12 my-2 br-15 reject">
+                    Unsuccessful
+                    <span *ngIf="blackBoxList.ApprovalMode"
+                      >( {{ blackBoxList.ApprovalMode }} )</span
+                    >
+                  </span>
+                </div>
+                <div *ngIf="blackBoxList.Status == 'Rejected'">
+                  <span class="py-0 px-1 f-12 my-2 br-15 reject">
+                    Rejected
+                    <span *ngIf="blackBoxList.ApprovalMode"
+                      >( {{ blackBoxList.ApprovalMode }} )</span
+                    >
+                  </span>
+                </div>
+                <div *ngIf="blackBoxList.Status == 'Approved'">
+                  <span class="py-0 px-1 f-12 my-2 br-15 approve">
+                    Approved
+                    <span *ngIf="blackBoxList.ApprovalMode"
+                      >( {{ blackBoxList.ApprovalMode }} )</span
+                    >
+                  </span>
+                </div>
+                <div *ngIf="blackBoxList.Status == 'Pending'">
+                  <span class="py-0 px-1 f-12 my-2 br-15 pending">
+                    Pending
+                    <span *ngIf="blackBoxList.ApprovalMode"
+                      >( {{ blackBoxList.ApprovalMode }} )</span
+                    >
+                  </span>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,220 @@
+<div class="missionCard dark-new px-2 pt-2 mt-1">
+  <div
+    *ngIf="mission.LiveStatus == 'Active'"
+    class="text-white statusCard mb-2"
+  >
+    <div class="mlive f-12 px-3 py-1 mt-1">
+      Live
+      <span
+        ><svg
+          width="12"
+          height="12"
+          viewBox="0 0 14 22"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            class="path-animation1"
+            d="M13 7L7 0.999999L1 7"
+            stroke="white"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            class="path-animation2"
+            d="M13 14L7 8L1 14"
+            stroke="white"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            class="path-animation3"
+            d="M13 21L7 15L1 21"
+            stroke="white"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </span>
+    </div>
+    <div *ngIf="mission.UAVLogMode" class="connection f-12 px-3 py-1">
+      <img
+        src="../../../../../assets/icons/connection_type.svg"
+        alt="connection_type"
+      />
+      <span>{{ mission.UAVLogMode }}</span>
+    </div>
+  </div>
+  <div class="missionHeader">
+    <span
+      class="missionName text-white f-20"
+      title="{{ mission?.OperationName }}"
+    >
+      {{ mission?.OperationName }}</span
+    >
+    <span
+      *ngIf="mission?.MissionStatus"
+      class="py-0 px-1 f-12 my-2 br-15"
+      [ngClass]="{
+        approve: mission?.MissionStatus == 'Approved',
+        reject: mission?.MissionStatus == 'Rejected',
+        pending: mission?.MissionStatus == 'Pending'
+      }"
+    >
+      {{ mission?.MissionStatus }} ({{ mission?.ApprovalMode }})</span
+    >
+  </div>
+  <span class="f-12 rpto-tag" *ngIf="mission.GeoFence"> RPTO </span>
+  <div class="white-text-opacity f-12 my-1" *ngIf="mission?.StartTime">
+    <span class="">
+      {{ mission?.StartTime | date : "EEEE, d 'th' MMMM yyyy" }}
+    </span>
+    (<span class="font-weight-bold">
+      {{ mission?.StartTime | date : "HH:mm 'to' " }}
+      {{ mission?.EndTime | date : "HH:mm" }}</span
+    >)
+  </div>
+  <div class="missionDetails text-white f-14 mt-2">
+    <div class="missionDetail">
+      <div class="truncate">{{ mission?.CreatedByName }}</div>
+      <div class="f-10 text-white-50">Pilot</div>
+    </div>
+    <div class="missionDetail">
+      <div>{{ mission?.MaximumAltitude }} m</div>
+      <div class="f-10 text-white-50">Maximum Altitude</div>
+    </div>
+  </div>
+  <!-- waiting for the backend to send the data -->
+  <div class="airspaceCard text-white f-12 my-2">
+    <span class="f-14">
+      <img src="../../../../../assets/icons/windgust.svg" alt="airspace" />
+      Airspace
+    </span>
+    <div class="airBox mt-1 mb-2">
+      <span class="airBoxItem fir-code" *ngIf="mission.FIRID">
+        <span
+          [ngClass]="{
+            'content-2': mission.ExtractedCorrelation.length == 0,
+            'content-4': mission.ExtractedCorrelation.length > 0
+          }"
+          >{{ mission.FIRID[0] }}</span
+        >
+        <span
+          class="f-10 text-white-50"
+          [ngClass]="{
+            'content-2': mission.ExtractedCorrelation.length == 0,
+            content: mission.ExtractedCorrelation.length > 0
+          }"
+          >FIR</span
+        >
+      </span>
+      <div *ngFor="let data of mission.ExtractedCorrelation">
+        <div
+          class="airBoxItem-1"
+          *ngIf="mission.ExtractedCorrelation && data.zone == 'FIC'"
+        >
+          <span class="content" *ngIf="data.zone == 'FIC'">{{
+            data.coRelationType
+          }}</span>
+          <span class="content f-10 text-white-50" *ngIf="data.zone == 'FIC'"
+            >FIC</span
+          >
+        </div>
+        <div
+          class="airBoxItem-1"
+          *ngIf="
+            mission.ExtractedCorrelation &&
+            data.zone != 'FIC' &&
+            data.zone != 'Outer-Yellow'
+          "
+        >
+          <span class="content">{{ data.type }}</span>
+          <span class="content f-10 text-white-50">{{ data.zone }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="airspaceCard text-white f-12 mb-2">
+    <span class="f-14">
+      <img src="../../../../../assets/icons/windgust.svg" alt="airspace" />
+      Ground
+    </span>
+    <div>
+      <div class="airBox my-1">
+        <div class="airBoxItem" *ngIf="mission.principalSubdivisionCode">
+          <span class="content-1">{{
+            mission.principalSubdivisionCode.split("-")[0]
+          }}</span>
+          <span class="f-10 text-white-50">Country</span>
+        </div>
+        <div class="airBoxItem" *ngIf="mission.principalSubdivisionCode">
+          <span class="truncate2">{{
+            mission.principalSubdivisionCode.split("-")[1]
+          }}</span>
+          <span class="truncate2 f-10 text-white-50">State</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="moreDetails">
+    <div *ngIf="toggle">
+      <div class="missionDetails text-white f-14 mt-2">
+        <div title="{{ mission?.ActivityType }}" class="missionDetail">
+          <div class="truncate">{{ mission?.ActivityType }}</div>
+          <div class="f-10 text-white-50">Activity Type</div>
+        </div>
+        <div class="missionDetail">
+          <div class="truncate">Flight Purpose</div>
+          <div class="f-10 text-white-50">Flight Purpose</div>
+        </div>
+      </div>
+      <div class="detailCard text-white f-14 my-2 px-2 py-1">
+        <div>{{ mission?.DroneName }}</div>
+        <div class="f-10 text-white-50">Drone Name</div>
+      </div>
+      <div class="detailCards">
+        <div
+          class="detailCard text-white f-14 px-2 py-1"
+          *ngIf="
+            latestMissionLogs?.satellitesCount ||
+            latestMissionLogs?.satellitesCount === 0
+          "
+        >
+          <div>{{ latestMissionLogs?.satellitesCount }}</div>
+          <div class="f-10 text-white-50">GPS Satellite Visibility</div>
+        </div>
+        <div
+          class="detailCard text-white f-14 px-2 py-1"
+          *ngIf="latestMissionLogs?.planes || latestMissionLogs?.planes === 0"
+        >
+          <div>{{ latestMissionLogs?.planes }}</div>
+          <div class="f-10 text-white-50">No. of Planes</div>
+        </div>
+        <div
+          class="detailCard text-white f-14 px-2 py-1"
+          *ngIf="
+            latestMissionLogs?.nearbyAirports ||
+            latestMissionLogs?.nearbyAirports === 0
+          "
+        >
+          <div>{{ latestMissionLogs?.nearbyAirports }}</div>
+          <div class="f-10 text-white-50">Nearby Airports</div>
+        </div>
+        <div
+          class="detailCard text-white f-14 px-2 py-1"
+          *ngIf="mission?.flights"
+        >
+          <div>{{ mission?.MaximumAltitude }}</div>
+          <div class="f-10 text-white-50">Nearby Airports</div>
+        </div>
+      </div>
+    </div>
+    <p class="toogleDetail f-12 mt-2 pb-2" (click)="onToggle($event)">
+      <span *ngIf="!toggle">More Details...</span>
+      <span *ngIf="toggle">Less Details...</span>
+    </p>
+  </div>
+</div>

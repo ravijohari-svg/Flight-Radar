@@ -1,0 +1,145 @@
+<div class="main-panel dark-medium">
+  <!-- Top Header -->
+  <div class="radar-top-header">
+    <div class="header-left">
+      <div class="logo">
+        <!-- <span class="logo-skye">SKYE</span><span class="logo-utm">UTM</span> -->
+           <img
+        src="../../../../../assets/common-layout/SkyeUTM logoWhite.svg"
+        width="130px"
+      />
+      </div>
+    </div>
+    <div class="header-center">
+      <div class="stats-group">
+        <div class="stat-item"><span class="stat-val text-white">{{stats.active | number:'2.0-0'}}</span> <span class="stat-lbl">Active</span></div>
+        <!-- <div class="stat-item"><span class="stat-val text-orange">{{stats.manned | number:'2.0-0'}}</span> <span class="stat-lbl">Manned</span></div> -->
+        <div class="stat-item"><span class="stat-val text-cyan">{{stats.skyeAir | number:'2.0-0'}}</span> <span class="stat-lbl">Skye Air</span></div>
+        <div class="stat-item"><span class="stat-val text-purple">{{stats.remoteId | number:'2.0-0'}}</span> <span class="stat-lbl">Remote ID</span></div>
+      </div>
+      <!-- <div class="last-updated">Last updated: 2 sec ago</div> -->
+    </div>
+    <div class="header-right">
+      <div class="live-status">
+        <div class="live-dot"></div>
+        <span>LIVE</span>
+      </div>
+      <!-- <button class="header-btn active"><i class="fa fa-bars"></i> Traffic</button>
+      <button class="header-btn"><i class="fa fa-filter"></i> Filters</button>
+      <button class="header-btn"><i class="fa fa-layer-group"></i> Layers</button>
+      
+      <div class="view-toggle">
+        <button class="toggle-btn active">2D</button>
+        <button class="toggle-btn">3D</button>
+      </div> -->
+      
+      <button class="icon-btn"><i class="fa fa-expand"></i></button>
+    </div>
+  </div>
+
+  <div class="map-col">
+    <div class="main-map px-0">
+      <ng-template appResuableOutlet></ng-template>
+    </div>
+  </div>
+
+  <app-heatmap
+    [show3DMapToggle]="false"
+    [toggle]="false"
+    [terrain]="false"
+    (toggSwitch)="toggle2D3D($event)"
+  ></app-heatmap>
+
+  <!-- Live Traffic Sidebar -->
+  <div class="live-traffic-sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-title">LIVE TRAFFIC</div>
+      <div class="search-box">
+        <i class="fa fa-search search-icon"></i>
+        <input type="text" placeholder="Search flight, drone..." (input)="onSearch($event)" />
+      </div>
+    </div>
+    
+    <div class="vehicle-list">
+      <div
+        class="vehicle-item"
+        *ngFor="let drone of filteredDroneList"
+        [class.selected]="selectedFlightId === drone.flightId"
+        (click)="focusDrone(drone)"
+      >
+        <div class="top-row">
+          <div class="flight-id">{{ drone.flightId }}</div>
+          <div class="status-dot"></div>
+        </div>
+        <div class="middle-row">
+          <div class="operator">{{ drone.operator }}</div>
+          <div class="altitude">{{ drone.alt | number:'1.0-0' }} m</div>
+        </div>
+        <div class="bottom-row">
+          <div class="type">{{ drone.type }}</div>
+          <div class="speed-heading">{{ drone.speed | number:'1.1-1' }} m/s &middot; {{ drone.heading | number:'1.0-0' }}&deg;</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="sidebar-footer">
+      {{ filteredDroneList.length }} of {{ droneList.length }} vehicles
+    </div>
+  </div>
+
+  <div class="map-ui-card">
+    <app-map-ui
+    *ngIf="isView"
+    [isView]="isView"
+    [title]="entityDescription?.title"
+    [fircode]="entityDescription?.airspaceInfo?.FIRCodes"
+    [airspacetype]="entityDescription?.airspaceInfo?.Type"
+    [fic]="entityDescription?.airspaceInfo.FIC"
+    [country]="entityDescription?.groundInfo.Country"
+    [state]="entityDescription?.groundInfo.States"
+    [elevation]="entityDescription?.groundInfo.elevation"
+    (changeIsView)="close($event)"
+  >
+  </app-map-ui>
+  </div>
+
+  <div
+    class="hover-card"
+    *ngIf="hoveredDrone"
+    [style.left.px]="hoverPosition.x"
+    [style.top.px]="hoverPosition.y"
+  >
+    <div class="hover-head">
+      <strong>{{ hoveredDrone.flightId }}</strong>
+      <span>{{ hoveredDrone.operator }}</span>
+    </div>
+    <div class="hover-state"><span></span> IN FLIGHT</div>
+    <dl>
+      <div><dt>Latitude</dt><dd>{{ hoveredDrone.lat | number: "1.5-5" }}</dd></div>
+      <div><dt>Longitude</dt><dd>{{ hoveredDrone.lng | number: "1.5-5" }}</dd></div>
+      <div><dt>Origin Country</dt><dd>India</dd></div>
+      <div><dt>Type</dt><dd>{{ hoveredDrone.type || "N/A" }}</dd></div>
+      <div><dt>Altitude</dt><dd>{{ hoveredDrone.alt | number: "1.0-0" }} m</dd></div>
+      <div><dt>Speed</dt><dd>{{ hoveredDrone.speed | number: "1.1-1" }} m/s</dd></div>
+      <div><dt>Heading</dt><dd>{{ hoveredDrone.heading | number: "1.0-0" }} deg</dd></div>
+      <div><dt>Last Updated</dt><dd>{{ hoveredDrone.lastUpdated | date:'h:mm:ss a' }}</dd></div>
+    </dl>
+  </div>
+
+  <!-- Bottom Footer -->
+  <div class="radar-bottom-footer">
+    <div class="footer-left">
+      <div class="footer-stat"><span class="f-lbl">Active Traffic</span> <span class="f-val">{{stats.active}}</span></div>
+      <!-- <div class="footer-stat"><span class="f-lbl">Active Missions</span> <span class="f-val">8</span></div> -->
+      <div class="footer-stat"><span class="f-lbl">Alerts</span> <span class="f-val text-green">0</span></div>
+      <div class="footer-stat"><span class="f-lbl">Comm Issues</span> <span class="f-val text-green">0</span></div>
+    </div>
+    <div class="footer-right">
+      <span>{{currentTime | date:'HH:mm:ss'}} IST</span>
+      <span class="dot-sep">&middot;</span>
+      <span>New Delhi ATC</span>
+      <span class="dot-sep">&middot;</span>
+      <span>Sky UTM v3.1.4</span>
+    </div>
+  </div>
+</div>

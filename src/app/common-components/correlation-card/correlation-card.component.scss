@@ -1,0 +1,57 @@
+@import "../../../scss/colorCodes.scss";
+.wayPointComps {
+  width: 336px;
+  .wayPointComp {
+    background: $dark-new;
+    border-radius: 4px;
+    left: 0px !important;
+    cursor: pointer;
+    .accordionHeader {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      > div {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        img {
+          width: 30px;
+        }
+      }
+      img {
+        width: 15px;
+      }
+    }
+  }
+  > div:nth-child(1) {
+    border: 1px solid $pending;
+    .accordianBorder {
+      border: 1px solid $pending;
+    }
+  }
+  > div:nth-child(2) {
+    border: 1px solid $reject;
+    .accordianBorder {
+      border: 1px solid $reject;
+    }
+  }
+  > div:nth-child(4) {
+    border: 1px solid $pending_1;
+    .accordianBorder {
+      border: 1px solid $pending_1;
+    }
+  }
+  > div:nth-child(3) {
+    border: 1px solid $approval;
+    .accordianBorder {
+      border: 1px solid $approval;
+    }
+  }
+  .accordionContent {
+    background: $dark-v1;
+    border-radius: 4px;
+  }
+  .green-border{
+    border:1px solid $dark-green !important;
+  }
+}

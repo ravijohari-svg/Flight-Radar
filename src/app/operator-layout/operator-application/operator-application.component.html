@@ -1,0 +1,176 @@
+<ng-container>
+  <div class="example-container">
+    <!-- [class.example-is-mobile]="mobileQuery.matches" -->
+    <mat-sidenav-container class="example-container">
+      <!-- autosize -->
+      <!-- [opened]="mobileQuery.matches ? false : true" -->
+      <mat-sidenav
+        #sidenav
+        mode="side"
+        [fixedInViewport]="true"
+        [opened]="true"
+        [fixedTopGap]="0"
+        [fixedBottomGap]="0"
+        class="body-color"
+        [ngClass]="{ 'small-sidenav': toggleSideNav == true }"
+        [class.disable-click] = "closedState == 'UpdateSidebar'"
+      >
+        <ul class="nav navbar-nav my-2 mx-2">
+          <div class="row mx-0">
+            <div *ngIf="!toggleSideNav" class="col-10 px-0">
+              <img
+                src="../../assets/common-layout/SkyeUTM logoWhite.svg"
+                alt="SkyeUTM"
+                title="SkyeUTM Logo"
+                width="120px"
+              />
+            </div>
+            <button
+              class="col-2 btn px-0"
+              [ngClass]="{ 'ml-2': toggleSideNav == true }"
+              (click)="toggleSideNav = !toggleSideNav"
+            >
+              <img src="../.../../../../assets/common-layout/Menu Open.svg" />
+            </button>
+          </div>
+          <div class="mt-4">
+            <!-- dont change the id of list -->
+            <li
+              *ngFor="let path of activeURLArr"
+              class="nav-item align-middle"
+              [id]="'nav-item-' + path.url"
+            >
+              <!-- Side Nev for guest mode -->
+              <div *ngIf="profileDetails?.UserMode === 'Guest'">
+                <a
+                  class="nav-link p-0 d-flex justify-content-start align-items-center m-0"
+                  routerLinkActive="active"
+                  [ngClass]="{
+                    'settings-text': path.name == 'Profile',
+                    'settings-text2': toggleSideNav == true
+                  }"
+                  title="{{ path.name }}"
+                >
+                  <span
+                    class="p-2"
+                    (click)="
+                      onGuestUserNavigationClick($event, path.name, path.url)
+                    "
+                  >
+                    <img src="{{ path.img }}" width="15px" class="mx-1" />
+                    <span *ngIf="!toggleSideNav"> {{ path.name }}</span>
+                  </span>
+                </a>
+              </div>
+
+              <!-- Side Nev after User Login -->
+              <div *ngIf="!profileDetails?.UserMode">
+                <a
+                  class="nav-link p-0 d-flex justify-content-start align-items-center m-0"
+                  routerLink="{{ path.url }}"
+                  routerLinkActive="active"
+                  [ngClass]="{
+                    'settings-text': path.name == 'Profile',
+                    'settings-text2': toggleSideNav == true
+                  }"
+                  title="{{ path.name }}"
+                >
+                  <span
+                    class="p-2"
+                    (click)="
+                      onRouterNavigationClick($event, path.name, path.url)
+                    "
+                  >
+                    <img src="{{ path.img }}" width="15px" class="mx-1" />
+                    <span *ngIf="!toggleSideNav"> {{ path.name }}</span>
+                  </span>
+                </a>
+              </div>
+            </li>
+          </div>
+
+          <div
+            class="bottom-container text-center pb-lg-2 pb-1"
+            [ngClass]="{ 'w-90': toggleSideNav == false }"
+          >
+            <!-- <li class="nav-item align-middle">
+              <button
+                title="Logout"
+                class="nav-link px-2 btn"
+                (click)="onLogout()"
+              >
+                <img
+                  src="../../../assets/common-layout/log-out.svg"
+                  width="15px"
+                  class="mx-1"
+                />
+                <span *ngIf="!toggleSideNav">Logout</span>
+              </button>
+            </li> -->
+            <!-- </div> -->
+            <div title="{{ profileDetails?.FirstName }}" class="row mx-0 py-2">
+              <div class="col-3 px-0">
+                <span class="profile-avatar rounded-circle">
+                  {{ profileDetails?.FirstName[0] }}
+                </span>
+              </div>
+              <div *ngIf="!toggleSideNav" class="col-9 px-2 profile-detail">
+                <div class="white-text">{{ profileDetails?.FirstName }}</div>
+                <div class="white-text-opacity">
+                  {{ profileDetails?.UserId }}
+                </div>
+              </div>
+            </div>
+            <div
+              *ngIf="!toggleSideNav"
+              class="col rounded dark-light img-text p-1 m-0 f-10"
+            >
+              <span class="font-weight-bold">Operator</span
+              ><span class="font-weight-light"> Access</span>
+            </div>
+          </div>
+        </ul>
+      </mat-sidenav>
+      <mat-sidenav-content
+        [ngClass]="{ 'sidenav-content-small': toggleSideNav == true }"
+      >
+        <!-- <div
+          class="py-2 body-color"
+          *ngIf="  !guestUser &&
+            currentUrl !== '/operator/operator-app/dashboard' &&
+            currentUrl !== '/operator/operator-app/mission/create-mission'
+          "
+        >
+          <div class="row mx-0">
+            <div class="col-10"></div>
+            <div class="col-2">
+              <button
+                class="btn primary-btn float-right"
+                (click)="authorizing('mission/create-mission')"
+              >
+                + Create Mission
+              </button>
+            </div>
+          </div>
+        </div> -->
+        <router-outlet class="clear"></router-outlet>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div>
+</ng-container>
+<!-- <button class="float-right " (click)="paymentModal(test)">Test ---------</button> -->
+<!-- <ng-template #payment id="payment" let-c="close" let-d="dismiss">
+  <div class="modal-body py-0 px-4 dark">
+    <button type="button" class="btn-close close pull-right white-text-opacity mt-2" aria-label="Close"
+      (click)="modalRef?.hide()">
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button> -->
+<div class="payment-card" *ngIf="paymentOpen">
+  <app-operator-payment-page></app-operator-payment-page>
+</div>
+<!-- </div>
+</ng-template> -->
+
+<!-- <app-operator-preflight-report></app-operator-preflight-report> -->
+
+<app-notification></app-notification>

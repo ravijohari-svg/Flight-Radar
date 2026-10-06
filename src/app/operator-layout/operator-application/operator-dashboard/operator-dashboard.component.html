@@ -1,0 +1,1275 @@
+<!-- <div class="agree-button-overlay" *ngIf="!showPopUp"> -->
+<div *ngIf="loader && viewerLoading" class="loader">
+  <div class="logo">
+    <img
+      src="../../../../../assets/common-layout/SquareLoader.gif"
+      width="30px"
+    />
+    <img
+      src="../../../../../assets/common-layout/SkyeUTM logoWhite.svg"
+      width="200px"
+    />
+  </div>
+</div>
+
+<div class="main-panel main-operator-dashboard">
+  <!-- map -->
+  <div class="card dark-medium h-100">
+    <div class="main-map">
+      <div class="map-container">
+        <ng-template appResuableOutlet></ng-template>
+      </div>
+      <!-- <div class="align-map-buttons operator-dashboard">
+          <div
+            class="osm-button"
+            *ngIf="toggleflagText == '3D'"
+            (click)="osmBuildings()"
+            style="word-wrap: break-word; margin-right: 5px"
+          >
+            <mat-slide-toggle>Obstacles</mat-slide-toggle>
+          </div>
+          <div class="slideToggle-button" style="word-wrap: break-word">
+            <span style="margin-right: 5px">2D</span>
+            <mat-slide-toggle (click)="toggle2D3D()">3D</mat-slide-toggle>
+          </div>
+        </div> -->
+    </div>
+  </div>
+  <!-- <div class="mt-3 pop-content">
+      <div class="pop-header f-16">Heatmaps</div>
+      <div class="form-check pop-check ml-2">
+        <input
+          class="form-check-input check-input"
+          [(ngModel)]="telecom"
+          (click)="telecomApi()"
+          style="width: 18px; height: 18px"
+          type="checkbox"
+          value=""
+          id="flexCheckDefault"
+        />
+        <label class="form-check-label f-14 ml-1" for="flexCheckDefault">
+          Telecom Tower
+        </label>
+      </div>
+      <div class="form-check pop-check ml-2">
+        <input
+          class="form-check-input check-input"
+          [(ngModel)]="heatmap"
+          style="width: 18px; height: 18px"
+          (click)="popHeatmap()"
+          type="checkbox"
+          value=""
+          id="flexCheckChecked"
+          checked
+        />
+        <label class="form-check-label f-14 ml-1" for="flexCheckChecked">
+          Population
+        </label>
+      </div>
+    </div> -->
+  <!-- HeatMaps  -->
+  <!-- <app-heatmap
+      (teleSwitch)="telecomApi($event)"
+      (popSwitch)="popHeatmap($event)"
+      (toggSwitch)="toggle2D3D($event)"
+      (terrSwitch)="osmBuildings($event)"
+    ></app-heatmap> -->
+  <app-heatmap
+    (toggSwitch)="toggle2D3D($event)"
+    (toggSwitchData)="toggleData($event)"
+    (toggSwitchTel)="toggleData($event)"
+    (toggSwitchPop)="toggleData($event)"
+    [heatmapData]="guestUser"
+  ></app-heatmap>
+  <!-- infomation card -->
+  <div class="infoCard">
+    <app-weather-card
+      [currentWeatherDetails]="currentWeatherDetails"
+      [responseCityName]="responseCityName"
+      [droneName]="droneName"
+    ></app-weather-card>
+  </div>
+  <!--  create mission button in Guest Mode -->
+  <div id="createMissionBtn" class="createMissionBtn" *ngIf="profileDetails?.UserMode === 'Guest'">
+    <button
+      class="btn primary-btn float-right primary-btn-alignment"
+      (click)="guestRedirect()"
+    >
+      + Create Mission
+    </button>
+  </div>
+  <button
+    *ngIf="guestUser"
+    id="drawButton"
+    class="drawButton"
+    [ngClass]="{ clicked: isClicked }"
+    (click)="onButtonClick()"
+  >
+    <img class="icon-size" src="../../../../assets/icons/dist.svg" />
+  </button>
+  <div
+    class="reset-position f-12"
+    *ngIf="this.pointData.length > 1 || uploaded"
+    (click)="onReset()"
+  >
+    <img src="../../../../../assets/icons/Refresh.svg" />Reset
+  </div>
+  <!--  create mission button -->
+  <div class="createMissionBtn" *ngIf="!profileDetails?.UserMode">
+    <button
+      [disabled]="createMissionBtnDisabled"
+      [class.createMissionBtn-disabled]="createMissionBtnDisabled"
+      class="btn primary-btn float-right primary-btn-alignment"
+      (click)="authorizing('mission/create-mission')"
+    >
+      + Create Mission
+    </button>
+  </div>
+  <!-- side create mission -->
+  <div class="mission-card" [class.collapsed]="!toggleMissionDetailstab">
+    <div class="dropdown" (click)="toggleMissionDetails()">
+      <img
+        src="../../../../assets/icons/chevron-left.svg"
+        [alt]="toggleMissionDetailstab ? 'left' : 'right'"
+        [class.rotate]="toggleMissionDetailstab"
+      />
+    </div>
+    <div class="missionBox body-color">
+      <div class="search p-2">
+        <div class="searchBox dark-v1">
+          <input
+            [(ngModel)]="cityName"
+            #cityInput
+            type="text"
+            class="form-control f-12 dark-v1 text-white"
+            placeholder="Enter a city"
+            aria-label="City Name"
+            aria-describedby="basic-addon2"
+            (keyup.enter)="onWeatherForm()"
+          />
+          <button class="btn weather-button icon" (click)="onWeatherForm()">
+            <img src="../../../../assets/icons/search.svg" />
+          </button>
+        </div>
+        <div class="error-message f-10" *ngIf="NotFound">City not found</div>
+      </div>
+
+      <div *ngIf="missionList" class="card dark">
+        <div class="card-body body-color py-1">
+          <div class="row justify-content-between align-items-center px-2">
+            <!-- <div class="text-white f-20">Missions</div> -->
+             <div class="d-flex align-items-center">
+              <div class="text-white f-20">Missions</div>
+              <button class="flight-plan-analytics-button ml-2"
+                *ngIf="mode"
+                (click)="redirectToMissionPlanner()">
+                <i class="fa fa-line-chart"></i>
+                Duplex Comms
+              </button>
+            </div>
+
+            <div *ngIf="missionList" class="text-right">
+              <button
+                class="btn px-0"
+                (click)="getSpecifiedMission('prev')"
+                [attr.disabled]="
+                  (missionIndex == 0 ? true : null) ||
+                  (missionStarted ? true : null)
+                "
+              >
+                <i class="fa fa-chevron-circle-left"></i>
+              </button>
+              <button
+                class="btn px-1"
+                (click)="getSpecifiedMission('next')"
+                [attr.disabled]="
+                  (missionIndex >= missionListArr?.length - 1 ? true : null) ||
+                  (missionStarted ? true : null)
+                "
+              >
+                <i class="fa fa-chevron-circle-right"></i>
+              </button>
+              <span class="list-description">
+                {{ missionIndex + 1 }}/{{ missionListArr?.length }}
+              </span>
+            </div>
+          </div>
+          <div class="card body-color mainBox">
+            <div class="mainBoxSub">
+              <div
+                class="card dark-light p-2"
+                [ngClass]="{
+                  'b-red':
+                    (deconfliction?.Deconfliction ||
+                      droneOutsideBuffer ||
+                      droneErrors) == true
+                }"
+              >
+                <div class="text-white missionCard mb-1 f-18">
+                  <div class="missionName" [title]="missionList.OperationName">
+                    {{ missionList.OperationName }} 
+                  </div>
+                  
+                  <div
+                    class="f-12 br-15 py-1 px-2 missionStatus"
+                    [ngClass]="{
+                      approve: missionList?.MissionStatus == 'Approved',
+                      reject: missionList?.MissionStatus == 'Rejected',
+                      pending: missionList?.MissionStatus == 'Pending'
+                    }"
+                  >
+                    {{ missionList?.MissionStatus }} ({{
+                      missionList?.ApprovalMode
+                    }})
+                  </div>
+                </div>
+                <div class="f-12 white-text-opacity">
+                  ({{missionList?.MissionId}})
+                </div>
+                <div class="f-12 white-text-opacity">
+                  {{ missionList.StartTime | date : "h:mm a" }} -
+                  {{ missionList.EndTime | date : "h:mm a" }},
+                  <!-- IF user logged in  -->
+                  <span *ngIf="!guestUser">
+                    {{ missionList.StartTime | date : "d MMM y" }}</span
+                  >
+                  <!-- for guest user  -->
+                  <span *ngIf="guestUser">
+                    {{ missionList.currentTimeDate | date : "d MMM y" }}</span
+                  >
+                </div>
+              </div>
+              <div class="toggleDetails body-color">
+                <div class="toggleDetailsBox text-white-50 p-2">
+                  <div (click)="changeTab('general')">
+                    <div [class.activeTab]="activeTab === 'general'">
+                      General Details
+                    </div>
+                  </div>
+                  <div (click)="changeTab('waypoint')">
+                    <div [class.activeTab]="activeTab === 'waypoint'">
+                      Waypoint Details
+                    </div>
+                  </div>
+                </div>
+                <div class="detailBox my-1 px-1">
+                  <div class="generalDetails" *ngIf="activeTab === 'general'">
+                    <div
+                      class="text-white f-14 mb-1 dark-new"
+                      *ngIf="
+                        advisoryNotification && advisoryNotification.message
+                      "
+                    >
+                      Terrain Advisory Notifications
+                    </div>
+                    <div
+                      *ngIf="
+                        advisoryNotification && advisoryNotification.message
+                      "
+                      class="card dark mb-2"
+                    >
+                      <div
+                        class="card-body py-1 error-message br-red text-center rounded"
+                        role="alert"
+                      >
+                        <div *ngIf="advisoryNotification">
+                          {{ advisoryNotification.message }}
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- live meassage notification -->
+                    <div
+                      class="text-white f-14 mb-1 dark-new"
+                      *ngIf="liveMessageNotification"
+                    >
+                      Notifications
+                    </div>
+                    <div
+                      *ngIf="liveMessageNotification && liveMessage"
+                      class="card dark mb-2"
+                    >
+                      <div
+                        class="card-body py-1 warning-message br-orange text-center rounded"
+                        role="alert"
+                      >
+                        <div *ngIf="liveMessageNotification">
+                          {{ liveMessage }}
+                        </div>
+                      </div>
+                    </div>
+                    <!-- live meassage notification/ -->
+                    <div
+                      class="text-white f-14 mb-1 dark-new"
+                      *ngIf="
+                        deconfliction?.Deconfliction ||
+                        droneOutsideBuffer ||
+                        droneErrors ||
+                        socketCloseErr
+                      "
+                    >
+                      Drone Notifications
+                    </div>
+                    <div
+                      *ngIf="deconfliction?.Deconfliction || droneOutsideBuffer"
+                      class="card dark mb-2"
+                    >
+                      <div
+                        class="card-body py-1 error-message br-red text-center rounded"
+                        role="alert"
+                      >
+                        <div *ngIf="droneOutsideBuffer">
+                          Drone left its buffer region
+                        </div>
+                        <div *ngIf="deconfliction?.Deconfliction">
+                          Deconfliction -
+                          <span
+                            *ngFor="
+                              let type of deconfliction?.Type;
+                              let i = index
+                            "
+                          >
+                            {{ type }}
+                            <span *ngIf="i != deconfliction?.Type.length - 1"
+                              >,
+                            </span>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div *ngIf="droneErrors" class="card dark my-2">
+                      <div
+                        class="card-body py-1 error-message br-red text-center rounded"
+                        role="alert"
+                      >
+                        {{ droneErrors }}
+                      </div>
+                    </div>
+                    <div *ngIf="socketCloseErr" class="card dark my-2">
+                      <div
+                        class="card-body py-1 error-message br-red text-center rounded"
+                        role="alert"
+                      >
+                        GCS Connection is closed, please make sure the software
+                        is initialized and refresh the application
+                      </div>
+                    </div>
+                    <div class="card no-border dark-medium p-2">
+                      <div class="f-14 text-white">
+                        <span *ngIf="missionList.DroneName">
+                          {{ missionList.DroneName }}
+                        </span>
+                        <span *ngIf="!missionList.DroneName">
+                          <span *ngFor="let droneAndGear of dronesAndGearList">
+                            <span
+                              *ngIf="
+                                droneAndGear.DroneId == missionList.DroneId
+                              "
+                            >
+                              {{ droneAndGear.DroneNum }}
+                            </span>
+                          </span>
+                        </span>
+                      </div>
+                      <div class="list-description-dark mt-1">Drone Type</div>
+                    </div>
+                    <div class="missionDetails text-white p-2">
+                      <div>
+                        <span>{{ missionList.CreatedByName }}</span>
+                        <span>Pilot</span>
+                      </div>
+                      <div>
+                        <span>{{ missionList.MaximumAltitude }} m</span>
+                        <span>Maximum Altitude</span>
+                      </div>
+                      <div>
+                        <span>{{ missionList.ActivityType }}</span>
+                        <span>Activity Type</span>
+                      </div>
+                      <div>
+                        <span>{{ missionList?.Waypoints?.length }}</span>
+                        <span>Waypoints</span>
+                      </div>
+                    </div>
+                    <!-- Elevation graph -->
+                    <div
+                      class="card dark-medium elevation-map"
+                      style="height: 200px; width: 288px"
+                      [ngClass]="{ resize: isToggle }"
+                    >
+                      <div
+                        class="dark-medium m-0 p-0 elevation-top rounded-top"
+                        style="height: 35px; width: 100%"
+                        [ngClass]="{ 'elevation-tops': isToggle }"
+                      >
+                        <div
+                          class="text-left text-white f-14 p-2"
+                          [ngClass]="{ 'elevation-font': isToggle }"
+                        >
+                          <span>Elevation Graph</span>
+                        </div>
+                        <div class="elevation-button">
+                          <button
+                            (click)="toggleExpand()"
+                            style="
+                              border: none;
+                              background-color: transparent;
+                              outline: none;
+                            "
+                          >
+                            <img
+                              src="../../../../../assets/common-layout/full.png"
+                              width="12px"
+                            />
+                          </button>
+                        </div>
+                      </div>
+                      <div
+                        class="elevation-content"
+                        [ngClass]="{ 'elevation-contents': isToggle }"
+                        style="height: 100%; width: 100%"
+                      >
+                        <div
+                          class="elevation-chart-container"
+                          style="height: 100%; width: 100%"
+                          echarts
+                          [options]="chartOption"
+                        ></div>
+                      </div>
+                    </div>
+                    <!-- Elevation graph  -->
+                    <div class="missionCompliance dark-medium my-2 p-2">
+                      <div class="text-white f-14 mb-2">Compliance</div>
+                      <div class="complainceBox">
+                        <div
+                          *ngFor="
+                            let category of missionPermissionsList;
+                            let i = index
+                          "
+                        >
+                          <div
+                            class="complaince"
+                            [ngClass]="{
+                              approve: category?.permission == 'Auto-Approve',
+                              reject: category?.permission == 'Auto-Reject',
+                              pending: category?.permission == 'Manual'
+                            }"
+                          ></div>
+                          <div class="f-10 text-white">
+                            {{ category?.Name }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card dark-light p-2" *ngIf="satellitesCount">
+                      <div class="missionCard">
+                        <div>
+                          <div class="text-white f-14">
+                            <div class="mb-1">GPS Satellites Visibility</div>
+                            <div>
+                              {{ satellitesCount.SatelliteCount }}
+                            </div>
+                          </div>
+                          <div class="f-12 white-text-opacity">
+                            {{
+                              satellitesCount.DateTime
+                                | date : "d MMM, y h:mm a"
+                            }}
+                          </div>
+                        </div>
+                        <img
+                          src="../../../../assets/icons/satellite.png"
+                          alt=""
+                          width="95"
+                          height="75"
+                        />
+                      </div>
+                    </div>
+                    <div class="card dark-light p-2 my-2" *ngIf="planes">
+                      <div class="missionCard">
+                        <div>
+                          <div class="text-white f-14">
+                            <div class="mb-1">No. of Planes</div>
+                            <div>{{ planes.length }}</div>
+                            <div
+                              class="f-12 white-text-opacity"
+                              *ngIf="satellitesCount"
+                            >
+                              {{
+                                satellitesCount.DateTime
+                                  | date : "d MMM, y h:mm a"
+                              }}
+                            </div>
+                          </div>
+                        </div>
+                        <img
+                          src="../../../../assets/icons/map.svg"
+                          alt="plane"
+                          width="127"
+                        />
+                      </div>
+                    </div>
+                    <div
+                      class="card dark-light p-2 my-2"
+                      *ngIf="nearbyAirports"
+                    >
+                      <div class="missionCard">
+                        <div>
+                          <div class="text-white f-14">
+                            <div class="mb-1">Nearby Airports</div>
+                            <div>
+                              {{ nearbyAirports.NearbyAirportDataLength }}
+                            </div>
+                            <div class="f-12 white-text-opacity">
+                              in radius of {{ nearbyAirports.radius }} NM
+                            </div>
+                          </div>
+                        </div>
+                        <img
+                          src="../../../../assets/icons/airport.png"
+                          alt="airports"
+                          width="73"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    class="waypointDetails text-white"
+                    *ngIf="activeTab === 'waypoint'"
+                  >
+                    <div class="wayPointSummary">
+                      Waypoint Summary
+                      <div>{{ corelation?.zoneCount[0] }}</div>
+                      <div>{{ corelation?.zoneCount[1] }}</div>
+                      <div>{{ corelation?.zoneCount[2] }}</div>
+                    </div>
+                    <div class="wayPointCards mt-2">
+                      <div
+                        *ngFor="
+                          let waypoint of missionList?.Waypoints;
+                          let i = index
+                        "
+                      >
+                        <div class="wayPointCard dark-medium p-2 mt-2">
+                          <div class="wayPointNumber">
+                            <img
+                              src="../../../../assets/common-layout/LocPinDropIcon.svg"
+                              alt=""
+                            />
+                            <div>Waypoint {{ i + 1 }}</div>
+                          </div>
+                          <div class="wayPointLogs my-2 f-14 px-2">
+                            <div class="wayPointLog">
+                              <div>
+                                {{
+                                  this.missionList?.Latitude[i]
+                                    | number : "1.3-4"
+                                }}
+                                °
+                              </div>
+                              <div class="f-10 text-white-50">Latitude</div>
+                            </div>
+                            <div class="wayPointLog">
+                              <div>
+                                {{
+                                  this.missionList?.Longitude[0]
+                                    | number : "1.3-4"
+                                }}
+                                °
+                              </div>
+                              <div class="f-10 text-white-50">Longitude</div>
+                            </div>
+                            <div class="wayPointLog">
+                              <div>{{ this.missionList?.Altitude[i] }} m</div>
+                              <div class="f-10 text-white-50">Altitude</div>
+                            </div>
+                          </div>
+                          <div class="wayPointComps f-14">
+                            <div
+                              class="wayPointComp my-2"
+                              (click)="toggleAccordion(i * 10 + 0)"
+                              *ngIf="
+                                corelation?.inneryellow[i] ||
+                                corelation?.outeryellow[i]
+                              "
+                            >
+                              <div class="accordionHeader p-2">
+                                <div>
+                                  <img
+                                    src="../../../../assets/icons/warning.svg"
+                                    alt="warning"
+                                  />
+                                  <div>
+                                    <div>Yellow Zone</div>
+                                    <div class="f-10 text-white-50">
+                                      Intersections, your flight requires
+                                      approval.
+                                    </div>
+                                  </div>
+                                </div>
+                                <img
+                                  *ngIf="expandedAccordionIndex !== i * 10 + 0"
+                                  src="../../../../assets/icons/arrowDown.svg"
+                                  alt="arrowDown"
+                                />
+                                <img
+                                  *ngIf="expandedAccordionIndex === i * 10 + 0"
+                                  src="../../../../assets/icons/arrowUp.svg"
+                                  alt="arrowDown"
+                                />
+                              </div>
+                              <div
+                                class="accordianBorder"
+                                *ngIf="expandedAccordionIndex === i * 10 + 0"
+                              ></div>
+                              <div
+                                class="p-2"
+                                *ngIf="expandedAccordionIndex === i * 10 + 0"
+                              >
+                                <div class="accordionContent f-11 p-2">
+                                  <div class="text-white-50">What this is:</div>
+                                  <div>
+                                    Yellow Zone - Drone flights are prohibited
+                                    without permission from the concerned air
+                                    traffic control authority and DGCA. Request
+                                    permission and coordinate with
+                                    DGCA(drone.dgca@gov.in) to obtain necessary
+                                    permissions to operate in this area.
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div
+                              class="wayPointComp my-2"
+                              (click)="toggleAccordion(i * 10 + 1)"
+                              *ngIf="
+                                corelation?.red[i] || corelation?.geozone[i]
+                              "
+                            >
+                              <div class="accordionHeader p-2">
+                                <div>
+                                  <img
+                                    src="../../../../assets/icons/error.svg"
+                                    alt="danger"
+                                  />
+                                  <div>
+                                    <div>Red Zone</div>
+                                    <div class="f-10 text-white-50">
+                                      You’ve intersected a red zone
+                                    </div>
+                                  </div>
+                                </div>
+                                <img
+                                  *ngIf="expandedAccordionIndex !== i * 10 + 1"
+                                  src="../../../../assets/icons/arrowDown.svg"
+                                  alt="arrowDown"
+                                />
+                                <img
+                                  *ngIf="expandedAccordionIndex === i * 10 + 1"
+                                  src="../../../../assets/icons/arrowUp.svg"
+                                  alt="arrowDown"
+                                />
+                              </div>
+                              <div
+                                class="accordianBorder"
+                                *ngIf="expandedAccordionIndex === i * 10 + 1"
+                              ></div>
+                              <div
+                                class="p-2"
+                                *ngIf="expandedAccordionIndex === i * 10 + 1"
+                              >
+                                <div class="accordionContent f-11 p-2">
+                                  <div class="text-white-50">What this is:</div>
+                                  <div>
+                                    Red Zone - Drone flight is prohibited within
+                                    5km of airport perimeter in India.
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div
+                              class="wayPointComp my-2"
+                              (click)="toggleAccordion(i * 10 + 2)"
+                              *ngIf="
+                                !(
+                                  corelation?.inneryellow[i] ||
+                                  corelation?.outeryellow[i] ||
+                                  corelation?.red[i] ||
+                                  corelation?.geozone[i]
+                                )
+                              "
+                            >
+                              <div class="accordionHeader p-2">
+                                <div>
+                                  <img
+                                    src="../../../../assets/icons/check-circle.svg"
+                                    alt="check"
+                                  />
+                                  <div>
+                                    <div>Green Zone</div>
+                                    <div class="f-10 text-white-50">
+                                      No Intersections, your flight path is
+                                      approved.
+                                    </div>
+                                  </div>
+                                </div>
+                                <img
+                                  *ngIf="expandedAccordionIndex !== i * 10 + 2"
+                                  src="../../../../assets/icons/arrowDown.svg"
+                                  alt="arrowDown"
+                                />
+                                <img
+                                  *ngIf="expandedAccordionIndex === i * 10 + 2"
+                                  src="../../../../assets/icons/arrowUp.svg"
+                                  alt="arrowDown"
+                                />
+                              </div>
+                              <div
+                                class="accordianBorder"
+                                *ngIf="expandedAccordionIndex === i * 10 + 2"
+                              ></div>
+                              <div
+                                class="p-2"
+                                *ngIf="expandedAccordionIndex === i * 10 + 2"
+                              >
+                                <div class="accordionContent f-11 p-2">
+                                  <div class="text-white-50">What this is:</div>
+                                  <div>
+                                    Green Zone - Drone flight is approved in
+                                    this area.
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="bottom-buttons my-1">
+                  <div *ngIf="!wsConnected">
+                    <button
+                      class="btn primary-btn p-2 f-14"
+                      [class.createMissionBtn-disabled]="guestUser"
+                      (click)="
+                        connect(
+                          missionList.MissionId,
+                          missionList.MissionStatus,
+                          missionList.BufferRegion,
+                          missionList.Altitude,
+                          missionList.Latitude,
+                          missionList.Longitude
+                        )
+                      "
+                      [disabled]="disableStart || disableButton"
+                    >
+                      <span *ngIf="!missionstartloader">Start Mission</span>
+                      <span *ngIf="missionstartloader"
+                        ><img
+                          src="../../../../../assets/common-layout/SquareLoader.gif"
+                          width="20px"
+                      /></span>
+                    </button>
+
+                    <!-- delete button -->
+
+                    <button
+                      [class.createMissionBtn-disabled]="guestUser"
+                      class="btn p-2 f-12 reject-btn text-center"
+                      (click)="rejectMission(missionList.MissionId)"
+                      [disabled]="disableStart || disableButton"
+                    >
+                      <span *ngIf="!deleteMissionLoader"
+                        ><img
+                          src="../../../../../assets/common-layout/Delete.svg"
+                          width="20px"
+                          class="mr-1"
+                      /></span>
+                      <span *ngIf="deleteMissionLoader"
+                        ><img
+                          src="../../../../../assets/common-layout/SquareLoader.gif"
+                          width="20px"
+                      /></span>
+                    </button>
+
+                    <!-- <button (click)="checkForOneLapConnection()">One lap connection</button> -->
+
+                    <div *ngIf="disableStart" class="error-message">
+                      Mission is already started is different window or tab
+                    </div>
+                    <div *ngIf="webSocketError" class="error-message">
+                      Error while connecting, please ensure your software is
+                      initialized
+                    </div>
+                    <div *ngIf="missionErrFlag" class="error-message">
+                      Your Mission is not approved yet!!
+                    </div>
+                  </div>
+
+                  <div *ngIf="missionStarted">
+                    <button
+                      *ngIf="missionStarted"
+                      class="btn primary-btn btn-block p-2 my-1 f-14 w-100"
+                      (click)="
+                        showSwal('endMissionConfirm', missionList.MissionId)
+                      "
+                    >
+                      End Mission
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="missionForm === 0">
+        <div
+          *ngIf="!missionList || (missionListArr && missionListArr.length == 0)"
+          class="card body-color text-center noMission p-3"
+        >
+          <img
+            src="../../../../assets/common-layout/Empty_State.svg"
+            width="90%"
+          />
+          <div class="empty-state-header">No upcoming Missions found!</div>
+          <div class="my-2 empty-state-text">
+            Create your Mission and monitor the live drone movements from our
+            application
+          </div>
+          <a
+            *ngIf="!guestUser"
+            (click)="authorizing('mission/create-mission', true)"
+            class="btn primary-btn p-2 my-4 f-12"
+          >
+            Let's get started
+          </a>
+        </div>
+      </div>
+
+      <div *ngIf="missionForm === 1">
+        <form [formGroup]="createMissionForm">
+          <div class="card missionform p-3">
+            <div class="text-title">Create Mission</div>
+            <div class="createform">
+              <div>
+                <label class="form-group-headings mt-4"
+                  >Your Name
+                  <span class="f-14 required-asterisk">*</span></label
+                >
+                <input
+                  type="text"
+                  placeholder="Enter.."
+                  formControlName="YourName"
+                  [ngClass]="{
+                    'is-invalid':
+                      submitted &&
+                      (f?.YourName.errors?.required != undefined ||
+                        (f?.YourName.errors?.minlength?.actualLength
+                          ? f?.YourName.errors?.minlength?.actualLength < 3
+                          : false) ||
+                        f?.YourName.errors.alphabetic == false)
+                  }"
+                  class="form-control form-select focus-input text-white"
+                />
+                <!-- <div
+                *ngIf="submitted && f?.YourName.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="submitted && f?.YourName.errors.required">Name is required</div>
+                <div *ngIf="submitted && f?.YourName.errors.minlength">
+                  Name should be at least 3
+                  characters long.
+                </div>
+                <div *ngIf="submitted && f?.YourName.errors.alphabetic == false
+                ">
+                Only characters are allowed
+                </div>
+              </div> -->
+
+                <div
+                  *ngIf="submitted && f?.YourName.errors"
+                  class="text-danger"
+                >
+                  <div *ngIf="submitted && f?.YourName.errors.required">
+                    Name is required
+                  </div>
+                  <div *ngIf="submitted && f?.YourName.errors.minlength">
+                    Name should be at least 3 characters long.
+                  </div>
+                  <div
+                    *ngIf="submitted && f?.YourName.errors.alphabetic == false"
+                  >
+                    Only characters are allowed
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <label class="form-group-headings mt-2"
+                  >Mobile number
+                  <span class="f-14 required-asterisk">*</span></label
+                >
+                <input
+                  type="text"
+                  placeholder="Enter.."
+                  formControlName="Mobile"
+                  [ngClass]="{
+                    'is-invalid':
+                      submitted &&
+                      (f?.Mobile?.value?.length !== 10 ||
+                        f?.Mobile.errors.numeric == false)
+                  }"
+                  class="form-control form-select focus-input text-white"
+                />
+                <div *ngIf="submitted && f?.Mobile.errors" class="text-danger">
+                  <div *ngIf="submitted && f?.Mobile.errors.required">
+                    Mobile number is required
+                  </div>
+                  <div *ngIf="submitted && f?.Mobile.errors.numeric == false">
+                    Only number is allowed
+                  </div>
+                  <div *ngIf="submitted && f?.Mobile.value.length !== 10">
+                    Length must be 10.
+                  </div>
+                </div>
+              </div>
+              <div>
+                <label class="form-group-headings mt-2"
+                  >Email <span class="f-14 required-asterisk">*</span></label
+                >
+                <input
+                  type="text"
+                  placeholder="Enter.."
+                  formControlName="Email"
+                  [ngClass]="{
+                    'is-invalid': submitted && f?.Email.errors
+                  }"
+                  class="form-control form-select focus-input text-white"
+                />
+                <div *ngIf="submitted && f?.Email.errors" class="text-danger">
+                  <div *ngIf="submitted && f?.Email.errors.required">
+                    Email is required
+                  </div>
+                  <div *ngIf="submitted && f?.Email.errors.email">
+                    Email is invalid
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-property">
+                <label class="form-group-headings mt-2">
+                  Flight Type
+                  <span class="f-14 required-asterisk">*</span>
+                </label>
+                <select
+                  class="form-control form-select focus-input text-white"
+                  formControlName="ActivityType"
+                  [ngClass]="{
+                    'is-invalid': submitted && f?.ActivityType.errors
+                  }"
+                >
+                  <option
+                    value=""
+                    disabled
+                    selected
+                    class="placeholder-option text-white"
+                  >
+                    Select..
+                  </option>
+                  <option
+                    *ngFor="
+                      let activityType of activityType;
+                      trackBy: getActivity
+                    "
+                    [ngValue]="activityType"
+                  >
+                    {{ activityType }}
+                  </option>
+                </select>
+                <div
+                  *ngIf="submitted && f?.ActivityType.errors"
+                  class="invalid-feedback inv-feedback"
+                >
+                  Flight type is required
+                </div>
+              </div>
+
+              <div class="back-next-button mt-3">
+                <button
+                  class="back-button text-white f-14 p-2"
+                  (click)="backStepper()"
+                >
+                  Cancel
+                </button>
+                <button
+                  class="next-button-1 text-white"
+                  (click)="nextOperation()"
+                >
+                  Continue
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div *ngIf="missionForm === 2">
+        <div class="card missionform p-3">
+          <div class="text-title">Create Mission</div>
+          <div class="createform">
+            <div class="my-3 second-screen">
+              <div class="form-flow">
+                <div class="input-button mt-3">
+                  <input
+                    class="form-check-input ml-3"
+                    type="radio"
+                    name="inlineRadioOptions"
+                    id="inlineRadio1"
+                    value="0"
+                    (change)="isDrawPoint()"
+                  />
+                  <div>
+                    <img src="../../../../assets/icons/pencil.svg" />
+                  </div>
+                </div>
+                <div class="input-button-content">
+                  <div class="input-button-content1 mr-1">Draw Waypoints</div>
+                  <div class="input-button-content2 mr-1">
+                    you can use the drawn waypoints.
+                  </div>
+                </div>
+              </div>
+              <div class="divider-class">
+                <div class="divider">OR</div>
+              </div>
+              <div class="form-flow-1">
+                <div class="input-button mt-3">
+                  <input
+                    class="form-check-input ml-3"
+                    type="radio"
+                    name="inlineRadioOptions"
+                    id="inlineRadio1"
+                    value="0"
+                    (change)="isUploaded()"
+                  />
+                  <div>
+                    <img src="../../../../assets/icons/file-upload.svg" />
+                  </div>
+                </div>
+                <div class="input-button-content">
+                  <div class="input-button-content1 mr-1">Upload Waypoints</div>
+                  <div class="input-button-content2 mr-1">
+                    you can upload waypoints file directly.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="back-next-button-1">
+              <button
+                class="back-button text-white f-14 p-2"
+                (click)="backStepper1()"
+              >
+                Cancel
+              </button>
+              <button
+                class="next-button text-white"
+                [ngClass]="{
+                  'next-button-1': isNext === 2 || isNext === 3,
+                  'next-button': isNext === 0
+                }"
+                (click)="nextOperation1()"
+                [disabled]="isNext !== 2 && isNext !== 3"
+              >
+                Continue
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="missionForm === 3">
+        <div class="card missionform p-3">
+          <div class="white-text-opacity">
+            Upload waypoint file(.kml/.waypoint)
+          </div>
+          <div class="createform">
+            <div class="mt-3 upload-waypoint-div" *ngIf="!uploaded">
+              <div class="upload-img">
+                <img
+                  src="../../../../../assets/common-layout/Upload.svg"
+                  alt="Upload"
+                />
+              </div>
+              <div for="uploadwayPoint">
+                <p class="text-center f-12 parahover text-white">
+                  Drag-and-drop file , or
+                  <span class="f-12 browse-link"> browse computer</span>
+                </p>
+              </div>
+              <input
+                #uploadwayPoint
+                type="file"
+                name="CSVFile"
+                id="uploadwayPoint"
+                (change)="onWayPointsUpload($event); uploadFiles($event)"
+                [ngClass]="{
+                  'is-invalid': submitted
+                }"
+              />
+            </div>
+
+            <div class="mt-3 upload-waypoint-div-1" *ngIf="uploaded">
+              <div class="text-white-50 f-10 text-center">
+                Your file uploaded successfully.
+              </div>
+              <div class="text-white f-10 text-center">
+                Click on show complaince to continue.
+              </div>
+            </div>
+            <div class="text-danger" *ngIf="invalidFile">file is invalid</div>
+
+            <div class="back-next-button-1 mt-3">
+              <button
+                class="back-button text-white f-14 p-2"
+                (click)="backStepper2()"
+              >
+                Cancel
+              </button>
+              <button
+                class="next-button text-white"
+                (click)="nextOperation2()"
+                [ngClass]="{
+                  'next-button-1': uploaded,
+                  'next-button': !uploaded
+                }"
+                [disabled]="!uploaded"
+              >
+                Show complaince
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- bottomLiveCard -->
+  <div class="bottomLiveCard" *ngIf="!guestUser">
+    <app-live-card
+      [liveLatitude]="liveLatitude"
+      [liveLongitude]="liveLongitude"
+      [liveAltitude]="liveAltitude"
+      [battery_remaining]="webSocketValue?.battery_remaining"
+      [batteryVoltage]="webSocketValue?.battery_voltage"
+      [groundspeed]="webSocketValue?.groundspeed"
+      [flightTime]="flightTime"
+      [distTraveled]="webSocketValue?.distTraveled"
+      (trackDrone)="TrackDrone()"
+      (changeToOneLap)="ConnectToOneLap()"
+      [showOneLap]="ws?.readyState == 1"
+      [droneFollow]="droneFollow"
+      [mode]="mode"
+      [modeVal]="webSocketValue?.modeVal"
+    ></app-live-card>
+  </div>
+
+  <!-- UI Card  -->
+  <app-map-ui
+    *ngIf="isView && !guestUser"
+    [isView]="isView"
+    [title]="entityDescription?.title"
+    [fircode]="entityDescription?.airspaceInfo?.FIRCodes"
+    [airspacetype]="entityDescription?.airspaceInfo?.Type"
+    [fic]="entityDescription?.airspaceInfo.FIC"
+    [country]="entityDescription?.groundInfo.Country"
+    [state]="entityDescription?.groundInfo.States"
+    [elevation]="entityDescription?.groundInfo.elevation"
+    (changeIsView)="close(val)"
+  >
+  </app-map-ui>
+</div>
+<!-- new user login -->
+<div class="overlay" *ngIf="showFirstTimeLoginDialog">
+  <div class="confirm-popup">
+    <div class="text-white f-20">
+      Congratulations!
+      <div class="text-white-50 f-14">
+        You are just one step away to create the mission
+      </div>
+    </div>
+
+    <div class="text-white-50 f-14 mt-3">
+      For creating the mission you need to verify below details:
+    </div>
+    <div class="text-white f-14 mt-3">
+      <img
+        src="../../../assets/icons/badge.svg"
+        class="confirm-icon mr-2"
+      />WhatsApp Verification
+    </div>
+    <div class="text-white f-14 mt-2">
+      <img
+        src="../../../assets/icons/badge.svg"
+        class="confirm-icon mr-2"
+      />Pilot Certificate Verification
+    </div>
+    <div class="confirm-popup-btn mt-3">
+      <div>
+        <button class="btn-cancel f-14" (click)="startTourPrompt()">
+          Skip & Take a Tour
+        </button>
+      </div>
+      <div>
+        <button class="btn-confirm f-14" (click)="goToProfilePage()">
+          Update Now
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="agree-button-overlay" *ngIf="showPopUp"></div>
+<div class="agree-button" *ngIf="showPopUp">
+  <div class="agree-logo mt-2 mb-2">
+    <span>
+      <img
+        src="../../../../../assets/common-layout/SkyeUTM logoWhite.svg"
+        width="160px"
+      />
+    </span>
+  </div>
+  <div class="agree-text">
+    <div class="white-text-opacity f-12 text-center">
+      This service uses technology and data provided by Skye
+    </div>
+    <div class="white-text-opacity f-12 text-center">
+      UTM. By continuing, you are agreeing to SkyeUTM’s
+    </div>
+    <div class="white-text-opacity f-12 text-center">
+      <span class="privacy f-12">Privacy Policy</span> and
+      <span class="privacy f-12">Terms of service</span>
+    </div>
+  </div>
+  <div class="agree-buttons mt-4">
+    <button class="agree-right-button" (click)="doNotAgree()">
+      <img
+        class="icon-size mr-1"
+        src="../../../../assets/icons/crossvector.svg"
+        width="20px"
+      />
+      <span>I do not agree</span>
+    </button>
+    <button class="agree-left-button" (click)="doAgree()">
+      <img
+        class="icon-size mr-1"
+        src="../../../../assets/icons/rightvector.svg"
+        width="20px"
+      />
+      <span>I agree</span>
+    </button>
+  </div>
+</div>

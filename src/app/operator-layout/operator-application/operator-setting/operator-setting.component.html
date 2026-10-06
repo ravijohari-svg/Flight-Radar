@@ -1,0 +1,31 @@
+<div class="px-3 py-3 mx-1 main-panel">
+  <div class="Admin-Portal text-white">Profile</div>
+  <div class="tabs">
+    <span class="pilotLink"
+      ><a
+        class="btn btn-tabs text-white"
+        [routerLink]="['pilots-profile']"
+        routerLinkActive="active"
+        >Pilots Details</a
+      >
+    </span>
+    <span class="pilotLink"
+      ><a
+        class="btn btn-tabs text-white"
+        [routerLink]="['pilots-document']"
+        routerLinkActive="active"
+        >Documents</a
+      >
+    </span>
+    <span *ngIf="profileDetails?.RPTO === true" class="pilotLink"
+      ><a
+        class="btn btn-tabs text-white"
+        [routerLink]="['rpto-form']"
+        routerLinkActive="active"
+        >RPTO Form</a
+      >
+    </span>
+    <!-- <span class="regulatorLink">  <a class="btn btn-tabs white-text" [routerLink]="['general']" routerLinkActive="active">General </a></span>  -->
+  </div>
+  <router-outlet></router-outlet>
+</div>

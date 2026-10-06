@@ -1,0 +1,226 @@
+@import "../../../../../../scss/colorCodes.scss";
+$_item_margin: 11px;
+$_color_bg: $dark-v1;
+$_height: 25px;
+
+.missionCard {
+  border-radius: 6px;
+  transition: hover 0.3s ease;
+  cursor: pointer;
+  &:hover {
+    outline: 2px solid $outline;
+  }
+  .statusCard {
+    display: flex;
+    justify-content: space-between;
+    .mlive {
+      background-color: $live-back;
+      border-radius: 15px;
+      svg {
+        rotate: 90deg;
+      }
+    }
+    .connection {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background-color: #3f444d;
+      border-radius: 10px;
+    }
+  }
+
+  .missionHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .missionName {
+      width: 160px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+  .missionDetails {
+    display: flex;
+    justify-content: space-between;
+    .missionDetail {
+      width: 90%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
+  .airspaceCard {
+    div {
+      padding: 1px;
+      display: flex;
+      gap: 2px;
+    }
+    img {
+      width: 14px;
+      rotate: 180deg;
+    }
+  }
+  .detailCards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .detailCard {
+    display: flex;
+    flex-direction: column;
+    background-color: $dark-border;
+    border-radius: 6px;
+  }
+}
+.truncate {
+  width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.truncate2 {
+  width: 50px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.airBox {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  text-align: center;
+}
+.content {
+  margin-left: 12px;
+  margin-right: 10px;
+}
+.content-4 {
+  margin-left: 4px;
+  margin-right: 4px;
+}
+.content-1 {
+  margin-left: 6px;
+  margin-right: 2px;
+  width: 50px;
+}
+.content-2 {
+  margin-left: 0px !important;
+  margin-right: 15px;
+  width: 60px;
+}
+.fir-code {
+  margin-top: 1px;
+  width: 100px !important;
+}
+.country-state {
+  display: flex;
+  flex-direction: column;
+  gap: 2px !important;
+}
+.airBoxItem {
+  display: flex;
+  // justify-content: center;
+  position: relative;
+  // width: calc(100% / 3 - 7px);
+  height: $_height;
+  line-height: $_height;
+  margin-right: $_item_margin;
+  padding-left: 20px;
+  background-color: $dark-border;
+  border-radius: 3px;
+
+  &:before {
+    content: "";
+    position: absolute;
+    right: -9px;
+    height: 4;
+    width: 0;
+    border-top: calc($_height/2) solid transparent;
+    border-bottom: calc($_height/2) solid transparent;
+    border-left: $_item_margin solid $dark-border;
+    border-radius: 2px;
+  }
+
+  &:after {
+    content: "";
+    position: absolute;
+    left: -1px;
+    height: 0;
+    width: 0;
+    border-top: calc($_height/2) solid transparent;
+    border-bottom: calc($_height/2) solid transparent;
+    border-left: $_item_margin solid $_color_bg;
+    border-radius: 2px;
+  }
+
+  &:first-child {
+    &:after {
+      display: none;
+    }
+  }
+
+  &:last-child {
+    margin-right: 0;
+    &:before {
+      display: none;
+    }
+  }
+}
+.airBoxItem-1 {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  // width: calc(100% / 3 - 7px);
+  height: $_height;
+  line-height: $_height;
+  margin-right: $_item_margin;
+  padding-left: 20px;
+  background-color: $dark-border;
+  border-radius: 3px;
+
+  &:before {
+    content: "";
+    position: absolute;
+    right: -9px;
+    height: 4;
+    width: 0;
+    border-top: calc($_height/2) solid transparent;
+    border-bottom: calc($_height/2) solid transparent;
+    border-left: $_item_margin solid $dark-border;
+    border-radius: 2px;
+  }
+
+  &:after {
+    content: "";
+    position: absolute;
+    left: -1px;
+    height: 0;
+    width: 0;
+    border-top: calc($_height/2) solid transparent;
+    border-bottom: calc($_height/2) solid transparent;
+    border-left: $_item_margin solid $_color_bg;
+    border-radius: 2px;
+  }
+}
+.toogleDetail {
+  color: #36a8e0;
+}
+
+@keyframes animateSVG {
+  0% {
+    stroke: white;
+  }
+  100% {
+    stroke: $dark-red;
+  }
+}
+.path-animation1 {
+  animation: animateSVG 1s infinite 0.5s;
+}
+.path-animation2 {
+  animation: animateSVG 1s infinite 0.25s;
+}
+.path-animation3 {
+  animation: animateSVG 1s infinite 0.125s;
+}

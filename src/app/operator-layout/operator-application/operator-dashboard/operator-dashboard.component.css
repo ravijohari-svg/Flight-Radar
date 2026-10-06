@@ -1,0 +1,285 @@
+p {
+  margin-top: 45vh;
+  margin-left: 42%;
+}
+
+.main-panel {
+  background-color: #f5f5f5;
+}
+
+.mission-row {
+  width: 100%;
+}
+
+.main-map {
+  height: 80vh;
+}
+
+@media screen and (max-width: 1300px) {
+  .main-map {
+    height: 85vh;
+  }
+}
+.list-description {
+  color: #8c8c8c;
+  font-size: 80%;
+}
+
+.list-values {
+  color: #121212;
+  font-size: 93%;
+  font-weight: 600;
+}
+
+.card-list-values {
+  color: #121212;
+  font-size: 80%;
+  font-weight: 600;
+}
+
+.mission-col {
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+.mission-col::-webkit-scrollbar {
+  width: 0.3em;
+}
+
+.mission-col::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.1);
+}
+
+.mission-col::-webkit-scrollbar-thumb {
+  background-color: #b9b9b9;
+}
+
+.card-no-border {
+  border: none;
+}
+
+@media (min-width: 992px) {
+  .col-lg-8.map-card {
+    flex: 0 0 65%;
+    max-width: 65%;
+  }
+}
+.weather-button {
+  color: #121212;
+  position: absolute;
+  top: 14%;
+  left: 75%;
+}
+
+.weather-temp {
+  font-size: 27px;
+  color: #121212;
+}
+
+.form-control:focus,
+.weather-button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.info-btn {
+  color: #c9c9c9;
+}
+
+.info-btn:hover + .hover-card {
+  display: block;
+}
+
+.hover-card {
+  display: none;
+  position: absolute;
+  width: 320px;
+  background-color: #ffffff;
+  left: 40%;
+  z-index: 10;
+}
+
+.hover-card-top5 {
+  top: 30%;
+}
+
+.hover-card-top10 {
+  top: 5%;
+}
+
+.hover-card-top15 {
+  top: -28%;
+}
+
+.hover-card-top-large {
+  top: -55%;
+}
+
+@media screen and (max-width: 1300px) and (min-width: 992px) {
+  .hover-card {
+    left: 55%;
+  }
+}
+@media screen and (max-width: 992px) {
+  .hover-card {
+    left: 40%;
+    width: 150px;
+  }
+}
+.primary-btn:disabled {
+  background-color: rgba(0, 0, 0, 0.225);
+  color: #ffffff;
+}
+
+.mission-section {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.active {
+  border-radius: 0;
+  border-bottom: 3px solid #3056af;
+  color: #3056af;
+}
+
+.btn-tabs {
+  font-size: 75%;
+  font-weight: 600;
+}
+
+.btn-tabs:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.card-mission {
+  min-height: 55vh;
+}
+
+@media screen and (min-width: 1500px) {
+  .card-mission {
+    min-height: 50vh;
+  }
+}
+.indicator-off {
+  width: 24px;
+  height: 24px;
+  background-color: rgba(0, 0, 0, 0.125);
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.indicator-off.indicator-green {
+  width: 24px;
+  height: 24px;
+  background-color: #96e000;
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 2px 1px, inset #304701 0 -1px 5px, #89FF00 0 2px 5px;
+  display: inline-block;
+}
+
+.indicator-off.indicator-red {
+  width: 24px;
+  height: 24px;
+  background-color: #F00;
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 2px 1px, inset #441313 0 -1px 5px, rgba(255, 0, 0, 0.5) 0 2px 12px;
+  display: inline-block;
+}
+
+.fa-circle {
+  color: rgba(0, 0, 0, 0.125);
+}
+
+.fa-check-circle {
+  color: #4fc55f;
+}
+
+.fa-times-circle,
+.fa-times {
+  color: #dc3545;
+}
+
+.fa-circle.red {
+  color: #dc3545;
+}
+
+.fa-dot-circle-o, .fa-circle.manual {
+  color: #ffcb3d;
+}
+
+.reject {
+  border: 1px solid #dc3545 !important;
+  color: #dc3545;
+  background-color: #faeaea;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.approve {
+  border: 1px solid #2bc43f !important;
+  color: #2bc43f;
+  background-color: #edfdee;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.pending {
+  border: 1px solid #ffcb3d !important;
+  color: #ffcb3d;
+  background-color: #feffe2;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.bx-popup-ctn {
+  position: absolute;
+  z-index: 999;
+  background: #fff;
+}
+
+.bx-popup-tip-container {
+  width: 40px;
+  height: 20px;
+  position: absolute;
+  left: 50%;
+  margin-left: -20px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.bx-popup-tip {
+  width: 17px;
+  background: #fff;
+  height: 17px;
+  padding: 1px;
+  margin: -10px auto 0;
+  transform: rotate(45deg);
+}
+
+.bx-popup-header-ctn {
+  background: #090302;
+  color: #fff;
+  font-size: 15px;
+  padding: 4px;
+}
+
+.bx-popup-content-ctn {
+  padding: 15px;
+}
+
+.leaflet-popup-close-button {
+  -webkit-user-select: auto;
+     -moz-user-select: auto;
+      -ms-user-select: auto;
+          user-select: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: #fff;
+  cursor: pointer;
+}
+
+.fa-chevron-circle-left,
+.fa-chevron-circle-right {
+  color: #8c8c8c;
+}/*# sourceMappingURL=operator-dashboard.component.css.map */

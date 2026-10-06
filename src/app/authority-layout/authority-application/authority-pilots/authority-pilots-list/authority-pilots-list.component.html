@@ -1,0 +1,49 @@
+<div *ngIf="loader" class="loader">
+  <div class="logo">
+    <img src="../../../../../assets/common-layout/SquareLoader.gif" width="30px">
+    <img src="../../../../../assets/common-layout/SkyeUTM logoWhite.svg" width="200px">
+  </div>
+</div>
+<!-- mx-lg-4 mx-2  -->
+<div *ngIf="!loader" class="px-lg-4 py-3 main-panel">
+  <div class="mx-3">
+    <div class="header my-3 white-text-opacity">Pilots</div>
+    <!-- <div class="row">
+      <div class="col-md-3  mb-3">
+        <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon1"
+          [(ngModel)]="selected" [typeahead]="missionSearchBy" typeaheadOptionField="custom"
+          (typeaheadOnSelect)="searchByOnSelect($event)">
+        <button type="submit" class="btn  px-0 py-2" (click)="onSearchKeyWord($event)"><i class="fa fa-search"></i>
+        </button>
+      </div>
+      <div *ngIf="searchByFlag" class="col-md-1 px-0">
+        <button type="button" class="btn primary-outline-btn px-0 py-2" (click)="clearSearch()">Clear</button>
+      </div>
+    </div> -->
+    <div class=" table-responsive my-2">
+      <table class=" table table-bordered dark-medium ">
+        <thead>
+          <tr>
+            <th scope="col">OPERATOR ID</th>
+            <th scope="col">NAME</th>
+            <th scope="col">EMAIL ID</th>
+            <th scope="col">PHONE NUMBER</th>
+            <th scope="col">REGISTRATION DATE</th>
+            <th scope="col">LAST ACTIVE</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let pilot of pilotsList">
+            <td> {{pilot.UserId}} </td>
+            <td>{{pilot.FirstName}}</td>
+            <td>{{pilot.EmailId}}</td>
+            <td>{{pilot.PhoneNumber}}</td>
+            <td>{{pilot.TS_Created | date : 'dd MMM yyyy, h:mm a'}} </td>
+            <td>{{pilot.LastLogin | date : 'dd MMM yyyy, h:mm a'}} </td>
+            <!--  -->
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

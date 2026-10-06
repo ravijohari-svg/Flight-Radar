@@ -1,0 +1,28 @@
+<div *ngIf="loader" class="loader">
+    <div class="logo">
+      <img src="../../../../../assets/common-layout/SquareLoader.gif" width="30px">
+      <img src="../../../../../assets/common-layout/SkyeUTM logoWhite.svg" width="200px">
+    </div>
+</div>
+
+<div class="main-panel p-lg-5 p-2 text-center">
+    <div class="mx-lg-5 mx-2">
+
+        <div *ngIf="response?.order_status === 'Success'" class="card dark-medium m-5 p-3">
+            <div class="mx-5">
+                <div class="f-24 white-text"> Congratulations! Your Payment Successful</div>
+                <div class="f-14 white-text py-2">Redirect to dashboard to explore more!!!</div>
+                <button class="btn primary-btn mx-5" (click)="redirectDashboard()">Home</button>
+            </div>
+        </div>
+
+        <div *ngIf="response?.order_status === 'Failure' || response?.order_status === 'Aborted'"
+            class="card dark-medium m-5 p-3">
+            <div class="mx-5">
+                <div class="f-24 white-text"> Oh no, your payment failed</div>
+                <div class="f-14 white-text py-2">Please retry after sometime</div>
+                <button class="btn primary-btn mx-5" (click)="redirectDashboard()">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>

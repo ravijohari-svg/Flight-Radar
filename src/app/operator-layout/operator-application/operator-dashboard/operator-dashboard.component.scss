@@ -1,0 +1,1070 @@
+@import "../../../../scss/colorCodes.scss";
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans&display=swap");
+
+@mixin colors($color, $background-color) {
+  color: $color;
+  background-color: $background-color;
+}
+
+@mixin font($font-size, $font-weight) {
+  font-size: $font-size;
+  font-weight: $font-weight;
+}
+.main-panel {
+  max-height: 100vh;
+  background-color: $black-dark;
+  overflow: hidden;
+  position: relative;
+}
+.main-map {
+  height: 100vh;
+}
+
+.mission-card {
+  top: 0;
+  position: absolute;
+  min-height: 50vh;
+  max-height: 100vh;
+  width: 340px;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+
+  .noMission {
+    min-height: 10vh !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .dropdown {
+    top: 35vh;
+    right: -60px;
+    transform: rotate(90deg);
+
+    img {
+      rotate: -90deg;
+    }
+  }
+
+  .search {
+    min-width: 30%;
+    max-width: 100%;
+
+    .searchBox {
+      input {
+        outline: none;
+        border: none;
+      }
+
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid $black-light;
+      border-radius: 8px;
+    }
+  }
+}
+
+.align-map-buttons {
+  font-weight: 600;
+  top: 77px;
+  right: 3rem;
+  margin: 3px 0;
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  font-family: "DM Sans", sans-serif;
+}
+
+.slideToggle-button {
+  font-family: "DM Sans", sans-serif;
+  z-index: 1000;
+  width: 103px !important;
+  font-size: 12px !important;
+  background-color: #ffff;
+  color: rgba(40, 40, 40, 0.92) !important;
+  border-radius: 15px !important;
+  height: 30px;
+  padding: 5px;
+  transition: all 0.2s;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  opacity: 0.7;
+}
+
+.infoCard {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-44%);
+}
+
+.createMissionBtn {
+  position: absolute;
+  top: 10px;
+  right: 1%;
+  width: max-content;
+}
+
+@media screen and (max-width: 1285px) {
+  .createMissionBtn {
+    top: 77px;
+  }
+}
+@media screen and (max-width: 1285px) {
+  .drawButton {
+    top: 77px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .drawButton {
+    top: 80px !important; /* Adjust this value as needed for mobile layout */
+    left: 5%;
+    z-index: -1;
+  }
+}
+//disabled class
+.createMissionBtn-disabled {
+  cursor: not-allowed;
+}
+
+//Mission
+.list-description {
+  color: $text-light;
+  font-size: 80%;
+}
+
+.list-values {
+  color: $text-dark;
+  font-size: 93%;
+  font-weight: 600;
+}
+
+.card-list-values {
+  color: $text-dark;
+  font-size: 80%;
+  font-weight: 600;
+}
+
+//Scrollbar
+.mission-col::-webkit-scrollbar {
+  width: 0.3em;
+}
+
+.mission-col::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.1);
+}
+
+.mission-col::-webkit-scrollbar-thumb {
+  background-color: $black-light;
+  // outline: 1px solid slategrey;
+}
+
+.card-no-border {
+  border: none;
+  // max-height: 450px;
+}
+
+.weather-temp {
+  font-size: 27px;
+  color: $text-dark;
+}
+
+.form-control {
+  border: 0.2px solid $text-white-opacity;
+}
+
+.form-control:focus,
+.weather-button:focus {
+  outline: none;
+  box-shadow: none;
+  background-color: $black-medium;
+}
+
+//Waypoints
+.info-btn {
+  color: $text-light;
+}
+
+.info-btn:hover + .hover-card {
+  display: block;
+  // color: red;
+}
+
+.hover-card {
+  display: none;
+  position: absolute;
+  width: 320px;
+  background-color: #ffffff;
+
+  left: 40%;
+  z-index: 10;
+}
+
+.hover-card-top5 {
+  top: 30%;
+}
+
+.hover-card-top10 {
+  top: 5%;
+}
+
+.hover-card-top15 {
+  top: -28%;
+}
+
+.hover-card-top-large {
+  top: -55%;
+}
+
+.primary-btn:disabled {
+  background-color: rgba(0, 0, 0, 0.225);
+  color: #ffffff;
+}
+
+.primary-btn {
+  font-size: 12px;
+}
+
+.primary-btn-alignment {
+  margin-top: 2.5px;
+}
+
+//Multi mission arrow
+.fa-chevron-circle-left,
+.fa-chevron-circle-right {
+  color: $text-light;
+}
+
+// Dark theme
+.section-header-dark {
+  @include font(100%, 600);
+}
+
+.no-border {
+  border: none;
+}
+
+.opactiy-6 {
+  opacity: 0.6;
+}
+
+.icon-circle {
+  padding: 5px 7px;
+}
+
+.osm-button {
+  font-family: "DM Sans", sans-serif;
+  z-index: 1000;
+  width: 117px !important;
+  font-size: 12px !important;
+  background-color: #ffff;
+  color: rgb(40 40 40 / 92%) !important;
+  border-radius: 15px !important;
+  height: 30px;
+  padding: 5px;
+  transition: all 0.2s;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  opacity: 0.7;
+}
+
+.mainBox {
+  height: calc(100vh - 100px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.dropdown {
+  position: absolute;
+  width: 100px;
+  height: 0;
+  border-bottom: 20px solid $dark-new;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  display: inline-flex;
+  justify-content: center;
+  cursor: pointer;
+
+  img {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease;
+    rotate: 90deg;
+
+    &.rotate {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.missionCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  .missionName {
+    height: 54px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .missionStatus {
+    text-align: center;
+  }
+}
+
+.toggleDetails {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 200px);
+  .toggleDetailsBox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    div {
+      cursor: pointer;
+      padding-bottom: 2px;
+      width: 100%;
+
+      div {
+        width: max-content;
+      }
+
+      .activeTab {
+        border-bottom: 2px solid blue;
+        color: white;
+      }
+    }
+  }
+
+  .generalDetails {
+    width: 100%;
+
+    .missionDetails {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+
+      div {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        font-size: 14px;
+        gap: 5px;
+
+        span:last-child {
+          font-size: 10px;
+          color: $text-white-opacity;
+        }
+      }
+    }
+  }
+}
+
+.detailBox {
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.detailBox::-webkit-scrollbar {
+  width: 2px;
+}
+
+.detailBox::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.1);
+}
+
+.detailBox::-webkit-scrollbar-thumb {
+  background-color: $black-light;
+}
+
+.bottom-buttons {
+  width: 100%;
+}
+
+.bottom-buttons > div > button:nth-child(2) {
+  width: 90px;
+}
+
+.bottom-buttons > div > button:first-child {
+  margin-right: 6px;
+  width: 200px;
+}
+
+.collapsed {
+  transform: translateX(0);
+}
+
+.waypointDetails {
+  width: 100%;
+}
+
+.wayPointSummary {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+
+  div {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    color: $black-dark;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+  }
+
+  div:nth-child(1) {
+    background: $approval;
+  }
+
+  div:nth-child(2) {
+    background: $pending;
+  }
+
+  div:nth-child(3) {
+    background: $reject;
+  }
+}
+
+.wayPointCard {
+  border-radius: 4px;
+
+  .wayPointNumber {
+    display: flex;
+    gap: 10px;
+  }
+
+  .wayPointLogs {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .wayPointComps {
+    .wayPointComp {
+      background: $black-light;
+      border-radius: 8px;
+      cursor: pointer;
+
+      .accordionHeader {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        > div {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+
+          img {
+            width: 30px;
+          }
+        }
+
+        img {
+          width: 15px;
+        }
+      }
+    }
+
+    > div:nth-child(1) {
+      border: 1px solid $pending;
+
+      .accordianBorder {
+        border: 1px solid $pending;
+      }
+    }
+
+    > div:nth-child(2) {
+      border: 1px solid $reject;
+
+      .accordianBorder {
+        border: 1px solid $reject;
+      }
+    }
+
+    > div:nth-child(4) {
+      border: 1px solid $pending_1;
+
+      .accordianBorder {
+        border: 1px solid $pending_1;
+      }
+    }
+
+    > div:nth-child(3) {
+      border: 1px solid $approval;
+
+      .accordianBorder {
+        border: 1px solid $approval;
+      }
+    }
+
+    .accordionContent {
+      background: $dark-new;
+      border-radius: 4px;
+    }
+  }
+}
+
+.missionCompliance {
+  .complainceBox {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+
+    > div {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .complaince {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .main-map {
+    height: 100vh;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .osm-button {
+    top: 193.5px !important;
+  }
+}
+
+@media screen and (max-width: 1164px) and (min-width: 993px) {
+  .osm-button {
+    top: 135.5px !important;
+  }
+}
+
+@media (min-width: 992px) {
+  .col-lg-8.map-card {
+    flex: 0 0 65%;
+    max-width: 85%;
+  }
+}
+
+@media screen and (max-width: 1285px) {
+  .align-map-buttons {
+    top: 114px;
+  }
+}
+
+// @media screen and (min-width: 993px) {
+//   .align-map-buttons {
+//     // top: 6.2rem !important;
+//   }
+// }
+// @media screen and (min-width: 1165px) {
+//   .align-map-buttons {
+//     // top: 5.1rem !important;
+//   }
+// }
+
+// Elevation graph
+.elevation-map {
+  position: sticky;
+  top: 0px;
+  z-index: 1;
+}
+
+.elevation-top {
+  background-color: $black-light;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.elevation-button {
+  display: flex;
+  flex-direction: row;
+  right: 2px;
+}
+
+.resize {
+  animation-name: resiz;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes resiz {
+  from {
+    height: 200px;
+    width: 288px;
+  }
+
+  to {
+    position: absolute;
+    width: 700px;
+    height: 400px;
+    top: calc(50% - 200px);
+    left: 400px;
+  }
+}
+
+.elevation-font {
+  font-size: 16px;
+}
+
+.elevation-tops {
+  height: 30px;
+  align-items: center;
+}
+
+.elevation-contents {
+  margin-bottom: 8px;
+  margin-left: 5px;
+  height: 100%;
+}
+
+.bottomLiveCard {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-44%);
+}
+.placeholder-option{
+  font-size: 14px !important;
+  color: #ffffff !important;
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba($dark-black, 0.7);
+  z-index: 1000;
+}
+
+.confirm-popup {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  height: 260px;
+  width: 500px;
+  border-radius: 9.761px;
+  background: $dark-body;
+  padding: 29.284px 19.523px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+
+  .confirm-icon {
+    border-radius: 100px;
+    background-color: $yellow;
+  }
+
+  .confirm-popup-btn {
+    display: flex;
+    justify-content: space-between;
+    gap: 25px;
+
+    .btn-cancel {
+      color: $button-color;
+      background-color: $dark-body;
+      border: none;
+      padding: 9.761px 14.642px;
+    }
+
+    .btn-confirm {
+      width: 150px;
+      padding: 9.761px 14.642px;
+      border-radius: 39.046px;
+      border: 1.22px solid $button-color;
+      margin-bottom: 18px;
+      background-color: $dark-body;
+      color: $button-color;
+    }
+  }
+}
+.icon-size {
+  width: 15px;
+  height: 15px;
+}
+.drawButton {
+  position: absolute;
+  top: 12px;
+  right: 13%;
+  z-index: 100;
+  width: 33px;
+  height: 32px;
+  border: 1px solid $text-white;
+  border-radius: 20%;
+}
+@media screen and (max-width: 1300px) and (min-width: 1048px) {
+  .drawButton {
+    top: 77px;
+    right: 15%;
+  }
+}
+
+@media screen and (max-width: 1048px) {
+  .drawButton {
+    top: 77px;
+    right: 20vw;
+  }
+}
+.clicked {
+  border-color: $blue-dark;
+}
+.drawButton:hover {
+  cursor: pointer !important;
+  border-color: $blue-dark;
+}
+.reset-position {
+  position: absolute;
+  bottom: 20px;
+  right: 50%;
+  z-index: 100;
+  width: 70px;
+  padding-left: 8px;
+  height: 32px;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  color: $text-white-opacity;
+  background-color: $black-medium;
+  border: 1px solid $black-medium;
+  border-radius: 8%;
+}
+.reset-position:hover{
+  cursor: pointer;
+}
+.text-title {
+  font-size: 20px;
+  letter-spacing: -1px;
+  width: 300px;
+  height: 24px;
+  color: $text-white;
+}
+.missionform {
+  min-height: 36vh !important;
+  display: flex;
+  flex-direction: column;
+  background-color: $dark-new;
+}
+.form-property {
+  display: flex;
+  width: 336px;
+  flex-direction: column;
+  margin: auto;
+  margin-bottom: 12px;
+}
+.form-group-headings {
+  color: $loginText2;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0.26px;
+}
+.form-select {
+  border-radius: 4px !important;
+  border: 1px solid $loginEye !important;
+  background: $dark-body !important;
+  height: 40px !important;
+}
+.focus-input:focus{
+  border-width:3px !important;
+}
+.required-asterisk {
+  color: $red;
+}
+.form-property {
+  display: flex;
+  width: 305px;
+  flex-direction: column;
+  margin: auto;
+  margin-bottom: 12px;
+}
+.back-next-button-1 {
+  display: flex;
+  flex-direction: row;
+  height: 44px;
+  width: 100%;
+  gap: 20px;
+  opacity: 1;
+}
+.back-next-button {
+  display: flex;
+  flex-direction: row;
+  height: 44px;
+  width: 100%;
+  gap: 20px;
+}
+.back-button {
+  width: 83px;
+  height: 44px;
+  border-radius: 4px;
+  background: $dark-border;
+  border: 1px solid $dark-border !important;
+}
+.next-button {
+  width: 300px;
+  height: 44px;
+  gap: 8px;
+  border-radius: 4px;
+  background: $loginText2;
+  opacity:0.4;
+  border:1px solid $loginText2 !important;
+}
+.next-button-1 {
+  width: 300px;
+  height: 44px;
+  gap: 8px;
+  border-radius: 4px;
+  background: $blue-dark;
+  // opacity:0.4;
+  border:1px solid $blue-dark !important;
+}
+// .second-screen{
+//   // margin-left:px;
+//   // margin-right:5px;
+// }
+.form-flow {
+  display: flex;
+  width: 100%;
+  height: 64px;
+  flex-direction: row;
+  gap: 42px;
+  border-radius: 4px;
+  background: $dark-border;
+  align-items: flex-start;
+}
+.input-button {
+  display: flex;
+  flex-direction: row;
+  gap: 35px;
+  width: 40px;
+  height: 24px;
+  margin-left: 50px !important;
+}
+.form-check-input {
+  width: 18px;
+  height: 18px;
+  border-radius: 15px;
+  position: absolute;
+  left: 4%;
+  background-color: transparent !important;
+}
+.form-check-input:hover {
+  cursor: pointer;
+}
+.input-button-content1 {
+  color:$text-white;
+  font-size: 14px;
+  margin-top: 0px;
+}
+.input-button-content2 {
+  color: $loginText2;
+  font-size: 12px;
+}
+.divider {
+  margin: auto;
+  margin-top: 10px;
+  font-size: 14px;
+  width: 28px;
+  height: 15px;
+  color: $text-white-opacity !important;
+}
+.divider-class {
+  height: 10px;
+}
+.form-flow-1 {
+  display: flex;
+  width: 100%;
+  height: 64px;
+  flex-direction: row;
+  gap: 42px;
+  border-radius: 4px;
+  background: $dark-border;
+  align-items: flex-start;
+  margin-top: 20px;
+}
+.input-button-content2 {
+  color: $loginText2;
+  font-size: 12px;
+}
+.input-button-content {
+  margin-top: 3px;
+  display: flex;
+  flex-direction: column;
+  width: 370px;
+  height: 50px;
+}
+.upload-title {
+  display: flex;
+  flex-direction: row;
+  margin-right:10px;
+  margin-left:10px;
+}
+.upload-waypoint-text {
+  color: $loginText2;
+}
+.reset-position {
+  margin-top: 15px !important;
+  margin-right:4px !important;
+  display: flex;
+  width: 85px;
+  height: 28px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  border: 1px solid $black-light;
+}
+.reset-position:hover {
+  cursor: pointer;
+}
+.upload-waypoint-div {
+  border: 1.5px dotted $text-white-opacity;
+  height: 115px;
+  border-radius: 10px;
+}
+.upload-waypoint-div-1 {
+  border: 1.5px dotted $text-white-opacity;
+  height: 115px;
+  border-radius: 10px;
+  padding-top: 40px;
+}
+.upload-img {
+  text-align: center;
+  margin-top: 21px;
+}
+#uploadwayPoint {
+  opacity: 0;
+  height: 115px;
+  position: relative;
+  bottom: 78%;
+  width: 320px;
+}
+.browse-link {
+  color: $link-text;
+}
+.agree-button {
+  position: absolute;
+  z-index: 100;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 521px;
+  height: 232px;
+  background-color: $dark-body;
+  border: 1px solid $dark-body;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+}
+.agree-button-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: $dark-black; /* Semi-transparent overlay */
+  z-index: 99; /* Behind the agree-button */
+  backdrop-filter: blur(5px); /* Blur effect */
+}
+.agree-logo {
+  height: '35%';
+  width:'100%';
+  display: flex;
+  justify-content: center;
+}
+.agree-text {
+  height: '30%';
+  width:'100%';
+  display: flex;
+  flex-direction: column;
+  align-items: 'center';
+}
+.privacy {
+  color: $regular-button2;
+}
+.agree-buttons {
+  height: '35%';
+  display: flex;
+  flex-direction: row;
+  width:'100%';
+  justify-content: center;
+  gap: 20px;
+}
+.agree-right-button{
+  border: 1px solid $reject;
+  background-color: $reject;
+  gap: 25px;
+  width: 154px;
+  height: 36px;
+  border-radius: 25px;
+}
+.agree-right-button:hover{
+ cursor: pointer;
+}
+.agree-left-button{
+  border: 1px solid $approval;
+  background-color: $approval;
+  gap: 25px;
+  width: 154px;
+  height: 36px;
+  border-radius: 25px;
+}
+.agree-left-button:hover{
+  cursor: pointer;
+ }
+
+.flight-plan-analytics-button {
+  flex: 0 0 auto;
+  min-width: 88px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 1px solid rgba(120, 186, 224, 0.42);
+  border-radius: 16px;
+  background: linear-gradient(135deg,
+      rgba(120, 186, 224, 0.28),
+      rgba(255, 255, 255, 0.07));
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+  text-transform: uppercase;
+  transition: border-color 0.18s ease, background 0.18s ease,
+    box-shadow 0.18s ease, transform 0.18s ease;
+  cursor: pointer;
+  position: relative;
+  left: 43px;
+  top: -2px;
+}
+
+.flight-plan-analytics-button:hover {
+  background: linear-gradient(135deg, rgba(120, 186, 224, 0.45), rgba(255, 255, 255, 0.15));
+  border-color: rgba(120, 186, 224, 0.7);
+  box-shadow: 0 0 10px rgba(120, 186, 224, 0.3);
+}
+
+.flight-plan-analytics-button i {
+  font-size: 12px;
+}

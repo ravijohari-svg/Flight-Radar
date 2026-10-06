@@ -1,0 +1,707 @@
+<div *ngIf="loader" class="loader">
+  <div class="logo">
+    <img
+      src="../../../../../assets/common-layout/SquareLoader.gif"
+      width="30px"
+    />
+    <img
+      src="../../../../../assets/common-layout/SkyeUTM logoWhite.svg"
+      width="200px"
+    />
+  </div>
+</div>
+<div *ngIf="!loader">
+  <div class="mx-md-3 mx-2 my-3">
+
+      <form [formGroup]="basicDetails">
+       <div class="full-card">
+        <div class="details-card">
+
+        <div class="card card-outer card-color">
+          <div
+            *ngIf="profileDetails"
+            [ngClass]="{ 'disabled-div': !editable }"
+            [disabled]="!editable"
+            class="card-body cardbody-margin px-4"
+          >
+            <div class="mt-1 mb-2">
+              <div class="list-values">Documents</div>
+              <div class="row">
+                <div class="col-md-4 px-3 py-2 my-2">
+                  <div class="input-label">Profile photo<span class="estrik f-14">*</span></div>
+                  <div
+                    class="input-group  file-label text-center align-middle uploadFILE"
+                    [ngClass]="{'upload-section': !pictureUrlFlag, 'initial-pos': pictureUrlFlag}"
+                  >
+                    <label class="text-drag f-10" for="uploadProfilePicture"  [ngClass]="{'label-sec': pictureUrlFlag}">
+                      <img
+                      src="../../../../../assets/common-layout/Upload.svg"
+                      for="uploadProfilePicture"
+                      class="ml-1 upload-img2 mt-2"
+                      *ngIf="!pictureUrlFlag"
+                      />
+                      <div  *ngIf="!pictureUrlFlag" class="ml-1"> Drag-and-drop png/jpg/jpeg,or</div>
+                      <p  *ngIf="!pictureUrlFlag"><span class="text-primary-drag ml-3">browse computer</span>
+                      </p>
+                      <span for="uploadProfilePicture" class="kml-name" *ngIf="pictureUrlFlag">
+                        {{ truncateText(profilePic, 10) }}
+                        </span
+                      >
+                    </label>
+
+                    <input
+                      type="file"
+                      #profileReset
+                      class="form-control"
+                      name="CSVFile"
+                      id="uploadProfilePicture"
+                      accept=".jpeg,.png,.jpg"
+                      (change)="uploadProfilePicture($event)"
+                      (click)="profileReset.value = ''"
+                      [ngClass]="{
+                        'is-invalid': submitted && basic.picture.errors
+                      }"
+                      [disabled]="!editable"
+                    />
+                    <img
+                      src="../../../../../assets/common-layout/file-close.svg"
+                      class="mb-2 close-hover"
+                      *ngIf="pictureUrlFlag"
+                      (click)="editable && resetProfilePicture()"
+
+                    />
+                  </div>
+                  <div *ngIf="pictureSizeError" class="error-message my-2">
+                    <div>File size should be less than or equal to 500KB</div>
+                  </div>
+                  <div
+                    *ngIf="
+                      submitted && basic.picture.errors && profilePic == ''
+                    "
+                    class="error-message my-2"
+                  >
+                    <div *ngIf="basic.picture.errors.required">
+                      Profile Photo is required
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-4 px-3 py-2 my-2">
+                  <div class="input-label">Passport Copy</div>
+                  <div
+                    class="input-group file-label text-center align-middle uploadFILE"
+                    [ngClass]="{'upload-section': !passportUrlFlag, 'initial-pos': passportUrlFlag}"
+                  >
+                    <label class="text-drag f-10" for="uploadPassportProof"   [ngClass]="{'label-sec': passportUrlFlag}">
+                      <img
+                      src="../../../../../assets/common-layout/Upload.svg"
+                      for="uploadPassportProof"
+                      class="ml-1 upload-img2 mt-2"
+                      *ngIf="!passportUrlFlag"
+                      />
+                      <div  *ngIf="!passportUrlFlag" class="ml-1"> Drag-and-drop pdf/png/jpeg,or</div>
+                      <p  *ngIf="!passportUrlFlag"><span class="text-primary-drag ml-3">browse computer</span>
+                      </p>
+                      <span for="uploadPassportProof" class="kml-name" *ngIf="passportUrlFlag">
+                        {{ truncateText(passportProof, 10) }}
+                        </span
+                      >
+                    </label>
+
+                    <input
+                      type="file"
+                      #passportReset
+                      name="CSVFile"
+                      id="uploadPassportProof"
+                      accept=".pdf,.jpeg,.png,.jpg"
+                      (change)="uploadPassportProof($event)"
+                      (click)="passportReset.value = ''"
+                      [ngClass]="{
+                        'is-invalid': submitted && basic.passportCopy.errors
+                      }"
+                      [disabled]="!editable"
+                    />
+                    <img
+                      src="../../../../../assets/common-layout/file-close.svg"
+                      (click)="editable && resetPassportProof()"
+                      class="mb-2 close-hover"
+                      *ngIf="passportUrlFlag"
+                    />
+                  </div>
+                  <div *ngIf="passportSizeError" class="error-message my-2">
+                    <div>File size should be less than or equal to 500KB</div>
+                  </div>
+                  <div
+                    *ngIf="
+                      submitted &&
+                      basic.passportCopy.errors &&
+                      passportProof == ''
+                    "
+                    class="error-message my-2"
+                  >
+                    <div *ngIf="basic.passportCopy.errors.required">
+                      Passport copy is required
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="col-md-4 px-3 py-2 my-2">
+                  <div class="input-label">Address Proof<span class="estrik f-14">*</span></div>
+                  <div
+                    class="input-group file-label text-center align-middle uploadFILE"
+                    [ngClass]="{'upload-section': !addressProofUrlFlag, 'initial-pos': addressProofUrlFlag}"
+                  >
+
+                    <label class="text-drag f-10" for="uploadAddressProof"   [ngClass]="{'label-sec': addressProofUrlFlag}">
+                      <img
+                      src="../../../../../assets/common-layout/Upload.svg"
+                      for="uploadPassportProof"
+                      class="ml-1 upload-img2 mt-2"
+                      *ngIf="!addressProofUrlFlag"
+                      />
+                      <div  *ngIf="!addressProofUrlFlag" class="ml-1"> Drag-and-drop pdf/png/jpeg,or</div>
+                      <p  *ngIf="!addressProofUrlFlag"><span class="text-primary-drag ml-3">browse computer</span>
+                      </p>
+                      <span for="uploadPassportProof" class="kml-name" *ngIf="addressProofUrlFlag">
+                        {{ truncateText(addressProofFlag, 10) }}
+                        </span
+                      >
+                    </label>
+                    <input
+                      type="file"
+                      #addressProof
+                      name="CSVFile"
+                      id="uploadAddressProof"
+                      accept=".pdf,.jpeg,.png,.jpg"
+                      (change)="uploadAddressProof($event)"
+                      (click)="addressProof.value = ''"
+                      [ngClass]="{
+                        'is-invalid': submitted && basic.addressProof.errors
+                      }"
+                      [disabled]="!editable"
+                    />
+                    <img
+                      src="../../../../../assets/common-layout/file-close.svg"
+                      class="mb-2 close-hover"
+                      *ngIf="addressProofUrlFlag"
+                      (click)="editable && resetAddressProof()"
+                    />
+                  </div>
+                  <div *ngIf="addressSizeError" class="error-message my-2">
+                    <div>File size should be less than or equal to 500KB</div>
+                  </div>
+                  <div
+                    *ngIf="
+                      submitted &&
+                      basic.addressProof.errors &&
+                      addressProofFlag == ''
+                    "
+                    class="error-message my-2"
+                  >
+                    <div *ngIf="basic.addressProof.errors.required">
+                      Address Proof is required
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-4 px-3 py-2 my-2">
+                  <div class="input-label">Pan<span class="estrik f-14">*</span></div>
+                  <div
+                    class="input-group file-label text-center align-middle uploadFILE"
+                    [ngClass]="{'upload-section': !panUrlFlag, 'initial-pos': panUrlFlag}"
+                  >
+
+                    <label class="text-drag f-10" for="uploadPan"   [ngClass]="{'label-sec': panUrlFlag}">
+                      <img
+                      src="../../../../../assets/common-layout/Upload.svg"
+                      for="uploadPan"
+                      class="ml-1 upload-img2 mt-2"
+                      *ngIf="!panUrlFlag"
+                      />
+                      <div  *ngIf="!panUrlFlag" class="ml-1"> Drag-and-drop pdf/png/jpeg,or</div>
+                      <p  *ngIf="!panUrlFlag"><span class="text-primary-drag ml-3">browse computer</span>
+                      </p>
+                      <span for="uploadPan" class="kml-name" *ngIf="panUrlFlag">
+                        {{ truncateText(panFlag, 10) }}</span
+                      >
+                    </label>
+
+                    <input
+                      type="file"
+                      #pan
+                      name="CSVFile"
+                      id="uploadPan"
+                      accept=".pdf,.jpeg,.png,.jpg"
+                      (change)="uploadPan($event)"
+                      (click)="pan.value = ''"
+                      [ngClass]="{
+                        'is-invalid': submitted && basic.pan.errors
+                      }"
+                      [disabled]="!editable"
+                    />
+                    <img
+                      src="../../../../../assets/common-layout/file-close.svg"
+                      *ngIf="panUrlFlag"
+                      class="mb-2 close-hover"
+                      (click)="editable && resetPan()"
+                    />
+                  </div>
+                  <div *ngIf="panSizeError" class="error-message my-2">
+                    <div>File size should be less than or equal to 500KB</div>
+                  </div>
+                  <div
+                    *ngIf="
+                      submitted &&
+                      basic.pan.errors &&
+                      panFlag == ''
+                    "
+                    class="error-message my-2"
+                  >
+                    <div *ngIf="basic.pan.errors.required">
+                      Pan is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card card-outer card-color mt-3">
+          <div
+            *ngIf="profileDetails"
+            [ngClass]="{ 'disabled-div': !editable }"
+            [disabled]="!editable"
+            class="card-body cardbody-margin px-4"
+          >
+            <div *ngIf="profileDetails" class="mt-2 mb-3">
+              <div class="list-values-inner mb-3">Compliance</div>
+              <div class="row">
+                <div class="col-md-4 px-3 py-2 my-2">
+                  <div class="input-label">Operations Plan</div>
+                  <div
+                    class="input-group file-label text-center align-middle uploadFILE"
+                    [ngClass]="{'upload-section': !operationsPlanUrlFlag, 'initial-pos':operationsPlanUrlFlag}"
+                  >
+                    <label class="text-drag f-10" for="operationsPlanUploads"   [ngClass]="{'label-sec': operationsPlanUrlFlag}">
+                      <img
+                      src="../../../../../assets/common-layout/Upload.svg"
+                      for="operationsPlanUploads"
+                      class="ml-1 upload-img2 mt-2"
+                      *ngIf="!operationsPlanUrlFlag"
+                      />
+                      <div  *ngIf="!operationsPlanUrlFlag" class="ml-1"> Drag-and-drop pdf/png/jpeg,or</div>
+                      <p  *ngIf="!operationsPlanUrlFlag"><span class="text-primary-drag ml-3">browse computer</span>
+                      </p>
+                      <span for="operationsPlanUploads" class="kml-name" *ngIf="operationsPlanUrlFlag">
+                        {{ truncateText(operationsPlanFileName, 10) }}
+                        </span
+                      >
+                    </label>
+
+                    <input
+                      type="file"
+                      #operationsPlan
+                      class="form-control"
+                      name="CSVFile"
+                      id="operationsPlanUploads"
+                      accept=".pdf,.jpeg,.png,.jpg"
+                      (change)="operationsPlanUploads($event)"
+                      (click)="operationsPlan.value = ''"
+                      [ngClass]="{
+                        'is-invalid': submitted && basic.operationsPlan.errors
+                      }"
+                      [disabled]="!editable"
+                    />
+                    <img
+                      src="../../../../../assets/common-layout/file-close.svg"
+                      *ngIf="operationsPlanUrlFlag"
+                      class="mb-2 close-hover"
+                      (click)="editable && resetOperationsPlan()"
+                    />
+                  </div>
+                  <div
+                    *ngIf="operationsPlanFileSizeError"
+                    class="error-message my-2"
+                  >
+                    <div>File size should be less than or equal to 500KB</div>
+                  </div>
+                  <div
+                    *ngIf="
+                      submitted &&
+                      basic.operationsPlan.errors &&
+                      operationsPlanFileName == ''
+                    "
+                    class="error-message my-2"
+                  >
+                    <div *ngIf="basic.operationsPlan.errors.required">
+                      Operations Plan is required
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-4 px-3 py-2 my-2">
+                  <div class="input-label">UIN certificate</div>
+                  <div
+                    class="input-group file-label text-center align-middle uploadFILE"
+                    [ngClass]="{'upload-section': !uinOfDronesUrlFlag, 'initial-pos':uinOfDronesUrlFlag}"
+                  >
+
+                    <label class="text-drag f-10" for="uinOfDronesUploads"   [ngClass]="{'label-sec': uinOfDronesUrlFlag}">
+                      <img
+                      src="../../../../../assets/common-layout/Upload.svg"
+                      for="uinOfDronesUploads"
+                      class="ml-1 upload-img2 mt-2"
+                      *ngIf="!uinOfDronesUrlFlag"
+                      />
+                      <div  *ngIf="!uinOfDronesUrlFlag" class="ml-1"> Drag-and-drop pdf/png/jpeg,or</div>
+                      <p  *ngIf="!uinOfDronesUrlFlag"><span class="text-primary-drag ml-3">browse computer</span>
+                      </p>
+                      <span for="uinOfDronesUploads" class="kml-name" *ngIf="uinOfDronesUrlFlag">
+                        {{ truncateText(uinOfDronesFileName, 10) }}
+                        </span
+                      >
+                    </label>
+
+
+                    <input
+                      type="file"
+                      #uinOfDrones
+                      class="form-control"
+                      name="CSVFile"
+                      id="uinOfDronesUploads"
+                      accept=".pdf,.jpeg,.png,.jpg"
+                      (change)="uinOfDronesUploads($event)"
+                      (click)="uinOfDrones.value = ''"
+                      [ngClass]="{
+                        'is-invalid': submitted && basic.uinOfDrones.errors
+                      }"
+                      [disabled]="!editable"
+                    />
+                    <img
+                      src="../../../../../assets/common-layout/file-close.svg"
+                      *ngIf="uinOfDronesUrlFlag"
+                      class="mb-2 close-hover"
+                      (click)="editable && resetUinOfDrones()"
+                    />
+                  </div>
+                  <div
+                    *ngIf="uinOfDronesFileSizeError"
+                    class="error-message my-2"
+                  >
+                    <div>File size should be less than or equal to 500KB</div>
+                  </div>
+                  <div
+                    *ngIf="
+                      submitted &&
+                      basic.uinOfDrones.errors &&
+                      uinOfDronesFileName == ''
+                    "
+                    class="error-message my-2"
+                  >
+                    <div *ngIf="basic.uinOfDrones.errors.required">
+                      UIN of drones is required
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-4 px-3 py-0 my-3">
+                  <div class="input-label">Pilot DGCA certificate</div>
+                  <div
+                    class="input-group file-label text-center align-middle uploadFILE"
+                    [ngClass]="{'upload-section': !dgcaCertificateUrlFlag, 'initial-pos':dgcaCertificateUrlFlag}"
+                  >
+                    <label class="text-drag f-10" for="dgcaCertificateUploads"   [ngClass]="{'label-sec': dgcaCertificateUrlFlag}">
+                      <img
+                      src="../../../../../assets/common-layout/Upload.svg"
+                      for="dgcaCertificateUploads"
+                      class="ml-1 upload-img2 mt-2"
+                      *ngIf="!dgcaCertificateUrlFlag"
+                      />
+                      <div  *ngIf="!dgcaCertificateUrlFlag" class="ml-1"> Drag-and-drop pdf/png/jpeg,or</div>
+                      <p  *ngIf="!dgcaCertificateUrlFlag"><span class="text-primary-drag ml-3">browse computer</span>
+                      </p>
+                      <span for="dgcaCertificateUploads" class="kml-name" *ngIf="dgcaCertificateUrlFlag">
+                        {{ truncateText(dgcaCertificateFileName, 10) }}</span
+                      >
+                    </label>
+
+
+                    <input
+                      type="file"
+                      #dgcaCertificate
+                      class="form-control"
+                      name="CSVFile"
+                      id="dgcaCertificateUploads"
+                      accept=".pdf,.jpeg,.png,.jpg"
+                      (change)="dgcaCertificateUploads($event)"
+                      (click)="dgcaCertificate.value = ''"
+                      [ngClass]="{
+                        'is-invalid': submitted && basic.dgcaCertificate.errors
+                      }"
+                      [disabled]="!editable"
+                    />
+                    <img
+                      src="../../../../../assets/common-layout/file-close.svg"
+                      *ngIf="dgcaCertificateUrlFlag"
+                      class="mb-2 close-hover"
+                      (click)="editable && resetDgcaCertificate()"
+                    />
+                  </div>
+                  <div
+                    *ngIf="dgcaCertificateFileSizeError"
+                    class="error-message my-2"
+                  >
+                    <div>File size should be less than or equal to 500KB</div>
+                  </div>
+                  <div
+                    *ngIf="
+                      submitted &&
+                      basic.dgcaCertificate.errors &&
+                      dgcaCertificateFileName == ''
+                    "
+                    class="error-message my-2"
+                  >
+                    <div *ngIf="basic.dgcaCertificate.errors.required">
+                      UIN of drones is required
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-4 px-3 py-0 my-2">
+                  <div class="input-label">Insurance</div>
+                  <div
+                    class="input-group file-label text-center align-middle uploadFILE"
+                    [ngClass]="{'upload-section': !insuranceUrlFlag, 'initial-pos':insuranceUrlFlag}"
+                  >
+                    <label class="text-drag f-10" for="insuranceUploads" [ngClass]="{'label-sec': insuranceUrlFlag}">
+                      <img
+                      src="../../../../../assets/common-layout/Upload.svg"
+                      for="insuranceUploads"
+                      class="ml-1 upload-img2 mt-2"
+                      *ngIf="!insuranceUrlFlag"
+                      />
+                      <div  *ngIf="!insuranceUrlFlag" class="ml-1"> Drag-and-drop pdf/png/jpeg,or</div>
+                      <p  *ngIf="!insuranceUrlFlag"><span class="text-primary-drag ml-3">browse computer</span>
+                      </p>
+                      <span for="insuranceUploads" class="kml-name" *ngIf="insuranceUrlFlag">
+                        {{ truncateText(insuranceFileName, 10) }}</span
+                      >
+                    </label>
+                    <input
+                      type="file"
+                      #insurance
+                      class="form-control"
+                      name="CSVFile"
+                      id="insuranceUploads"
+                      accept=".pdf,.jpeg,.png,.jpg"
+                      (change)="insuranceUploads($event)"
+                      (click)="insurance.value = ''"
+                      [ngClass]="{
+                        'is-invalid': submitted && basic.insurance.errors
+                      }"
+                      [disabled]="!editable"
+                    />
+                    <img
+                      src="../../../../../assets/common-layout/file-close.svg"
+                      *ngIf="insuranceUrlFlag"
+                      class="mb-2 close-hover"
+                      (click)="editable && resetInsurance()"
+                    />
+                  </div>
+                  <div
+                    *ngIf="insuranceFileSizeError"
+                    class="error-message my-2"
+                  >
+                    <div>File size should be less than or equal to 500KB</div>
+                  </div>
+                  <div
+                    *ngIf="
+                      submitted &&
+                      basic.insurance.errors &&
+                      insuranceFileName == ''
+                    "
+                    class="error-message my-2"
+                  >
+                    <div *ngIf="basic.insurance.errors.required">
+                      Insurance is required
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-4 px-3 py-0 my-2">
+                  <div class="input-label">Incorporation certificate</div>
+                  <div
+                    class="input-group file-label text-center align-middle uploadFILE"
+                    [ngClass]="{'upload-section': !incorporationUrlFlag, 'initial-pos':incorporationUrlFlag}"
+                  >
+                    <label class="text-drag f-10" for="incorporationUploads" [ngClass]="{'label-sec': incorporationUrlFlag}">
+                      <img
+                      src="../../../../../assets/common-layout/Upload.svg"
+                      for="incorporationUploads"
+                      class="ml-1 upload-img2 mt-2"
+                      *ngIf="!incorporationUrlFlag"
+                      />
+                      <div  *ngIf="!incorporationUrlFlag" class="ml-1"> Drag-and-drop pdf/png/jpeg,or</div>
+                      <p  *ngIf="!incorporationUrlFlag"><span class="text-primary-drag ml-3">browse computer</span>
+                      </p>
+                      <span for="incorporationUploads" class="kml-name" *ngIf="incorporationUrlFlag">
+                        {{ truncateText(incorporationFileName, 10) }}</span
+                      >
+                    </label>
+                    <input
+                      type="file"
+                      #incorporation
+                      class="form-control"
+                      name="CSVFile"
+                      id="incorporationUploads"
+                      accept=".pdf,.jpeg,.png,.jpg"
+                      (change)="incorporationUploads($event)"
+                      (click)="incorporation.value = ''"
+                      [ngClass]="{
+                        'is-invalid': submitted && basic.incorporation.errors
+                      }"
+                      [disabled]="!editable"
+                    />
+                    <img
+                      src="../../../../../assets/common-layout/file-close.svg"
+                      (click)="editable && resetIncorporation()"
+                      *ngIf="incorporationUrlFlag"
+                      class="mb-2 close-hover"
+                    />
+                  </div>
+                  <div
+                    *ngIf="incorporationFileSizeError"
+                    class="error-message my-2"
+                  >
+                    <div>File size should be less than or equal to 500KB</div>
+                  </div>
+                  <div
+                    *ngIf="
+                      submitted &&
+                      basic.incorporation.errors &&
+                      incorporationFileName == ''
+                    "
+                    class="error-message my-2"
+                  >
+                    <div *ngIf="basic.incorporation.errors.required">
+                      Incorporation is required
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-4 px-3 py-0 my-2">
+                  <div class="input-label">Company profile</div>
+                  <div
+                    class="input-group file-label text-center align-middle uploadFILE"
+                    [ngClass]="{'upload-section': !companyProfileUrlFlag, 'initial-pos':companyProfileUrlFlag}"
+                  >
+
+                    <label class="text-drag f-10" for="companyProfileUploads" [ngClass]="{'label-sec': companyProfileUrlFlag}">
+                      <img
+                      src="../../../../../assets/common-layout/Upload.svg"
+                      for="companyProfileUploads"
+                      class="ml-1 upload-img2 mt-2"
+                      *ngIf="!companyProfileUrlFlag"
+                      />
+                      <div  *ngIf="!companyProfileUrlFlag" class="ml-1"> Drag-and-drop pdf/png/jpeg,or</div>
+                      <p  *ngIf="!companyProfileUrlFlag"><span class="text-primary-drag ml-3">browse computer</span>
+                      </p>
+                      <span for="companyProfileUploads" class="kml-name" *ngIf="companyProfileUrlFlag">
+                        {{ truncateText(companyProfileFileName, 10) }}
+                        </span
+                      >
+                    </label>
+                    <input
+                      type="file"
+                      #companyProfile
+                      class="form-control"
+                      name="CSVFile"
+                      id="companyProfileUploads"
+                      accept=".pdf,.jpeg,.png,.jpg"
+                      (change)="companyProfileUploads($event)"
+                      (click)="companyProfile.value = ''"
+                      [ngClass]="{
+                        'is-invalid': submitted && basic.companyProfile.errors
+                      }"
+                      [disabled]="!editable"
+                    />
+                    <img
+                      src="../../../../../assets/common-layout/file-close.svg"
+                      (click)="editable && resetCompanyProfile()"
+                      *ngIf="companyProfileUrlFlag"
+                      class="mb-2 close-hover"
+                    />
+                  </div>
+                  <div
+                    *ngIf="companyProfileFileSizeError"
+                    class="error-message my-2"
+                  >
+                    <div>File size should be less than or equal to 500KB</div>
+                  </div>
+                  <div
+                    *ngIf="
+                      submitted &&
+                      basic.companyProfile.errors &&
+                      companyProfileFileName == ''
+                    "
+                    class="error-message my-2"
+                  >
+                    <div *ngIf="basic.companyProfile.errors.required">
+                      Company Profile is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+        <!-- side rectangle  -->
+        <div class="ml-4 side-rec">
+            <div class="circle"  [style.background]="getConicGradient(progressValue)">
+              <span class="initials">{{firstLetter}}{{secondLetter}}</span>
+              <div class="inner-circle" (click)="editableForm()" >
+                <img
+                src="../../../../../assets/common-layout/pencil.svg" width="25px">
+              </div>
+            </div>
+            <!-- <div class="circle-text text-white-50">
+            </div> -->
+            <button class="button-logout"  (click)="onExit()">
+              <img src="../../../../../assets/common-layout/logout.svg" width="15px"> Logout
+            </button>
+        </div>
+       </div>
+      </form>
+      <div *ngIf="editable" class="width-align">
+        <div class="my-3" style="float: right">
+          <button
+            class="primary-outline-btn btn button-text2 button-text"
+            (click)="formCancel()"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            class="primary-btn btn button-text"
+            (click)="formSumbit()"
+          >
+            Confirm details
+          </button>
+        </div>
+      </div>
+  </div>
+</div>
+
+ <div class="overlay" *ngIf="sureExit">
+ <div class="exit-button" *ngIf="sureExit">
+   <div class="exit-button-text text-white f-16">Are you sure you want to exit</div>
+   <div class="exit-buttons">
+     <button class="exit-button-1 mt-3  text-white-50" (click)="onStay()">Cancel</button>
+     <button class="exit-button-1 mt-3  text-white-50" (click)="onLogout()">Ok</button>
+   </div>
+ </div>
+ </div>
+

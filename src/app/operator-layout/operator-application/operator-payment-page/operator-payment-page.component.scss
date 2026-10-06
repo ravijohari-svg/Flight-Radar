@@ -1,0 +1,141 @@
+@import "../../../../scss/colorCodes.scss";
+
+@mixin font($font-size, $font-weight) {
+  font-size: $font-size;
+  font-weight: $font-weight;
+}
+
+@mixin colors($color, $background-color) {
+  color: $color;
+  background-color: $black-medium;
+}
+* {
+  margin: 0%;
+  padding: 0%;
+  box-sizing: border-box;
+}
+.active-plan {
+  border: 1px solid $text-light;
+  padding: 7px;
+  text-align: center;
+  border-radius: 11px;
+  width: 100px;
+  margin: auto;
+}
+
+.container-fluid {
+  border-radius: 20px;
+  background-color: $dark-v1;
+  min-height: 90vh !important;
+}
+.backImage1 {
+  position: absolute;
+  bottom: 27%;
+  left: 2%;
+  opacity: 0.5;
+}
+
+.backImage {
+  position: absolute;
+  top: -14%;
+  left: 63%;
+  opacity: 0.5;
+}
+
+// .terms a {
+//   color: $text-white-opacity !important ;
+// }
+// .terms li {
+//   margin: 15px;
+// }
+// .terms li:first-child {
+//   list-style: none;
+// }
+// .terms li a {
+//   position: relative;
+//   left: 6px;
+// }
+.pricingContainer {
+  width: 100%;
+  height: 100% !important;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  color: #fff;
+}
+.planCard {
+  border: 1px solid $pricePlanBorder;
+  border-radius: 30px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .planName {
+    padding-top: 20px !important;
+    text-align: center;
+    line-height: 20px;
+    position: relative;
+    :first-child {
+      text-transform: uppercase;
+    }
+    .popular {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 50%;
+      border: 1px solid $pricePolularBorder;
+      border-radius: 45px 0 0 45px;
+      padding: 0 5px;
+      background: $pricePolularBorder;
+      color: black;
+    }
+  }
+  .planFlights {
+    text-align: center;
+    background: $violet-light;
+    color: #000;
+    position: relative;
+  }
+  .basicText {
+    background-color: $pending !important;
+  }
+  .advancedText {
+    background-color: $dark-green !important;
+  }
+  .premiumText {
+    background-color: $pricePlanPremium !important;
+  }
+  // ul {
+  //   width: 100%;
+  //   margin: 0;
+  // }
+  // li {
+  //   list-style-image: url(../../../../assets/icons/tick.svg);
+  // }
+}
+.listItem {
+  display: flex;
+  gap: 10px;
+  border-bottom: 1px solid #4a5363;
+  line-height: 17px;
+  padding: 8px;
+  img {
+    position: relative;
+    top: 2px;
+  }
+}
+.planButton {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  a {
+    width: 80%;
+    padding: 5px;
+  }
+}
+.pricingContainer .planCard:nth-child(2) .popular {
+  display: block;
+}

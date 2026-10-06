@@ -1,0 +1,30 @@
+.bg-dark {
+  background-color: #0c1011 !important;
+}
+
+.active {
+  color: #ffcb3d !important;
+}
+
+.align-middle {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.nav-item, .primary-btn {
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.navbar-expand-lg .navbar-nav .nav-link {
+  padding-right: 1.7rem !important;
+  padding-left: 1.7rem !important;
+  color: #ffffff;
+}
+
+@media (min-width: 992px) {
+  .navbar-expand-lg .navbar-nav .nav-link {
+    padding-right: 1.7rem !important;
+    padding-left: 1.7rem !important;
+  }
+}/*# sourceMappingURL=common-layout.component.css.map */

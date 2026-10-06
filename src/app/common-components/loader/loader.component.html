@@ -1,0 +1,21 @@
+<div class="loaderBox">
+  <div class="dynamicLoader">
+    <div class="loaderContent">
+      <img
+        [src]="
+          '../../../assets/loader_assets/' + getAssetDetails(PhaseKey)?.path
+        "
+        alt=""
+        [@bounce]="PhaseKey"
+      />
+      <div class="label">
+        <div>Loading {{ getAssetDetails(PhaseKey)?.label }}</div>
+        <div class="dot-container">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

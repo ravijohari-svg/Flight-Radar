@@ -1,0 +1,86 @@
+<div class="mt-2 corelation-card mr-3 mb-2">
+  <span
+    ><img class="f-12" src="../../../../../assets/icons/marker.svg" />
+    <span class="card-title ml-1 white-text">Waypoint {{ waypointNo }}</span>
+  </span>
+  <div class="form-row inside-card" [formGroup]="wayPointForm">
+    <div class="form-group">
+      <label class="label-class mt-2 f-12">Latitude(°)</label>
+      <div class="input-group">
+        <input
+          type="number"
+          class="text-white input-class text-center"
+          formControlName="Latitude"
+          [ngClass]="{
+            'border border-danger': waypointValue.Latitude.errors
+          }"
+          [readonly]="isDisable"
+        />
+      </div>
+      <div *ngIf="waypointValue.Latitude.errors" class="error">
+        <div *ngIf="waypointValue.Latitude.errors.required">
+          Lattitude required
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="mt-2 label-class f-12">Longitude(°)</label>
+      <div class="input-group">
+        <input
+          type="number"
+          class="text-white input-class text-center"
+          formControlName="Longitude"
+          [ngClass]="{
+            'border border-danger': waypointValue.Longitude.errors
+          }"
+          [readonly]="isDisable"
+        />
+      </div>
+      <div *ngIf="waypointValue.Longitude.errors" class="error">
+        <div *ngIf="waypointValue.Longitude.errors.required">
+          Longitude required
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="label-class mt-2 f-12">Altitude(m)</label>
+      <div class="input-group">
+        <input
+          type="number"
+          formControlName="Altitude"
+          class="text-white input-class text-center"
+          [ngClass]="{
+            'border border-danger': waypointValue.Altitude.errors
+          }"
+          [readonly]="isDisable"
+        />
+      </div>
+      <div *ngIf="waypointValue.Altitude.errors" class="error">
+        <div *ngIf="waypointValue.Altitude.errors.required">
+          Altitude required
+        </div>
+        <!-- <div *ngIf="waypointValue.Altitude.errors.min">Alt not less than 0</div> -->
+        <div *ngIf="waypointValue.Altitude.errors.max">Alt not more than 120</div>
+      </div>
+    </div>
+  </div>
+  <div class="notification mb-3" *ngIf="!correlationData?.inneryellow[waypointNo] && !correlationData?.outeryellow[waypointNo] &&
+  !correlationData?.red[waypointNo] && !correlationData?.geozone[waypointNo] && (statusGreenInitial || statusGreen)">
+    <img class="f-12" src="../../../../../assets/icons/alert-triangle.svg" />
+    <div class="notification-text f-12">You reaches the max limit of 120m for Green Zone</div>
+  </div>
+  <div class="notification mb-3" *ngIf="correlationData?.outeryellow[waypointNo] && (statusYellowInitial || statusYellow)">
+    <img class="f-12" src="../../../../../assets/icons/alert-triangle.svg" width="40px"/>
+    <div class="notification-text f-12">You reaches the max limit of 60m for Outer Yellow Zone</div>
+  </div>
+  <!-- Correlation -->
+  <app-correlation-card
+    *ngIf="showCorr"
+    [index]="waypointNo"
+    [innerYellow]="correlationData?.inneryellow[waypointNo]"
+    [outerYellow]="correlationData?.outeryellow[waypointNo]"
+    [redZone]="correlationData?.red[waypointNo]"
+    [geoZone]="correlationData?.geozone[waypointNo]"
+  >
+  </app-correlation-card>
+</div>

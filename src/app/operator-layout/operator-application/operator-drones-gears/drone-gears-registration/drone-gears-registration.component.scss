@@ -1,0 +1,489 @@
+@import '../../../../../scss/colorCodes.scss';
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans&display=swap');
+
+@font-face {
+  font-family: SFProText;
+  src: url(../../../../../assets/fonts/SFProText-Regular.ttf) format('truetype');
+}
+
+@mixin font($font-size, $font-weight) {
+  font-size: $font-size;
+  font-weight: $font-weight;
+}
+
+@mixin colors($color, $background-color) {
+  color: $color;
+  background-color: $background-color;
+}
+
+.form-control,
+.input-group-text {
+  // height: 40px;
+  font-size: 12px;
+  background-color: $black-medium;
+  color: $text-white-opacity;
+  border: 1px solid $black-light;
+  border-radius: 8px;
+}
+
+// .form-control::placeholder {
+//   color: $text-white-opacity;
+//   opacity:0.9;
+// }
+.form-control,
+.input-group-text {
+  padding: 1.25rem 2rem;
+}
+
+select {
+  padding: 0.67rem 1.5rem;
+  background-color: $black-medium;
+  color: $text-white-opacity;
+  border-radius: 8px;
+  width: 100%;
+  font-size: 12px;
+  border: 1px solid $black-light;
+}
+
+select:invalid {
+  opacity: 0.5;
+}
+
+.input-group-text {
+  padding: 0.5rem;
+}
+
+.form-control:focus,
+.input-group-text:focus {
+  outline: none;
+  box-shadow: none;
+  background-color: $black-medium;
+}
+
+.input-group-text {
+  background-color: transparent;
+}
+
+.list-values {
+  color: $text-white;
+  // font-size: 93%;
+  // font-weight: 600;
+  font-family: "DM Sans", sans-serif;
+  font-size: 22px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.17;
+  letter-spacing: -1px;
+  text-align: left;
+}
+
+.list-description {
+  color: $text-white-opacity;
+  font-size: 75%;
+}
+
+.form-control.is-invalid {
+  background-image: none !important;
+}
+
+.back_button {
+  width: 175px;
+  height: 32px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  // margin: 24px 1023px 24px 18px;
+  margin: 24px 1023px 24px 142px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: solid 1px $black-light;
+}
+
+.back_button_label {
+  font-family: "DM Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: 0.24px;
+  text-align: center;
+  color: $text-white;
+}
+
+img.ChevronLeft {
+  width: 12px;
+  height: 12px;
+  flex-grow: 0;
+  object-fit: contain;
+}
+
+.add-new-drone-text {
+  // margin-left: 18px;
+  margin-left: 142px;
+  margin-bottom: 23px;
+
+  font-family: "DM Sans", sans-serif;
+  font-size: 34px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.11;
+  letter-spacing: -1px;
+  text-align: left;
+  color: $text-white;
+}
+
+.back_button:hover {
+  cursor: pointer !important;
+}
+
+.input-label {
+  flex-grow: 0;
+  font-family: SFProText;
+  font-size: 14px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.14;
+  letter-spacing: 0.28px;
+  text-align: left;
+  color: #ffffff;
+  margin-bottom: 7px;
+}
+
+.card-color {
+  background-color: $dark-v1;
+  max-width: 80vw;
+  // margin-left: 19px;
+  margin-left: 143px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.cardbody-margin {
+  margin-top: -5px;
+  margin-bottom: -26px;
+}
+
+.width-align {
+  max-width: 80vw;
+  // margin-right: -20px;
+  margin-left: 142px;
+}
+
+.button-text {
+  width: 153px;
+  height: 40px;
+  flex-grow: 0;
+  font-family: "DM Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: 0.32px;
+  text-align: center;
+}
+
+.button-text3 {
+  width: 220px;
+  height: 40px;
+  flex-grow: 0;
+  font-family: "DM Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: 0.32px;
+  text-align: center;
+}
+
+.button-text2 {
+  color: #ffffff;
+  margin-right: 7px;
+  border: solid 1px $black-light;
+}
+
+@media screen and (max-width: 1600px) and (min-width: 1366px) {
+  .width-align {
+    max-width: 80vw;
+    // margin-right: -20px;
+    margin-left: 100px;
+  }
+
+  .card-color {
+    background-color: $dark-v1;
+    max-width: 80vw;
+    // margin-left: 19px;
+    margin-left: 100px;
+  }
+
+  .add-new-drone-text {
+    // margin-left: 18px;
+    margin-left: 100px;
+  }
+
+  .back_button {
+    // margin: 24px 1023px 24px 18px;
+    margin: 24px 1023px 24px 100px;
+  }
+}
+
+@media screen and (max-width: 1366px) and (min-width: 1280px) {
+  .width-align {
+    max-width: 80vw;
+    // margin-right: -20px;
+    margin-left: 75px;
+  }
+
+  .card-color {
+    background-color: $dark-v1;
+    max-width: 80vw;
+    // margin-left: 19px;
+    margin-left: 75px;
+  }
+
+  .add-new-drone-text {
+    // margin-left: 18px;
+    margin-left: 75px;
+  }
+
+  .back_button {
+    // margin: 24px 1023px 24px 18px;
+    margin: 24px 1023px 24px 75px;
+  }
+}
+
+@media screen and (max-width: 1280px) and (min-width: 900px) {
+  .width-align {
+    max-width: 80vw;
+    // margin-right: -20px;
+    // margin-left: 55px;
+    margin-left: 83px;
+  }
+
+  .card-color {
+    background-color: $dark-v1;
+    max-width: 80vw;
+    // margin-left: 19px;
+    margin-left: 83px;
+  }
+
+  .add-new-drone-text {
+    // margin-left: 18px;
+    margin-left: 83px;
+  }
+
+  .back_button {
+    // margin: 24px 1023px 24px 18px;
+    margin: 24px 1023px 24px 83px;
+  }
+}
+
+@media screen and (max-width: 900px) and (min-width: 700px) {
+  .width-align {
+    max-width: 80vw;
+    // margin-right: -20px;
+    margin-left: 40px;
+  }
+
+  .card-color {
+    background-color: $dark-v1;
+    max-width: 80vw;
+    // margin-left: 19px;
+    margin-left: 40px;
+  }
+
+  .add-new-drone-text {
+    // margin-left: 18px;
+    margin-left: 40px;
+  }
+
+  .back_button {
+    // margin: 24px 1023px 24px 18px;
+    margin: 24px 1023px 24px 40px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .width-align {
+    max-width: 80vw;
+    // margin-right: -20px;
+    margin-left: 30px;
+  }
+
+  .card-color {
+    background-color: $dark-v1;
+    max-width: 80vw;
+    // margin-left: 19px;
+    margin-left: 30px;
+  }
+
+  .add-new-drone-text {
+    // margin-left: 18px;
+    margin-left: 30px;
+  }
+
+  .back_button {
+    // margin: 24px 1023px 24px 18px;
+    margin: 24px 1023px 24px 30px;
+  }
+}
+.Upload {
+  height: 128px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 3px;
+  padding: 0;
+}
+.File-Upload {
+  width: 222px;
+  height: 80px;
+  align-self: stretch;
+  flex-grow: 0;
+  margin: 8px 0 0;
+  padding: 4px 55px 4px 5px;
+  border-radius: 4px;
+  border: dashed 1.5px $kb-color;
+  background-color: $black-dark;
+}
+.Upload-Documents-Description {
+  // margin: 4px 146px 16px 0;
+  // font-family: SFProText;
+  color: $upload-doc;
+}
+#uploadDocumentsFile {
+  opacity: 0;
+  height: 80px;
+  position: relative !important;
+  bottom: 94%;
+  left: 1%;
+  width: 224px;
+}
+
+.Document-Uploaded {
+  font-family: SFProText;
+  font-weight: 400;
+  // width:66px;
+  height: 16px;
+}
+
+.File-Uploaded {
+  // width: 320px;
+  width: 243px;
+  height: 32px;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0 0;
+  padding: 6px 8px;
+  border-radius: 4px;
+  border: solid 1px $file-upload-border;
+  background-color: $file-upload-bg;
+}
+.File-Upload {
+  width: 222px;
+  height: 80px;
+  align-self: stretch;
+  flex-grow: 0;
+  margin: 8px 0 0;
+  padding: 4px 55px 4px 5px;
+  border-radius: 4px;
+  border: dashed 1.5px $kb-color;
+  background-color: $black-dark;
+}
+.File-Upload_Inner {
+  width: 228px;
+  height: 72px;
+  flex-grow: 0;
+}
+.upload-img2 {
+  width: 30.5px;
+  height: 32px;
+  flex-grow: 0;
+  margin: 0 99.4px 8px 98.1px;
+  object-fit: contain;
+}
+.text-drag {
+  width: 216px;
+  height: 32px;
+  flex-grow: 0;
+  margin: 5px 0 0;
+  font-family: SFProText;
+  font-size: 10px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  text-align: center;
+  color: $text-white;
+}
+
+.text-primary-drag {
+  color: $text-primary;
+}
+.filenamepdf {
+  font-family: SFProText;
+  color: $text-white;
+}
+
+.KB {
+  height: 16px;
+  flex-grow: 1;
+  font-family: SFProText;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  text-align: left;
+  color: $kb-color;
+}
+
+.file-close {
+  width: 16px;
+  height: 16px;
+  flex-grow: 0;
+  object-fit: contain;
+}
+
+.Frame-Upload {
+  height: 130px;
+  align-self: stretch;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 0;
+  margin-bottom: 5px;
+}
+.Frame-Uploads {
+  height: 250px;
+  align-self: stretch;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 0;
+}
+.star {
+  color: $red;
+  // font-size: 120%
+}

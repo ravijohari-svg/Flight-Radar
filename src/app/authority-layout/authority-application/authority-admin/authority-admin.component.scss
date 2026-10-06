@@ -1,0 +1,89 @@
+@import '../../../../scss/colorCodes.scss';
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans&display=swap');
+@font-face {
+  font-family: SFProText;
+  src: url(../../../../assets/fonts/SFProText-Regular.ttf) format('truetype');
+}
+
+@mixin font($font-size, $font-weight) {
+  font-size: $font-size;
+  font-weight: $font-weight;
+}
+
+@mixin colors($color, $background-color) {
+  color: $color;
+  background-color: $background-color;
+}
+
+.tabs {
+  border-bottom: 1px solid $black-only;
+}
+
+.active {
+  // border-radius: 0;
+  // border-bottom: 5px solid $blue-dark;
+  border-radius: 0;
+  border-bottom: 2px solid $blue-dark;
+}
+.regulatorLink{
+  margin-left: 11px
+}
+
+.btn-tabs {
+  @include font(16px, 500);
+  font-family: 'DM Sans', sans-serif;
+  color: $text-white;
+}
+
+.btn-tabs:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.main-panel {
+//   min-height: calc(100vh - 60px);
+  min-height: calc(100vh)
+
+}
+.Admin-Portal {
+    width: 139px;
+    height: 28px;
+    margin: 24px 1059px 24px 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.17;
+    letter-spacing: -1px;
+    text-align: left;
+    color: $text-white;
+  }
+  .Number {
+    width: 24px;
+    height: 12px;
+    flex-grow: 0;
+    font-family: SFProText;
+    font-size: 12px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: 0.24px;
+    text-align: center;
+    color: $text-white;
+  }
+ 
+  .Notification {
+    width: 23px;
+    height: 16px;
+    flex-grow: 0;
+    // display: flex;
+    flex-direction: column;
+    // justify-content: flex-start;
+    // align-items: flex-start;
+    gap: 8px;
+    padding: 2px 4px;
+    border-radius: 4px;
+    background-color:  $dark-v1;
+  }

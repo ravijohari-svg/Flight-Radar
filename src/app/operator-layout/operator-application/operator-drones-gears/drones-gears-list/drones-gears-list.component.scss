@@ -1,0 +1,318 @@
+@import '../../../../../scss/colorCodes.scss';
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans&display=swap');
+
+@font-face {
+  font-family: SFProText;
+  src: url(../../../../../assets/fonts/SFProText-Regular.ttf) format('truetype');
+}
+
+@mixin font($font-size, $font-weight) {
+  font-size: $font-size;
+  font-weight: $font-weight;
+}
+
+@mixin colors($color, $background-color) {
+  color: $color;
+  background-color: $background-color;
+}
+
+//Main Panel
+// .main-panel {
+//   min-height: calc(100vh - 48px);
+// }
+.main-panel {
+  // min-height: calc(100vh - 48px);
+  min-height: calc(100vh);
+
+}
+
+//Header
+
+.list-values {
+  color: $text-white-opacity;
+  font-size: 10px;
+  font-family: SFProText;
+  font-weight: normal;
+}
+
+.list-description {
+  font-family: SFProText;
+  color: $text-white;
+  font-size: 14px;
+  font-weight: normal;
+}
+
+//Buttons
+.primary-btn,
+.primary-outline-btn {
+  //   font-size: 75%;
+  @include font(75%, 600);
+}
+
+.btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+//icons
+.fa-circle {
+  font-size: 30%;
+}
+
+//Cards
+.card-grey {
+  background-color: $screen-color;
+  border: none;
+}
+
+.card-footer {
+  background-color: $text-white !important;
+  border-top: none;
+  border-radius: 10px;
+}
+
+//SideNav Drawer
+mat-sidenav {
+  width: 40%;
+}
+
+@media screen and (max-width: 768px) {
+  mat-sidenav {
+    width: 60%;
+  }
+}
+.grey-text {
+  color: $text-light;
+}
+
+.main-header {
+  font-size:  24px;
+  font-weight: bold;
+  font-family: 'DM Sans', sans-serif;
+}
+.main-sub-header{
+  font-size: 14px;
+  font-weight: normal;
+color: rgba(255, 255, 255, 0.75);
+font-family: SFProText;
+}
+.sub-header {
+ font-size: 20px;
+  color: $text-white;
+  font-weight: bold;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.clickable-card {
+  cursor: pointer;
+}
+
+.clickable-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, .12), 0 4px 8px rgba(0, 0, 0, .06);
+}
+.remoteID-url-color{
+  color: #91b5fd;
+  } 
+  .Regular-Button {
+    width: 100px;
+    height: 32px;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: solid 1px $black-light;
+  }
+  .Regular-Button2 {
+    width: 100px;
+    height: 32px;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: solid 1px $text-white;
+  }
+  img.Content-Copy {
+    width: 12px;
+    height: 12px;
+    flex-grow: 0;
+    object-fit: contain;
+  }
+  .Button-label {
+    width: 46px;
+    height: 12px;
+    flex-grow: 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: 0.24px;
+    text-align: center;
+    color:$text-white;
+  }
+  .server-connection {
+    width: 200px;
+    height: 32px;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: solid 1px $text-white;
+  }
+  .arrows-up {
+    width: 12px;
+    height: 12px;
+    flex-grow: 0;
+    object-fit: contain;
+  }
+
+  
+  .server-connection-lable {
+    width: 166px;
+    height: 12px;
+    flex-grow: 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: 0.24px;
+    text-align: center;
+    color: $text-white;
+  }
+  .display-flex{
+    display: flex;
+                  flex-direction: row;
+                  justify-content: space-between;
+  }
+select{
+  background-color: $black-medium;
+  color: $text-white-opacity;
+  font-size: 12px;
+  border: 1px solid $black-light;
+  width: 32px;
+  height: 32px;
+  margin-bottom: -11px;
+  border-radius: 8px;
+  border: solid 1px $black-light;
+}
+
+mat-select{
+  background: url('../../../../../assets/common-layout/dotsHorizontal.svg') ;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color:  $black-medium;
+  color: $text-white-opacity;
+  font-size: 12px;
+  border: 1px solid $black-light;
+  width: 32px;
+  height: 32px;
+  margin-bottom: -11px;
+  border-radius: 8px;
+  padding-top: 6px;
+ 
+}
+.mat-select-panel {
+  background-color: $black-medium !important;
+}
+// .mat-select-value {
+//   color: $dark-v1;
+// }
+//  select, option .image{
+//     background: url("../../../../../assets/common-layout/Delete.svg") ;
+//     background-size: contain;
+//     background-repeat: no-repeat;
+//     background-position: left center;
+//     padding-left: 20px;
+//     width: 16px;
+//   height: 16px;
+//   flex-grow: 0;
+//   object-fit: contain;
+// }
+
+img.dots-horizontal {
+  width: 16px;
+  height: 16px;
+  flex-grow: 0;
+  object-fit: contain;
+}
+img.Delete {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: left center;
+    padding-left: 20px;
+}
+.File-Uploaded {
+  // width: 243px;
+  width: 132px;
+  height: 32px;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 2px;
+  margin: 8px 0 0;
+  padding: 6px 8px;
+  border-radius: 4px;
+  border: solid 1px $file-upload-border;
+  background-color: $file-upload-bg;
+}
+.filenamepdf {
+  font-family: SFProText;
+  color: $text-white;
+}
+.hrLine {
+  height:2px;
+  border-width:0;
+  color:$dark-v1;
+  background-color:$dark-v1
+}
+.whatsapp-background {
+  background-image: url('../../../../../assets/common-layout/whatsapp_bg.svg');
+  background-repeat: no-repeat;
+  background-position: right top; /* Adjust this as needed */
+  // bottom
+  padding-right: 20px; /* Adjust this to create space for the image */
+  /* You can also set other background properties like background-size, background-color, etc. */
+}
+
+.whatsapp_card {
+  position: relative;
+}
+.whatsapp_card {
+  width: 60px;
+  height: 60px;
+  background: $dark-border;
+  z-index: 99999;
+  position: absolute;
+  right: 0;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+}
+.whatsapp_card img{
+  width: 25px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+
+
+
+

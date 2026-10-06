@@ -1,0 +1,49 @@
+<div class="mt-3 pop-content">
+  <div class="pop-header f-16 text-white">Map Actions</div>
+  <div class="pop-check mt-2" *ngIf="show3DMapToggle">
+    <img class="ml-1" src="../../../../assets/icons/tech 1.svg" width="15" height="15" />
+    <label class="form-check-label f-12 ml-1 mr-1" for="flexCheckDefault">
+      3D Map
+    </label>
+    <span class="slideToggle-button ml-4" style="word-wrap: break-word">
+      <mat-slide-toggle #myToggle [disabled]="disabled" (click)="toggle2D3D()"
+      [class.mat-checked]="isMatChecked"></mat-slide-toggle>
+    </span>
+  </div>
+  <div class="pop-check mt-2" *ngIf="toggle" >
+    <img class="ml-1" src="../../../../assets/icons/Group.svg" width="15" height="15" />
+    <label class="form-check-label f-12 ml-1 mr-2" for="flexCheckDefault">
+      Terrain
+    </label>
+    <span class="slideToggle-button ml-4" style="word-wrap: break-word">
+      <mat-slide-toggle [disabled]="disabled" (click)="terrain3D()"></mat-slide-toggle>
+    </span>
+  </div>
+  <div class="pop-check mt-2">
+    <img class="ml-1" src="../../../../assets/icons/telecom.svg" width="15" height="15" />
+    <label class="form-check-label f-12 ml-1" for="flexCheckDefault">
+      Telecom
+    </label>
+    <span class="slideToggle-button ml-4" style="word-wrap: break-word">
+      <mat-slide-toggle #telecom [disabled]="disabled" (click)="telecomApi()"></mat-slide-toggle>
+    </span>
+  </div>
+  <div class="pop-check mt-2 mb-2">
+    <img class="ml-1" src="../../../../assets/icons/group-1.svg" width="15" height="15" />
+    <label class="form-check-label f-12 ml-1 mr-2" for="flexCheckDefault">
+      Population
+    </label>
+    <span class="slideToggle-button ml-1" style="word-wrap: break-word">
+      <mat-slide-toggle #population [disabled]="disabled" (click)="popHeatmap()"></mat-slide-toggle>
+    </span>
+  </div>
+  <div class="pop-check mt-1 mb-2" *ngIf="!heatmapData">
+    <img class="ml-1" src="../../../../assets/icons/group-1.svg" width="15" height="15" />
+    <label class="form-check-label f-12 ml-1 mr-2" for="flexCheckDefault">
+      Skye Pods
+    </label>
+    <span class="slideToggle-button togg" style="word-wrap: break-word">
+      <mat-slide-toggle (click)="getPodsData()"></mat-slide-toggle>
+    </span>
+  </div>
+</div>

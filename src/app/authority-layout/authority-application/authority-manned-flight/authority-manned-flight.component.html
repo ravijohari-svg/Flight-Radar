@@ -1,0 +1,298 @@
+<div class="traffic-display">
+  <div class="map-surface">
+    <ng-template appResuableOutlet></ng-template>
+    <div class="map-grid"></div>
+  </div>
+
+  <header class="traffic-topbar">
+    <div class="brand-lockup">
+      <img src="assets/common-layout/SkyeUTM logoWhite.svg" width="130" alt="Skye UTM" />
+    </div>
+    <div class="top-stats">
+      <span><strong>{{ planes.length + droneList.length }}</strong> Active</span>
+      <span><strong class="manned-count">{{ filteredPlanes.length }}</strong> Manned</span>
+      <span style="cursor: pointer;" routerLink="/authority/authority-app/manned-flight"><strong class="drones-count">{{ filteredDroneList.length }}</strong> Unmanned</span>
+    </div>
+    <div class="feed-state">
+      <span class="live-dot"></span>
+      <strong>{{ isLoading ? "SYNC" : "LIVE" }}</strong>
+      <span>Last updated: {{ getLastUpdatedAgo() }}</span>
+    </div>
+    <form class="location-search" (ngSubmit)="jumpToSearchLocation()">
+      <span></span>
+      <input
+        type="text"
+        name="locationSearch"
+        placeholder="Search area or lat,lng"
+        [(ngModel)]="jumpText"
+      />
+      <button type="submit">{{ isSearchingLocation ? "..." : "Go" }}</button>
+      <small *ngIf="locationSearchMessage">{{ locationSearchMessage }}</small>
+    </form>
+    <div class="top-actions">
+      <!-- <button type="button" class="active">Traffic</button> -->
+      <button type="button" (click)="toggleFilterPanel()">Filters</button>
+      <!-- <button type="button" (click)="getLiveMannedFlightData(true)">Replay</button> -->
+      <button type="button" (click)="zoomToCurrentLocation()">LOC</button>
+    </div>
+  </header>
+
+  <div class="filter-overlay-right" *ngIf="filterPanelOpen">
+    <aside class="filter-panel-right">
+      <div class="filter-head">
+        <div class="filter-title">Filters</div>
+        <button type="button" class="filter-close" (click)="toggleFilterPanel()">✕</button>
+      </div>
+
+      <div class="filter-body">
+        <section class="filter-group">
+          <div class="group-title">TRAFFIC TYPE</div>
+          <label class="filter-item">
+            <input type="checkbox" [(ngModel)]="tempTrafficFilter.manned" />
+            <span class="label-text">Manned Aircraft</span>
+          </label>
+          <label class="filter-item">
+            <input type="checkbox" [(ngModel)]="tempTrafficFilter.unmanned" />
+            <span class="label-text">Unmanned</span>
+          </label>
+        </section>
+
+        <!-- <section class="filter-group">
+          <div class="group-title">STATUS</div>
+          <label class="filter-item small">
+            <input type="checkbox" [checked]="selectedStatus==='all'" disabled /> In Flight
+          </label>
+          <label class="filter-item small">
+            <input type="checkbox" [checked]="selectedStatus==='planned'" disabled /> Planned
+          </label>
+          <label class="filter-item small">
+            <input type="checkbox" [checked]="selectedStatus==='completed'" disabled /> Completed
+          </label>
+        </section> -->
+
+        <!-- <section class="filter-group">
+          <div class="group-title">OPERATOR</div>
+          <div class="operator-list">
+            <label class="operator-item">
+              <input type="checkbox" disabled /> Skye Air
+            </label>
+            <label class="operator-item">
+              <input type="checkbox" disabled /> Other Operators
+            </label>
+          </div>
+        </section> -->
+      </div>
+
+      <div class="filter-footer">
+        <button type="button" class="apply" (click)="applyTrafficFilters()">Apply Filters</button>
+        <button type="button" class="reset" (click)="resetFilters()">Reset</button>
+      </div>
+    </aside>
+  </div>
+
+  <aside class="traffic-sidebar">
+    <div class="sidebar-heading">Live Traffic</div>
+    <div class="search-box">
+      <span></span>
+      <input
+        type="text"
+        placeholder="Search flight, drone..."
+        [(ngModel)]="searchText"
+        (ngModelChange)="onFiltersChange()"
+      />
+    </div>
+
+
+    <div class="zoom-message" *ngIf="liveDataMessage">{{ liveDataMessage }}</div>
+
+    <div class="traffic-list">
+      <button
+        type="button"
+        class="traffic-row"
+        *ngFor="let plane of filteredPlanes; trackBy: trackByPlane"
+        [class.active]="selectedPlane && getPlaneId(selectedPlane) === getPlaneId(plane)"
+        (click)="selectPlane(plane)"
+      >
+        <span class="row-status" [ngClass]="getStatusClass(plane)"></span>
+        <span class="row-main">
+          <strong>{{ getPlaneTitle(plane) }}</strong>
+          <small>{{ getAirlineName(plane) }}</small>
+          <small>{{ getOriginCountry(plane) }}</small>
+        </span>
+        <span class="row-meta">
+          <strong>{{ toMeters(plane.altitude) }} m</strong>
+          <small>{{ toMps(plane.speed) }} m/s / {{ plane.heading || 0 }} deg</small>
+        </span>
+      </button>
+
+      <button
+        type="button"
+        class="traffic-row"
+        *ngFor="let drone of filteredDroneList; trackBy: trackByDrone"
+        (click)="selectDrone(drone)"
+        [class.active]="selectedDroneId === drone.flightId"
+      >
+        <span class="row-status" [ngClass]="getStatusClass(drone)"></span>
+        <span class="row-main">
+          <strong>{{ drone.flightId }}</strong>
+          <small>{{ drone.operator }}</small>
+          <small>{{ drone.type || 'Drone' }}</small>
+        </span>
+        <span class="row-meta">
+          <strong>{{ toMeters(drone.alt) }} m</strong>
+          <small>{{ toMps(drone.speed) }} m/s / {{ drone.heading || 0 }} deg</small>
+        </span>
+      </button>
+    </div>
+
+    <div class="sidebar-footer">
+      {{ filteredPlanes.length + filteredDroneList.length }} of {{ planes.length + droneList.length }} vehicles
+    </div>
+  </aside>
+
+  <section class="detail-drawer" *ngIf="selectedPlane">
+    <div class="drawer-head">
+      <div>
+        <h2>{{ getPlaneTitle(selectedPlane) }}</h2>
+        <p><span></span> IN FLIGHT <small>{{ getAirlineName(selectedPlane) }}</small></p>
+      </div>
+      <button type="button" (click)="selectedPlane = undefined">x</button>
+    </div>
+
+    <img
+      *ngIf="selectedPlane.photoThumbnailUrl || selectedPlane.photoUrl"
+      class="aircraft-photo"
+      [src]="selectedPlane.photoThumbnailUrl || selectedPlane.photoUrl"
+      [alt]="getPlaneTitle(selectedPlane)"
+    />
+
+    <div class="detail-section">
+      <h3>Identification</h3>
+      <dl>
+        <div><dt>Flight ID</dt><dd>{{ selectedPlane.flightNo || getPlaneTitle(selectedPlane) }}</dd></div>
+        <div><dt>ICAO/Hex</dt><dd>{{ selectedPlane.adshex || selectedPlane.icao24 || "N/A" }}</dd></div>
+        <div><dt>Operator</dt><dd>{{ getAirlineName(selectedPlane) }}</dd></div>
+        <div><dt>Owner</dt><dd>{{ selectedPlane.owner || "N/A" }}</dd></div>
+        <div><dt>Origin Country</dt><dd>{{ getOriginCountry(selectedPlane) }}</dd></div>
+        <div><dt>Vehicle Type</dt><dd>{{ selectedPlane.aircraftType || "Manned Aircraft" }}</dd></div>
+        <div><dt>Manufacturer</dt><dd>{{ selectedPlane.manufacturer || "N/A" }}</dd></div>
+        <div><dt>Registration</dt><dd>{{ selectedPlane.registration || "N/A" }}</dd></div>
+      </dl>
+    </div>
+
+    <div class="detail-section">
+      <h3>Position</h3>
+      <dl>
+        <div><dt>Latitude</dt><dd class="accent">{{ selectedPlane.lat | number: "1.5-5" }}</dd></div>
+        <div><dt>Longitude</dt><dd class="accent">{{ selectedPlane.lon | number: "1.5-5" }}</dd></div>
+      <div><dt>Altitude</dt><dd>{{ toMeters(selectedPlane.altitude) }} m</dd></div>
+      <div><dt>Route</dt><dd>{{ getRoute(selectedPlane) }}</dd></div>
+      <div><dt>Origin</dt><dd>{{ selectedPlane.origin || "N/A" }}</dd></div>
+      <div><dt>Destination</dt><dd>{{ selectedPlane.destination || "N/A" }}</dd></div>
+      </dl>
+    </div>
+
+    <div class="detail-section">
+      <h3>Movement</h3>
+      <dl>
+      <div><dt>Speed</dt><dd>{{ toMps(selectedPlane.speed) }} m/s</dd></div>
+      <div><dt>Heading</dt><dd>{{ selectedPlane.heading || 0 }} deg</dd></div>
+      <div><dt>Vertical Speed</dt><dd>{{ selectedPlane.verticalRate || 0 }} ft/min</dd></div>
+      <div><dt>Source</dt><dd>{{ getDataSource(selectedPlane) }}</dd></div>
+      </dl>
+    </div>
+
+    <div class="drawer-actions">
+      <button type="button" (click)="flyToPlane(selectedPlane)">Track Vehicle</button>
+      <button type="button" class="primary" (click)="copySelectedLink()">View Full Details</button>
+    </div>
+  </section>
+
+  <!-- <div class="map-controls">
+    <button type="button" (click)="zoomToCurrentLocation()">LOC</button>
+    <button type="button" (click)="focusRegion()">FIT</button>
+  </div> -->
+
+  <app-heatmap
+    [show3DMapToggle]="false"
+    [toggle]="false"
+    [terrain]="false"
+    (toggSwitch)="toggle2D3D($event)"
+  ></app-heatmap>
+
+  <div
+    class="hover-card"
+    *ngIf="hoveredPlane"
+    [style.left.px]="hoverPosition.x"
+    [style.top.px]="hoverPosition.y"
+  >
+    <div class="hover-head">
+      <strong>{{ getPlaneTitle(hoveredPlane) }}</strong>
+      <span>{{ getAirlineName(hoveredPlane) }}</span>
+    </div>
+    <div class="hover-state"><span></span> IN FLIGHT</div>
+    <img
+      *ngIf="hoveredPlane.photoThumbnailUrl || hoveredPlane.photoUrl"
+      class="hover-photo"
+      [src]="hoveredPlane.photoThumbnailUrl || hoveredPlane.photoUrl"
+      [alt]="getPlaneTitle(hoveredPlane)"
+    />
+    <dl>
+      <div><dt>Latitude</dt><dd>{{ hoveredPlane.lat | number: "1.5-5" }}</dd></div>
+      <div><dt>Longitude</dt><dd>{{ hoveredPlane.lon | number: "1.5-5" }}</dd></div>
+      <div><dt>Route</dt><dd>{{ getRoute(hoveredPlane) }}</dd></div>
+      <div><dt>Origin Country</dt><dd>{{ getOriginCountry(hoveredPlane) }}</dd></div>
+      <div><dt>Registration</dt><dd>{{ hoveredPlane.registration || "N/A" }}</dd></div>
+      <div><dt>Type</dt><dd>{{ hoveredPlane.aircraftType || "N/A" }}</dd></div>
+      <div><dt>Altitude</dt><dd>{{ toMeters(hoveredPlane.altitude) }} m</dd></div>
+      <div><dt>Speed</dt><dd>{{ toMps(hoveredPlane.speed) }} m/s</dd></div>
+      <div><dt>Heading</dt><dd>{{ hoveredPlane.heading || 0 }} deg</dd></div>
+      <div><dt>Last Updated</dt><dd>{{ hoveredPlane.lastUpdate || getLastUpdatedAgo() }}</dd></div>
+    </dl>
+  </div>
+
+  <div
+    class="hover-card"
+    *ngIf="hoveredDrone"
+    [style.left.px]="hoverPositionDrone.x"
+    [style.top.px]="hoverPositionDrone.y"
+  >
+    <div class="hover-head">
+      <strong>{{ hoveredDrone.flightId }}</strong>
+      <span>{{ hoveredDrone.operator }}</span>
+    </div>
+    <div class="hover-state"><span></span> IN FLIGHT</div>
+    <dl>
+      <div><dt>Latitude</dt><dd>{{ hoveredDrone.lat | number: "1.5-5" }}</dd></div>
+      <div><dt>Longitude</dt><dd>{{ hoveredDrone.lng | number: "1.5-5" }}</dd></div>
+      <div><dt>Type</dt><dd>{{ hoveredDrone.type || 'N/A' }}</dd></div>
+      <div><dt>Altitude</dt><dd>{{ hoveredDrone.alt | number: "1.0-0" }} m</dd></div>
+      <div><dt>Speed</dt><dd>{{ hoveredDrone.speed | number: "1.1-1" }} m/s</dd></div>
+      <div><dt>Heading</dt><dd>{{ hoveredDrone.heading || 0 }} deg</dd></div>
+      <div><dt>Last Updated</dt><dd>{{ hoveredDrone.lastUpdated }}</dd></div>
+    </dl>
+  </div>
+
+    <div class="map-legend">
+    <span><i class="manned"></i>Manned</span>
+    <span><i class="drones"></i>Drones</span>
+    <!-- Remote ID removed per UI spec - only three options remain -->
+    <span><i class="other"></i>Other UAS</span>
+  </div>
+
+  <div class="altitude-scale">
+    <span>Altitude</span>
+    <small>0 ft</small>
+    <div class="scale-ramp">
+      <i *ngFor="let item of altitudeLegend" [style.background]="item.color"></i>
+    </div>
+    <small>40,000+ ft</small>
+  </div>
+
+  <footer class="traffic-footer">
+    <span>Active Traffic <strong>{{ filteredPlanes.length }}</strong></span>
+    <span>Active Missions <strong>0</strong></span>
+    <span>Alerts <strong>0</strong></span>
+    <span>Comm Issues <strong>0</strong></span>
+  </footer>
+</div>

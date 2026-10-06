@@ -1,0 +1,110 @@
+
+
+<div class="container-fluid text-white  pb-5 pt-4  contact-page-wrapper">
+
+    <div class="row justify-content-center">
+
+        <div class="landing-header-container col-md-10">
+            <div class="landing-header ">
+                <div class="header-left">
+                    <img src="assets/landing-img/skyeair_logo_white.png" alt="Skye UTM Logo" class="logo" />
+                </div>
+                <div class="header-right">
+                    <!-- <button class="custom-btn-login btn btn-dark">Login</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center pl-0">
+
+        
+      <div class="col-md-10 d-flex flex-wrap">
+        <!-- Left Content -->
+        <div class="col-md-6 mb-4 pl-0 pr-4 left-section">
+          <h2 class="fw-bold contact-heading">Experience the power of Skye UTM with a live demo</h2>
+          <ul class="mt-4 pl-4 ">
+            <li><strong>Mission Planning Made Easy</strong><br />Create and manage drone missions effortlessly with map-based tools.</li>
+            <li class="mt-3"><strong>Real-Time Airspace Monitoring</strong><br />Track flights and stay updated with live drone traffic data.</li>
+            <li class="mt-3"><strong>WhatsApp Integration</strong><br />Plan missions and track deliveries directly through WhatsApp.</li>
+            <li class="mt-3"><strong>Centralized Dashboard</strong><br />Monitor all drone activities and performance from a single interface.</li>
+            <li class="mt-3"><strong>Regulatory Compliance</strong><br />Ensure safe, legal operations with automated flight approvals.</li>
+          </ul>
+        </div>
+  
+        <!-- Right Form -->
+        <div class="col-md-6 bg-white text-dark p-4 rounded">
+          <h4 class="mb-4 mt-3">Tell us a bit about yourself</h4>
+          <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+            <div class="row mb-3">
+              <div class="col">
+                <label class="required">First Name</label>
+                <input type="text" class="form-control" placeholder="First Name" formControlName="Name" />
+                <div class="text-danger" *ngIf="contactForm.get('Name')?.invalid && contactForm.get('Name')?.touched">
+                  First Name is required
+                </div>
+              </div>
+              <div class="col">
+                <label class="required">Last Name</label>
+                <input type="text" class="form-control" placeholder="Last Name" formControlName="LastName" />
+                <div class="text-danger" *ngIf="contactForm.get('LastName')?.invalid && contactForm.get('LastName')?.touched">
+                  Last Name is required
+                </div>
+              </div>
+            </div>
+  
+            <div class="row mb-3">
+              <div class="col">
+                <label class="required">Company Email ID</label>
+                <input type="Email" class="form-control" placeholder="Company Email ID" formControlName="Email" />
+                <div class="text-danger" *ngIf="contactForm.get('Email')?.invalid && contactForm.get('Email')?.touched">
+                  Valid Email is required
+                </div>
+              </div>
+              <div class="col">
+                <label class="required">Company Name</label>
+                <input type="text" class="form-control" placeholder="Company Name" formControlName="Company" />
+                <div class="text-danger" *ngIf="contactForm.get('Company')?.invalid && contactForm.get('Company')?.touched">
+                  Company Name is required
+                </div>
+              </div>
+            </div>
+  
+            <div class="row mb-3">
+              <div class="col">
+                <label class="required">Phone </label>
+                <input type="text" class="form-control" maxlength="10" placeholder="Phone Number" formControlName="Phone" />
+                <div class="text-danger" *ngIf="contactForm.get('Phone')?.touched && contactForm.get('Phone')?.invalid">
+                    <div *ngIf="contactForm.get('Phone')?.errors?.['required']">Phone Number is required</div>
+                    <div *ngIf="contactForm.get('Phone')?.errors?.['pattern']">Enter a valid 10-digit Phone number</div>
+                  </div>
+              </div>
+              <div class="col">
+                <label class="required">Role</label><br>
+                <select class="form-select form-control" formControlName="Role">
+                  <option value="">Select Role</option>
+                  <option>Developer</option>
+                  <option>Manager</option>
+                  <option>Administrator</option>
+                </select>
+                <div class="text-danger" *ngIf="contactForm.get('Role')?.invalid && contactForm.get('Role')?.touched">
+                  Role is required
+                </div>
+              </div>
+            </div>
+  
+            <div class="mb-3">
+                <label class="required">Message</label>
+              <textarea class="form-control" rows="4" placeholder="Message" formControlName="Message"></textarea>
+              <div class="text-danger" *ngIf="contactForm.get('Message')?.invalid && contactForm.get('Message')?.touched">
+                Message is required
+              </div>
+            </div>
+  
+            <p class="small">By clicking “Submit”, I agree to the terms set in Skye Air Mobility Privacy policy.</p>
+            <button class="submit-btn" type="submit" [disabled]="contactForm.invalid">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  

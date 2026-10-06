@@ -1,0 +1,1092 @@
+<div>
+  <div *ngIf="loader" class="loader">
+    <div class="logo">
+      <img
+        src="../../../../../assets/common-layout/SquareLoader.gif"
+        width="30px"
+      />
+      <img
+        src="../../../../../assets/common-layout/SkyeUTM logoWhite.svg"
+        width="200px"
+      />
+    </div>
+  </div>
+  <div *ngIf="!loader">
+    <div class="mx-md-3 mx-2 my-3">
+      <div>
+        <form [formGroup]="basicDetails">
+          <div class="full-card">
+            <div class="details-card">
+              <!-- General details  -->
+              <div class="card card-outer card-color">
+                <div
+                  *ngIf="profileDetails"
+                  [ngClass]="{ 'disabled-div': !editable }"
+                  [disabled]="!editable"
+                  class="card-body cardbody-margin px-4"
+                >
+                  <div class="my-1">
+                    <div class="list-values">Basic</div>
+                    <div class="row">
+                      <div class="col-md-4 px-3 py-2 my-2">
+                        <div class="input-label text-white">
+                          Full Name<span class="astrik">*</span>
+                        </div>
+                        <input
+                          class="form-control input-general"
+                          type="text"
+                          placeholder=""
+                          formControlName="fullName"
+                          [ngClass]="{
+                            'is-invalid': submitted && basic.fullName.errors
+                          }"
+                          (keydown.enter)="$event.preventDefault()"
+                        />
+                        <div
+                          *ngIf="submitted && basic.fullName.errors"
+                          class="error-message my-2"
+                        >
+                          <div *ngIf="basic.fullName.errors.required">
+                            This field is required
+                          </div>
+                          <div *ngIf="basic.fullName.errors.pattern">
+                            Invalid input. Only alphanumeric characters allowed.
+                          </div>
+                          <div *ngIf="basic.fullName.errors.textOnly">
+                            Number is not allowed in name
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-4 px-3 py-2 my-2">
+                        <div class="input-label text-white">
+                          Email ID<span class="astrik">*</span>
+                        </div>
+                        <input
+                          class="form-control input-general"
+                          type="text"
+                          placeholder=""
+                          formControlName="emailID"
+                          [ngClass]="{
+                            'is-invalid': submitted && basic.emailID.errors
+                          }"
+                        />
+                        <div
+                          *ngIf="submitted && basic.emailID.errors"
+                          class="error-message my-2"
+                        >
+                          <div *ngIf="basic.emailID.errors.required">
+                            This field is required
+                          </div>
+                          <div *ngIf="basic.emailID.errors.email">
+                            Not correct email id
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-4 px-3 py-2 my-2">
+                        <div class="input-label text-white">
+                          WhatsApp Number<span class="astrik">*</span>
+                        </div>
+                        <input
+                          class="form-control input-general"
+                          type="text"
+                          placeholder=""
+                          formControlName="phoneNumber"
+                          [ngClass]="{
+                            'is-invalid': submitted && basic.phoneNumber.errors
+                          }"
+                        />
+                        <div
+                          *ngIf="submitted && basic.phoneNumber.errors"
+                          class="error-message my-2"
+                        >
+                          <div *ngIf="basic.phoneNumber.errors.required">
+                            This field is required
+                          </div>
+                          <div *ngIf="basic.phoneNumber.errors.pattern">
+                            Please enter a valid number
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-4 px-3 py-2 mb-2">
+                        <div class="input-label text-white">
+                          Date of Birth<span class="astrik">*</span>
+                        </div>
+                        <input
+                          type="text"
+                          (change)="dateChange($event)"
+                          class="form-control input-general"
+                          formControlName="dateOfBirth"
+                          bsDatepicker
+                          [bsConfig]="{
+                            adaptivePosition: true,
+                            dateInputFormat: 'DD-MM-YYYY'
+                          }"
+                          [ngClass]="{
+                            'is-invalid': submitted && basic.dateOfBirth.errors
+                          }"
+                        />
+                        <div
+                          *ngIf="submitted && basic.dateOfBirth.errors"
+                          class="invalid-feedback"
+                        >
+                          <div *ngIf="basic.dateOfBirth.errors.required">
+                            Date of Birth is required
+                          </div>
+                          <div *ngIf="basic.dateOfBirth.errors.age">
+                            Must be atleast 18 years or older
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-4 px-3 py-2 my-2">
+                        <div class="input-label">
+                          Maximum Qualification<span class="astrik">*</span>
+                        </div>
+                        <select
+                          formControlName="maximumQualification"
+                          [ngClass]="{
+                            'is-invalid':
+                              submitted && basic.maximumQualification.errors
+                          }"
+                        >
+                          <option selected value="" disabled>Select..</option>
+                          <option
+                            *ngFor="let qualification of QualificationArray"
+                            [ngValue]="qualification"
+                            class="text-white"
+                          >
+                            {{ qualification }}
+                          </option>
+                        </select>
+
+                        <div
+                          *ngIf="submitted && basic.maximumQualification.errors"
+                          class="error-message my-2"
+                        >
+                          <div
+                            *ngIf="basic.maximumQualification.errors.required"
+                          >
+                            This field is required
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-4 px-3 py-2 my-2">
+                        <div class="input-label text-white">
+                          Adhaar No.<span class="astrik">*</span>
+                        </div>
+                        <input
+                          class="form-control input-general"
+                          type="text"
+                          formControlName="adhaarNo"
+                          [ngClass]="{
+                            'is-invalid': submitted && basic.adhaarNo.errors
+                          }"
+                          (keydown.enter)="$event.preventDefault()"
+                        />
+                        <div
+                          *ngIf="submitted && basic.adhaarNo.errors"
+                          class="error-message my-2"
+                        >
+                          <div *ngIf="basic.adhaarNo.errors.required">
+                            This field is required
+                          </div>
+                          <div *ngIf="basic.adhaarNo.errors.numberOnly">
+                            Number only
+                          </div>
+                          <div *ngIf="basic.adhaarNo.errors.adhaarNumberLength">
+                            Length should be 12
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-8 px-3 py-2 my-2">
+                        <div class="input-label text-white">
+                          Address<span class="astrik">*</span>
+                        </div>
+                        <input
+                          class="form-control input-general"
+                          type="text"
+                          formControlName="addressOnAddhaar"
+                          [ngClass]="{
+                            'is-invalid':
+                              submitted && basic.addressOnAddhaar.errors
+                          }"
+                          (keydown.enter)="$event.preventDefault()"
+                        />
+                        <div
+                          *ngIf="submitted && basic.addressOnAddhaar.errors"
+                          class="error-message my-2"
+                        >
+                          <div *ngIf="basic.addressOnAddhaar.errors.required">
+                            This field is required
+                          </div>
+                          <div *ngIf="basic.addressOnAddhaar.errors.max">
+                            Number is not allowed in name
+                          </div>
+                          <div *ngIf="basic.addressOnAddhaar.errors.pattern">
+                            Space not allowed
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-4 px-3 py-2 my-2">
+                        <div class="input-label text-white">
+                          Proof of Identity<span class="astrik">*</span>
+                        </div>
+                        <select
+                          formControlName="identityProof"
+                          [ngClass]="{
+                            'is-invalid':
+                              submitted && basic.identityProof.errors
+                          }"
+                        >
+                          <option selected value="" disabled>Select..</option>
+                          <option
+                            *ngFor="let identity of IdentityArray"
+                            [ngValue]="identity"
+                          >
+                            {{ identity }}
+                          </option>
+                        </select>
+
+                        <div
+                          *ngIf="submitted && basic.identityProof.errors"
+                          class="error-message my-2"
+                        >
+                          <div *ngIf="basic.identityProof.errors.required">
+                            This field is required
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-4 px-3 py-2 my-2">
+                        <div class="input-label text-white">
+                          Proof of Identity No.<span class="astrik">*</span>
+                        </div>
+                        <input
+                          class="form-control input-general"
+                          type="text"
+                          formControlName="identityNumber"
+                          [ngClass]="{
+                            'is-invalid':
+                              submitted && basic.identityNumber.errors
+                          }"
+                          (keydown.enter)="$event.preventDefault()"
+                        />
+                        <div
+                          *ngIf="submitted && basic.identityNumber.errors"
+                          class="error-message my-2"
+                        >
+                          <div *ngIf="basic.identityNumber.errors.required">
+                            This field is required
+                          </div>
+                          <div *ngIf="basic?.identityNumber?.errors?.pattern">
+                            wrong input
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-4 px-3 py-2 my-2">
+                        <div class="input-label">Proof of Identity</div>
+                        <div
+                          class="input-group border-style file-label text-center align-middle uploadFILE"
+                          [ngClass]="{
+                            'upload-section':
+                              !IdentityDocFileName.value ||
+                              IdentityDoc?.errors?.loading,
+                            'initial-pos': IdentityDocFileName.value,
+                            'disabled-cursor':
+                              !editable || IdentityDoc?.errors?.loading
+                          }"
+                        >
+                          <label
+                            for="IdentityDoc"
+                            class="text-drag"
+                            [ngClass]="{
+                              'label-sec': IdentityDocFileName.value
+                            }"
+                          >
+                            <img
+                              src="../../../../../assets/common-layout/Upload.svg"
+                              class="ml-2 upload-img2 mt-2"
+                              *ngIf="!IdentityDocFileName.value"
+                            />
+                            <div
+                              *ngIf="!IdentityDocFileName.value"
+                              class="ml-2"
+                            >
+                              Drag-and-drop a JPEG/PNG file, or
+                            </div>
+                            <p *ngIf="!IdentityDocFileName.value">
+                              <span class="text-primary-drag ml-4"
+                                >browse computer</span
+                              >
+                            </p>
+                            <span
+                              for="IdentityDoc"
+                              class="kml-name"
+                              *ngIf="IdentityDocFileName.value"
+                            >
+                              {{
+                                IdentityDocFileName?.value?.substring(0, 12) +
+                                  "..."
+                              }}
+                            </span>
+                            <span
+                              for="IdentityDoc"
+                              class="kml-name"
+                              *ngIf="
+                                IdentityDoc.errors && IdentityDoc.errors.loading
+                              "
+                            >
+                              Uploading...
+                            </span>
+                          </label>
+                          <input
+                            type="file"
+                            class="form-control"
+                            name="IdentityDoc"
+                            id="IdentityDoc"
+                            accept=".pdf, .png, .jpeg, .jpg"
+                            (change)="fileUpload($event, 'IdentityDoc')"
+                            [ngClass]="{
+                              'is-invalid':
+                                submitted &&
+                                basic.IdentityDoc.errors &&
+                                !basic.IdentityDoc.errors.loading
+                            }"
+                            [disabled]="!editable"
+                          />
+                          <img
+                            src="../../../../../assets/common-layout/file-close.svg"
+                            class="mb-3 close-hover"
+                            (click)="editable && removeFile('IdentityDoc')"
+                            *ngIf="IdentityDocFileName.value"
+                          />
+                        </div>
+                        <div
+                          *ngIf="basic.IdentityDoc.errors"
+                          class="error-message my-2"
+                        >
+                          <div
+                            *ngIf="
+                              basic.IdentityDoc.errors &&
+                              basic.IdentityDoc.errors.SizeGreater
+                            "
+                          >
+                            File size should be less than or equal to 500KB
+                          </div>
+                          <div
+                            *ngIf="
+                              basic.IdentityDoc.errors &&
+                              basic.IdentityDoc.errors.UploadValidFile
+                            "
+                          >
+                            Please upload the valid kml/waypoint file
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card card-outer card-color mt-3">
+                <div
+                  *ngIf="profileDetails"
+                  [ngClass]="{ 'disabled-div': !editable }"
+                  [disabled]="!editable"
+                  class="card-body cardbody-margin px-4"
+                >
+                  <div class="my-1">
+                    <div class="list-values">Documents</div>
+                    <div class="row">
+                      <div class="col-md-4 px-3 py-2 my-2">
+                        <div class="input-label">Photo</div>
+                        <div
+                          class="input-group border-style file-label text-center align-middle uploadFILE"
+                          [ngClass]="{
+                            'upload-section':
+                              !PhotoFileName.value || Photo?.errors?.loading,
+                            'initial-pos': PhotoFileName.value,
+                            'disabled-cursor':
+                              !editable || Photo?.errors?.loading
+                          }"
+                        >
+                          <label
+                            for="Photo"
+                            class="text-drag"
+                            [ngClass]="{
+                              'label-sec': PhotoFileName.value
+                            }"
+                          >
+                            <img
+                              src="../../../../../assets/common-layout/Upload.svg"
+                              class="ml-2 upload-img2 mt-2"
+                              *ngIf="!PhotoFileName.value"
+                            />
+                            <div *ngIf="!PhotoFileName.value" class="ml-2">
+                              Drag-and-drop a JPEG/PNG file, or
+                            </div>
+                            <p *ngIf="!PhotoFileName.value">
+                              <span class="text-primary-drag ml-4"
+                                >browse computer</span
+                              >
+                            </p>
+                            <span
+                              for="Photo"
+                              class="kml-name"
+                              *ngIf="PhotoFileName.value"
+                            >
+                              {{
+                                PhotoFileName?.value?.substring(0, 12) + "..."
+                              }}
+                            </span>
+                            <span
+                              for="Photo"
+                              class="kml-name"
+                              *ngIf="Photo.errors && Photo.errors.loading"
+                            >
+                              Uploading...
+                            </span>
+                          </label>
+                          <input
+                            type="file"
+                            class="form-control"
+                            name="Photo"
+                            id="Photo"
+                            accept=".png, .jpeg, .jpg"
+                            (change)="fileUpload($event, 'Photo')"
+                            [ngClass]="{
+                              'is-invalid':
+                                submitted &&
+                                basic.Photo.errors &&
+                                !basic.Photo.errors.loading
+                            }"
+                            [disabled]="!editable"
+                          />
+                          <img
+                            src="../../../../../assets/common-layout/file-close.svg"
+                            class="mb-3 close-hover"
+                            (click)="editable && removeFile('Photo')"
+                            *ngIf="PhotoFileName.value"
+                          />
+                        </div>
+                        <div
+                          *ngIf="basic.Photo.errors"
+                          class="error-message my-2"
+                        >
+                          <div
+                            *ngIf="
+                              basic.Photo.errors &&
+                              basic.Photo.errors.SizeGreater
+                            "
+                          >
+                            File size should be less than or equal to 500KB
+                          </div>
+                          <div
+                            *ngIf="
+                              basic.Photo.errors &&
+                              basic.Photo.errors.UploadValidFile
+                            "
+                          >
+                            Please upload the valid kml/waypoint file
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-4 px-3 py-2 my-2">
+                        <div class="input-label">10th Certificate</div>
+                        <div
+                          class="input-group border-style file-label text-center align-middle uploadFILE"
+                          [ngClass]="{
+                            'upload-section':
+                              !TenthCertificateFileName.value ||
+                              TenthCertificate?.errors?.loading,
+                            'initial-pos': TenthCertificateFileName.value,
+                            'disabled-cursor':
+                              !editable || TenthCertificate?.errors?.loading
+                          }"
+                        >
+                          <label
+                            for="TenthCertificate"
+                            class="text-drag"
+                            [ngClass]="{
+                              'label-sec': TenthCertificateFileName.value
+                            }"
+                          >
+                            <img
+                              src="../../../../../assets/common-layout/Upload.svg"
+                              class="ml-2 upload-img2 mt-2"
+                              *ngIf="!TenthCertificateFileName.value"
+                            />
+                            <div
+                              *ngIf="!TenthCertificateFileName.value"
+                              class="ml-2"
+                            >
+                              Drag-and-drop a JPEG/PNG file, or
+                            </div>
+                            <p *ngIf="!TenthCertificateFileName.value">
+                              <span class="text-primary-drag ml-4"
+                                >browse computer</span
+                              >
+                            </p>
+                            <span
+                              for="TenthCertificate"
+                              class="kml-name"
+                              *ngIf="TenthCertificateFileName.value"
+                            >
+                              {{
+                                TenthCertificateFileName?.value?.substring(
+                                  0,
+                                  12
+                                ) + "..."
+                              }}
+                            </span>
+                            <span
+                              for="TenthCertificate"
+                              class="kml-name"
+                              *ngIf="
+                                TenthCertificate.errors &&
+                                TenthCertificate.errors.loading
+                              "
+                            >
+                              Uploading...
+                            </span>
+                          </label>
+                          <input
+                            type="file"
+                            class="form-control"
+                            name="TenthCertificate"
+                            id="TenthCertificate"
+                            accept=".pdf, .png, .jpeg, .jpg"
+                            (change)="fileUpload($event, 'TenthCertificate')"
+                            [ngClass]="{
+                              'is-invalid':
+                                submitted &&
+                                basic.TenthCertificate.errors &&
+                                !basic.TenthCertificate.errors.loading
+                            }"
+                            [disabled]="!editable"
+                          />
+                          <img
+                            src="../../../../../assets/common-layout/file-close.svg"
+                            class="mb-3 close-hover"
+                            (click)="editable && removeFile('TenthCertificate')"
+                            *ngIf="TenthCertificateFileName.value"
+                          />
+                        </div>
+                        <div
+                          *ngIf="basic.TenthCertificate.errors"
+                          class="error-message my-2"
+                        >
+                          <div
+                            *ngIf="
+                              basic.TenthCertificate.errors &&
+                              basic.TenthCertificate.errors.SizeGreater
+                            "
+                          >
+                            File size should be less than or equal to 500KB
+                          </div>
+                          <div
+                            *ngIf="
+                              basic.TenthCertificate.errors &&
+                              basic.TenthCertificate.errors.UploadValidFile
+                            "
+                          >
+                            Please upload the valid kml/waypoint file
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-4 px-3 py-2 my-2">
+                        <div class="input-label">Graduation Certificate</div>
+                        <div
+                          class="input-group border-style file-label text-center align-middle uploadFILE"
+                          [ngClass]="{
+                            'upload-section':
+                              !GraduationCertificateFileName.value ||
+                              GraduationCertificate?.errors?.loading,
+                            'initial-pos': GraduationCertificateFileName.value,
+                            'disabled-cursor':
+                              !editable ||
+                              GraduationCertificate?.errors?.loading
+                          }"
+                        >
+                          <label
+                            for="GraduationCertificate"
+                            class="text-drag"
+                            [ngClass]="{
+                              'label-sec': GraduationCertificateFileName.value
+                            }"
+                          >
+                            <img
+                              src="../../../../../assets/common-layout/Upload.svg"
+                              class="ml-2 upload-img2 mt-2"
+                              *ngIf="!GraduationCertificateFileName.value"
+                            />
+                            <div
+                              *ngIf="!GraduationCertificateFileName.value"
+                              class="ml-2"
+                            >
+                              Drag-and-drop a JPEG/PNG file, or
+                            </div>
+                            <p *ngIf="!GraduationCertificateFileName.value">
+                              <span class="text-primary-drag ml-4"
+                                >browse computer</span
+                              >
+                            </p>
+                            <span
+                              for="GraduationCertificate"
+                              class="kml-name"
+                              *ngIf="GraduationCertificateFileName.value"
+                            >
+                              {{
+                                GraduationCertificateFileName?.value?.substring(
+                                  0,
+                                  12
+                                ) + "..."
+                              }}
+                            </span>
+                            <span
+                              for="GraduationCertificate"
+                              class="kml-name"
+                              *ngIf="
+                                GraduationCertificate.errors &&
+                                GraduationCertificate.errors.loading
+                              "
+                            >
+                              Uploading...
+                            </span>
+                          </label>
+                          <input
+                            type="file"
+                            class="form-control"
+                            name="GraduationCertificate"
+                            id="GraduationCertificate"
+                            accept=".pdf, .png, .jpeg, .jpg"
+                            (change)="
+                              fileUpload($event, 'GraduationCertificate')
+                            "
+                            [ngClass]="{
+                              'is-invalid':
+                                submitted &&
+                                basic.GraduationCertificate.errors &&
+                                !basic.GraduationCertificate.errors.loading
+                            }"
+                            [disabled]="!editable"
+                          />
+                          <img
+                            src="../../../../../assets/common-layout/file-close.svg"
+                            class="mb-3 close-hover"
+                            (click)="
+                              editable && removeFile('GraduationCertificate')
+                            "
+                            *ngIf="GraduationCertificateFileName.value"
+                          />
+                        </div>
+                        <div
+                          *ngIf="basic.GraduationCertificate.errors"
+                          class="error-message my-2"
+                        >
+                          <div
+                            *ngIf="
+                              basic.GraduationCertificate.errors &&
+                              basic.GraduationCertificate.errors.SizeGreater
+                            "
+                          >
+                            File size should be less than or equal to 500KB
+                          </div>
+                          <div
+                            *ngIf="
+                              basic.GraduationCertificate.errors &&
+                              basic.GraduationCertificate.errors.UploadValidFile
+                            "
+                          >
+                            Please upload the valid kml/waypoint file
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-4 px-3 py-2 my-2">
+                        <div class="input-label">Resume</div>
+                        <div
+                          class="input-group border-style file-label text-center align-middle uploadFILE"
+                          [ngClass]="{
+                            'upload-section':
+                              !ResumeFileName.value || Resume?.errors?.loading,
+                            'initial-pos': ResumeFileName.value,
+                            'disabled-cursor':
+                              !editable || Resume?.errors?.loading
+                          }"
+                        >
+                          <label
+                            for="Resume"
+                            class="text-drag"
+                            [ngClass]="{
+                              'label-sec': ResumeFileName.value
+                            }"
+                          >
+                            <img
+                              src="../../../../../assets/common-layout/Upload.svg"
+                              class="ml-2 upload-img2 mt-2"
+                              *ngIf="!ResumeFileName.value"
+                            />
+                            <div *ngIf="!ResumeFileName.value" class="ml-2">
+                              Drag-and-drop a JPEG/PNG file, or
+                            </div>
+                            <p *ngIf="!ResumeFileName.value">
+                              <span class="text-primary-drag ml-4"
+                                >browse computer</span
+                              >
+                            </p>
+                            <span
+                              for="Resume"
+                              class="kml-name"
+                              *ngIf="ResumeFileName.value"
+                            >
+                              {{
+                                ResumeFileName?.value?.substring(0, 12) + "..."
+                              }}
+                            </span>
+                            <span
+                              for="Resume"
+                              class="kml-name"
+                              *ngIf="Resume.errors && Resume.errors.loading"
+                            >
+                              Uploading...
+                            </span>
+                          </label>
+                          <input
+                            type="file"
+                            class="form-control"
+                            name="Resume"
+                            id="Resume"
+                            accept=".pdf, .png, .jpeg, .jpg"
+                            (change)="fileUpload($event, 'Resume')"
+                            [ngClass]="{
+                              'is-invalid':
+                                submitted &&
+                                basic.Resume.errors &&
+                                !basic.Resume.errors.loading
+                            }"
+                            [disabled]="!editable"
+                          />
+                          <img
+                            src="../../../../../assets/common-layout/file-close.svg"
+                            class="mb-3 close-hover"
+                            (click)="editable && removeFile('Resume')"
+                            *ngIf="ResumeFileName.value"
+                          />
+                        </div>
+                        <div
+                          *ngIf="basic.Resume.errors"
+                          class="error-message my-2"
+                        >
+                          <div
+                            *ngIf="
+                              basic.Resume.errors &&
+                              basic.Resume.errors.SizeGreater
+                            "
+                          >
+                            File size should be less than or equal to 500KB
+                          </div>
+                          <div
+                            *ngIf="
+                              basic.Resume.errors &&
+                              basic.Resume.errors.UploadValidFile
+                            "
+                          >
+                            Please upload the valid kml/waypoint file
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-4 px-3 py-2 my-2">
+                        <div class="input-label">
+                          Certificate of Medical Fitness
+                        </div>
+                        <div
+                          class="input-group border-style file-label text-center align-middle uploadFILE"
+                          [ngClass]="{
+                            'upload-section':
+                              !MedicalFitnessCertificateFileName.value ||
+                              MedicalFitnessCertificate?.errors?.loading,
+                            'initial-pos':
+                              MedicalFitnessCertificateFileName.value,
+                            'disabled-cursor':
+                              !editable ||
+                              MedicalFitnessCertificate?.errors?.loading
+                          }"
+                        >
+                          <label
+                            for="MedicalFitnessCertificate"
+                            class="text-drag"
+                            [ngClass]="{
+                              'label-sec':
+                                MedicalFitnessCertificateFileName.value
+                            }"
+                          >
+                            <img
+                              src="../../../../../assets/common-layout/Upload.svg"
+                              class="ml-2 upload-img2 mt-2"
+                              *ngIf="!MedicalFitnessCertificateFileName.value"
+                            />
+                            <div
+                              *ngIf="!MedicalFitnessCertificateFileName.value"
+                              class="ml-2"
+                            >
+                              Drag-and-drop a JPEG/PNG file, or
+                            </div>
+                            <p *ngIf="!MedicalFitnessCertificateFileName.value">
+                              <span class="text-primary-drag ml-4"
+                                >browse computer</span
+                              >
+                            </p>
+                            <span
+                              for="MedicalFitnessCertificate"
+                              class="kml-name"
+                              *ngIf="MedicalFitnessCertificateFileName.value"
+                            >
+                              {{
+                                MedicalFitnessCertificateFileName?.value?.substring(
+                                  0,
+                                  12
+                                ) + "..."
+                              }}
+                            </span>
+                            <span
+                              for="MedicalFitnessCertificate"
+                              class="kml-name"
+                              *ngIf="
+                                MedicalFitnessCertificate.errors &&
+                                MedicalFitnessCertificate.errors.loading
+                              "
+                            >
+                              Uploading...
+                            </span>
+                          </label>
+                          <input
+                            type="file"
+                            class="form-control"
+                            name="MedicalFitnessCertificate"
+                            id="MedicalFitnessCertificate"
+                            accept=".pdf, .png, .jpeg, .jpg"
+                            (change)="
+                              fileUpload($event, 'MedicalFitnessCertificate')
+                            "
+                            [ngClass]="{
+                              'is-invalid':
+                                submitted &&
+                                basic.MedicalFitnessCertificate.errors &&
+                                !basic.MedicalFitnessCertificate.errors.loading
+                            }"
+                            [disabled]="!editable"
+                          />
+                          <img
+                            src="../../../../../assets/common-layout/file-close.svg"
+                            class="mb-3 close-hover"
+                            (click)="
+                              editable &&
+                                removeFile('MedicalFitnessCertificate')
+                            "
+                            *ngIf="MedicalFitnessCertificateFileName.value"
+                          />
+                        </div>
+                        <div
+                          *ngIf="basic.MedicalFitnessCertificate.errors"
+                          class="error-message my-2"
+                        >
+                          <div
+                            *ngIf="
+                              basic.MedicalFitnessCertificate.errors &&
+                              basic.MedicalFitnessCertificate.errors.SizeGreater
+                            "
+                          >
+                            File size should be less than or equal to 500KB
+                          </div>
+                          <div
+                            *ngIf="
+                              basic.MedicalFitnessCertificate.errors &&
+                              basic.MedicalFitnessCertificate.errors
+                                .UploadValidFile
+                            "
+                          >
+                            Please upload the valid kml/waypoint file
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-4 px-3 py-2 my-2">
+                        <div class="input-label">Signature*</div>
+                        <div
+                          class="input-group border-style file-label text-center align-middle uploadFILE"
+                          [ngClass]="{
+                            'upload-section':
+                              !SignatureFileName.value ||
+                              Signature?.errors?.loading,
+                            'initial-pos': SignatureFileName.value,
+                            'disabled-cursor':
+                              !editable || Signature?.errors?.loading
+                          }"
+                        >
+                          <label
+                            for="Signature"
+                            class="text-drag"
+                            [ngClass]="{
+                              'label-sec': SignatureFileName.value
+                            }"
+                          >
+                            <img
+                              src="../../../../../assets/common-layout/Upload.svg"
+                              class="ml-2 upload-img2 mt-2"
+                              *ngIf="!SignatureFileName.value"
+                            />
+                            <div *ngIf="!SignatureFileName.value" class="ml-2">
+                              Drag-and-drop a JPEG/PNG file, or
+                            </div>
+                            <p *ngIf="!SignatureFileName.value">
+                              <span class="text-primary-drag ml-4"
+                                >browse computer</span
+                              >
+                            </p>
+                            <span
+                              for="Signature"
+                              class="kml-name"
+                              *ngIf="SignatureFileName.value"
+                            >
+                              {{
+                                SignatureFileName?.value?.substring(0, 12) +
+                                  "..."
+                              }}
+                            </span>
+                            <span
+                              for="Signature"
+                              class="kml-name"
+                              *ngIf="
+                                Signature.errors && Signature.errors.loading
+                              "
+                            >
+                              Uploading...
+                            </span>
+                          </label>
+                          <input
+                            type="file"
+                            class="form-control"
+                            name="Signature"
+                            id="Signature"
+                            accept=".pdf, .png, .jpeg, .jpg"
+                            (change)="fileUpload($event, 'Signature')"
+                            [ngClass]="{
+                              'is-invalid':
+                                submitted &&
+                                basic.Signature.errors &&
+                                !basic.Signature.errors.loading
+                            }"
+                            [disabled]="!editable"
+                          />
+                          <img
+                            src="../../../../../assets/common-layout/file-close.svg"
+                            class="mb-3 close-hover"
+                            (click)="editable && removeFile('Signature')"
+                            *ngIf="SignatureFileName.value"
+                          />
+                        </div>
+                        <div
+                          *ngIf="basic.Signature.errors"
+                          class="error-message my-2"
+                        >
+                          <div
+                            *ngIf="
+                              basic.Signature.errors &&
+                              basic.Signature.errors.SizeGreater
+                            "
+                          >
+                            File size should be less than or equal to 500KB
+                          </div>
+                          <div
+                            *ngIf="
+                              basic.Signature.errors &&
+                              basic.Signature.errors.UploadValidFile
+                            "
+                          >
+                            Please upload the valid kml/waypoint file
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- side rectangle  -->
+            <div class="ml-4 side-rec">
+              <div
+                class="circle"
+                [style.background]="getConicGradient(progressValue)"
+              >
+                <span class="initials"
+                  >{{ firstLetter }}{{ secondLetter }}</span
+                >
+                <div class="inner-circle" (click)="editableForm()">
+                  <img
+                    src="../../../../../assets/common-layout/pencil.svg"
+                    width="25px"
+                  />
+                </div>
+              </div>
+              <!-- <div class="circle-text text-white-50">
+                Abhishek Chauhan
+              </div> -->
+              <button class="button-logout" (click)="onExit()">
+                <img
+                  src="../../../../../assets/common-layout/logout.svg"
+                  width="15px"
+                />
+                Logout
+              </button>
+            </div>
+          </div>
+        </form>
+
+        <div *ngIf="editable" class="width-align">
+          <div class="my-3" style="float: right">
+            <button
+              class="primary-outline-btn btn button-text2 button-text"
+              (click)="revertChanges()"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              class="primary-btn btn button-text"
+              (click)="formSumbit()"
+            >
+              Confirm details
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="overlay" *ngIf="sureExit">
+  <div class="exit-button" *ngIf="sureExit">
+    <div class="exit-button-text text-white f-16">
+      Are you sure you want to exit
+    </div>
+    <div class="exit-buttons">
+      <button class="exit-button-1 mt-3 text-white-50" (click)="onStay()">
+        Cancel
+      </button>
+      <button class="exit-button-1 mt-3 text-white-50" (click)="onLogout()">
+        Ok
+      </button>
+    </div>
+  </div>
+</div>

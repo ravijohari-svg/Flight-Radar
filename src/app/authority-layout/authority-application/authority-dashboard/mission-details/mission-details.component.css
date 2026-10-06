@@ -1,0 +1,142 @@
+.title {
+  display: inline;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.main-map {
+  height: 75vh;
+}
+
+@media screen and (max-width: 1300px) {
+  .main-map {
+    height: 80vh;
+  }
+}
+.list-values {
+  color: #121212;
+  font-size: 93%;
+  font-weight: 600;
+}
+
+.list-description {
+  color: #8c8c8c;
+  font-size: 80%;
+}
+
+.info-btn {
+  color: #c9c9c9;
+}
+
+.info-btn:hover + .hover-card {
+  display: block;
+}
+
+.hover-card {
+  display: none;
+  position: absolute;
+  width: 320px;
+  background-color: #ffffff;
+  top: 3%;
+  left: 42%;
+  z-index: 10;
+}
+
+.hover-card-top5 {
+  top: 25%;
+}
+
+.hover-card-top10 {
+  top: 0%;
+}
+
+.hover-card-top15 {
+  top: -35%;
+}
+
+.hover-card-top-large {
+  top: -60%;
+}
+
+.row [class*=col-] {
+  margin-bottom: -99999px;
+  padding-bottom: 99999px;
+}
+
+.row {
+  overflow: hidden;
+}
+
+.reject {
+  border: 1px solid #dc3545 !important;
+  color: #dc3545;
+  background-color: #faeaea;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.approve {
+  border: 1px solid #2bc43f !important;
+  color: #2bc43f;
+  background-color: #edfdee;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.pending {
+  border: 1px solid #ffcb3d !important;
+  color: #ffcb3d;
+  background-color: #feffe2;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.card-list-values {
+  color: #121212;
+  font-size: 80%;
+  font-weight: 600;
+}
+
+.mission-col {
+  max-height: 72vh;
+  overflow-y: auto;
+}
+
+@media screen and (max-width: 1300px) {
+  .mission-col {
+    max-height: 77vh;
+  }
+}
+.mission-col::-webkit-scrollbar {
+  width: 0.3em;
+}
+
+.mission-col::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.1);
+}
+
+.mission-col::-webkit-scrollbar-thumb {
+  background-color: #b9b9b9;
+}
+
+.fa-check-circle {
+  color: #4fc55f;
+}
+
+.fa-times-circle,
+.fa-times {
+  color: #dc3545;
+}
+
+.fa-circle.red {
+  color: #dc3545;
+}
+
+.fa-dot-circle-o, .fa-circle.manual {
+  color: #ffcb3d;
+}/*# sourceMappingURL=mission-details.component.css.map */

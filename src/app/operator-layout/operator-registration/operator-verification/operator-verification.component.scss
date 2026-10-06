@@ -1,0 +1,188 @@
+@import "../../../../scss/colorCodes.scss";
+
+@mixin font($font-size, $font-weight) {
+  font-size: $font-size;
+  font-weight: $font-weight;
+}
+
+@mixin colors($color, $background-color) {
+  color: $color;
+  background-color: $background-color;
+}
+* {
+  margin: 0%;
+  padding: 0%;
+  box-sizing: border-box;
+}
+.login {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+
+  .leftBox {
+    position: relative;
+    width: 70%;
+
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .loginHeading {
+      position: absolute;
+      width: 100%;
+      top: 0%;
+      // background-color: $loginBG2;
+      color: $loginText;
+      padding: 2.5rem;
+      :first-child {
+        font-size: 5vw;
+        font-weight: 700;
+        line-height: 5vw;
+        margin-right: 20rem;
+      }
+      :nth-child(2) {
+        color: $loginText;
+        font-size: 1.5vw;
+        margin-right: 15rem;
+        margin-top: 12px;
+      }
+    }
+  }
+  .rightBox {
+    width: 30%;
+    height: 100vh;
+    background: $loginBG;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    .logo {
+      margin: 20px 0 0 0;
+      width: 250px;
+    }
+    .loginFormBox {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .class-verify {
+      text-align: center;
+      padding: 0 15px;
+      .verify-text {
+        margin-bottom: 15px;
+        font-weight: 500;
+        font-size: 28px;
+      }
+      .text-mail {
+        font-size: 18px;
+      }
+      .resend-mail {
+        white-space: nowrap;
+        color: $link-text;
+      }
+      .resend-mail:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.success-popup {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  background: $approval;
+  top: 65vh;
+  left: 70.2vw;
+  width: 452px;
+  height: 80px;
+
+  .success-img {
+    width: 40px;
+    height: 40px;
+  }
+}
+.success-text {
+  width: 328px;
+}
+.success-text-1 {
+  font-size: 16px;
+  width: 80px;
+  font-weight: 600 !important;
+}
+.success-close {
+  width: 80px;
+}
+.success-close img {
+  width: 25px !important;
+  height: 25px !important;
+  margin-left: 30px;
+}
+.success-close img:hover {
+  cursor: pointer;
+}
+
+@media (min-width: 913px) {
+  .login {
+    .leftBox {
+      width: 60%;
+      .loginHeading {
+        :first-child {
+          margin-right: 0rem;
+        }
+        :nth-child(2) {
+          margin-right: 0rem;
+        }
+      }
+    }
+    .rightBox {
+      width: 40%;
+      .logo {
+        width: 250px;
+        margin: 20px 0 0 0;
+      }
+      .rightBoxlogin {
+        font-size: 2rem;
+        margin-top: 0.5vw;
+        margin-bottom: 0px;
+      }
+    }
+  }
+}
+@media (min-width: 600px) and (max-width: 912px) {
+  .login {
+    .leftBox {
+      display: none;
+    }
+    .rightBox {
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      .class-verify {
+        width: 70%;
+      }
+    }
+  }
+}
+@media (max-width: 768px) {
+  .leftBox {
+    display: none;
+  }
+  .login {
+    .rightBox {
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      .class-verify {
+        width: 90%;
+        padding: 0;
+      }
+    }
+  }
+}

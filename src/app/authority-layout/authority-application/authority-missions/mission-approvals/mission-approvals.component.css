@@ -1,0 +1,50 @@
+.table-bordered {
+  border-collapse: separate;
+  border: none !important;
+}
+
+.table-bordered tbody tr {
+  padding: 20px !important;
+}
+
+.table-bordered thead tr th {
+  border: none !important;
+  color: #212529;
+  opacity: 0.45;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 0.5rem;
+}
+
+.table-bordered tbody tr td {
+  border-right: none;
+  border-left: none;
+  border-top: 0.5px solid;
+  border-bottom: 0.5px solid;
+  border-color: rgba(0, 0, 0, 0.125);
+  margin: 0px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.table-bordered tbody tr {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.table-bordered tbody tr td button {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.table-bordered tbody tr td:first-child {
+  border-left: 0.5px solid rgba(0, 0, 0, 0.125);
+}
+
+.table-bordered tbody tr td:last-child {
+  border-right: 0.5px solid rgba(0, 0, 0, 0.125);
+}
+
+.table-bordered th, .table-bordered td {
+  vertical-align: middle;
+}/*# sourceMappingURL=mission-approvals.component.css.map */

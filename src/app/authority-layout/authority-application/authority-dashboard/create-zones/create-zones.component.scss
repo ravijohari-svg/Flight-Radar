@@ -1,0 +1,377 @@
+
+@import "../../../../../scss/colorCodes.scss";
+
+.createMissionBtn {
+    position: absolute;
+    top: 60px;
+    right: 50px;
+    width: max-content;
+  }
+  
+  .primary-btn:disabled {
+    background-color: rgba(0, 0, 0, 0.225);
+    color: #ffffff;
+  }
+  
+  .primary-btn-alignment {
+    margin-top: 2.5px;
+    font-size:12px;
+  }
+  .map-ui {
+    position: fixed;
+    z-index: 25;
+    top: 12vh;
+    right: 0;
+  }
+  .back-button {
+    width: 83px;
+    height: 44px;
+    border-radius: 4px;
+    background: $dark-border;
+    border: 1px solid $dark-border !important;
+  }
+  .next-button {
+    width: 300px;
+    height: 44px;
+    gap: 8px;
+    border-radius: 4px;
+    background: $loginText2;
+    opacity: 0.4;
+    border: 1px solid $loginText2 !important;
+  }
+  .back-next-button {
+    display: flex;
+    flex-direction: row;
+    height: 44px;
+    width: 100%;
+    gap: 20px;
+  }
+  
+  .mission-creation {
+    position: absolute;
+    top: 4.3rem;
+    left: 1%;
+    width: 368px;
+  }
+  
+  .mission-cards {
+    width: 368px;
+    max-height: 638px;
+    top: 5.4rem;
+    left: 1.3%;
+    border-radius: 4px;
+    background: $dark-new;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    min-height: 410px;
+  }
+  
+  .top-section {
+    width: 368px;
+    height: 64px;
+    flex-shrink: 0;
+    border-radius: 8px 8px 0px 0px;
+    border-bottom: 1px solid $dark-border;
+  }
+  
+  
+  .mission-header {
+    display: flex;
+    flex-direction: row;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 16px;
+  }
+  
+  .mission-header {
+    top: 18px;
+    left: 16px;
+    gap: 4px;
+  }
+  
+  .img-close {
+    width: 32px;
+    height: 32px;
+    fill: $dark-border;
+    stroke-width: 1px;
+    stroke: $img-stroke;
+  }
+  
+  .form-flow-1 {
+    display: flex;
+    width: 100%;
+    height: 64px;
+    flex-direction: row;
+    gap: 42px;
+    border-radius: 4px;
+    background: $dark-border;
+    align-items: flex-start;
+    margin-top: 20px;
+  }
+  
+  .form-check-input {
+    width: 18px;
+    height: 18px;
+    border-radius: 15px;
+    position: absolute;
+    left: 4%;
+    background-color: transparent !important;
+  }
+  .form-check-input:hover {
+    cursor: pointer;
+  }
+  .input-button {
+    width: 20px;
+    height: 18px;
+  }
+  
+  .input-button {
+    display: flex;
+    flex-direction: row;
+    gap: 35px;
+    width: 40px;
+    height: 24px;
+    margin-left: 50px !important;
+  }
+  
+  .input-button-content {
+    margin-top: 3px;
+    display: flex;
+    flex-direction: column;
+    width: 370px;
+    height: 50px;
+  }
+  .input-button-content1 {
+    color: $text-white;
+    font-size: 14px;
+  }
+  .input-button-content2 {
+    color: $loginText2;
+    font-size: 12px;
+  }
+  
+  .text-title {
+    font-size: 20px;
+    letter-spacing: -1px;
+    width: 300px;
+    height: 24px;
+  }
+  
+  .second-screen {
+    margin-left: 14px;
+    margin-right: 12px;
+  }
+  
+  
+  .back-next-button {
+    display: flex;
+    flex-direction: row;
+    height: 44px;
+    width: 100%;
+    gap: 20px;
+  }
+  .back-button {
+    width: 83px;
+    height: 44px;
+    border-radius: 4px;
+    background: $dark-border;
+    border: 1px solid $dark-border !important;
+  }
+  .back-button-1 {
+    width: 60px;
+    height: 44px;
+    border-radius: 4px;
+    background: $dark-border;
+    border: 1px solid $dark-border !important;
+  }
+  .next-button {
+    width: 300px;
+    height: 44px;
+    gap: 8px;
+    border-radius: 4px;
+    background: $loginText2;
+    opacity: 0.4;
+    border: 1px solid $loginText2 !important;
+  }
+
+  
+.mission-cards::-webkit-scrollbar {
+    width: 0.2rem;
+  }
+  
+  .mission-cards::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 2px $scrollbar;
+  }
+  
+  .mission-cards::-webkit-scrollbar-thumb {
+    background-color: $black-light;
+  }
+  
+  .document-card {
+    height: 38vh;
+  }
+  
+  .document-card::-webkit-scrollbar {
+    width: 0.3rem;
+    height: 0.3rem;
+  }
+  
+  .document-card::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 2px $scrollbar;
+  }
+  
+  .document-card::-webkit-scrollbar-thumb {
+    background-color: $black-light;
+    // background-color:$black-dark;
+  }
+  
+  .back-color {
+    opacity: 1;
+    background-color: $button-color;
+    border: 2px solid $button-color !important;
+  }
+  .max-alt {
+    margin-left: 16px;
+    margin-right: 10px;
+    color: $loginText2;
+    font-size: 13px;
+  }
+  .form-control,
+.input-group {
+  // background-color: $black-medium;
+  color: $text-white-opacity;
+  font-size: 12px;
+}
+
+.form-control:focus,
+.input-group:focus {
+  outline: none;
+  box-shadow: none;
+  background-color: $black-medium;
+}
+.waypoint-card {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  background: $dark-border;
+}
+
+.alt-change {
+  width: 99.3%;
+  height: 40px;
+  border-radius: 4px;
+  border: 1px solid $black-light;
+  background: $dark-body;
+  display: flex;
+  padding: 8px 9px;
+  align-items: center;
+  gap: 8px;
+  align-self: stretch;
+}
+
+
+.inc-width {
+  width: 242px;
+  height: 44px;
+  gap: 8px;
+  border-radius: 4px;
+  background: $loginText2;
+  border: 1px solid $loginText2 !important;
+}
+.inc-widths {
+  width: 175px;
+  height: 44px;
+  gap: 8px;
+  border-radius: 4px;
+  background: $loginText2;
+  border: 1px solid $loginText2 !important;
+}
+.focus-input:focus {
+  border-width: 3px !important;
+}
+
+.display-flex {
+  width: 100%;
+  height: 40px;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 22px 0 0;
+  padding: 0;
+}
+.form-property {
+  display: flex;
+  width: 336px;
+  flex-direction: column;
+  margin: auto;
+  margin-bottom: 12px;
+}
+.form-control,
+.input-group {
+  outline: none;
+  box-shadow: none;
+  background-color: $black-medium;
+}
+.form-group-headings {
+  color: $loginText2;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0.26px;
+}
+
+
+.focus-input:focus {
+  border-width: 3px !important;
+}
+.heatmap {
+  position: fixed;
+  z-index: 25;
+  top: 6vh;
+  right: 0;
+}
+
+.set-waypoint-button {
+  width: 242px;
+  height: 44px;
+  gap: 8px;
+  border-radius: 4px;
+  background: $button-color;
+  border: 2px solid $button-color !important;
+}
+.set-waypoint-button-1 {
+  width: 175px;
+  height: 44px;
+  gap: 8px;
+  border-radius: 4px;
+  background: $button-color;
+  border: 2px solid $button-color !important;
+}
+.setwaypoint-button {
+  width: 242px;
+  height: 44px;
+  gap: 8px;
+  border-radius: 4px;
+  background: $loginText2;
+  border: 1px solid $loginText2;
+  opacity: 0.6;
+}
+.setwaypoint-button-1 {
+  width: 175px;
+  height: 44px;
+  gap: 8px;
+  border-radius: 4px;
+  background: $loginText2;
+  border: 1px solid $loginText2;
+  opacity: 0.6;
+}
+
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(180deg);
+}

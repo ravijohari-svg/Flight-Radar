@@ -1,0 +1,317 @@
+<div
+  class="template-card body-color"
+  [ngClass]="isView ? (isDropdownOpen ? 'decHeight' : 'incHeight') : ''"
+>
+  <!-- Title part  -->
+  <div
+    class="title text-white f-18 text p-2"
+    [ngClass]="{ 'dropdown-open-1': isDropdownOpen }"
+  >
+    <div>{{ title || "....." }}</div>
+    <div class="twobuttons">
+      <div class="slidedown" (click)="toggleDrop()" *ngIf="isDropdownOpen">
+        <img src="/../../../assets/common-layout/dropdown.png" width="18px" />
+      </div>
+      <div class="slideup" (click)="toggleDrop()" *ngIf="!isDropdownOpen">
+        <img src="../../../../assets/icons/arrowUp.svg" width="18px" />
+      </div>
+      <div (click)="close()">
+        <img src="/../../../assets/common-layout/close.png" width="18px" />
+      </div>
+    </div>
+  </div>
+  <!-- Title part  -->
+  <!-- Card main part  -->
+  <div class="info p-2" [ngStyle]="{ height: isDropdownOpen ? 'auto' : '0' }">
+    <div class="pic-info mt-3 text-left">
+      <div>
+        <img
+          *ngIf="
+            title == 'AirportInnerYellowZone' ||
+            title == 'AirportOuterYellowZone'
+          "
+          src="/../../../assets/common-layout/atc.png"
+          width="110px"
+          height="120px"
+        />
+        <img
+          *ngIf="title == 'AirportRedZone'"
+          src="/../../../assets/common-layout/airport.jpg"
+          width="110px"
+          height="120px"
+        />
+        <img
+          *ngIf="
+            title == 'GeoZone' ||
+            title == 'GreenZone' ||
+            title == 'VIDF' ||
+            title == 'VOMF' ||
+            title == 'VECF' ||
+            title == 'VABF'
+          "
+          src="/../../../assets/common-layout/fir.png"
+          width="110px"
+          height="120px"
+        />
+      </div>
+      <div class="text-left text-white">
+        <div class="f-12" *ngIf="title == 'GreenZone'">
+          Your flight zone falls under the green zone. You are free to fly below
+          400 ft AGL. Your flight will be notified to the respective FIR for
+          and/or FIC for further safety of your flight.
+        </div>
+        <div class="f-12" *ngIf="title == 'VIDF'">
+          VIDF is the FIR code for the Delhi Flight Information Region (FIR),
+          which is responsible for managing air traffic control operations and
+          flight information in and around Delhi, India
+        </div>
+        <div class="f-12" *ngIf="title == 'VABF'">
+          VABF is the FIR code for the Mumbai Flight Information Region (FIR) in
+          India. Mumbai FIR is responsible for managing air traffic control
+          operations, communication, and coordination within its designated
+          airspace.
+        </div>
+        <div class="f-12" *ngIf="title == 'VECF'">
+          VECF is the FIR code for the Kolkata Flight Information Region (FIR),
+          which is responsible for managing air traffic control operations and
+          flight information in and around Kolkata, India.
+        </div>
+        <div class="f-12" *ngIf="title == 'VOMF'">
+          VOMF is the FIR code for the Chennai Flight Information Region (FIR),
+          which is responsible for managing air traffic control operations and
+          flight information in and around Chennai, India
+        </div>
+        <div
+          class="f-12"
+          *ngIf="
+            title == 'AirportInnerYellowZone' ||
+            title == 'AirportOuterYellowZone'
+          "
+        >
+          Your flight zone falls under the Yellow zone of the Airport. You will
+          require permissions to begin flight. The airport zone refers to a ATC
+          controlled airspace wherein coordination will be required with the
+          ATC's for a safe and coordinated flight. You can apply for permissions
+          within the Skye UTM system.
+        </div>
+        <div *ngIf="title == 'GeoZone'">
+          Restricted Airspace - fly with permission
+        </div>
+        <div *ngIf="title == 'AirportRedZone'">
+          Airport zone - fly with permission
+        </div>
+      </div>
+    </div>
+    <div
+      class="middle-section"
+      [ngClass]="showdata && showAccordian ? 'showaccords' : 'hideaccords'"
+    >
+      <div
+        class="text-1 f-12 dark-light p-2"
+        [ngClass]="{
+          red: title == 'GeoZone' || title == 'AirportRedZone',
+          yellow:
+            title == 'AirportInnerYellowZone' ||
+            title == 'AirportOuterYellowZone',
+          green:
+            title == 'GreenZone' ||
+            title == 'VIDF' ||
+            title == 'VABF' ||
+            title == 'VECF' ||
+            title == 'VOMF'
+        }"
+      >
+        <div class="img-display ml-2">
+          <img
+            *ngIf="title == 'GeoZone' || title == 'AirportRedZone'"
+            src="/../../../assets/common-layout/warning.png"
+            width="30px"
+          />
+          <img
+            *ngIf="
+              title == 'GreenZone' ||
+              title == 'VIDF' ||
+              title == 'VOMF' ||
+              title == 'VECF' ||
+              title == 'VABF'
+            "
+            src="../../../../assets/icons/check-circle.svg"
+            width="30px"
+          />
+          <img
+            *ngIf="
+              title == 'AirportInnerYellowZone' ||
+              title == 'AirportOuterYellowZone'
+            "
+            src="../../../../assets/icons/warning.svg"
+            width="30px"
+          />
+        </div>
+        <div class="text-2 ml-0 text-left" style="width: 70%">
+          <h5 class="text-white">{{ title }}</h5>
+          <p
+            class="text-white"
+            *ngIf="
+              title == 'GreenZone' ||
+              title == 'VIDF' ||
+              title == 'VABF' ||
+              title == 'VECF' ||
+              title == 'VOMF'
+            "
+          >
+            No intersection with any Restricted zone.
+          </p>
+          <p
+            class="text-white"
+            *ngIf="
+              title == 'AirportRedZone' ||
+              title == 'AirportInnerYellowZone' ||
+              title == 'AirportOuterYellowZone'
+            "
+          >
+            Restricted area.
+          </p>
+          <p class="text-white" *ngIf="title == 'GeoZone'">Prohibited area.</p>
+        </div>
+        <div class="updownbutton ml-3" (click)="showdatas()" *ngIf="!showdata">
+          <img src="/../../../assets/common-layout/dropdown.png" width="18px" />
+        </div>
+        <div class="updownbutton ml-3" (click)="showdatas()" *ngIf="showdata">
+          <img src="../../../../assets/icons/arrowUp.svg" width="18px" />
+        </div>
+      </div>
+      <!-- Accordian part  -->
+      <div
+        *ngIf="showAccordian"
+        [ngClass]="{
+          red: title == 'GeoZone' || title == 'AirportRedZone',
+          yellow:
+            title == 'AirportInnerYellowZone' ||
+            title == 'AirportOuterYellowZone',
+          green:
+            title == 'GreenZone' ||
+            title == 'VIDF' ||
+            title == 'VECF' ||
+            title == 'VOMF' ||
+            title == 'VABF'
+        }"
+        class="expandinfo p-2 f-12 mt-1"
+      >
+        <div class="text-white text-left" *ngIf="title == 'VIDF'">
+          VIDF- The VIDF FIR covers a significant portion of northern India,
+          including the airspace around Delhi and its surrounding regions. It
+          extends over parts of the states of Delhi, Haryana, Uttar Pradesh,
+          Rajasthan, Punjab, and Himachal Pradesh.
+        </div>
+        <div class="text-white text-left" *ngIf="title == 'VABF'">
+          VABF- The Mumbai FIR covers a significant portion of western India,
+          including the states of Maharashtra, Goa, Gujarat, and parts of Madhya
+          Pradesh and Rajasthan. It extends over the Arabian Sea and covers a
+          large area of oceanic airspace.
+        </div>
+        <div class="text-white text-left" *ngIf="title == 'VOMF'">
+          VOMF- The VOMF FIR covers a significant portion of southern India,
+          including the airspace around Chennai and its surrounding regions. It
+          extends over parts of the states of Tamil Nadu, Kerala, Andhra
+          Pradesh, and parts of Karnataka.
+        </div>
+        <div class="text-white text-left" *ngIf="title == 'VECF'">
+          VECF- The VECF FIR covers a significant portion of eastern India,
+          including the airspace around Kolkata and its surrounding regions. It
+          extends over parts of the states of West Bengal, Bihar, Jharkhand,
+          Odisha, and parts of northeastern India.
+        </div>
+        <div class="text-white text-left" *ngIf="title == 'GreenZone'">
+          Green- No Intersections with any restricted and probhited area.
+        </div>
+        <div class="text-white" *ngIf="title == 'GeoZone'">
+          You’ve intersected a red zone these are the prohibited areas.
+        </div>
+        <div class="text-white" *ngIf="title == 'AirportRedZone'">
+          Red Zone - Airport red zones are areas near airport perimeters where
+          drone flights are strictly prohibited. These zones typically have a
+          radius of 5 kilometers around the airport
+        </div>
+        <div
+          class="text-white text-left"
+          *ngIf="
+            title == 'AirportInnerYellowZone' ||
+            title == 'AirportOuterYellowZone'
+          "
+        >
+          Yellow Zone - Drone flights are prohibited without permission from the
+          concerned air traffic control authority and DGCA. Request permission
+          and coordinate with DGCA(drone.dgca@gov.in) to obtain necessary
+          permissions to operate in this area.
+        </div>
+      </div>
+      <!-- Accordian part End  -->
+    </div>
+    <div class="airground body-color">
+      <!-- Airspace region  -->
+      <div class="card no-border body-color p-2">
+        <div class="f-18 text-white">Airspace Information</div>
+        <div class="row">
+          <div class="list-description-dark mt-1">
+            <div class="column">
+              <div class="f-10 col-12 text-truncate">FIR Codes:</div>
+              <div class="f-14 text-white col-12 ps-2">
+                {{ fircode || "....." }}
+              </div>
+            </div>
+          </div>
+          <div class="list-description-dark mt-1">
+            <div class="column">
+              <div class="f-10 col-12 text-truncate">Type:</div>
+              <div class="f-14 text-white col-12 ps-2">
+                {{ airspacetype || "....." }}
+              </div>
+            </div>
+          </div>
+          <div class="list-description-dark mt-1">
+            <div class="column">
+              <div class="f-10 col-12 text-truncate">FIC</div>
+              <div class="f-14 text-white col-12 ps-2">
+                {{ fic || "....." }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Ground region  -->
+      <div class="card no-border body-color p-2">
+        <div class="f-18 text-white">Ground Information</div>
+        <div class="row">
+          <div class="list-description-dark mt-1">
+            <div class="column">
+              <div class="f-10 col-12 text-truncate">Country:</div>
+              <div class="f-14 text-white col-12 ps-2">
+                {{ country || "....." }}
+              </div>
+            </div>
+          </div>
+          <div class="list-description-dark mt-1">
+            <div class="cloumn">
+              <div class="f-10 col-12 text-truncate">State:</div>
+              <div class="f-14 text-white col-12 ps-2">
+                {{ state || "....." }}
+              </div>
+            </div>
+          </div>
+          <div class="list-description-dark mt-1">
+            <div class="cloumn">
+              <div class="f-10 col-12 text-truncate">Elevation:</div>
+              <div class="f-14 text-white col-12 ps-2">
+                <!-- {{ elevation || "....." }} -->
+                {{ elevation !== undefined ? elevation + 'm' : '.....' }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <!-- Card main part  -->
+  </div>
+</div>

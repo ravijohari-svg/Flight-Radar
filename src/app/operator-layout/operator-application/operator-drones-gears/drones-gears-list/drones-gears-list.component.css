@@ -1,0 +1,82 @@
+.main-panel {
+  background-color: #f5f5f5;
+  min-height: calc(100vh - 52px);
+}
+
+.header {
+  font-size: 14px;
+  font-weight: 600;
+  color: #121212;
+}
+
+.list-values {
+  color: #121212;
+  font-size: 70%;
+  font-weight: 600;
+}
+
+.list-description {
+  color: #8c8c8c;
+  font-size: 70%;
+}
+
+.primary-btn,
+.primary-outline-btn {
+  font-size: 75%;
+  font-weight: 600;
+}
+
+.btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.fa-circle {
+  font-size: 30%;
+}
+
+.card-grey {
+  background-color: #f5f5f5;
+  border: none;
+}
+
+.card-footer {
+  background-color: #ffffff !important;
+  border-top: none;
+  border-radius: 10px;
+}
+
+mat-sidenav {
+  width: 40%;
+  background: #1b1f27;;
+}
+
+@media screen and (max-width: 768px) {
+  mat-sidenav {
+    width: 60%;
+  }
+}
+.grey-text {
+  color: #8c8c8c;
+}
+
+.main-header {
+  font-size: 18px;
+  font-weight: 600;
+  color: #121212;
+}
+
+.sub-header {
+  font-size: 14px;
+  font-weight: 600;
+  color: #121212;
+}
+
+.clickable-card {
+  cursor: pointer;
+}
+
+.clickable-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);
+}/*# sourceMappingURL=drones-gears-list.component.css.map */

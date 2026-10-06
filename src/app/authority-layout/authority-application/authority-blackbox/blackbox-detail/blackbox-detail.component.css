@@ -1,0 +1,257 @@
+.main-panel {
+  min-height: calc(100vh - 54px);
+}
+
+.header {
+  font-size: 20px;
+  font-weight: 600;
+  color: #121212;
+}
+
+.list-values {
+  color: #121212;
+  font-size: 75%;
+  font-weight: 600;
+}
+
+.list-description {
+  color: #8c8c8c;
+  font-size: 75%;
+}
+
+.main-map {
+  height: 50vh;
+}
+
+@media screen and (max-width: 1300px) {
+  .main-map {
+    height: 55vh;
+  }
+}
+.info-btn {
+  color: #c9c9c9;
+}
+
+.info-btn:hover + .hover-card {
+  display: block;
+}
+
+.hover-card {
+  display: none;
+  position: absolute;
+  width: 320px;
+  background-color: #ffffff;
+  top: 3%;
+  left: 65%;
+  z-index: 10;
+}
+
+.StepProgress {
+  position: relative;
+  padding-left: 40px;
+  list-style: none;
+}
+.StepProgress::before {
+  display: inline-block;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 15px;
+  width: 10px;
+  height: 100%;
+  border-left: 2px solid rgba(0, 0, 0, 0.125);
+}
+.StepProgress-item {
+  position: relative;
+  counter-increment: list;
+}
+.StepProgress-item::before {
+  display: inline-block;
+  content: " ";
+  position: absolute;
+  left: -30px;
+  height: 100%;
+  width: 10px;
+}
+.StepProgress-item::after {
+  content: " ";
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: -31px;
+  width: 14px;
+  height: 14px;
+  border: 2px solid #CCC;
+  border-radius: 50%;
+  border: 2px solid #2bc43f;
+  background-color: #2bc43f;
+}
+.StepProgress-item.warning::after {
+  font-size: 7px;
+  color: #FFF;
+  text-align: center;
+  border: 2px solid #ffcb3d;
+  background-color: #ffcb3d;
+}
+
+.table-borderless tbody tr td {
+  color: #8c8c8c;
+  padding: 0.5rem;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.table-borderless tbody tr td:last-child {
+  color: #121212;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.fixed-position {
+  position: relative !important;
+}
+
+@media (min-width: 992px) {
+  .fixed-position {
+    position: fixed !important;
+  }
+}
+.btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.fa-chevron-circle-down {
+  color: rgba(0, 0, 0, 0.125);
+}
+
+.accordion-content {
+  border-top: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.blue-block {
+  font-size: 70%;
+  color: #ffffff;
+  background-color: #3056af;
+}
+
+.section-header {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.drone-trail-section {
+  height: 400px;
+}
+
+.drone-trail-section::-webkit-scrollbar {
+  width: 0.3em;
+}
+
+.drone-trail-section::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.2);
+}
+
+.drone-trail-section::-webkit-scrollbar-thumb {
+  background-color: #adadad;
+}
+
+.table-bordered {
+  border-collapse: separate;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 5px;
+  background-color: #ffffff;
+}
+
+.table-bordered tbody tr {
+  padding: 20px !important;
+  cursor: pointer;
+}
+
+.table-bordered thead tr th {
+  border: none !important;
+  color: rgba(18, 18, 18, 0.8);
+  font-size: 10px;
+  font-weight: 600;
+  padding: 0.4rem;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: #ffffff;
+}
+
+.table-header {
+  font-size: 22px;
+  font-weight: 600;
+  color: #111111;
+  padding-left: 0rem !important;
+}
+
+.table-bordered tbody tr td {
+  border-right: none;
+  border-left: none;
+  border-top: 1px solid;
+  border-bottom: none;
+  border-color: rgba(0, 0, 0, 0.125) !important;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 0.4rem;
+}
+.table table-bordered thead tr{
+  cursor: pointer;
+}
+
+.table-bordered tbody tr:hover {
+  transform: scale(1.02);
+}
+
+.table-bordered th,
+.table-bordered td {
+  vertical-align: middle;
+}
+
+.card-list-values {
+  color: #121212;
+  font-size: 80%;
+  font-weight: 600;
+}
+
+.mission-col {
+  max-height: 72vh;
+  overflow-y: auto;
+}
+
+@media screen and (max-width: 1300px) {
+  .mission-col {
+    max-height: 77vh;
+  }
+}
+.mission-col::-webkit-scrollbar {
+  width: 0.3em;
+}
+
+.mission-col::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.1);
+}
+
+.mission-col::-webkit-scrollbar-thumb {
+  background-color: #b9b9b9;
+}
+
+.fa-check-circle {
+  color: #4fc55f;
+}
+
+.fa-times-circle,
+.fa-times {
+  color: #dc3545;
+}
+
+.fa-circle.red {
+  color: #dc3545;
+}
+
+.fa-dot-circle-o, .fa-circle.manual {
+  color: #ffcb3d;
+}/*# sourceMappingURL=blackbox-detail.component.css.map */

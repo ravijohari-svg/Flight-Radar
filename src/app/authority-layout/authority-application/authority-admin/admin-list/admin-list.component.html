@@ -1,0 +1,854 @@
+<div *ngIf="loader" class="loader">
+  <div class="logo">
+    <img
+      src="../../../../../assets/common-layout/SquareLoader.gif"
+      width="30px"
+    />
+    <img
+      src="../../../../../assets/common-layout/SkyeUTM logoWhite.svg"
+      width="200px"
+    />
+  </div>
+</div>
+<!-- *ngIf="!loader" -->
+<div *ngIf="getAuthoritiesDetailsDataValid" class="px-3 py-3 main-panel">
+  <div class="mx-0">
+    <div class="">
+      <!-- <div class="white-text f-12 font-weight-bold mt-3" style="
+      margin-bottom: -12px;
+      display: flex;
+      justify-content: flex-end;
+  "><button
+          class="btn primary-btn primary-btn-alignment" (click)="addAdmin(addAmin,'')">Create
+          Admin</button></div> -->
+    </div>
+    <div
+      *ngIf="
+        getAuthoritiesDetailsDataValid &&
+        getAuthoritiesDetailsDataValid.length == 0
+      "
+      class="empty-state-container mx-auto"
+    >
+      <div class="text-center">
+        <img
+          src="../../../../../assets/common-layout/Empty-State_Horizontal.svg"
+          width="100%"
+        />
+        <div class="empty-state-header">No Admin found!</div>
+      </div>
+    </div>
+
+    <div
+      class="mt-3"
+      *ngIf="
+        getAuthoritiesDetailsDataValid &&
+        getAuthoritiesDetailsDataValid.length != 0
+      "
+    >
+      <div class="search-text">Search</div>
+      <div class="row search-row">
+        <div class="col-lg-6">
+          <input
+            type="text"
+            class="form-control search-control dark-medium"
+            placeholder="Search for a authority by ID, level, name"
+            aria-label="Search"
+            aria-describedby="basic-addon1"
+            [(ngModel)]="selected"
+            [typeahead]="authoritySearchBy"
+            [typeaheadSelectFirstItem]="false"
+            typeaheadOptionField="custom"
+            (typeaheadOnSelect)="searchByOnSelect($event)"
+            (keydown)="onKeyDownEvent($event)"
+          />
+          <!-- <button type="submit" class="btn  px-0 py-2" (click)="onSearchKeyWord()"><i class="fa fa-search"></i>
+    </button> -->
+        </div>
+
+        <div class="col-lg-2" style="margin-top: -24px">
+          <div
+            class="Regular-Button1"
+            (click)="clearSearch()"
+            style="float: right"
+          >
+            <img
+              src="../../../../../assets/common-layout/refresh-cw-01.svg"
+              class="refresh-cw-01"
+            />
+            <span class="Button-label"> Reset Filters </span>
+          </div>
+        </div>
+
+        <div class="col-lg-2" style="margin-top: -24px">
+          <div class="Regular-Button2" style="float: right">
+            <img
+              src="../../../../../assets/common-layout/Filter-List.svg"
+              class="Filter-List"
+            />
+            <select
+              class="form-select form-control2 f-16"
+              aria-label="Default select example"
+              (change)="filterLevelChange($event)"
+              [(ngModel)]="selectedOption"
+            >
+              <option value="" selected disabled>Filter by</option>
+              <option *ngFor="let level of filterLevel" value="{{ level }}">
+                {{ level }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-lg-2">
+          <button
+            style="float: right; width: 143px; height: 38px"
+            class="btn primary-btn primary-btn-alignment"
+            (click)="addAdmin(addAmin, '')"
+          >
+            Create Admin
+          </button>
+        </div>
+      </div>
+      <div class="table-responsive-md my-1">
+        <table class="table table-bordered dark-medium">
+          <thead>
+            <tr>
+              <th scope="col" style="border-top-left-radius: 7px">
+                Access Name
+              </th>
+              <th scope="col">ID Number</th>
+              <th scope="col">Level</th>
+              <!-- <th scope="col" >DATE AND TIME</th> -->
+              <!-- <th scope="col">START-END TIME</th> -->
+              <th scope="col">Country</th>
+              <th scope="col">FIR</th>
+              <th scope="col">State</th>
+              <th scope="col">City/District</th>
+              <th scope="col" style="border-top-right-radius: 7px"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="
+                let authoritiesData of getAuthoritiesDetailsData;
+                trackBy: trackByUserId
+              "
+            >
+              <td>
+                {{ authoritiesData.FirstName }} {{ authoritiesData.LastName }}
+              </td>
+              <td>
+                {{ authoritiesData.UserId }}
+              </td>
+
+              <td>{{ authoritiesData.Level }}</td>
+              <!-- <td >{{authoritiesData.StartTime | date : 'dd MMM yyyy'}}, {{authoritiesData.StartTime | date : 'h:mm a'}} - {{authoritiesData.EndTime | date : 'h:mm a'}}</td> -->
+              <td>
+                <!-- {{authoritiesData?.LevelMap?.CountryName?.Name}} -->
+                {{ authoritiesData?.LevelMap?.Country?.Name }}
+              </td>
+              <td *ngIf="authoritiesData.LevelMap?.FIR?.Name">
+                {{ authoritiesData.LevelMap?.FIR?.Name }} -
+                {{ authoritiesData.LevelMap?.FIR?.IsoCode }}
+              </td>
+              <td *ngIf="!authoritiesData.LevelMap?.FIR?.Name">------</td>
+              <td *ngIf="authoritiesData.LevelMap?.State?.Name">
+                {{ authoritiesData.LevelMap?.State?.Name }}
+              </td>
+              <td *ngIf="!authoritiesData.LevelMap?.State?.Name">------</td>
+              <td *ngIf="authoritiesData.LevelMap?.District?.Name">
+                {{ authoritiesData.LevelMap?.District?.Name }}
+              </td>
+              <td *ngIf="!authoritiesData.LevelMap?.District?.Name">------</td>
+
+              <td>
+                <div class="button-flex">
+                  <div
+                    class="Icon-Button"
+                    (click)="deleteAuthorities(authoritiesData)"
+                  >
+                    <img
+                      src="../../../../../assets/common-layout/Delete.svg"
+                      class="Delete"
+                    />
+                  </div>
+                  <div
+                    class="Edit-Button"
+                    (click)="editAuthorities(authoritiesData, addAmin)"
+                  >
+                    <span class="Edit-label"> Edit </span>
+                  </div>
+                </div>
+              </td>
+              <!-- <td class="light-semi-bold">
+                  <div *ngIf="authoritiesData.Status == 'Success'">
+                    <span class="py-0 px-1 f-12 my-2 br-15 approve">
+                      Successful
+                      <span *ngIf="authoritiesData.ApprovalMode">( {{authoritiesData.ApprovalMode}} )</span>
+                    </span>
+                  </div>
+                  <div *ngIf="authoritiesData.Status == 'UnSuccess'">
+                    <span class="py-0 px-1 f-12 my-2 br-15 reject">
+                      Unsuccessful
+                      <span *ngIf="authoritiesData.ApprovalMode">( {{authoritiesData.ApprovalMode}} )</span>
+                    </span>
+                  </div>
+                  <div *ngIf="authoritiesData.Status == 'Rejected'">
+                    <span class="py-0 px-1 f-12 my-2 br-15 reject">
+                      Rejected
+                      <span *ngIf="authoritiesData.ApprovalMode">( {{authoritiesData.ApprovalMode}} )</span>
+                    </span>
+                  </div>
+                  <div *ngIf="authoritiesData.Status == 'Approved'">
+                    <span class="py-0 px-1 f-12 my-2 br-15 approve">
+                      Approved
+                      <span *ngIf="authoritiesData.ApprovalMode">( {{authoritiesData.ApprovalMode}} )</span>
+                    </span>
+                  </div>
+                  <div *ngIf="authoritiesData.Status == 'Pending'">
+                    <span class="py-0 px-1 f-12 my-2 br-15 pending">
+                      Pending
+                      <span *ngIf="authoritiesData.ApprovalMode">( {{authoritiesData.ApprovalMode}} )</span>
+                    </span>
+                  </div>
+  
+                </td> -->
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #addAmin id="addAmin" let-c="close" let-d="dismiss">
+  <div class="admin-list-modal">
+    <div class="card bg-color modal-body">
+      <div class="row">
+        <div class="main-header white-text-opacity float-left mt-2 col-9">
+          <span *ngIf="editFlag == false" class="Title f-24">Add Admin</span>
+          <span *ngIf="editFlag" class="Title f-24">{{ titleName }}</span>
+        </div>
+        <!-- <div class="text-right col-3">
+        <button type="button" class="close" aria-label="Close" (click)="onCancel()">
+          <span aria-hidden="true"><i class="fa fa-times"></i></span>
+        </button>
+      </div> -->
+      </div>
+      <hr class="my-2" />
+      <div class="mt-4" *ngIf="toggleForm == true">
+        <form [formGroup]="addAdminForm">
+          <div class="form-group">
+            <div class="Frame-Label">
+              <label class="label" for="formGroupExampleInput"
+                ><span class="input-label"> First Name </span></label
+              >
+              <label
+                class="label"
+                for="formGroupExampleInput"
+                style="margin-left: 150px"
+                ><span class="input-label">Last Name </span></label
+              >
+            </div>
+
+            <div class="Frame-Input">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Enter First Name"
+                formControlName="FirstName"
+                [ngClass]="{
+                  'is-invalid':
+                    FirstName && FirstName.invalid && FirstName.touched
+                }"
+              />
+
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Enter Last Name"
+                formControlName="LastName"
+                [ngClass]="{
+                  'is-invalid': LastName && LastName.invalid && LastName.touched
+                }"
+              />
+            </div>
+            <div class="row msg-align">
+              <div
+                *ngIf="submitted && adminParameter.FirstName.errors"
+                class="error-message col"
+              >
+                <div *ngIf="adminParameter.FirstName.errors.required">
+                  This field is required
+                </div>
+                <div *ngIf="adminParameter.FirstName.errors.minlength">
+                  First name must be at least 2 characters long
+                </div>
+              </div>
+              <div
+                *ngIf="submitted && adminParameter.LastName.errors"
+                class="error-message col"
+              >
+                <div
+                  *ngIf="adminParameter.LastName.errors.required"
+                  class="align-right"
+                >
+                  This field is required
+                </div>
+                <div
+                  *ngIf="adminParameter.LastName.errors.minlength"
+                  style="float: right; max-width: 224px"
+                >
+                  Last name must be at least 2 characters long
+                </div>
+              </div>
+            </div>
+
+            <div class="Frame-Label" *ngIf="editFlag == false">
+              <label class="label" for="formGroupExampleInput"
+                ><span class="input-label"> Email ID </span></label
+              >
+              <label
+                class="label"
+                for="formGroupExampleInput"
+                style="margin-left: 167px"
+                ><span class="input-label"> Phone Number </span></label
+              >
+            </div>
+            <div class="Frame-Input" *ngIf="editFlag == false">
+              <input
+                type="email"
+                class="form-control"
+                placeholder="Enter EmailId"
+                formControlName="EmailId"
+                [ngClass]="{
+                  'is-invalid': EmailId && EmailId.invalid && EmailId.touched
+                }"
+              />
+              <input
+                type="number"
+                class="form-control"
+                placeholder="Enter Phone Number"
+                formControlName="PhoneNumber"
+                [ngClass]="{
+                  'is-invalid':
+                    PhoneNumber && PhoneNumber.invalid && PhoneNumber.touched
+                }"
+              />
+            </div>
+            <div class="row msg-align" *ngIf="editFlag == false">
+              <div
+                *ngIf="submitted && adminParameter.EmailId.errors"
+                class="error-message col"
+              >
+                <div *ngIf="adminParameter.EmailId.errors.required">
+                  This field is required
+                </div>
+                <div *ngIf="adminParameter.EmailId.errors.email">
+                  Email is invalid
+                </div>
+              </div>
+              <div
+                *ngIf="submitted && adminParameter.PhoneNumber.errors"
+                class="error-message col"
+              >
+                <div
+                  *ngIf="adminParameter.PhoneNumber.errors.required"
+                  class="align-right"
+                >
+                  This field is required
+                </div>
+                <div
+                  *ngIf="adminParameter.PhoneNumber.errors.pattern"
+                  style="float: right; max-width: 224px"
+                >
+                  Phone number must contain exactly 10 digits
+                </div>
+              </div>
+            </div>
+
+            <div class="Frame-Label">
+              <label class="label" for="formGroupExampleInput"
+                ><span class="input-label"> Level </span></label
+              >
+              <label
+                class="label"
+                for="formGroupExampleInput"
+                style="margin-left: 187px"
+                ><span class="input-label"> Country </span></label
+              >
+            </div>
+            <div class="Frame-Input">
+              <ng-select
+                (change)="levelChange($event)"
+                class="ngSelect-width"
+                [ngClass]="{
+                  'is-invalid': Level && Level.invalid && Level.touched
+                }"
+                aria-label="Default select example"
+                [items]="levelArr"
+                appendTo="body"
+                formControlName="Level"
+                placeholder="Enter Level or Choose"
+              >
+              </ng-select>
+              <ng-select
+                (change)="countryChange($event)"
+                class="ngSelect-width"
+                [ngClass]="{
+                  'is-invalid': Country && Country.invalid && Country.touched
+                }"
+                aria-label="Default select example"
+                [items]="countryArr"
+                appendTo="body"
+                formControlName="Country"
+                placeholder="Enter Country or Choose"
+              >
+              </ng-select>
+            </div>
+            <!-- <div class="row msg-align ">
+              <div class="" *ngIf="submitted && adminParameter.Level.errors" class="error-message">
+                <div *ngIf="adminParameter.Level.errors.required">This field is required</div>
+              </div>
+              <div class="" *ngIf="submitted && adminParameter.Country.errors" class="error-message" >
+                <div *ngIf="adminParameter.Country.errors.required">This field is required</div>
+              </div>
+            </div> -->
+            <div class="row msg-align">
+              <div
+                *ngIf="submitted && adminParameter.Level.errors"
+                class="error-message col"
+              >
+                <div *ngIf="adminParameter.Level.errors.required">
+                  This field is required
+                </div>
+              </div>
+              <div
+                *ngIf="submitted && adminParameter.Country.errors"
+                class="error-message col"
+              >
+                <div
+                  *ngIf="adminParameter.Country.errors.required"
+                  class="align-right"
+                >
+                  This field is required
+                </div>
+              </div>
+            </div>
+            <!-- <input formControlName="Country" [typeahead]="countryArr"
+          class="form-control" [ngClass]="{ 'is-invalid': submitted && (basic.Country.errors || !CountryCode)}">
+        <div *ngIf="submitted && (basic.Country.errors || !CountryCode)" class="error-message">
+          <div *ngIf="basic.Country?.errors?.required">Country is required</div>
+          <div *ngIf="!CountryCode">Country is invalid</div>
+        </div> -->
+
+            <div class="Frame-Label">
+              <label
+                *ngIf="!stateDropdownFlag"
+                class="label"
+                for="formGroupExampleInput"
+                ><span class="input-label"> State </span></label
+              >
+              <label
+                *ngIf="!firDropdownFlag"
+                [ngClass]="{ 'fir-leftMargin': !stateDropdownFlag }"
+                class="label"
+                for="formGroupExampleInput"
+                ><span class="input-label"> FIR </span></label
+              >
+            </div>
+            <div class="Frame-Input">
+              <ng-select
+                *ngIf="!stateDropdownFlag"
+                (change)="stateChange($event)"
+                class="ngSelect-width"
+                [ngClass]="{
+                  'is-invalid': State && State.invalid && State.touched
+                }"
+                aria-label="Default select example"
+                [items]="stateArr"
+                appendTo="body"
+                formControlName="State"
+                placeholder="Enter State or Choose"
+              >
+              </ng-select>
+              <ng-select
+                *ngIf="!firDropdownFlag"
+                (change)="firChange($event)"
+                class="ngSelect-width"
+                [ngClass]="{ 'is-invalid': Fir && Fir.invalid && Fir.touched }"
+                aria-label="Default select example"
+                [items]="firArr"
+                appendTo="body"
+                formControlName="Fir"
+                placeholder="Enter Fir or Choose"
+              >
+              </ng-select>
+            </div>
+            <div class="row msg-align">
+              <div
+                *ngIf="
+                  !stateDropdownFlag && submitted && adminParameter.State.errors
+                "
+                class="error-message col"
+              >
+                <div *ngIf="adminParameter.State.errors.required">
+                  This field is required
+                </div>
+              </div>
+              <div
+                *ngIf="
+                  !firDropdownFlag && submitted && adminParameter.Fir.errors
+                "
+                class="error-message col"
+              >
+                <div *ngIf="adminParameter.Fir.errors.required">
+                  This field is required
+                </div>
+              </div>
+            </div>
+
+            <!-- In process -->
+            <div class="Frame-Label">
+              <label
+                class="label"
+                *ngIf="!stateDropdownFlag"
+                for="formGroupExampleInput"
+                ><span class="input-label"> District/City </span></label
+              >
+              <label
+                class="label"
+                [ngClass]="{ 'age-leftMargin': !stateDropdownFlag }"
+                for="formGroupExampleInput"
+                ><span class="input-label"> Age </span></label
+              >
+            </div>
+            <div class="Frame-Input">
+              <ng-select
+                *ngIf="!stateDropdownFlag"
+                class="ngSelect-width"
+                [ngClass]="{
+                  'is-invalid': Zone && Zone.invalid && Zone.touched
+                }"
+                aria-label="Default select example"
+                [items]="cityArr"
+                appendTo="body"
+                formControlName="Zone"
+                placeholder="Enter Zone or Choose"
+              >
+              </ng-select>
+              <input
+                type="number"
+                class="form-control"
+                placeholder="Enter Age"
+                formControlName="Age"
+                [ngClass]="{ 'is-invalid': Age && Age.invalid && Age.touched }"
+              />
+            </div>
+            <div class="row msg-align">
+              <div
+                *ngIf="
+                  !stateDropdownFlag && submitted && adminParameter.Zone.errors
+                "
+                class="error-message col"
+              >
+                <div
+                  *ngIf="adminParameter.Zone.errors.required"
+                  class="align-right"
+                >
+                  This field is required
+                </div>
+              </div>
+              <div
+                *ngIf="submitted && adminParameter.Age.errors"
+                class="error-message col"
+              >
+                <div *ngIf="adminParameter.Age.errors.required">
+                  This field is required
+                </div>
+              </div>
+            </div>
+            <!-- In process -->
+
+            <div class="Frame-Label">
+              <label class="label" for="formGroupExampleInput"
+                ><span class="input-label"> Map Layer/ Zone </span></label
+              >
+
+              <!-- <label class="label" for="formGroupExampleInput" style="margin-left: 196px;"><span class="input-label">
+                  Role
+                </span></label> -->
+            </div>
+            <div class="Frame-Input">
+              <ng-select
+                class="ngSelect-width MaplayerDropdown maplayerdd-width"
+                [multiple]="true"
+                [(ngModel)]="selectedMapLayer"
+                [ngClass]="{
+                  'is-invalid': Maplayer && Maplayer.invalid && Maplayer.touched
+                }"
+                aria-label="Default select example"
+                [items]="mapLayerArr"
+                appendTo="body"
+                formControlName="Maplayer"
+                placeholder="Enter Maplayer or Choose"
+              >
+              </ng-select>
+
+              <!-- <input type="text" class="form-control" placeholder="Enter Role" formControlName="Role"
+                [ngClass]="{ 'is-invalid': Role && Role.invalid && Role.touched }"> -->
+            </div>
+            <div class="row msg-align">
+              <div
+                *ngIf="submitted && adminParameter.Maplayer.errors"
+                class="error-message col"
+              >
+                <div
+                  *ngIf="adminParameter.Maplayer.errors.required"
+                 
+                >
+                  This field is required
+                </div>
+              </div>
+              <!-- <div *ngIf="submitted && adminParameter.Role.errors" class="error-message col">
+                <div *ngIf="adminParameter.Role.errors.required" class="align-right">This field is required</div>
+              </div> -->
+            </div>
+            <!-- <br>
+      <label for="formGroupExampleInput">Location</label>
+      <input type="text" class="form-control" placeholder="Enter Location" formControlName="Location"
+      [ngClass]="{ 'is-invalid':Location && Location.invalid && Location.touched }">
+    <div *ngIf="submitted && adminParameter.Location.errors" class="error-message">
+      <div *ngIf="adminParameter.Location.errors.required">This field is required</div>
+    </div> -->
+          </div>
+
+          <!-- <div class="mt-3">
+            <div class="list-values my-1"> Permission Type</div>
+            <div *ngFor="let permission of permissionList" class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="Permission" value="permission.Value"
+                (click)="onPermissionChange(permission.Value)"
+                [checked]="permission.Value == addDroneParameterForm.value.Permission">
+              <label class="form-check-label" for="flexRadioDefault1">
+                {{permission.Name}}
+              </label>
+            </div>
+            <div *ngIf="submitted && droneParameter.Permission.errors" class="error-message">
+              <div *ngIf="droneParameter.Permission.errors.required">This field is required</div>
+            </div>
+          </div> -->
+          <div class="my-2 float-right">
+            <span class="font-DMsans">
+              <button
+                *ngIf="!editFlag"
+                type="button"
+                class="btn btn-dark-border2 mb-3 f-12 px-4 mx-2"
+                (click)="onCancel()"
+              >
+                Cancel
+              </button>
+            </span>
+            <span class="font-DMsans">
+              <button
+                *ngIf="editFlag"
+                type="button"
+                class="btn btn-dark-border2 mb-3 f-12 px-4 mx-2"
+                (click)="onCancel()"
+              >
+                Discard
+              </button>
+            </span>
+            <span class="font-DMsans">
+              <button
+                *ngIf="!editFlag"
+                type="button"
+                class="btn primary-btn mb-3 px-4"
+                (click)="addAdminSubmit()"
+              >
+                Add
+              </button>
+            </span>
+            <span class="font-DMsans">
+              <button
+                *ngIf="editFlag"
+                type="button"
+                class="btn primary-btn mb-3 px-4"
+                (click)="editAuthoritiesCall()"
+              >
+                Save Changes
+              </button>
+            </span>
+          </div>
+        </form>
+      </div>
+
+      <!-- second-form -->
+      <div class="mt-4" *ngIf="toggleForm == false">
+        <form [formGroup]="addAdminAuthForm">
+          <div class="form-group">
+            <div class="Frame-Label">
+              <label class="label" for="formGroupExampleInput"
+                ><span class="input-label"> Email ID/ UserName </span></label
+              >
+              <label
+                class="label"
+                for="formGroupExampleInput"
+                style="margin-left: 85px"
+                ><span class="input-label"> Verification Code </span></label
+              >
+            </div>
+            <div class="Frame-Input">
+              <input
+                type="email"
+                class="form-control"
+                placeholder="Enter UserName/EmailId"
+                formControlName="UserName"
+                [ngClass]="{
+                  'is-invalid': UserName && UserName.invalid && UserName.touched
+                }"
+              />
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Enter VerificationCode"
+                formControlName="VerificationCode"
+                [ngClass]="{
+                  'is-invalid':
+                    VerificationCode &&
+                    VerificationCode.invalid &&
+                    VerificationCode.touched
+                }"
+              />
+            </div>
+
+            <div class="row msg-align">
+              <div
+                *ngIf="submitted && adminAuthParameter.UserName.errors"
+                class="error-message col"
+              >
+                <div *ngIf="adminAuthParameter.UserName.errors.required">
+                  This field is required
+                </div>
+              </div>
+              <div
+                *ngIf="submitted && adminAuthParameter.VerificationCode.errors"
+                class="error-message col"
+              >
+                <div
+                  *ngIf="adminAuthParameter.VerificationCode.errors.required"
+                  class="align-right"
+                >
+                  This field is required
+                </div>
+              </div>
+            </div>
+
+            <div class="Frame-Label">
+              <label class="label" for="formGroupExampleInput"
+                ><span class="input-label"> Password </span></label
+              >
+              <label
+                class="label"
+                for="formGroupExampleInput"
+                style="margin-left: 154px"
+                ><span class="input-label"> Confirm Password </span></label
+              >
+            </div>
+            <div class="Frame-Input">
+              <input
+                type="password"
+                class="form-control"
+                placeholder="Enter Password"
+                formControlName="Password"
+                [ngClass]="{
+                  'is-invalid': Password && Password.invalid && Password.touched
+                }"
+              />
+              <input
+                type="password"
+                class="form-control"
+                placeholder="Enter ConfirmPassword"
+                formControlName="ConfirmPassword"
+                (change)="confirmPasswordChange($event)"
+                [ngClass]="{
+                  'is-invalid':
+                    ConfirmPassword &&
+                    ConfirmPassword.invalid &&
+                    ConfirmPassword.touched
+                }"
+              />
+            </div>
+
+            <div class="row msg-align">
+              <div
+                *ngIf="submitted && adminAuthParameter.Password.errors"
+                class="error-message col"
+              >
+                <div *ngIf="adminAuthParameter.Password.errors.required">
+                  This field is required
+                </div>
+              </div>
+              <div
+                *ngIf="submitted && adminAuthParameter.ConfirmPassword.errors"
+                class="error-message col"
+              >
+                <div
+                  *ngIf="adminAuthParameter.ConfirmPassword.errors.required"
+                  class="align-right"
+                >
+                  This field is required
+                </div>
+              </div>
+            </div>
+
+            <div class="error-message col" *ngIf="pwdMismatch">
+              Password and ConfirmPassword doesn't match
+            </div>
+          </div>
+
+          <div class="my-2 float-right">
+            <span class="font-DMsans">
+              <button
+                type="button"
+                class="btn btn-dark-border2 mb-3 f-12 px-4 mx-2"
+                (click)="cancelAddAdminAuth()"
+              >
+                Cancel
+              </button>
+            </span>
+            <span class="font-DMsans">
+              <button
+                type="button"
+                class="btn primary-btn mb-3 px-4"
+                (click)="addAdminAuthSubmit()"
+              >
+                Submit
+              </button>
+            </span>
+            <!-- <button *ngIf="editFlag" type="button" class="btn primary-btn mb-3 px-4"
+              (click)="editDroneParameterSubmit()">Apply</button> -->
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<!-- <ng-template #editAdmin id="editAdmin" let-c="close" let-d="dismiss">
+    <div class="card dark-medium modal-body">
+      <div class="row">
+        <div class="main-header white-text-opacity float-left mt-2 col-9">
+          <span>Add</span>
+          Admin</div>
+        <div class="text-right col-3">
+          <button type="button" class="close" aria-label="Close" (click)="cancelAddAdminAuth()">
+            <span aria-hidden="true"><i class="fa fa-times"></i></span>
+          </button>
+        </div>
+      </div>
+      <hr class="my-2">
+      <div class="mt-4">
+        enter here
+      </div>
+    </div>
+  </ng-template> -->

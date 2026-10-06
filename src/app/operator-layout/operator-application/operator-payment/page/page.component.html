@@ -1,0 +1,36 @@
+<div class="container my-2">
+  <h3 style="color: #fff; text-align: center;" class="my-4" >Subscriptions</h3>
+  <!-- Card deck -->
+  <div class="row">
+
+    <div *ngFor = "let plan of pricingPlans" class="col-xs-12 col-sm-6 col-md-3 px-2">
+
+      <div class="card h-100"  [ngClass]="{'active': plan.Module == profileDetails?.SubscriptionPlan }" >
+        <div class="card-body d-flex flex-column">
+
+          <h4 class="card-title mb-1" [ngClass]="{'card-title-active': plan.Module == profileDetails?.SubscriptionPlan }"> {{plan.Module}} </h4>
+          <p class="f-12 text-center text-dark-medium fw-500 mb-1" *ngIf="plan.Module == profileDetails?.SubscriptionPlan"> (Current Plan) </p>
+          <h6 class="card-price text-center " *ngIf="plan.Module != profileDetails?.SubscriptionPlan">(<span>&#8377;</span>&nbsp;{{plan.Price}})</h6>
+          <div [ngClass]="{'mt-3': plan.Module != profileDetails?.SubscriptionPlan }">
+            <ul [ngClass]="{'ul-active': plan.Module == profileDetails?.SubscriptionPlan }" *ngFor="let service of plan.Services">
+              <li class="card-text">
+                {{service.Text}} <span *ngIf="service.Number">({{service.Number}} submissions per month)</span>
+              </li>
+            </ul>
+          </div>
+          <div class="mt-auto text-center">
+        
+          
+          <button *ngIf="plan.Module != profileDetails?.SubscriptionPlan && plan.Module != 'Advanced' && plan.Module != 'Premium' "  (click)="onPay(plan)" type="button" class="btn primary-btn f-12 px-5 mt-2">Choose Plan</button>
+          <a href ="mailto:yashodhan@skyeair.tech" *ngIf="plan.Module != 'Basic' && plan.Module !='Free'"   type="button" class="btn primary-btn f-12 px-5 mt-2">Contact Sales</a>
+          <!-- <button *ngIf="plan.Module == profileDetails?.SubscriptionPlan" disabled="true" class="btn primary-outline-btn f-12 px-5 mt-2">Current Plan</button> -->
+        </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,71 @@
+<div class="main-panel dark-medium">
+  <div class="main-map px-0">
+    <!-- <ac-map sceneMode="SceneMode.PERFORMANCE_SCENE2D" [mapId]="mapIdObj.mapId">
+    </ac-map> -->
+    <ng-template appResuableOutlet></ng-template>
+  </div>
+  <div class="mission-container card dark-medium p-2">
+    <!-- <div *ngIf="liveDetails && liveDetails != {}  && liveDetails?.coordinates">
+            <div class="f-20 white-text my-2">Remote ID Portal</div>
+            <div class="row mx-0 text-center">
+                <div class="col-sm-6 my-2 px-2 h-100">
+                    <div class="card p-2 dark-light">
+                        <div class="white-text f-18">{{liveDetails.coordinates.latitude | number : '.0-6'}}°</div>
+                        <div class="white-text-opacity f-10">Latitude</div>
+                    </div>
+                </div>
+                <div class="col-sm-6 my-2 px-2 h-100">
+                    <div class="card p-2 dark-light h-100">
+                        <div class="white-text f-18">{{liveDetails.coordinates.longitude | number : '.0-6'}}° </div>
+                        <div class="white-text-opacity f-10">Longitude</div>
+                    </div>
+                </div>
+
+                <div class="col-sm my-2 px-2 h-100">
+                    <div class="card dark-light p-2 h-100">
+                        <div class="white-text f-18">
+                            {{liveDetails.altitude | number : '.0-6'}}m
+                        </div>
+                        <div class="white-text-opacity f-10">Altitude</div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+    <!-- Onelap -->
+    <div *ngIf="liveDetails && liveDetails != {}">
+      <div class="f-20 white-text my-2">Onelap Tracker</div>
+      <div class="row mx-0 text-center">
+        <div class="col-sm-6 my-2 px-2 h-100">
+          <div class="card p-2 dark-light">
+            <div class="white-text f-18">
+              {{ liveDetails.latitude | number : ".0-6" }}°
+            </div>
+            <div class="white-text-opacity f-10">Latitude</div>
+          </div>
+        </div>
+        <div class="col-sm-6 my-2 px-2 h-100">
+          <div class="card p-2 dark-light h-100">
+            <div class="white-text f-18">
+              {{ liveDetails.longitude | number : ".0-6" }}°
+            </div>
+            <div class="white-text-opacity f-10">Longitude</div>
+          </div>
+        </div>
+
+        <div class="col-sm my-2 px-2 h-100">
+          <div class="card dark-light p-2 h-100">
+            <div class="white-text f-18">
+              {{ liveDetails.altitude | number : ".0-6" }}m
+            </div>
+            <div class="white-text-opacity f-10">Altitude</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="liveDetails == {} || !liveDetails" class="f-16 white-text">
+      No active Drones at the moment!
+    </div>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+.tabs {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.active {
+  border-radius: 0;
+  border-bottom: 5px solid #3056af;
+  color: #3056af !important;
+}
+
+.btn-tabs {
+  font-size: 90%;
+  font-weight: 400;
+}
+
+.btn-tabs:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.main-panel {
+  min-height: 100vh;
+} /*# sourceMappingURL=authority-rule-engine.component.css.map */

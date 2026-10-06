@@ -1,0 +1,120 @@
+<ng-template #payment id="payment" let-c="close" let-d="dismiss">
+  <!-- <div class="modal-body py-0 px-4 dark"> -->
+  <div class="py-3 container-fluid">
+    <div class="row justify-content-between px-4">
+      <div>
+        <h4 class="f-24 text-white">Plans & Pricing</h4>
+        <div class="text-white-50 f-12 mt-2">
+          Upgrade to unlock the power of Skye UTM
+        </div>
+        <img
+          class="backImage"
+          src="
+          ../../../../../../assets/common-layout/Group 48.svg"
+        />
+      </div>
+      <button
+        type="button"
+        class="btn-close close pull-right white-text-opacity"
+        aria-label="Close"
+        (click)="onModalClose()"
+      >
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+      </button>
+    </div>
+    <div class="px-3 pt-3 pb-0 pricingContainer">
+      <div *ngFor="let plan of pricingPlans; let i = index" class="planCard">
+        <div>
+          <div class="planName">
+            <p class="f-20">{{ plan.Module }}</p>
+            <h4 class="f-32 my-2">₹{{ plan.Price }}</h4>
+            <p class="f-16">Per Month</p>
+            <p class="popular f-12">Popular</p>
+          </div>
+          <div
+            class="planFlights mt-2"
+            [ngClass]="{
+              basicText: plan.Module == 'Basic',
+              advancedText: plan.Module == 'Advanced',
+              premiumText: plan.Module == 'Premium'
+            }"
+          >
+            <p class="p-2">{{ plan.NumberOfFlights }} Flights</p>
+          </div>
+          <div *ngFor="let service of plan.Services" class="listItem">
+            <img
+              width="13"
+              height="13"
+              src="../../../../assets/icons/tick.svg"
+              alt="tick"
+            />
+            <p class="f-14">
+              {{ service.Text }}
+            </p>
+          </div>
+        </div>
+        <div class="py-3 planButton">
+          <!-- @SL - Modifying ccavenue as payment gateway -->
+          <a
+            class="btn btn_text btn-dark-border"
+            *ngIf="plan.Module == profileDetails?.SubscriptionPlan"
+            (click)="ccAvenuePay(plan)"
+            type="button"
+          >
+            <!-- onPay(plan)   ccAvenuePay(plan)-->
+            Current Plan
+          </a>
+
+          <!-- @SL - Modifying ccavenue as payment gateway -->
+          <a
+            *ngIf="
+              plan.Module != profileDetails?.SubscriptionPlan &&
+              (plan.Module == 'Advanced' || plan.Module == 'Basic')
+            "
+            type="button"
+            (click)="ccAvenuePay(plan)"
+            class="btn primary-btn"
+            >Choose Plan</a
+          >
+          <a
+            href="mailto:yashodhan@skyeair.tech"
+            *ngIf="plan.Module == 'Premium' || plan.Module == 'Premium+'"
+            type="button"
+            class="choosebtn btn primary-btn"
+            >Contact Sales</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+  <img
+    class="backImage1"
+    src="
+        ../../../../../../assets/common-layout/Group 47.svg"
+  />
+
+  <!-- </div> -->
+</ng-template>
+
+<!-- @SL - CC Avenue redirect submit -->
+<form
+  #form
+  ngNoForm
+  id="nonseamless"
+  method="post"
+  name="redirect"
+  [action]="url"
+>
+  <input
+    type="hidden"
+    id="encRequest"
+    name="encRequest"
+    [ngModel]="encRequest"
+  />
+  <input
+    type="hidden"
+    name="access_code"
+    id="access_code"
+    [ngModel]="accessCode"
+  />
+</form>

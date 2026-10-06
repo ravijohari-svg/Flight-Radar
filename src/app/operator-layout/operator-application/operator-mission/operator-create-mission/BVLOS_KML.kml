@@ -1,0 +1,1050 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>BVLOS_KML.kmz</name>
+	<Style id="point2">
+		<IconStyle>
+			<Icon>
+				<href>kml_symbol_flvos_kmz_maps_google_com_mapfiles_kml_shapes_shaded_dot_png@scale=1.2_0.png</href>
+			</Icon>
+		</IconStyle>
+	</Style>
+	<Style id="area1">
+		<LineStyle>
+			<color>ffff00aa</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>bfff00aa</color>
+			<fill>0</fill>
+		</PolyStyle>
+	</Style>
+	<Style id="area10">
+		<LineStyle>
+			<color>ff0000ff</color>
+			<width>5</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>bf0000ff</color>
+			<fill>0</fill>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="area11">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#area12</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#area1</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="point1">
+		<IconStyle>
+			<Icon>
+				<href>kml_symbol_flvos_kmz_maps_google_com_mapfiles_kml_shapes_placemark_square_png@scale=1.2_0.png</href>
+			</Icon>
+		</IconStyle>
+	</Style>
+	<Style id="area12">
+		<LineStyle>
+			<color>ffff00aa</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>bfff00aa</color>
+			<fill>0</fill>
+		</PolyStyle>
+	</Style>
+	<Style id="line1">
+		<LineStyle>
+			<color>ffff0000</color>
+			<width>2</width>
+		</LineStyle>
+	</Style>
+	<StyleMap id="area13">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#area18</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#area10</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="area14">
+		<LineStyle>
+			<color>ff00ffff</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>bf00ffff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="area15">
+		<LineStyle>
+			<color>ffffffaa</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>bfffffaa</color>
+		</PolyStyle>
+	</Style>
+	<Style id="point3">
+		<IconStyle>
+			<Icon>
+				<href>kml_symbol_flvos_kmz_maps_google_com_mapfiles_kml_paddle_purple-stars_png_hs32x1_0.png</href>
+			</Icon>
+		</IconStyle>
+	</Style>
+	<StyleMap id="area16">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#area14</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#area110</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="area17">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#area15</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#area19</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="area18">
+		<LineStyle>
+			<color>ff0000ff</color>
+			<width>5</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>bf0000ff</color>
+			<fill>0</fill>
+		</PolyStyle>
+	</Style>
+	<Style id="area19">
+		<LineStyle>
+			<color>ffffffaa</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>bfffffaa</color>
+		</PolyStyle>
+	</Style>
+	<Style id="area110">
+		<LineStyle>
+			<color>ff00ffff</color>
+			<width>2</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>bf00ffff</color>
+		</PolyStyle>
+	</Style>
+	<Folder>
+		<name>Point Features</name>
+		<description>Point Features</description>
+		<Placemark>
+			<name>THE BASE</name>
+			<description>Unknown Point Feature</description>
+			<styleUrl>#point1</styleUrl>
+			<Point>
+				<coordinates>80.1926524479,13.4363144785,-999998.9999999999</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Remote Landing Site</name>
+			<description>Unknown Point Feature</description>
+			<styleUrl>#point1</styleUrl>
+			<Point>
+				<coordinates>80.2467923195,13.4331638782,-999998.9999999999</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Transit Waypoint-1</name>
+			<description>Unknown Point Feature</description>
+			<styleUrl>#point2</styleUrl>
+			<Point>
+				<coordinates>80.204591701,13.4236308876,-999998.9999999999</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Transit Waypoint-2</name>
+			<description>Unknown Point Feature</description>
+			<styleUrl>#point2</styleUrl>
+			<Point>
+				<coordinates>80.19243056179999,13.4418924346,-999998.9999999999</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>Transit Waypoint-3</name>
+			<description>Unknown Point Feature</description>
+			<styleUrl>#point2</styleUrl>
+			<Point>
+				<coordinates>80.2255220071,13.4524395087,-999998.9999999999</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>EMERGENCY LANDING POINT</name>
+			<description>Unknown Point Feature</description>
+			<styleUrl>#point3</styleUrl>
+			<Point>
+				<coordinates>80.24216312110001,13.4365496757,-999998.9999999999</coordinates>
+			</Point>
+		</Placemark>
+	</Folder>
+	<Folder>
+		<name>Area Features</name>
+		<open>1</open>
+		<description>Area Features</description>
+		<Placemark>
+			<name>Untitled Polygon</name>
+			<description>Building</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.1985319085,13.4531150255,0 80.1977497346,13.4533721566,0 80.1975241303,13.4529558926,0 80.1973840469,13.4525639479,0 80.1974731367,13.4519152127,0 80.1976742569,13.4509233276,0 80.1979387733,13.4503969508,0 80.1988455943,13.4503975012,0 80.2001048159,13.4506562678,0 80.2001043616,13.4517320116,0 80.1992996968,13.451806021,0 80.1992996062,13.4518426538,0 80.1993755375,13.4527480997,0 80.2005322679,13.4526132761,0 80.201274637,13.4526745349,0 80.2015262856,13.4523808332,0 80.2016144312,13.4516219955,0 80.202117078,13.4505465314,0 80.20275862770001,13.4497022368,0 80.2032762538,13.4497361057,0 80.20361593440001,13.4500301367,0 80.2035657054,13.4504952071,0 80.2032136671,13.4511192154,0 80.20321366909999,13.4511559431,0 80.2036539014,13.451560233,0 80.2044860857,13.4522087299,0 80.2042851221,13.4532375249,0 80.20323923780001,13.4540580027,0 80.2024707292,13.4537516826,0 80.20257189829999,13.4545723793,0 80.2038100245,13.4549198268,0 80.2036226908,13.4557869732,0 80.20242324519999,13.4559784604,0 80.2016020241,13.4557713715,0 80.2011992223,13.455611945,0 80.1998218418,13.4557353016,0 80.199224296,13.455292503,0 80.1991356182,13.4548037787,0 80.1992619243,13.453102794,0 80.1985319085,13.4531150255,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<name>Untitled Polygon</name>
+			<description>Building</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.20107498430001,13.4567445152,0 80.20152210649999,13.4567001064,0 80.2026385887,13.4566162882,0 80.20269027409999,13.4574522275,0 80.2011659005,13.4574967245,0 80.20107498430001,13.4567445152,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<name>Untitled Polygon</name>
+			<description>Building</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.2002625634,13.4560878587,0 80.20096654610001,13.4560267881,0 80.2010524837,13.4566777145,0 80.2003195157,13.45671673,0 80.2002625634,13.4560878587,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<name>Untitled Polygon</name>
+			<description>Building</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.2058180944,13.4525585135,0 80.2065220379,13.4528435837,0 80.2062397401,13.4532136709,0 80.2056058599,13.4530125518,0 80.2058180944,13.4525585135,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<name>Untitled Polygon</name>
+			<description>Building</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.2073914855,13.4528669321,0 80.20792929,13.4531462947,0 80.2083141998,13.4533468296,0 80.2102252256,13.4535072702,0 80.2104729995,13.4535871295,0 80.21146342829999,13.4535736782,0 80.2128646969,13.4536142891,0 80.21286387569999,13.4539620623,0 80.21275436889999,13.4548710521,0 80.2124775094,13.4554547412,0 80.211614672,13.4555872777,0 80.21114749020001,13.4555003627,0 80.21052762230001,13.4554059051,0 80.2100465848,13.4552591134,0 80.2093864377,13.4548579043,0 80.2086302278,13.4545234901,0 80.20744809590001,13.4539084226,0 80.20713187600001,13.4534003208,0 80.2073914855,13.4528669321,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<name>Untitled Polygon</name>
+			<description>Building</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.21567838350001,13.4570850578,0 80.215959466,13.4568832057,0 80.21622118099999,13.4567144112,0 80.2168635445,13.4565672267,0 80.21722235190001,13.4565779769,0 80.21761367160001,13.4569269012,0 80.21828751549999,13.4567251633,0 80.2190594966,13.456545566,0 80.2192206734,13.4568866981,0 80.2191874645,13.4571196708,0 80.2188847028,13.4572025845,0 80.218385428,13.4574758259,0 80.2181244116,13.457518375,0 80.2179287168,13.4572435768,0 80.217558974,13.4574866671,0 80.2173522162,13.4579624882,0 80.21709172750001,13.4586392522,0 80.21715699089999,13.4593263982,0 80.2167651199,13.4595700186,0 80.2160808779,13.4595906577,0 80.21573278060001,13.4595167815,0 80.21565703740001,13.4591149097,0 80.21564693099999,13.4582586575,0 80.21562381770001,13.4574550417,0 80.21567838350001,13.4570850578,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<name>Untitled Polygon</name>
+			<description>Building</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.20091265710001,13.4433611598,0 80.2011058305,13.4419123586,0 80.20311531199999,13.442300315,0 80.2030034746,13.4428850255,0 80.20275870570001,13.4428949256,0 80.20271794120001,13.4436191989,0 80.2022691114,13.4435794391,0 80.2021465827,13.4438673456,0 80.2018808279,13.4437625243,0 80.20176613389999,13.444030094,0 80.2007624557,13.4438178787,0 80.20091265710001,13.4433611598,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<name>Untitled Polygon</name>
+			<description>Building</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.2021338294,13.4403371257,0 80.20195270550001,13.4402163841,0 80.2018028557,13.4400452405,0 80.20186123960001,13.4398686145,0 80.2020575013,13.4397979445,0 80.20198791129999,13.4395429672,0 80.2018819509,13.4392466425,0 80.2017542493,13.4389651939,0 80.2015981091,13.4387616775,0 80.201349849,13.438432768,0 80.2015117415,13.4381116952,0 80.2018862059,13.4380767833,0 80.2023816475,13.4382370869,0 80.2027569887,13.43812564,0 80.20324763399999,13.4378198846,0 80.20362123069999,13.4377985927,0 80.20367865679999,13.4380007989,0 80.2038151573,13.4382996155,0 80.2043696444,13.4383004513,0 80.204808797,13.4380485449,0 80.2052403953,13.4378459092,0 80.20560938049999,13.43794205,0 80.2060170309,13.4381960877,0 80.2060553609,13.4384699395,0 80.205973907,13.4387517598,0 80.20597399819999,13.4387734086,0 80.20614920280001,13.4390709846,0 80.2061508159,13.4393667356,0 80.2059130879,13.4396991505,0 80.20545229619999,13.4399881956,0 80.2054448682,13.4399954215,0 80.2050437689,13.4400460265,0 80.2044488121,13.4401900071,0 80.2039961709,13.4402549787,0 80.2036843092,13.4401686133,0 80.2036400012,13.4397714196,0 80.20363998169999,13.4397425509,0 80.20323870759999,13.4396269684,0 80.2030910358,13.4399502871,0 80.2027305351,13.4406796322,0 80.2023231922,13.4404854921,0 80.2021338294,13.4403371257,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<name>Untitled Polygon</name>
+			<description>Building</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.20776149949999,13.4394413982,0 80.208136532,13.4392508154,0 80.2086269062,13.4393108512,0 80.2089841021,13.4394156717,0 80.20951651599999,13.4394802082,0 80.2095908634,13.4401698816,0 80.2095729983,13.4405173037,0 80.209135531,13.4408472412,0 80.20879601030001,13.4415246706,0 80.2084123912,13.4418892327,0 80.20813576,13.4418457559,0 80.2077612838,13.4414202596,0 80.2075652541,13.4406912097,0 80.2075569408,13.4397543557,0 80.20776149949999,13.4394413982,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<name>Untitled Polygon</name>
+			<description>Building</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.22041451699999,13.4266331399,0 80.22176907319999,13.4271028717,0 80.2228256169,13.4273129449,0 80.22410266190001,13.4275554808,0 80.2241805444,13.4275706859,0 80.2242428468,13.4275858764,0 80.22436744149999,13.4276313904,0 80.2255040946,13.4279190973,0 80.2263765042,13.4282971462,0 80.2270145392,13.4290700942,0 80.22713928509999,13.4297667834,0 80.2284372669,13.4299197894,0 80.22917906080001,13.4306906757,0 80.2303106248,13.4310076177,0 80.23145032630001,13.4314473771,0 80.23168572439999,13.4319627459,0 80.23169815919999,13.4325975429,0 80.23079854140001,13.4332805677,0 80.22926400350001,13.4334660852,0 80.2273123602,13.4338465794,0 80.2273515458,13.4353021557,0 80.2269358156,13.4360612527,0 80.226886385,13.4360774467,0 80.2263916996,13.4361597544,0 80.2262985048,13.435769469,0 80.2266507457,13.4349485114,0 80.2259550971,13.4344196999,0 80.22577765290001,13.4342602751,0 80.2261811237,13.4332600565,0 80.2266593937,13.4324728489,0 80.22627771259999,13.4319095236,0 80.2249453167,13.4324571925,0 80.2238465593,13.4318004428,0 80.2231929695,13.4312013404,0 80.2229761113,13.4302919348,0 80.2228280424,13.4291506677,0 80.22143984660001,13.4286995379,0 80.220231443,13.4278368432,0 80.2197890345,13.4272367288,0 80.22041451699999,13.4266331399,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<name>Untitled Polygon</name>
+			<description>Building</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.249830465,13.4387362948,0 80.2498465268,13.438175282,0 80.25000653719999,13.437816334,0 80.2505186076,13.4374224943,0 80.2534570846,13.4374681882,0 80.2537938208,13.4387179455,0 80.2546950679,13.4389671337,0 80.25453461159999,13.4398264957,0 80.2532632395,13.4403731634,0 80.2518658227,13.4404663885,0 80.2509520926,13.4404196904,0 80.2504547404,13.4401858021,0 80.2498131621,13.4399049658,0 80.2489307356,13.4402638046,0 80.24920257150001,13.440997565,0 80.2482247208,13.4411532168,0 80.2479038969,13.439140344,0 80.249830465,13.4387362948,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<name>Untitled Polygon</name>
+			<description>Building</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.2353676442,13.4518166431,0 80.2370018968,13.4516984286,0 80.23875857660001,13.451698627,0 80.2388635673,13.4532413018,0 80.2384087973,13.4548301064,0 80.2387417063,13.455696937,0 80.2396565631,13.4564040011,0 80.2406770772,13.4570920312,0 80.2415955143,13.4578218475,0 80.2416197844,13.4586746143,0 80.24123787870001,13.4592040024,0 80.2398937028,13.4588348147,0 80.238944718,13.4588057565,0 80.2378739039,13.4592336236,0 80.2375045997,13.4581239691,0 80.2376106845,13.4571839121,0 80.23681965900001,13.4563924381,0 80.23647427989999,13.4553260917,0 80.2357356032,13.4544411104,0 80.2348548288,13.4537991766,0 80.2348467538,13.4531920408,0 80.23508443199999,13.4524698866,0 80.2353676442,13.4518166431,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<name>Untitled Polygon</name>
+			<description>Building</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.2160901294,13.432436624,0 80.21708780349999,13.4341876049,0 80.2160326013,13.4348568566,0 80.2151727557,13.4332506301,0 80.2160901294,13.432436624,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<name>Untitled Polygon</name>
+			<description>Building</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.2169730379,13.4329159093,0 80.21684682430001,13.4322805383,0 80.2172483267,13.4321572586,0 80.21740883450001,13.4327262795,0 80.2169730379,13.4329159093,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<name>Untitled Polygon</name>
+			<description>Building</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.20871443830001,13.4341316743,0 80.2090246068,13.4336409209,0 80.2093795041,13.4332277911,0 80.2100685676,13.4332172472,0 80.2107333508,13.4332502692,0 80.2112036449,13.4336072665,0 80.2113183699,13.4340759016,0 80.21127248569999,13.4343659926,0 80.2110545975,13.4346672323,0 80.21063106130001,13.4350016184,0 80.210125554,13.435001905,0 80.20942692040001,13.4349459748,0 80.2088282261,13.4346337552,0 80.20871443830001,13.4341316743,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<name>Untitled Polygon</name>
+			<description>Building</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.2176689809,13.4623875996,0 80.2180449016,13.4622710362,0 80.2179013321,13.4617953939,0 80.21820742609999,13.4616945857,0 80.2184623446,13.4620894726,0 80.2187030156,13.4623278035,0 80.2192478289,13.4625665376,0 80.2190686611,13.4633947152,0 80.2189557216,13.4638901667,0 80.2184897459,13.4642244681,0 80.2180863513,13.4641406569,0 80.21780499880001,13.4638548748,0 80.2173561467,13.4636212854,0 80.2169853309,13.4631616325,0 80.2170143332,13.4627283006,0 80.2171711611,13.4624395481,0 80.2176689809,13.4623875996,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<name>Untitled Polygon</name>
+			<description>Building</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.23206651380001,13.457018513,0 80.23166975549999,13.4572114653,0 80.2314515291,13.4569217605,0 80.2318478206,13.4566853655,0 80.23206651380001,13.457018513,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<name>Untitled Polygon</name>
+			<description>Building</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.216875617,13.4410746082,0 80.21710265750001,13.4418074404,0 80.2155133743,13.4419764249,0 80.21532389719999,13.441402884,0 80.216875617,13.4410746082,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<name>Untitled Polygon</name>
+			<description>Building</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.22911131399999,13.4372894016,0 80.2291009767,13.4372726547,0 80.2288946171,13.4363382499,0 80.22971398360001,13.4360612415,0 80.2298618139,13.4366099528,0 80.2299516077,13.4372022228,0 80.22911131399999,13.4372894016,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<name>Untitled Polygon</name>
+			<description>Building</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.2104343378,13.4289507086,0 80.2104688715,13.4282086834,0 80.2107002698,13.4275480317,0 80.2110277278,13.4270174594,0 80.2111503616,13.4264996316,0 80.21059342149999,13.4258872,0 80.21030219639999,13.4253094804,0 80.2140815968,13.4255565742,0 80.21385179080001,13.4290803679,0 80.2109558607,13.4289974986,0 80.2104343378,13.4289507086,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<name>Untitled Polygon</name>
+			<description>Building</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.1904155252,13.449356165,0 80.1902531706,13.4480705724,0 80.1932941302,13.4474769828,0 80.19400126079999,13.4501696477,0 80.1935960572,13.4502756703,0 80.1931785785,13.4501098504,0 80.1929256751,13.448891678,0 80.1912711282,13.4492095891,0 80.1904155252,13.449356165,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<name>Untitled Polygon</name>
+			<description>Building</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.1945179586,13.4531043277,0 80.1947987642,13.4539492635,0 80.19501803030001,13.4544183247,0 80.19475488,13.4545125745,0 80.19435124100001,13.4545719709,0 80.1941847945,13.4541789256,0 80.19385992310001,13.4538807869,0 80.1931419772,13.4522179759,0 80.19429860450001,13.4519523509,0 80.1945179586,13.4531043277,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<name>Untitled Polygon</name>
+			<description>Building</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.2509412949,13.4361937348,0 80.25113104099999,13.436409465,0 80.2508062565,13.4367118581,0 80.2505514161,13.4365584323,0 80.2509412949,13.4361937348,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<name>Untitled Polygon</name>
+			<description>Building</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.2029914207,13.422836754,0 80.20284845019999,13.4220354902,0 80.2021322966,13.4219076442,0 80.20170253160001,13.4206534093,0 80.20228817909999,13.4204797984,0 80.2026816461,13.421002108,0 80.2032900427,13.4216871553,0 80.20361212970001,13.4228369096,0 80.2029914207,13.422836754,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<name>Untitled Polygon</name>
+			<description>Building</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.20957727539999,13.4190258005,0 80.2082121287,13.4191507418,0 80.20638023799999,13.4187134587,0 80.206381131,13.4179321892,0 80.20957727539999,13.4190258005,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<name>Untitled Polygon</name>
+			<description>Building</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.19730440719999,13.4235146498,0 80.1976045119,13.4236794575,0 80.19697165220001,13.4248256717,0 80.1967385713,13.424710495,0 80.19730440719999,13.4235146498,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<name>Thiruvallur</name>
+			<description>Unknown Area Type</description>
+			<LookAt>
+				<longitude>80.2039569429522</longitude>
+				<latitude>13.4305798160557</latitude>
+				<altitude>0</altitude>
+				<heading>-0.001598841407751325</heading>
+				<tilt>1.017681466891001</tilt>
+				<range>3619.995958370309</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#area13</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.1817868646,13.4547678869,0 80.2010154693,13.4160540272,0 80.2598720254,13.43628526,0 80.2382621547,13.4694599993,0 80.2383142099,13.469541456,0 80.1817868646,13.4547678869,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<description>EM</description>
+			<styleUrl>#area11</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.236024163,13.4289128531,0 80.2504110343,13.4343342893,0 80.24690103970001,13.439284212,0 80.2338151742,13.4342033183,0 80.236024163,13.4289128531,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<description>Unknown Area Type</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.2019591916,13.4591272378,0 80.2019388149,13.4590594163,0 80.2019388149,13.4590594163,0 80.2022250317,13.4589981968,0 80.2025243937,13.4598309595,0 80.20224732280001,13.4599406208,0 80.2019591916,13.4591272378,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<description>Unknown Area Type</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.2043165086,13.45970307,0 80.2042391114,13.4591998681,0 80.204898302,13.4590895706,0 80.204951145,13.4596184875,0 80.204951145,13.4596184875,0 80.2043165086,13.45970307,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<description>Unknown Area Type</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.2068417782,13.4527774618,0 80.2069397663,13.4521725633,0 80.2072190862,13.4522342406,0 80.207087372,13.4527920533,0 80.2068417782,13.4527774618,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<description>Unknown Area Type</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.24198307109999,13.4388678854,0 80.2422922225,13.4388688157,0 80.2422922225,13.4388688157,0 80.2422976312,13.4391693656,0 80.2421070386,13.43917501,0 80.24198307109999,13.4388678854,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<description>Unknown Area Type</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.1955552878,13.4285240552,0 80.1967587388,13.428608726,0 80.19668663189999,13.4292800273,0 80.1954515,13.4291703833,0 80.1954515,13.4291703833,0 80.1955552878,13.4285240552,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<description>Unknown Area Type</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.19591825480001,13.4438596186,0 80.1959099299,13.4438160669,0 80.1959099299,13.4438160669,0 80.1962106902,13.4437942285,0 80.19626623960001,13.4442814725,0 80.1959867504,13.4442743622,0 80.19591825480001,13.4438596186,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<description>Unknown Area Type</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.1965653299,13.4455321428,0 80.1965963287,13.4454554779,0 80.1965957013,13.4454554759,0 80.1966571282,13.4454734812,0 80.1966254734,13.4455587416,0 80.1965653299,13.4455321428,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<description>Unknown Area Type</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.19814857270001,13.4456478845,0 80.19817380249999,13.4456078429,0 80.1982289099,13.4456395428,0 80.19820452339999,13.44567754,0 80.19820452339999,13.44567754,0 80.19814857270001,13.4456478845,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<description>Unknown Area Type</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.1993830009,13.4460677076,0 80.19937008220001,13.4459902885,0 80.1994768605,13.4459550096,0 80.1995297894,13.4458870116,0 80.19959435369999,13.4459050261,0 80.199643196,13.4459340446,0 80.1996034693,13.4459941012,0 80.19955015559999,13.4459890188,0 80.199518021,13.4460300621,0 80.1994426663,13.446049474,0 80.1994426663,13.446049474,0 80.1993830009,13.4460677076,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<description>Unknown Area Type</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.2019018145,13.4461151244,0 80.2019011438,13.4463177791,0 80.2019011438,13.4463177791,0 80.20178629359999,13.4463275478,0 80.20179640000001,13.4461175537,0 80.2019018145,13.4461151244,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<description>Unknown Area Type</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.1987852979,13.448955659,0 80.1987856775,13.4488414355,0 80.19899743160001,13.4488421096,0 80.1989970521,13.448956333,0 80.1987852979,13.448955659,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<description>Unknown Area Type</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.1986810468,13.458554162,0 80.1986813563,13.4584611253,0 80.19887147199999,13.4584617309,0 80.1988711626,13.4585547677,0 80.1986810468,13.458554162,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<description>Unknown Area Type</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.20784337080001,13.4571330431,0 80.2078440704,13.4569202555,0 80.2081306545,13.4569211579,0 80.20812995519999,13.4571339454,0 80.20784337080001,13.4571330431,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<description>Unknown Area Type</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.2133819849,13.4563189549,0 80.2133856839,13.4551857559,0 80.21464830559999,13.4551897008,0 80.2146446125,13.4563229001,0 80.2133819849,13.4563189549,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<description>Unknown Area Type</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.2212530619,13.4558223077,0 80.2212608374,13.4534160039,0 80.2231904942,13.4534219691,0 80.22318273800001,13.455828274,0 80.2212530619,13.4558223077,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<description>Unknown Area Type</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.2159413184,13.4297043107,0 80.2159425358,13.4293293977,0 80.2166793836,13.4293316891,0 80.2166781673,13.4297066021,0 80.2159413184,13.4297043107,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<description>Unknown Area Type</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.2077070046,13.4491352991,0 80.20770724979999,13.4490606853,0 80.2078267736,13.4490610615,0 80.20782652840001,13.4491356754,0 80.2077070046,13.4491352991,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<description>Unknown Area Type</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.2038843111,13.4516255583,0 80.2038859128,13.4511405688,0 80.20464823579999,13.4511429794,0 80.2046466357,13.4516279691,0 80.2038843111,13.4516255583,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<description>Unknown Area Type</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.1982544821,13.4403759666,0 80.19825491340001,13.4402461858,0 80.1984113444,13.4402466838,0 80.19841091319999,13.4403764646,0 80.1982544821,13.4403759666,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<description>Unknown Area Type</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.2315442874,13.4284385781,0 80.2315446743,13.4283169843,0 80.2316268599,13.4283172348,0 80.23162647309999,13.4284388287,0 80.2315442874,13.4284385781,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<description>Unknown Area Type</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.2332649053,13.4278718841,0 80.2332653747,13.427724037,0 80.23342488350001,13.4277245221,0 80.2334244142,13.4278723693,0 80.2332649053,13.4278718841,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<description>Unknown Area Type</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.2143127921,13.4420450185,0 80.2143131201,13.4419443049,0 80.2144304446,13.441944671,0 80.2144301167,13.4420453845,0 80.2143127921,13.4420450185,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<description>Unknown Area Type</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.21854327290001,13.4528144637,0 80.2185443682,13.4524766279,0 80.2191245859,13.4524784293,0 80.2191234915,13.4528162651,0 80.21854327290001,13.4528144637,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<description>Unknown Area Type</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.2438904592,13.4390650293,0 80.2438919205,13.4385986883,0 80.244099433,13.4385993112,0 80.24409797209999,13.4390656522,0 80.2438904592,13.4390650293,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<description>Unknown Area Type</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.23138992059999,13.4400708071,0 80.23139050170001,13.4398884165,0 80.2315937796,13.4398890368,0 80.2315931988,13.4400714274,0 80.23138992059999,13.4400708071,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<description>Unknown Area Type</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.2319294844,13.4404178935,0 80.2319300166,13.4402507021,0 80.2320725938,13.4402511369,0 80.23207206159999,13.4404183283,0 80.2319294844,13.4404178935,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<description>Unknown Area Type</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.2236664341,13.4355855044,0 80.2236704339,13.4343419339,0 80.2249980605,13.4343460216,0 80.22499406750001,13.4355895925,0 80.2236664341,13.4355855044,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<description>Unknown Area Type</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.2098996815,13.4367398335,0 80.20989994990001,13.4366578502,0 80.2099921762,13.4366581395,0 80.2099919078,13.4367401227,0 80.2098996815,13.4367398335,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<description>Unknown Area Type</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.2103719162,13.436799348,0 80.21037215130001,13.4367274975,0 80.2104314396,13.4367276833,0 80.2104312045,13.4367995338,0 80.2103719162,13.436799348,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<description>Unknown Area Type</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.21056779440001,13.4367594305,0 80.210568159,13.4366479701,0 80.21068108919999,13.436648324,0 80.2106807246,13.4367597844,0 80.21056779440001,13.4367594305,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<description>Unknown Area Type</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.2098249455,13.437339338,0 80.21039777830001,13.4373621198,0 80.21039777830001,13.4373621198,0 80.211050222,13.4374434425,0 80.21107305229999,13.4377466364,0 80.2110336689,13.4381347429,0 80.2113527226,13.4381823764,0 80.2113405267,13.438998437,0 80.2106924311,13.4390430409,0 80.21069434269999,13.4399151066,0 80.2106305301,13.4404885073,0 80.2098158169,13.4404906156,0 80.2097788937,13.440126753,0 80.20992350269999,13.4396142305,0 80.2097138889,13.4396089094,0 80.2098249455,13.437339338,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<description>Unknown Area Type</description>
+			<styleUrl>#area16</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.2083955149,13.4370262056,0 80.2083957041,13.4369685251,0 80.2085117016,13.4369688896,0 80.20851151239999,13.4370265702,0 80.2083955149,13.4370262056,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<name>Line</name>
+			<description>Aerial Coverage</description>
+			<styleUrl>#area17</styleUrl>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							80.1923091431,13.4360190881,0 80.2079833274,13.4194001072,0 80.19314037239999,13.4416391555,0 80.22540063460001,13.4519303913,0 80.2464794544,13.4328386362,0 80.246793051,13.4331703346,0 80.24710664849999,13.4335020326,0 80.22562993210001,13.4529541737,0 80.1917078197,13.4421327418,0 80.2011686581,13.4279584523,0 80.1929876152,13.4366322416,0 80.1926483787,13.4363256651,0 80.1923091431,13.4360190881,0 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+	</Folder>
+	<Folder>
+		<name>Line Features</name>
+		<description>Line Features</description>
+		<Placemark>
+			<name>Line</name>
+			<description>Line</description>
+			<styleUrl>#line1</styleUrl>
+			<LineString>
+				<coordinates>
+					80.1926483787,13.4363256651,0 80.2045760531,13.4236793035,0 80.1924240968,13.4418859497,0 80.22551528309999,13.4524422825,0 80.246793051,13.4331703346,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+	</Folder>
+</Document>
+</kml>

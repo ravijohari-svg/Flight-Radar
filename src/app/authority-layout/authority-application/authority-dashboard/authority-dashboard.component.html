@@ -1,0 +1,114 @@
+<div class="main-panel dark-medium">
+  <div class="position-relative py-1 dark-new topHeader" style="z-index: 2">
+    <div class="row mx-0">
+      <div class="col-lg-2 row mx-0 align-items-center px-1">
+        <div class="col-5 pr-lg-2 text-white f-12">Overview</div>
+        <div class="col-7 pr-lg-3 pl-lg-1">
+          <select
+            class="form-control select-dropdown p-1 my-2 f-12 dark-medium text-white-opacity"
+            id="inputGroupSelect01"
+            [formControl]="metricDaysValue"
+            (change)="clearAndResetInterval()"
+          >
+            <option
+              *ngFor="let days of metricDays"
+              [value]="days"
+              [attr.selected]="days == metricDaysValue.value ? true : null"
+            >
+              {{ days }} Days
+            </option>
+          </select>
+        </div>
+      </div>
+      <div
+        *ngFor="let metric of metricTypes"
+        class="col-md col-sm-6 row mx-0 align-items-center px-lg-1"
+        (click)="onMetricReDirect(metric)"
+      >
+        <div class="col-2 px-1 pb-1 text-right">
+          <span class="rounded-circle dark-light icon-circle">
+            <img src="{{ metric.img }}" width="13px" />
+          </span>
+        </div>
+        <div class="col px-2">
+          <div class="list-description-dark f-10">{{ metric.Name }}</div>
+          <div class="text-white f-12">{{ metric.Value }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="map-col">
+    <div class="main-map px-0">
+      <ng-template appResuableOutlet></ng-template>
+    </div>
+  </div>
+  <div class="tabs p-2 dark-body" *ngIf="!createZoneState">
+    <div class="dark-new p-md-2">
+      <button class="btn-tabs mx-2 py-2 px-3 dark-body" (click)="tabIndex = 0; missionSelected = false" [disabled]="tabIndex == 0">
+        Ongoing Flights
+        <span *ngIf="ongoingMissionCount != undefined">
+          ({{ ongoingMissionCount }})
+        </span>
+      </button>
+      <button class="btn-tabs mx-2 py-2 px-3 dark-body" (click)="tabIndex = 1" [disabled]="tabIndex == 2">
+        Upcoming Flights
+        <span *ngIf="upcomingMissionCount != undefined">
+          ({{ upcomingMissionCount }})
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <div id="createMissionBtn" class="createMissionBtn" >
+    <button (click)="createZoneState = true;"
+      class="btn primary-btn float-right primary-btn-alignment">
+      Create Zones
+    </button>
+  </div>
+
+  <div class="map-ui-card">
+    <app-map-ui
+    *ngIf="isView"
+    [isView]="isView"
+    [title]="entityDescription?.title"
+    [fircode]="entityDescription?.airspaceInfo?.FIRCodes"
+    [airspacetype]="entityDescription?.airspaceInfo?.Type"
+    [fic]="entityDescription?.airspaceInfo.FIC"
+    [country]="entityDescription?.groundInfo.Country"
+    [state]="entityDescription?.groundInfo.States"
+    [elevation]="entityDescription?.groundInfo.elevation"
+    (changeIsView)="close(val)"
+  >
+  </app-map-ui>
+  </div>
+  <div class="bottom-field" *ngIf="!createZoneState">
+
+    <div *ngIf="tabIndex == 0">
+      <app-ongoing-missions
+        [(ongoingMissionCount)]="ongoingMissionCount"
+        [(upcomingMissionCount)]="upcomingMissionCount"
+      ></app-ongoing-missions>
+    </div>
+    <div *ngIf="tabIndex == 1">
+      <app-upcoming-mission-list
+        *ngIf="!missionSelected"
+        [(missionSelected)]="missionSelected"
+        [(upcomingMissionCount)]="upcomingMissionCount"
+        [(ongoingMissionCount)]="ongoingMissionCount"
+        [(upcomingSelectedMissionId)]="missionSelected"
+      >
+      </app-upcoming-mission-list>
+      <app-mission-details
+        *ngIf="missionSelected"
+        [(missionSelected)]="missionSelected"
+        [(upcomingSelectedMissionId)]="missionSelected"
+        [(mapsManagerService)]="mapsManagerService"
+      >
+      </app-mission-details>
+    </div>
+  </div>
+
+  <div class="mission-creation bottom-field" *ngIf="createZoneState">
+    <app-create-zones ></app-create-zones>
+  </div>
+</div>

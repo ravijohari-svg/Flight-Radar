@@ -1,0 +1,129 @@
+<div class="login">
+  <div class="leftBox">
+    <img src="../../../assets/icons/loginBg.png" alt="" />
+    <div class="loginHeading">
+      <p>Automating the skies.</p>
+      <p>Connecting operators with authorities for a safer airspace</p>
+    </div>
+  </div>
+  <div class="rightBox">
+    <div class="logo">
+      <img
+        src="../../../assets/common-layout/SkyeUTM logoWhite.svg"
+        alt="SkyeUTM"
+        title="SkyeUTM Logo"
+      />
+    </div>
+    <div class="loginFormBox">
+      <p class="rightBoxlogin text-white ">Login</p>
+      <div class="formBox">
+        <form [formGroup]="loginForm">
+          <div class="my-4">
+            <div class="form-group">
+              <label for="formGroupExampleInput">Email ID</label>
+              <input
+                type="email"
+                class="form-control dark-medium"
+                formControlName="EmailID"
+                [ngClass]="{
+                  'is-invalid': submitted && login.EmailID.errors
+                }"
+                #authEmail
+              />
+              <div
+                *ngIf="submitted && login.EmailID.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="login.EmailID.errors.required">
+                  Email ID is required
+                </div>
+                <div *ngIf="login.EmailID.errors.email">Invalid Email ID</div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="form-group">
+              <label for="formGroupExampleInput">Password</label>
+              <div class="input-group">
+                <input
+                  [type]="fieldTextTypePass ? 'text' : 'password'"
+                  class="form-control dark-medium passwordType"
+                  formControlName="Password"
+                  [ngClass]="{
+                    'is-invalid': submitted && login.Password.errors
+                  }"
+                />
+                <div
+                  class="input-group-append"
+                  (click)="toggleFieldTextTypePass()"
+                >
+                  <span class="input-group-text">
+                    <i
+                      class="fa"
+                      [ngClass]="{
+                        'fa-eye-slash': fieldTextTypePass,
+                        'fa-eye': !fieldTextTypePass
+                      }"
+                    ></i>
+                  </span>
+                </div>
+              </div>
+
+              <div
+                *ngIf="submitted && login.Password.errors"
+                class="error-message"
+              >
+                <div *ngIf="login.Password.errors.required">
+                  Password is required
+                </div>
+                <div *ngIf="login.Password.errors.minlength">
+                  Minimum of 8 characters is required
+                </div>
+              </div>
+              <div class="text-right mt-2 forgotText">
+                <span (click)="toforgotPassword()">Forgot Password?</span>
+              </div>
+              <div *ngIf="loginFail != ''" class="error-message">
+                {{ loginFail }}
+              </div>
+            </div>
+            <div class="loginBtn my-4">
+              <button
+                class="btn primary-btn px-5"
+                (click)="onLoginFormSubmit()"
+                *ngIf="!loader"
+              >
+                Login
+              </button>
+              <div *ngIf="loader">
+                <button class="btn primary-btn px-5">
+                  <img
+                    src="../../../../../assets/common-layout/SquareLoader.gif"
+                    width="20px"
+                  />
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <ul class="rightBoxLinks p-4">
+        <li>
+          <a href="#" target="_blank">Terms and Conditions</a>
+        </li>
+        <li>
+          <a href="#" target="_blank">Contact Us</a>
+        </li>
+        <li>
+          <a href="#" target="_blank">Cancellation and Refund Policy</a>
+        </li>
+        <li>
+          <a href="#" target="_blank">Privacy Policy</a>
+        </li>
+        <li>
+          <a href="#" target="_blank">Shipping and Delivery Policy</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
